@@ -2,6 +2,7 @@
 
 ## Input name here and add to pull request plz
 
-Ranelle NO!
-Janice!
-Brandon!
+Ranelle!
+Janice Yura Lee!
+Winber();
+
