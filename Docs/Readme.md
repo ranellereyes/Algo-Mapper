@@ -4,13 +4,3 @@
 
 ###Ranelle!
 #Janice Yura Lee!
-
-
-
-
-
-
-
-
-
-hahahahahahahahahhaahah
