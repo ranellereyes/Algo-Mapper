@@ -5,6 +5,7 @@ end
 
 def not_like_this?
   false
+  p "NotLikeThis"
 end
 
 def stupid
