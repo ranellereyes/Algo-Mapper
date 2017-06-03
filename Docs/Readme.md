@@ -3,4 +3,4 @@
 ## Input name here and add to pull request plz
 
 Ranelle!
-Janice!
+Janice Yura Lee!
