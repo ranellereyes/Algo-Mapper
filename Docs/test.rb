@@ -12,6 +12,10 @@ def stupid
   p "Hmmmmmm smells good"
 end
 
+
+def janice(alcohol)
+  p "janice takes alcohol"
+end
 def invoke_greatness
   winber = [];
   winber << 'css god'
