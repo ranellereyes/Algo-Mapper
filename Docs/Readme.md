@@ -2,6 +2,6 @@
 
 ## Input name here and add to pull request plz
 
-Ranelle sucks!
+Ranelle NO!
 Janice!
 Brandon!
