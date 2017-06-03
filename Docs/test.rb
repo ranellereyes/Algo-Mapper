@@ -3,6 +3,10 @@ def test_file
 end
 
 
+def not_like_this?
+  false
+end
+
 def stupid
   p "Ranelle likes to smell Brandon's poopy head"
   p "Hmmmmmm smells good"
