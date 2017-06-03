@@ -3,5 +3,4 @@
 ## Input name here and add to pull request plz
 
 Ranelle!
-Janice!
-Winber();
+Janice Yura Lee!
