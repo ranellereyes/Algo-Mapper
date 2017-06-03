@@ -8,4 +8,4 @@ in working folder
 6. (branch) git add -A
 7. (branch) git commit -m "Add comment"
 8. (branch) git push origin (branchname)
-9. Go to github homepage to make pull request.
+9. Go to github homepage to make pull request and go back to number 4.
