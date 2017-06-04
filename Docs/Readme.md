@@ -5,12 +5,18 @@ PLAN:
 ### MVPs
 
  - 5-6 Different Algorithms
+  - A*
+  - Dijkstra's
+  - Bellman-Ford
+  - Gabow's Algorithm
+  - Floyd-Warshall Algorithm
+  - Johnson's Algorithm
  - Algorithm visualization
  - Testing Parameters
  - Work only in a single language
 
- - ** Bonus: Maybe different types of data structures as well? **
-- ** Bonus: Different languages! **
+ - _Bonus: Maybe different types of data structures as well?_
+ - _Bonus: Different languages!_
 
 ### Technologies
 
@@ -23,7 +29,13 @@ PLAN:
 - Worst case performance
 - Worst case space complexity
 
-- __**Not all Algorithms can be used with all data structures__
+- __Not all Algorithms can be used with all data structures__
+
+## Back End Tasks
+
+- Python and Django
+- MongoDB setup
+- Bonus: _User interaction, clickable nodes?_
 
 ## Front End Tasks
 
@@ -42,3 +54,7 @@ PLAN:
   - Get backend working
   - Algorithm selection
   - Data type selection
+
+### Weekend Goals!
+
+-
