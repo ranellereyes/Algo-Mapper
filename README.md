@@ -22,15 +22,15 @@ __Bonus MVP__:
 
 ### Wireframes
 
-![index-page](docs/wireframes/Index-Page.png)
+![index-page](docs/wireframes/index-page.png)
 
 Homepage, automatically displays the 4 algorithms and their visualization. Able to get quick, short blurb about a certain algorithm on click.
 
-![comparison-page](docs/wireframes/Comparison-Page.png)
+![comparison-page](docs/wireframes/comparison-page.png)
 
 Compares two different algorithms. Shows a bigger visualization along with the code and a plot of time-complexity.
 
-![show-page](docs/wireframes/Show-Page.png)
+![show-page](docs/wireframes/show-page.png)
 
 Detail page regarding the algorithm. Walks through how it works and the math behind the algorithm.
 
