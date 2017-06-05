@@ -4,18 +4,36 @@ header.header {
   left: 0;
   height: 50px;
   width: 100%;
-  background: grey;
+  background: black;
   align-items: center;
 }
 
 nav.nav-bar {
   display: flex;
   justify-content: space-between;
-  width: 1400px;
+  width: 1300px;
   margin: 0 auto;
+  height: 50px;
 }
 
 ul {
   display: flex;
   list-style: none;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+}
+
+li a {
+  padding: 10px;
+  color: white;
+}
+
+a:hover {
+  text-shadow: 0 0 0 white;
+  text-decoration: underline;
+  cursor: pointer;
 }
