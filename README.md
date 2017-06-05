@@ -22,15 +22,15 @@ __Bonus MVP__:
 
 ### Wireframes
 
-![index-page](wireframes/Index Page.png)
+![index-page](docs/wireframes/Index Page.png)
 
 Homepage, automatically displays the 4 algorithms and their visualization. Able to get quick, short blurb about a certain algorithm on click.
 
-![comparison-page](wireframes/Comparison-Page.png)
+![comparison-page](docs/wireframes/Comparison-Page.png)
 
 Compares two different algorithms. Shows a bigger visualization along with the code and a plot of time-complexity.
 
-![show-page](wireframes/Show Page.png)
+![show-page](docs/wireframes/Show Page.png)
 
 Detail page regarding the algorithm. Walks through how it works and the math behind the algorithm.
 
@@ -48,10 +48,10 @@ This website will utilize a Python/Django backend with a PostgreSQL database. Mo
 
 Our group consists of four members:
 
-- Janice Yura Lee
-- Winber Xu
-- Ranelle Reyes
 - Brandon Chui
+- Janice Yura Lee
+- Ranelle Reyes
+- Winber Xu
 
 #### Timeline
 
@@ -74,11 +74,11 @@ Our group consists of four members:
   - Halfway point check-in meeting!
   - Finish overall skeleton of website (Brandon)
   - Finish up lingering algo-code and start on algorithm descriptions (Ranelle)
-  - Get basic easel.js started on visualization (Winber/Yura)
+  - Get basic easel.js started on visualization (Winber & Yura)
 
 **Day 4**:
-  - Work on algorithm visualization (Yura/Winber)
-  - Work on D3 and Time Complexity plot (Ranelle/Brandon)
+  - Work on algorithm visualization (Yura & Winber)
+  - Work on D3 and Time Complexity plot (Ranelle & Brandon)
 
 **Day 5**:
   - Continue working and wrapping up on Day 4 projects
