@@ -1,0 +1,17 @@
+{% load render_bundle from webpack_loader %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>AlgoMapper</title>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+
+  <body>
+    <div id="root"></div>
+    {% render_bundle 'main' %}
+  </body>
+</html>
