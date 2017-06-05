@@ -36,7 +36,7 @@ Detail page regarding the algorithm. Walks through how it works and the math beh
 
 ### Technologies & Technical Challenges
 
-This website will utilize a Python/Django backend with a PostgreSQL database. Most of the challenges for this project will come from conceptual knowledge of algorithms and usage of D3.js along with easel.js to visualize our algorithms.
+This website will utilize a Python/Django backend with a PostgreSQL database. Most of the challenges for this project will come from conceptual knowledge of algorithms and usage of D3.js along with Easel.js to visualize our algorithms.
 
 ### Things we accomplished this weekend.
 
@@ -74,7 +74,7 @@ Our group consists of four members:
   - Halfway point check-in meeting!
   - Finish overall skeleton of website (Brandon)
   - Finish up lingering algo-code and start on algorithm descriptions (Ranelle)
-  - Get basic easel.js started on visualization (Winber & Yura)
+  - Get basic Easel.js started on visualization (Winber & Yura)
 
 **Day 4**:
   - Work on algorithm visualization (Yura & Winber)
@@ -83,6 +83,7 @@ Our group consists of four members:
 **Day 5**:
   - Continue working and wrapping up on Day 4 projects
   - Start prepping for deployment/try deploying website
+  - Style each page of website
 
 **DAY 6**:
   - Penultimate check-in meeting!!!
