@@ -64,6 +64,7 @@ Our group consists of four members:
     - Bellman-Ford
     - Floyd-Warshall
   - Make Node class for usage in Algorithms (Ranelle)
+  - Happy hour check-in!
 
 **Day 2**:
   - Be close to finishing algorithm code, have testable code by this point (Everyone)
