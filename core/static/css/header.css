@@ -1,0 +1,21 @@
+header.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: grey;
+  align-items: center;
+}
+
+nav.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 1400px;
+  margin: 0 auto;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+}
