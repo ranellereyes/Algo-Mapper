@@ -3,3 +3,4 @@ assets/bundles/
 *.pyc
 *.pyo
 __pycache__/
+webpack-stats.json
