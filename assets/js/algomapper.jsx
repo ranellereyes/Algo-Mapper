@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import { Node, NODELIST2 } from './node/node';
 import Astar from './node/astar';
+import Dijkstra from './node/dijkstra';
+
 
 import Root from './components/root';
 
@@ -28,3 +30,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 window.a = new Astar(NODELIST2);
+window.b = new Dijkstra(NODELIST2);
