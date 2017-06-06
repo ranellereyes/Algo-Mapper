@@ -9,7 +9,7 @@ export class Node {
 
 export const NODELIST = {
   1: new Node([{ id: 2, weight: 10 }, { id: 3, weight: 5 }], 20, 20, 1),
-  2: new Node([{ id: 5, weight: 8 }], 40, 10, 2),
+  2: new Node([{ id: 5, weight: 4 }], 40, 10, 2),
   3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 7 }], 40, 30, 3),
   4: new Node([{ id: 6, weight: 9 }], 60, 30, 4),
   5: new Node([{ id: 6, weight: 2 }], 60, 10, 5),
@@ -49,9 +49,9 @@ export class Astar {
         let path = [];
         while (curr.parent) {
           path.push(curr.id);
-          debugger;
           curr = curr.parent;
         }
+        path.push(curr.id);
         return path.reverse();
       }
 
@@ -62,6 +62,7 @@ export class Astar {
       });
 
       this.closeList.push(this.openList.shift());
+
       this.childNodes(currentNode).forEach( node => {
         let newNode = list[node.id];
         currentNode.children.find( n => n.id === node.id);
@@ -99,7 +100,3 @@ export class Astar {
     );
   }
 }
-
-window.NODELIST = NODELIST;
-window.Node = Node;
-window.a = new Astar(NODELIST);
