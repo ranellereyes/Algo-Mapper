@@ -33,7 +33,7 @@ class Astar {
       let currentNode = this.openList[lowIdx];
 
       // return path if current node is the end node
-      if (currentNode.x === endNode.x && currentNode.y === endNode.y) {
+      if (currentNode.id === endNode.id) {
         let curr = currentNode;
         let path = [];
         while (curr.parent) {
