@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-import { Astar, Node, NODELIST } from './node/node';
+import { Node, NODELIST2 } from './node/node';
+import Astar from './node/astar';
 
 import Root from './components/root';
 
@@ -26,6 +27,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-window.NODELIST = NODELIST;
-window.Node = Node;
-window.Astar = Astar;
+window.a = new Astar(NODELIST2);

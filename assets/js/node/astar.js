@@ -36,6 +36,7 @@ class Astar {
       if (currentNode.x === endNode.x && currentNode.y === endNode.y) {
         let curr = currentNode;
         let path = [];
+        debugger;
         while (curr.parent) {
           path.push(curr.id);
           curr = curr.parent;
