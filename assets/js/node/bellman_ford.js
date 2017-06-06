@@ -22,9 +22,18 @@ class BellmanFord {
     this.path = [];
     this.nodeList = nodeList;
     this.edgeList = this.createEdgeList(this.nodeList).bind(this);
+
+    this.search = this.search.bind(this);
+    this.steps = this.steps.bind(this);
+
   }
 
   search(startNodeId, endNodeId) {
+
+  }
+
+  steps(startNodeId, endNodeId) {
+
   }
 
   createEdgeList(nodeList) {
