@@ -1,2 +1,5 @@
 node_modules/
 assets/bundles/
+*.pyc
+*.pyo
+__pycache__/
