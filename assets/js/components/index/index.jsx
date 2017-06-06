@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Index extends React.Componenet {
+class Index extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -8,7 +8,8 @@ class Index extends React.Componenet {
   render() {
     return (
       <div className="index">
-        <main></main>
+        <main className="index">
+        </main>
       </div>
     )
   }
