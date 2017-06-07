@@ -15,7 +15,7 @@ class Dijkstra {
       let node = this.nodeList[id];
       if (node !== this.source) {
         node.cost = Infinity;
-        this.unvisited.push(node)
+        this.unvisited.push(node);
       }
     });
   }
@@ -32,7 +32,7 @@ class Dijkstra {
             _node.cost = node.cost + child.weight;
             parent[_node.id] = node.id;
           }
-          _node.cost = node.cost + child.weight
+          _node.cost = node.cost + child.weight;
         }
       });
       // adds node to visited list
@@ -45,7 +45,7 @@ class Dijkstra {
       node = this.unvisited[0]
       for (let i = 1; i < this.unvisited.length; i++) {
         if (this.unvisited[i].cost < node.cost) {
-          node = this.unvisited[i]
+          node = this.unvisited[i];
         }
       }
     }

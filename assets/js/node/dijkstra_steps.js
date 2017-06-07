@@ -4,6 +4,7 @@ class DijkstraSteps {
     this.visited = [];
     this.unvisited = [];
     this.steps = [];
+    this.costs = this.costs.bind(this);
   }
 
   initiate(source) {
@@ -20,6 +21,7 @@ class DijkstraSteps {
   }
 
   search(source, destination) {
+    this.steps.push({path: [source], costs: [this.costs()]})
     let parent = {};
     let node = this.nodeList[source];
     while (this.unvisited.length !== 0) {
@@ -28,13 +30,36 @@ class DijkstraSteps {
         let _node;
         if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
           _node = this.nodeList[child.id];
+          if (_node.cost > node.cost + child.weight) {
+            _node.cost = node.cost + child.weight;
+            parent[_node.id] = node.id;
+          }
+          _node.cost = node.cost + child.weight;
         }
-      })
-    }
+        this.steps.push({path: [node.id, child.id], costs: [this.costs()}] })
+      });
 
+      this.visited.push(node);
+
+      this.unvisited.splice(this.unvisited.indexOf(node), 1);
+
+      node = this.unvisited[0];
+      for (let i = 1; i < this.unvisited.length; i++) {
+        if (this.unvisited[i].cost < node.cost) {
+          node = this.unvisited[i];
+        }
+      }
+    }
+    console.log(this.steps);
   }
 
-
+  costs() {
+    let stepCost = [];
+    for (var i = 0; i < this.nodeList.length; i++) {
+      stepCost.push(this.nodeList[i])
+    }
+    return stepCost;
+  }
 
 }
 
