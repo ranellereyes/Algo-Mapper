@@ -16,11 +16,35 @@ class Visualization {
     nodes.forEach( (node, idx) => {
       node.children.forEach( child => {
         if (!child.id) return;
-        links.push({ source: node, target: list[child.id] })
+        links.push({ source: node, target: list[child.id], weight: child.weight })
       });
     });
     let graph = { nodes: nodes, links: links };
     return graph;
+  }
+
+  centerTextX(x1, x2, y1, y2) {
+    let x = (x1 + x2) / 2;
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let radians = Math.atan(dy/dx);
+    if (Math.cos(radians) === 0) return x + 10;
+    if ((dy > 0 && dx > 0) || (dy < 0 && dx > 0)) {
+      return x + Math.cos(radians) * 10;
+    }
+    return x - Math.cos(radians) * 10;
+  }
+
+  centerTextY(x1, x2, y1, y2) {
+    let y = (y1 + y2) / 2;
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let radians = Math.atan(dy/dx);
+    if (Math.sin(radians) === 0) return y + 10;
+    if ((dy > 0 && dx > 0) || (dy < 0 && dx > 0)) {
+      return y - Math.sin(radians) * 10;
+    }
+    return y + Math.sin(radians) * 10;
   }
 
   draw() {
@@ -51,7 +75,10 @@ class Visualization {
     this.colorPath = d3.select('marker#color path');
     this.colorPath2 = d3.select('marker#color2 path');
 
-    this.links = this.svg.selectAll(".link")
+    this.nodeGroup = this.svg.selectAll("g")
+      .data(graph.nodes);
+
+    this.links = this.svg.selectAll("line.link")
         .data(graph.links)
         .enter().append("line")
         .attr("stroke", "gray")
@@ -64,25 +91,37 @@ class Visualization {
         .style("stroke-width", 3)
         .style("marker-end",  "url(#base)");
 
-    this.nodeGroup = this.svg.selectAll("g")
-      .data(graph.nodes);
+    this.svg.selectAll("text.link")
+        .data(graph.links)
+        .enter().append("text")
+        .attr("class", "link")
+        .attr("x", (d) => this.centerTextX(d.source.x, d.target.x, d.source.y, d.target.y))
+        .attr("y", (d) => this.centerTextY(d.source.x, d.target.x, d.source.y, d.target.y))
+        .attr("dy", 5)
+        .attr("text-anchor", "middle")
+        .text(function(d) { return d.weight });
+
 
     this.nodeWrapper = this.nodeGroup
         .enter().append("g")
-        .attr("transform", function(d) { return `translate(${d.x},${d.y})` })
+        // .attr("transform", function(d) { return `translate(${d.x},${d.y})` })
 
     this.nodeWrapper
         .append("circle")
         .attr("class", "node");
 
     this.nodeText = this.nodeWrapper.append("text")
-        .attr("dx", function(d) { return -4 })
-        .attr("dy", function(d) { return 5 })
+        .attr("x", function(d) { return d.x })
+        .attr("y", function(d) { return d.y })
+        .attr("dy", 5)
+        .attr("text-anchor", "middle")
         .text(function(d) { return d.id });
 
     this.nodes = d3.selectAll(".node")
         .attr("r", 20)
         .attr("id", function(d) { return d.id })
+        .attr("cx", function(d) { return d.x })
+        .attr("cy", function(d) { return d.y })
         .style("fill", "LightBlue")
         .style("stroke", "black")
         .style("stroke-width", 2);
