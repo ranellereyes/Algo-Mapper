@@ -5,7 +5,6 @@ class BellmanFord {
     this.edgeList = this.createEdgeList(nodeList);
 
     this.search = this.search.bind(this);
-    this.steps = this.steps.bind(this);
   }
 
   search(startNodeId, endNodeId) {
@@ -37,15 +36,11 @@ class BellmanFord {
     return this.createPath(parents, startNodeId, endNodeId);
   }
 
-  steps(startNodeId, endNodeId) {
-    return [];
-  }
-
   createEdgeList(nodeList) {
     let edges = [];
     Object.keys(nodeList).forEach((nodeId) => {
       nodeList[nodeId].children.forEach((child) => {
-        edges.push({ fromId: nodeId, toId: child.id, weight: child.weight});
+        edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
       });
     });
     return edges;
