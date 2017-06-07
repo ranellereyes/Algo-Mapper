@@ -4,11 +4,8 @@ import configureStore from './store/store';
 
 import Root from './components/root';
 
-// ==TESTING==
-// import { NODELIST, NODELIST2 } from './node/node';
-// import { nodelistGenerator } from './node/node';
-// import { floydWarshallAlgoSteps } from './node/floyd-warshall-algo-steps';
-// window.fw = floydWarshallAlgoSteps;
+import { NODELIST, NODELIST2 } from './algorithms/node';
+import AstarStep from './algorithms/astar_step';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,5 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
 window.NODELIST2 = NODELIST2;
 window.NODELIST = NODELIST;
 window.Node = Node;
-window.r = new nodelistGenerator(20);
-window.ng = nodelistGenerator;
+window.a = new AstarStep(NODELIST);

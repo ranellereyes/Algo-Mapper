@@ -78,3 +78,5 @@ class AstarStep extends Astar {
     return []
   }
 }
+
+export default AstarStep;
