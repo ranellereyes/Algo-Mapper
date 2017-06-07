@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-import { Node, NODELIST2, NODELIST } from './node/node';
-import Astar from './node/astar';
-import DijkstraSteps from './node/dijkstra_steps';
-
 
 import Root from './components/root';
+
+// ==TESTING==
+import { NODELIST, NODELIST2 } from './node/node';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -28,6 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<Root store={ store } />, root);
 });
 
-
-window.a = new Astar(NODELIST2);
-window.b = new DijkstraSteps(NODELIST);
+window.NODELIST2 = NODELIST2;
+window.NODELIST = NODELIST;
+window.Node = Node;
