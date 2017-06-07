@@ -26,7 +26,6 @@ class DijkstraSteps {
     let parent = {};
     let node = this.nodeList[source];
     while (this.unvisited.length !== 0) {
-      let step = {};
       node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
         if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
@@ -35,15 +34,16 @@ class DijkstraSteps {
             _node.cost = node.cost + child.weight;
             parent[_node.id] = node.id;
           }
-          _node.cost = node.cost + child.weight;
         }
         this.steps.push({path: [node.id, child.id], costs: [this.costs()]})
       });
 
+      // adds node to visited list
       this.visited.push(node);
-
+      // remove node from unvisited list
       this.unvisited.splice(this.unvisited.indexOf(node), 1);
 
+      //choose node with lowest cost
       node = this.unvisited[0];
       for (let i = 1; i < this.unvisited.length; i++) {
         if (this.unvisited[i].cost < node.cost) {
@@ -52,8 +52,8 @@ class DijkstraSteps {
       }
     }
     console.log(this.steps);
+    // create path from source to destination
     this.createPath(parent, source, destination);
-
   }
 
   costs() {

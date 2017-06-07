@@ -32,7 +32,7 @@ class Dijkstra {
             _node.cost = node.cost + child.weight;
             parent[_node.id] = node.id;
           }
-          _node.cost = node.cost + child.weight;
+          // _node.cost = node.cost + child.weight;
         }
       });
       // adds node to visited list
