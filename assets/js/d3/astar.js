@@ -27,7 +27,7 @@ class AstarVisualization {
     let color = d3.scaleOrdinal(d3.schemeCategory20);
     let graph = this.parseNodes();
 
-    this.svg = d3.select("main").append("svg")
+    this.svg = d3.select("div.visualization").append("svg")
         .attr("width", 500)
         .attr("height", 500);
 

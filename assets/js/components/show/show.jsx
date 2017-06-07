@@ -1,17 +1,25 @@
 import React from 'react';
+import AstarVisualization from '../../d3/astar';
+import NODELIST from '../../node/node';
 
 class Show extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { graph: new AstarVisualization(NODELIST) }
+  }
+
+  componentDidMount() {
+    this.state.graph.draw();
   }
 
   render() {
     return (
       <div className="index">
-        <main className="index">
-          <ul>
+        <main className="show">
+          <h1 className="name">A* Algorithm</h1>
+          <ul className="visualization">
             <div className="visualization" />
-            <aside className="code" />
+            <aside className="code"></aside>
           </ul>
           <section className="algo-bottom">
             <h1>Description</h1>
