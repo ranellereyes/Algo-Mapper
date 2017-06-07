@@ -75,7 +75,6 @@ class BellmanFord {
       path.push(parents[startKey]);
       startKey = parents[startKey];
     }
-    console.log(path);
     return path.reverse();
   }
 }
