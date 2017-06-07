@@ -11,6 +11,7 @@ class Show extends React.Component {
   componentDidMount() {
     let visual = new AstarVisualization(NODELIST);
     visual.draw();
+    this.setState({ graph: visual });
   }
 
   render() {

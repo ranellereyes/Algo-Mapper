@@ -31,8 +31,9 @@ li {
 
 li a {
   margin: 0 10px;
-  color: DarkGray;
+  color: DarkSlateGray;
   height: 100%;
+  text-decoration: none;
 }
 
 li.logo {
@@ -50,7 +51,7 @@ div.underline {
   height: 3px;
   width: 0%;
   align-self: flex-start;
-  background: DarkGray;
+  background: DarkSlateGray;
   transition: width 0.3s;
 }
 

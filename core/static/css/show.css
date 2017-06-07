@@ -21,13 +21,15 @@ ul.visualization {
 aside.code {
   height: 500px;
   flex-grow: 1;
-  background: black;
+  background: PapayaWhip;
+  border: 1px solid Gray;
 }
+
 div.visualization {
   height: 500px;
   width: 500px;
-  background: #DFC4A2;
-  border: 1px solid black;
+  background: White;
+  border: 1px solid Gray;
   margin-right: 30px;
 }
 
