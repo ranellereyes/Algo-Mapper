@@ -1,4 +1,4 @@
-import NODELIST from "./node";
+import {NODELIST, NODELIST2} from "./node";
 
 export class floydWarshallAlgo {
   constructor (nodelist) {
@@ -9,6 +9,9 @@ export class floydWarshallAlgo {
     this.initCosts = this.initCosts.bind(this);
     window.parents = this.parents;
     window.costs = this.costs;
+
+    this.initCosts();
+    this.initParents();
   }
 
   initCosts () {
@@ -52,6 +55,25 @@ export class floydWarshallAlgo {
     }
   }
 
+  pathDeconstructor(start, end, intermediate = null) {
+    let path = [end],
+        startIdx = this.indices.indexOf(start),
+        endIdx = this.indices.indexOf(end),
+        intIdx = this.indices.indexOf(intermediate);
+
+    if (intIdx > -1) {
+      while (intermediate !== path[0]) {
+        path.unshift(this.parents[intIdx][this.indices.indexOf(path[0])]);
+      }
+    }
+
+    while (start !== path[0]) {
+      path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
+    }
+
+    return path;
+  }
+
   search (start, end) {
     for (let k = 0; k < this.indices.length; k++) {
       for (let i = 0; i < this.indices.length; i++) {
@@ -64,15 +86,15 @@ export class floydWarshallAlgo {
       }
     }
 
-    let path = [end],
-        startIdx = this.indices.indexOf(start),
-        endIdx = this.indices.indexOf(end);
+    // Parsed into helper function
+    // let path = [end],
+    //     startIdx = this.indices.indexOf(start),
+    //     endIdx = this.indices.indexOf(end);
+    //
+    // while (start !== path[0]) {
+    //   path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
+    // }
 
-    while (start !== path[0]) {
-      debugger;
-      path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
-    }
-
-    return path;
+    return this.pathDeconstructor(start, end);
   }
 }

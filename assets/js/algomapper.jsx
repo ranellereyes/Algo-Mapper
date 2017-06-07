@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 
 //TESTING
-// import { NODELIST } from './node/node';
-// import { floydWarshallAlgo } from './node/floyd-wellman-algo';
+import { NODELIST, NODELIST2 } from './node/node';
+import { floydWarshallAlgo } from './node/floyd-warshall-algo';
 
 import Root from './components/root';
 
@@ -30,6 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===TESTING===
 
-// window.NODELIST = NODELIST;
-// window.Node = Node;
-// window.floyd = new floydWarshallAlgo(NODELIST);
+window.nodelist = NODELIST2;
+window.Node = Node;
+window.floyd = new floydWarshallAlgo(NODELIST2);
