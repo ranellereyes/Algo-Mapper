@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-import { NODELIST } from './node/node';
 
 //TESTING
-import { floydWarshallAlgo } from './node/floyd-wellman-algo';
+// import { NODELIST } from './node/node';
+// import { floydWarshallAlgo } from './node/floyd-wellman-algo';
 
 import Root from './components/root';
 
@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<Root store={ store } />, root);
 });
 
+// ===TESTING===
 
-window.NODELIST = NODELIST;
-window.Node = Node;
-window.floyd = new floydWarshallAlgo(NODELIST);
+// window.NODELIST = NODELIST;
+// window.Node = Node;
+// window.floyd = new floydWarshallAlgo(NODELIST);
