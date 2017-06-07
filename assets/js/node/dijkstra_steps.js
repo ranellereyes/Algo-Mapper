@@ -1,19 +1,20 @@
 class DijkstraSteps {
-  constructor(nodeList) {
+  constructor(nodeList, source) {
     this.nodeList = nodeList;
     this.visited = [];
     this.unvisited = [];
     this.steps = [];
     this.costs = this.costs.bind(this);
+    this.source = source || this.nodeList[1]; // nodeList[#]
   }
 
   initiate(source) {
-    this.source.weigth = 0;
+    this.source.weight = 0;
     this.source.cost = 0;
-    this.unvisited.push(source);
+    this.unvisited.push(this.source);
     Object.keys(this.nodeList).forEach(id => {
       let node = this.nodeList[id];
-      if (node !== source) {
+      if (node !== this.source) {
         node.cost = Infinity;
         this.unvisited.push(node)
       }
@@ -36,7 +37,7 @@ class DijkstraSteps {
           }
           _node.cost = node.cost + child.weight;
         }
-        this.steps.push({path: [node.id, child.id], costs: [this.costs()}] })
+        this.steps.push({path: [node.id, child.id], costs: [this.costs()]})
       });
 
       this.visited.push(node);
@@ -51,14 +52,27 @@ class DijkstraSteps {
       }
     }
     console.log(this.steps);
+    this.createPath(parent, source, destination);
+
   }
 
   costs() {
     let stepCost = [];
-    for (var i = 0; i < this.nodeList.length; i++) {
-      stepCost.push(this.nodeList[i])
+    for (var i = 0; i < Object.keys(this.nodeList).length; i++) {
+      stepCost.push(this.nodeList[i + 1].cost)
     }
     return stepCost;
+  }
+
+  createPath(parent, source, destination) {
+    let path = [destination.id];
+    let startKey = destination.id;
+    while (parent[startKey]) {
+      path.push(parent[startKey]);
+      startKey = parent[startKey]
+    }
+    console.log(path.reverse());
+    return path.reverse();
   }
 
 }
