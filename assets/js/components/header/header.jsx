@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
   constructor(props) {
@@ -10,8 +11,9 @@ class Header extends React.Component {
       <header className="header">
         <nav className="nav-bar">
           <ul>
-            <li>
-              <a>Home</a>
+            <li className="logo">
+              <Link to="/">AlgoMapper</Link>
+              <div className="underline" />
             </li>
           </ul>
           <ul>
