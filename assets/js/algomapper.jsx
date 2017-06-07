@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import { Astar, Node, NODELIST } from './node/node';
+import BellmanFord from './node/bellman_ford';
 
 import Root from './components/root';
 
@@ -29,3 +30,4 @@ document.addEventListener('DOMContentLoaded', () => {
 window.NODELIST = NODELIST;
 window.Node = Node;
 window.Astar = Astar;
+window.BellmanFord = BellmanFord;
