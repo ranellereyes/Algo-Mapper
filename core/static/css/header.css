@@ -32,7 +32,6 @@ li {
 li a {
   margin: 0 10px;
   color: DarkSlateGray;
-  height: 100%;
   text-decoration: none;
 }
 
@@ -48,7 +47,7 @@ li.logo a {
 }
 
 div.underline {
-  margin: -17px 10px 0 10px;
+  margin: 3px 10px 0 10px;
   height: 1px;
   width: 0%;
   align-self: flex-start;
@@ -61,6 +60,6 @@ li a:hover {
 }
 
 li:hover div.underline {
-  width: calc(100% - 25px);
+  width: calc(100% - 20px);
   cursor: pointer;
 }
