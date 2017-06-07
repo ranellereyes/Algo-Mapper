@@ -27,7 +27,7 @@ class AstarVisualization {
     let color = d3.scaleOrdinal(d3.schemeCategory20);
     let graph = this.parseNodes();
 
-    this.svg = d3.select("main").append("svg")
+    this.svg = d3.select("div.visualization").append("svg")
         .attr("width", 500)
         .attr("height", 500);
 
@@ -36,20 +36,20 @@ class AstarVisualization {
         .enter().append("marker")
         .attr("id", function(d) { return d })
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 25)
+        .attr("refX", 30)
         .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
         .attr("orient", "auto")
         .append("path")
         .attr("d", "M0,-5L10,0L0,5 L10,0 L0, -5")
-        .style("stroke", "white")
+        .style("stroke", "gray")
         .style("opacity", "1");
 
     this.links = this.svg.selectAll(".link")
         .data(graph.links)
         .enter().append("line")
-        .attr("stroke", "white")
+        .attr("stroke", "gray")
         .attr("class", "link")
         .style("stroke-width", 1)
         .style("marker-end",  "url(#suit)");
@@ -58,8 +58,8 @@ class AstarVisualization {
         .data(graph.nodes)
         .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 8)
-        .style("fill", color(5))
+        .attr("r", 20)
+        .style("fill", "indigo")
         .style("stroke", "lightgray")
         .style("stroke-width", 1)
 

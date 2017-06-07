@@ -1,0 +1,51 @@
+main.show {
+  margin: 0 auto;
+  width: 1300px;
+  height: 800px;
+  background: AliceBlue;
+  margin-top: 50px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+h1.name {
+  margin: 30px;
+}
+
+ul.visualization {
+  display: flex;
+  margin: 30px;
+}
+
+aside.code {
+  height: 500px;
+  flex-grow: 1;
+  background: black;
+}
+div.visualization {
+  height: 500px;
+  width: 500px;
+  background: #DFC4A2;
+  border: 1px solid black;
+  margin-right: 30px;
+}
+
+
+section.algo-bottom {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+ul.algo-description {
+  display: flex;
+}
+
+div.how-it-works {
+  flex: 3
+}
+
+aside.pros-n-cons {
+  flex: 1
+}

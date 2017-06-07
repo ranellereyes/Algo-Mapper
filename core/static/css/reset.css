@@ -9,3 +9,7 @@ span, p, header, footer, button, a {
   font-family: Source Sans Pro;
   list-style: none;
 }
+
+body {
+  background: AliceBlue;
+}
