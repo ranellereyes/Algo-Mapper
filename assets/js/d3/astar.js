@@ -5,89 +5,91 @@ class AstarVisualization {
 
   parseNodes() {
     let nodes = [];
-    let keys = Object.keys(this.nodeList).sort();
+    let list = this.nodeList;
+    let keys = Object.keys(list).sort();
     keys.forEach( idx => {
-      this.nodeList[idx].fx = this.nodeList[idx].x;
-      this.nodeList[idx].fy = this.nodeList[idx].y;
-      nodes.push(this.nodeList[idx]);
+      // list[idx].index = parseInt(idx);
+      nodes.push(list[idx]);
     });
 
     let links = [];
     nodes.forEach( (node, idx) => {
       node.children.forEach( child => {
-        links.push({ source: idx + 1, target: child.id + 1 })
+        if (!child.id) return;
+        links.push({ source: node, target: list[child.id] })
       });
     });
-    let graph = { nodes: nodes, links: links};
+    let graph = { nodes: nodes, links: links };
     return graph;
   }
 
   draw() {
-    //Constants for the SVG
-    var width = 500,
-        height = 500;
-
-    //Set up the colour scale
-    var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-    //Set up the force layout
-    var force = d3.forceSimulation()
-      .force("link", d3.forceLink().id(function(d) { return d.index }))
-      .force("y", d3.forceY(0))
-      .force("x", d3.forceX(0));
-
-    //Append a SVG to the body of the html page. Assign this SVG as an object to svg
-    var svg = d3.select("main").append("svg")
-        .attr("width", width)
-        .attr("height", height);
-
-    //Read the data from the mis element
-    // var mis = document.getElementById('mis').innerHTML;
+    let color = d3.scaleOrdinal(d3.schemeCategory20);
     let graph = this.parseNodes();
 
-    //Creates the graph data structure out of the json data
-    // force.nodes(graph.nodes)
-    //     .links(graph.links)
-    //     .start();
+    this.svg = d3.select("main").append("svg")
+        .attr("width", 500)
+        .attr("height", 500);
 
-    //Create all the line svgs but without locations yet
-    var link = svg.selectAll(".link")
+    this.svg.append("defs").selectAll("marker")
+        .data(["suit", "licensing", "resolved"])
+        .enter().append("marker")
+        .attr("id", function(d) { return d })
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 25)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-5L10,0L0,5 L10,0 L0, -5")
+        .style("stroke", "white")
+        .style("opacity", "1");
+
+    this.links = this.svg.selectAll(".link")
         .data(graph.links)
         .enter().append("line")
+        .attr("stroke", "white")
         .attr("class", "link")
-        .style("stroke-width", 2);
+        .style("stroke-width", 1)
+        .style("marker-end",  "url(#suit)");
 
-    //Do the same with the circles for the nodes - no
-    var node = svg.selectAll(".node")
+    this.nodes = this.svg.selectAll(".node")
         .data(graph.nodes)
         .enter().append("circle")
         .attr("class", "node")
         .attr("r", 8)
-        .style("fill", color(5));
+        .style("fill", color(5))
+        .style("stroke", "lightgray")
+        .style("stroke-width", 1)
 
+    this.force = d3.forceSimulation();
+        // .force("link", d3.forceLink().id(function(d) { return d.id }));
 
-    //Now we are giving the SVGs co-ordinates - the force layout is generating the co-ordinates which this code is using to update the attributes of the SVG elements
-    force.on("end", function () {
-        link.attr("x1", function (d) {
-            return d.source.x;
-        })
-            .attr("y1", function (d) {
-            return d.source.y;
-        })
-            .attr("x2", function (d) {
-            return d.target.x;
-        })
-            .attr("y2", function (d) {
-            return d.target.y;
-        });
+    let render = () => {
+      this.links
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
 
-        node.attr("cx", function (d) {
-            return d.x;
-        })
-            .attr("cy", function (d) {
-            return d.y;
-        });
-    });
+      this.nodes
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+    }
+
+    // this.force.nodes(graph.nodes);
+
+    // force
+    //   .force("link")
+    //   .links(graph.links);
+
+    this.force.on("tick", render);
+
+  }
+
+  highlightNode(id) {
+    d3.select(this.nodes._groups[0][id - 1]).style("fill", "red");
   }
 }
 
