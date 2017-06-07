@@ -1,10 +1,11 @@
-class Dijkstra {
-  constructor(nodeList, source, destination) {
+class DijkstraSteps {
+  constructor(nodeList, source) {
     this.nodeList = nodeList;
     this.visited = [];
     this.unvisited = [];
+    this.steps = [];
+    this.costs = this.costs.bind(this);
     this.source = source || this.nodeList[1]; // nodeList[#]
-    this.destination = destination; // nodeList[#]
   }
 
   initiate(source) {
@@ -15,14 +16,15 @@ class Dijkstra {
       let node = this.nodeList[id];
       if (node !== this.source) {
         node.cost = Infinity;
-        this.unvisited.push(node);
+        this.unvisited.push(node)
       }
     });
   }
 
   search(source, destination) {
+    this.steps.push({path: [source], costs: [this.costs()]})
     let parent = {};
-    let node = source;
+    let node = this.nodeList[source];
     while (this.unvisited.length !== 0) {
       node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
@@ -32,25 +34,34 @@ class Dijkstra {
             _node.cost = node.cost + child.weight;
             parent[_node.id] = node.id;
           }
-          // _node.cost = node.cost + child.weight;
         }
+        this.steps.push({path: [node.id, child.id], costs: [this.costs()]})
       });
+
       // adds node to visited list
       this.visited.push(node);
       // remove node from unvisited list
       this.unvisited.splice(this.unvisited.indexOf(node), 1);
 
-
       //choose node with lowest cost
-      node = this.unvisited[0]
+      node = this.unvisited[0];
       for (let i = 1; i < this.unvisited.length; i++) {
         if (this.unvisited[i].cost < node.cost) {
           node = this.unvisited[i];
         }
       }
     }
+    console.log(this.steps);
     // create path from source to destination
     this.createPath(parent, source, destination);
+  }
+
+  costs() {
+    let stepCost = [];
+    for (var i = 0; i < Object.keys(this.nodeList).length; i++) {
+      stepCost.push(this.nodeList[i + 1].cost)
+    }
+    return stepCost;
   }
 
   createPath(parent, source, destination) {
@@ -64,7 +75,6 @@ class Dijkstra {
     return path.reverse();
   }
 
-
 }
 
-export default Dijkstra;
+export default DijkstraSteps;

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-import { Astar, Node, NODELIST, NODELIST2  } from './node/node';
-import BellmanFord from './node/bellman_ford';
-import BellmanFordSteps from './node/bellman_ford_steps';
 
 import Root from './components/root';
+
+// ==TESTING==
+import { NODELIST, NODELIST2 } from './node/node';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -28,9 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.NODELIST2 = NODELIST2;
-
 window.NODELIST = NODELIST;
 window.Node = Node;
-window.Astar = Astar;
-window.BellmanFord = BellmanFord;
-window.BellmanFordSteps = BellmanFordSteps;
