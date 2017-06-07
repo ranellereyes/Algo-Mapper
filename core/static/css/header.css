@@ -42,13 +42,14 @@ li.logo {
 }
 
 li.logo a {
-  font-family: Fredoka One;
+  margin-top: 5px;
+  font-family: Poiret One;
   font-size: 40px;
 }
 
 div.underline {
-  margin: -15px 10px 0 10px;
-  height: 3px;
+  margin: -17px 10px 0 10px;
+  height: 1px;
   width: 0%;
   align-self: flex-start;
   background: DarkSlateGray;
