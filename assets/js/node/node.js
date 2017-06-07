@@ -8,12 +8,12 @@ export class Node {
 }
 
 export const NODELIST = {
-  1: new Node([{ id: 2, weight: 10 }, { id: 3, weight: 5 }], 20, 20, 1),
-  2: new Node([{ id: 5, weight: 4 }], 40, 10, 2),
-  3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 7 }], 40, 30, 3),
-  4: new Node([{ id: 6, weight: 9 }], 60, 30, 4),
-  5: new Node([{ id: 6, weight: 2 }], 60, 10, 5),
-  6: new Node([{}], 80, 20, 6)
+  1: new Node([{ id: 2, weight: 10 }, { id: 3, weight: 5 }], 75, 250, 1),
+  2: new Node([{ id: 5, weight: 4 }], 225, 150, 2),
+  3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 7 }], 225, 350, 3),
+  4: new Node([{ id: 6, weight: 9 }], 375, 350, 4),
+  5: new Node([{ id: 6, weight: 2 }], 375, 150, 5),
+  6: new Node([{}], 525, 250, 6)
 }
 
 export const NODELIST2 = {
