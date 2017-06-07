@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
+import { Astar, Node, NODELIST, NODELIST2  } from './node/node';
+import BellmanFord from './node/bellman_ford';
 
 import Root from './components/root';
 
@@ -23,3 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={ store } />, root);
 });
+
+window.NODELIST2 = NODELIST2;
+
+window.NODELIST = NODELIST;
+window.Node = Node;
+window.Astar = Astar;
+window.bell = BellmanFord;

@@ -34,7 +34,12 @@ class BellmanFord {
       }
     }
 
-    return this.createPath(parents, startNodeId, endNodeId);
+    return {
+              path: this.createPath(parents, startNodeId, endNodeId),
+              steps: [],
+              table: {cost: cost,
+              parents: null}
+            };
   }
 
   steps(startNodeId, endNodeId) {
