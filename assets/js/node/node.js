@@ -14,7 +14,7 @@ export const NODELIST = {
   4: new Node([{ id: 6, weight: 9 }], 60, 30, 4),
   5: new Node([{ id: 6, weight: 2 }], 60, 10, 5),
   6: new Node([{}], 80, 20, 6)
-}
+};
 
 export const NODELIST2 = {
   1: new Node([
@@ -33,4 +33,4 @@ export const NODELIST2 = {
   6: new Node([{ id: 8, weight: 2 }], 80, 20, 6),
   7: new Node([{ id: 4, weight: 12 }, { id: 8, weight: 5 }], 80, 20, 7),
   8: new Node([{ id: 3, weight: 4 }], 80, 20, 8)
-}
+};

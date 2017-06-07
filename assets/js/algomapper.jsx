@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-import { Astar, Node, NODELIST } from './node/node';
+import { NODELIST } from './node/node';
+
+//TESTING
+import { floydWarshallAlgo } from './node/floyd-wellman-algo';
 
 import Root from './components/root';
 
@@ -28,4 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.NODELIST = NODELIST;
 window.Node = Node;
-window.Astar = Astar;
+window.floyd = new floydWarshallAlgo(NODELIST);
