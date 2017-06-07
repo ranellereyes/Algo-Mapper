@@ -1,4 +1,5 @@
-import NODELIST from "./node";
+// TESTING STUFF
+// import { NODELIST, NODELIST2 } from "./node";
 
 export class floydWarshallAlgo {
   constructor (nodelist) {
@@ -7,8 +8,9 @@ export class floydWarshallAlgo {
     this.costs = Object.keys(nodelist).map(e => new Array);
     this.parents = Object.keys(nodelist).map(e => new Array);
     this.initCosts = this.initCosts.bind(this);
-    window.parents = this.parents;
-    window.costs = this.costs;
+
+    this.initCosts();
+    this.initParents();
   }
 
   initCosts () {
@@ -46,10 +48,36 @@ export class floydWarshallAlgo {
         if (i === j) {
           this.parents[i][j] = null;
         } else if (!this.parents[i][j]) {
-          this.parents[i][j] = 'orphan D=';
+          this.parents[i][j] = undefined;
         }
       }
     }
+  }
+
+  pathDeconstructor(start, end, intermediate = null) {
+    let path = [end],
+        startIdx = this.indices.indexOf(start),
+        endIdx = this.indices.indexOf(end),
+        intIdx = this.indices.indexOf(intermediate);
+
+    if (intIdx > -1) {
+      while (intermediate !== path[0]) {
+        let parent = this.parents[intIdx][this.indices.indexOf(path[0])];
+        if (!parent) { break; }
+        path.unshift(parent);
+      }
+    }
+
+    while (start !== path[0]) {
+      let parent = this.parents[startIdx][this.indices.indexOf(path[0])];
+      if (!parent) {
+        path.unshift(start);
+        break;
+      }
+      path.unshift(parent);
+    }
+
+    return path;
   }
 
   search (start, end) {
@@ -64,15 +92,15 @@ export class floydWarshallAlgo {
       }
     }
 
-    let path = [end],
-        startIdx = this.indices.indexOf(start),
-        endIdx = this.indices.indexOf(end);
+    // Parsed into helper function
+    // let path = [end],
+    //     startIdx = this.indices.indexOf(start),
+    //     endIdx = this.indices.indexOf(end);
+    //
+    // while (start !== path[0]) {
+    //   path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
+    // }
 
-    while (start !== path[0]) {
-      debugger;
-      path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
-    }
-
-    return path;
+    return this.pathDeconstructor(start, end);
   }
 }
