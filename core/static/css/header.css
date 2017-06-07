@@ -2,10 +2,12 @@ header.header {
   position: fixed;
   top: 0;
   left: 0;
-  height: 50px;
+  height: 65px;
   width: 100%;
-  background: black;
+  background: white;
   align-items: center;
+  box-shadow: 0 2px 2px LightGray;
+  opacity: 0.95;
 }
 
 nav.nav-bar {
@@ -13,13 +15,13 @@ nav.nav-bar {
   justify-content: space-between;
   width: 1300px;
   margin: 0 auto;
-  height: 50px;
+  height: 65px;
 }
 
 ul {
   display: flex;
   list-style: none;
-  margin: 0;
+  margin: 0 10px;
 }
 
 li {
@@ -28,12 +30,36 @@ li {
 }
 
 li a {
-  padding: 10px;
-  color: white;
+  margin: 0 10px;
+  color: DarkSlateGray;
+  text-decoration: none;
 }
 
-a:hover {
-  text-shadow: 0 0 0 white;
-  text-decoration: underline;
+li.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+li.logo a {
+  margin-top: 5px;
+  font-family: Poiret One;
+  font-size: 40px;
+}
+
+div.underline {
+  margin: 3px 10px 0 10px;
+  height: 1px;
+  width: 0%;
+  align-self: flex-start;
+  background: DarkSlateGray;
+  transition: width 0.3s;
+}
+
+li a:hover {
+  cursor: pointer;
+}
+
+li:hover div.underline {
+  width: calc(100% - 20px);
   cursor: pointer;
 }

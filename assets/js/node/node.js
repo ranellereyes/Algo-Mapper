@@ -9,11 +9,11 @@ export class Node {
 
 export const NODELIST = {
   1: new Node([{ id: 2, weight: 10 }, { id: 3, weight: 5 }], 75, 250, 1),
-  2: new Node([{ id: 5, weight: 4 }], 225, 150, 2),
-  3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 7 }], 225, 350, 3),
-  4: new Node([{ id: 6, weight: 9 }], 375, 350, 4),
-  5: new Node([{ id: 6, weight: 2 }], 375, 150, 5),
-  6: new Node([{}], 525, 250, 6)
+  2: new Node([{ id: 5, weight: 4 }], 175, 150, 2),
+  3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 7 }], 175, 350, 3),
+  4: new Node([{ id: 6, weight: 9 }], 325, 350, 4),
+  5: new Node([{ id: 6, weight: 2 }], 325, 150, 5),
+  6: new Node([{}], 425, 250, 6)
 };
 
 export const NODELIST2 = {
