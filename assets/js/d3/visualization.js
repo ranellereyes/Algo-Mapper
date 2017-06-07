@@ -32,7 +32,7 @@ class Visualization {
         .attr("height", 500);
 
     this.svg.append("defs").selectAll("marker")
-        .data(["base", "color"])
+        .data(["base", "color", "color2"])
         .enter().append("marker")
         .attr("id", function(d) { return d })
         .attr("viewBox", "0 -5 10 10")
@@ -49,6 +49,7 @@ class Visualization {
 
     this.basePath = d3.select('marker#base path');
     this.colorPath = d3.select('marker#color path');
+    this.colorPath2 = d3.select('marker#color2 path');
 
     this.links = this.svg.selectAll(".link")
         .data(graph.links)
@@ -74,7 +75,7 @@ class Visualization {
         .append("circle")
         .attr("class", "node");
 
-    this.nodeWrapper.append("text")
+    this.nodeText = this.nodeWrapper.append("text")
         .attr("dx", function(d) { return -4 })
         .attr("dy", function(d) { return 5 })
         .text(function(d) { return d.id });
@@ -107,6 +108,17 @@ class Visualization {
       .style('marker-end', 'url(#color)')
       .style('stroke', color);
     this.colorPath.style('stroke', color).style('fill', color);
+  }
+
+  highlightLink2(fromId, toId, color) {
+    d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
+      .style('marker-end', 'url(#color2)')
+      .style('stroke', color);
+    this.colorPath.style('stroke', color).style('fill', color);
+  }
+
+  changeText(textFunction) {
+    this.nodeText.text((d) => textFunction(d))
   }
 }
 
