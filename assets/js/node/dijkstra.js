@@ -24,10 +24,10 @@ class Dijkstra {
     let parent = {};
     let node = source;
     while (this.unvisited.length !== 0) {
-      node.children.forEach(child => {
+      node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
         if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
-          _node = this.nodeList[child.id]
+          _node = this.nodeList[child.id];
           if (_node.cost > node.cost + child.weight) {
             _node.cost = node.cost + child.weight;
             parent[_node.id] = node.id;
