@@ -1,6 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../node/node';
+import { NODELIST } from '../../algorithms/node';
 
 class Show extends React.Component {
   constructor(props) {
