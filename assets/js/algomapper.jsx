@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import { Astar, Node, NODELIST, NODELIST2  } from './node/node';
 import BellmanFord from './node/bellman_ford';
+import BellmanFordSteps from './node/bellman_ford_steps';
 
 import Root from './components/root';
 
@@ -31,4 +32,5 @@ window.NODELIST2 = NODELIST2;
 window.NODELIST = NODELIST;
 window.Node = Node;
 window.Astar = Astar;
-window.bell = BellmanFord;
+window.BellmanFord = BellmanFord;
+window.BellmanFordSteps = BellmanFordSteps;
