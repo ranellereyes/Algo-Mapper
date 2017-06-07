@@ -1,4 +1,5 @@
-import {NODELIST, NODELIST2} from "./node";
+// TESTING STUFF
+// import { NODELIST, NODELIST2 } from "./node";
 
 export class floydWarshallAlgo {
   constructor (nodelist) {
