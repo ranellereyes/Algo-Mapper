@@ -22,15 +22,15 @@ __Bonus MVP__:
 
 ### Wireframes
 
-![index-page](docs/wireframes/Index-Page.png)
+![index-page](docs/wireframes/index_page.png)
 
 Homepage, automatically displays the 4 algorithms and their visualization. Able to get quick, short blurb about a certain algorithm on click.
 
-![comparison-page](docs/wireframes/Comparison-Page.png)
+![comparison-page](docs/wireframes/comparison_page.png)
 
 Compares two different algorithms. Shows a bigger visualization along with the code and a plot of time-complexity.
 
-![show-page](docs/wireframes/Show-Page.png)
+![show-page](docs/wireframes/show_page.png)
 
 Detail page regarding the algorithm. Walks through how it works and the math behind the algorithm.
 
@@ -64,6 +64,7 @@ Our group consists of four members:
     - Bellman-Ford
     - Floyd-Warshall
   - Make Node class for usage in Algorithms (Ranelle)
+  - Happy hour check-in!
 
 **Day 2**:
   - Be close to finishing algorithm code, have testable code by this point (Everyone)
