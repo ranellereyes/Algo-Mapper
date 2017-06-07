@@ -48,7 +48,7 @@ li.logo a {
 div.underline {
   margin: -15px 10px 0 10px;
   height: 3px;
-  width: 35%;
+  width: 0%;
   align-self: flex-start;
   background: DarkGray;
   transition: width 0.3s;

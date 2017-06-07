@@ -26,7 +26,8 @@ aside.code {
 div.visualization {
   height: 500px;
   width: 500px;
-  background: white;
+  background: #DFC4A2;
+  border: 1px solid black;
   margin-right: 30px;
 }
 

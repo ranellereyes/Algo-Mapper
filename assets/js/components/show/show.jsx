@@ -1,15 +1,16 @@
 import React from 'react';
 import AstarVisualization from '../../d3/astar';
-import NODELIST from '../../node/node';
+import { NODELIST } from '../../node/node';
 
 class Show extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { graph: new AstarVisualization(NODELIST) }
+    this.state = { };
   }
 
   componentDidMount() {
-    this.state.graph.draw();
+    let visual = new AstarVisualization(NODELIST);
+    visual.draw();
   }
 
   render() {
