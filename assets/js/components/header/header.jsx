@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Header extends React.Component {
         <nav className="nav-bar">
           <ul>
             <li className="logo">
-              <a>AlgoMapper</a>
+              <Link to="/">AlgoMapper</Link>
               <div className="underline" />
             </li>
           </ul>

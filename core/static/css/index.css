@@ -1,13 +1,45 @@
+div.index {
+  display: flex;
+  flex-direction: column;
+}
+
 main.index {
   margin: 0 auto;
   width: 1300px;
-  height: 800px;
-  background: Lavender;
+  height: 300px;
+  background: AliceBlue;
   margin-top: 50px;
 }
 
-div.visualization {
-  height: 500px;
-  width: 500px;
+section.algo-display {
+  display: flex;
+  flex-direction: column;
+  background: AliceBlue;
+  width: 1300px;
   margin: 0 auto;
+}
+
+ul.algo-list {
+  display: flex;
+}
+
+div.algo-image {
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+  border: 1px solid Black;
+}
+
+div.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+
+  border-bottom: 25px solid gray;
+}
+
+div.algo-description {
+  margin: 0 30px;
+  background: white;
 }

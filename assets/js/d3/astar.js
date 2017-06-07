@@ -36,13 +36,14 @@ class AstarVisualization {
         .enter().append("marker")
         .attr("id", function(d) { return d })
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 30)
+        .attr("refX", 26)
         .attr("refY", 0)
-        .attr("markerWidth", 10)
-        .attr("markerHeight", 10)
+        .attr("markerWidth", 4)
+        .attr("markerHeight", 4)
         .attr("orient", "auto")
         .append("path")
-        .attr("d", "M0,-5L10,0L0,5 L10,0 L0, -5")
+        .attr("d", "M0,-5L10,0L0,5")
+        .style("fill", "gray")
         .style("stroke", "gray")
         .style("opacity", "1");
 
@@ -51,7 +52,7 @@ class AstarVisualization {
         .enter().append("line")
         .attr("stroke", "gray")
         .attr("class", "link")
-        .style("stroke-width", 1)
+        .style("stroke-width", 3)
         .style("marker-end",  "url(#suit)");
 
     this.nodes = this.svg.selectAll(".node")
@@ -59,9 +60,9 @@ class AstarVisualization {
         .enter().append("circle")
         .attr("class", "node")
         .attr("r", 20)
-        .style("fill", "indigo")
-        .style("stroke", "lightgray")
-        .style("stroke-width", 1)
+        .style("fill", "LightBlue")
+        .style("stroke", "black")
+        .style("stroke-width", 2)
 
     this.force = d3.forceSimulation();
         // .force("link", d3.forceLink().id(function(d) { return d.id }));
@@ -88,8 +89,8 @@ class AstarVisualization {
 
   }
 
-  highlightNode(id) {
-    d3.select(this.nodes._groups[0][id - 1]).style("fill", "red");
+  highlightNode(id, color) {
+    d3.select(this.nodes._groups[0][id - 1]).style("fill", color);
   }
 }
 
