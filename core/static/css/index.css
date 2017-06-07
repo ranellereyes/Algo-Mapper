@@ -1,0 +1,13 @@
+main.index {
+  margin: 0 auto;
+  width: 1300px;
+  height: 800px;
+  background: grey;
+  margin-top: 50px;
+}
+
+div.visualization {
+  height: 500px;
+  width: 500px;
+  margin: 0 auto;
+}
