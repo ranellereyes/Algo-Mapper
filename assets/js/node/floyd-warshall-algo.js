@@ -8,8 +8,6 @@ export class floydWarshallAlgo {
     this.costs = Object.keys(nodelist).map(e => new Array);
     this.parents = Object.keys(nodelist).map(e => new Array);
     this.initCosts = this.initCosts.bind(this);
-    window.parents = this.parents;
-    window.costs = this.costs;
 
     this.initCosts();
     this.initParents();
@@ -50,7 +48,7 @@ export class floydWarshallAlgo {
         if (i === j) {
           this.parents[i][j] = null;
         } else if (!this.parents[i][j]) {
-          this.parents[i][j] = 'orphan D=';
+          this.parents[i][j] = undefined;
         }
       }
     }
@@ -64,12 +62,19 @@ export class floydWarshallAlgo {
 
     if (intIdx > -1) {
       while (intermediate !== path[0]) {
-        path.unshift(this.parents[intIdx][this.indices.indexOf(path[0])]);
+        let parent = this.parents[intIdx][this.indices.indexOf(path[0])];
+        if (!parent) { break; }
+        path.unshift(parent);
       }
     }
 
     while (start !== path[0]) {
-      path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
+      let parent = this.parents[startIdx][this.indices.indexOf(path[0])];
+      if (!parent) {
+        path.unshift(start);
+        break;
+      }
+      path.unshift(parent);
     }
 
     return path;
