@@ -3,7 +3,7 @@ class Dijkstra {
     this.nodeList = nodeList;
     this.visited = [];
     this.unvisited = [];
-    this.source = this.nodeList[1]; // nodeList[#]
+    this.source = source || this.nodeList[1]; // nodeList[#]
     this.destination = destination; // nodeList[#]
   }
 
@@ -23,7 +23,6 @@ class Dijkstra {
   search(source, destination) {
     let parent = {};
     let node = source;
-    let lowestCost;
     while (this.unvisited.length !== 0) {
       node.children.forEach(child => {
         let _node;
@@ -34,29 +33,23 @@ class Dijkstra {
             parent[_node.id] = node.id;
           }
           _node.cost = node.cost + child.weight
-          // debugger
         }
-        // if (_node && ) {
-        //
-        // }
-        // else if (_node) {
-        //   // console.log(_node, _node.cost);
-        //   lowestCost = lowestCost < _node.cost ? lowestCost : child;
-        //   parent[_node.id] = node.id;
-        // }
       });
+      // adds node to visited list
       this.visited.push(node);
+      // remove node from unvisited list
       this.unvisited.splice(this.unvisited.indexOf(node), 1);
+
+
+      //choose node with lowest cost
       node = this.unvisited[0]
       for (let i = 1; i < this.unvisited.length; i++) {
         if (this.unvisited[i].cost < node.cost) {
           node = this.unvisited[i]
         }
       }
-
-      lowestCost = undefined;
     }
-    console.log(parent);
+    // create path from source to destination
     this.createPath(parent, source, destination);
   }
 
