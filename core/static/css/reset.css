@@ -11,5 +11,7 @@ span, p, header, footer, button, a {
 }
 
 body {
-  background: White;
+  /*background: White;*/
+  background: #F4F4F4;
+
 }

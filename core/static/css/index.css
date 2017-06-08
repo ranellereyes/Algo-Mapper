@@ -5,17 +5,28 @@ div.index {
 
 main.index {
   margin: 0 auto;
-  width: 1300px;
-  height: 300px;
-  background: AliceBlue;
+  width: 100%;
+  /*max-width: 1200px;
+  min-width: 1000px;*/
+  height: 400px;
+  background: #F4F4F4;
   margin-top: 50px;
 }
-
+main.index div {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 1000px;
+  height: 400px;
+  background: white;
+}
 section.algo-display {
   display: flex;
   flex-direction: column;
   background: AliceBlue;
-  width: 1300px;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 1000px;
   margin: 0 auto;
 }
 
