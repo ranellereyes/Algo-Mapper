@@ -62,12 +62,12 @@ export class nodelistGenerator {
     // Generate children up to 4 nodes away, no repeats
     while (family.length < numOfChildren) {
       // Generates random child, checks if child already made
-      let childId = n + 1 + Math.floor(4 * Math.random());
+      let childId = n + 1 + Math.floor(2 * Math.random());
       while (family.map(e => Number(e.id)).includes(childId)) {
         childId = n + 1 + Math.floor(4 * Math.random());
       }
 
-      family.push({id: childId, wt: this.randomWt()});
+      family.push({id: childId, weight: this.randomWt()});
     }
 
     // Filters out non-existant nodes
@@ -76,7 +76,7 @@ export class nodelistGenerator {
     // If node has all children filtered out, give it adjacent node
     // Check if node is last node
     if (family.length === 0 && n !== this.max) {
-      family.push({id: n + 1, wt: this.randomWt()});
+      family.push({id: n + 1, weight: this.randomWt()});
     }
 
     return family;
