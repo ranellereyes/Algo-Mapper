@@ -70,6 +70,15 @@ export class nodelistGenerator {
       family.push({id: childId, wt: this.randomWt()});
     }
 
+    // Filters out non-existant nodes
+    family = family.filter(node => Number(node.id) <= this.max);
+
+    // If node has all children filtered out, give it adjacent node
+    // Check if node is last node
+    if (family.length === 0 && n !== this.max) {
+      family.push({id: n + 1, wt: this.randomWt()});
+    }
+
     return family;
   }
 }
