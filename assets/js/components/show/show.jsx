@@ -1,5 +1,5 @@
 import React from 'react';
-import AstarVisualization from '../../d3/astar';
+import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../node/node';
 
 class Show extends React.Component {
@@ -9,8 +9,9 @@ class Show extends React.Component {
   }
 
   componentDidMount() {
-    let visual = new AstarVisualization(NODELIST);
+    let visual = new Visualization(NODELIST);
     visual.draw();
+    window.v = visual;
     this.setState({ graph: visual });
   }
 
