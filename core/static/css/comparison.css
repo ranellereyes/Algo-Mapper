@@ -98,7 +98,7 @@ section.comp-graph li{
 }
 section.comp-graph li.comp-graph-code{
   width: 25%;
-  overflow:
+  overflow: scroll;
 
 }
 section.comp-graph li.comp-graph{

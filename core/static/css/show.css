@@ -39,6 +39,8 @@ aside.show-code {
   flex-grow: 1;
   background: White;
   border: 0px solid Gray;
+  overflow: scroll;
+  
   /*border-left: 3px solid DarkGray;*/
 }
 
