@@ -17,33 +17,40 @@ class Show extends React.Component {
 
   render() {
     return (
-      <div className="index">
-        <main className="show">
-          <section className="show">
-            <h1 className="name">A* Algorithm</h1>
+      <div className="index-main">
+        <main className="show-main">
+          <section className="show-main">
+            <h1 className="show-name">A* Algorithm</h1>
             <ul className="visualization">
               <div className="visualization" />
-              <aside className="code"></aside>
+              <aside className="show-code">
+                <h3>Code area</h3>
+              </aside>
             </ul>
           </section>
         </main>
-        <section className="algo-bottom">
-          <h1>Description</h1>
-          <ul className="algo-description">
-            <div className="how-it-works">
-              <h3>How it Works</h3>
-              <p>asdfaf</p>
-              <h3>Math</h3>
-              <p>asdfasdf</p>
-            </div>
-            <aside className="pros-n-cons">
-              <h3>Pros & Cons</h3>
-              <p>asdf</p>
-            </aside>
-          </ul>
+        <section className="show-algo-bottom">
+          <div>
+            <h1>Description</h1>
+            <ul className="show-algo-description">
+              <div className="show-how-it-works">
+                <h3>How it Works</h3>
+                <p>asdfaf  EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
+                </p>
+                <h3>Math</h3>
+                <p>asdfasdf  EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
+                </p>
+              </div>
+              <aside className="show-pros-n-cons">
+                <h3>Pros & Cons</h3>
+                <p>asdfas
+                </p>
+              </aside>
+            </ul>
+          </div>
         </section>
       </div>
-    )
+    );
   }
 }
 

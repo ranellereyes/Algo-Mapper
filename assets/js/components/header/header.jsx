@@ -8,15 +8,15 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className="header">
+      <header className="nav-header">
         <nav className="nav-bar">
           <ul>
-            <li className="logo">
+            <li className="nav-logo">
               <Link to="/">AlgoMapper</Link>
-              <div className="underline" />
+              <div className="nav-logo-underline" />
             </li>
           </ul>
-          <ul>
+          <ul className="nav-menu">
             <li>
               <a>About us</a>
             </li>

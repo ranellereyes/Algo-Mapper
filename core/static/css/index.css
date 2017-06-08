@@ -1,45 +1,68 @@
-div.index {
+div.index-main {
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
 }
 
-main.index {
-  margin: 0 auto;
-  width: 1300px;
-  height: 300px;
-  background: AliceBlue;
+main.index-main {
+  width: 100%;
+  height: 400px;
+  background: #F4F4F4;
   margin-top: 50px;
+  /*border-bottom: 1px solid #eaeaea;*/
+}
+main.index-main div {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 600px;
 }
 
-section.algo-display {
+section.index-algo-display {
   display: flex;
   flex-direction: column;
-  background: AliceBlue;
-  width: 1300px;
+  background: white;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 600px;
   margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
-ul.algo-list {
+ul.index-algo-list {
   display: flex;
+  margin: 0;
+  justify-content: space-between;
 }
 
-div.algo-image {
-  height: 300px;
-  width: 300px;
-  margin: 10px;
-  border: 1px solid Black;
+div.index-algo-image {
+  height: 270px;
+  width: 23%;
+  border: 1.5px solid #eaeaea;
+  border-radius: 4px;
 }
 
-div.arrow-up {
+div.index-algo-image:hover {
+  border: 1.5px solid #44A7C3;
+  border-radius: 4px;
+  cursor: pointer;
+}
+div.index-arrow-up {
   width: 0;
   height: 0;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
-
-  border-bottom: 25px solid gray;
+  border-bottom: 25px solid #eaeaea;
 }
 
-div.algo-description {
-  margin: 0 30px;
+div.index-algo-description {
+  border: 1.5px solid #eaeaea;
+  border-radius: 4px;
+  /*margin: 0 30px;*/
   background: white;
+}
+div.index-algo-description h3 {
+  margin: 15px;
+  font-size: 12pt;
 }
