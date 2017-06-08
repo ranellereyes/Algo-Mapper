@@ -1,37 +1,49 @@
 div.index {
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
 }
 
 main.index {
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
-  min-width: 1000px;
+  min-width: 600px;
   height: 400px;
   background: white;
   margin-top: 50px;
+  border-bottom: 1px solid #eaeaea;
+
 }
 
 section.algo-display {
   display: flex;
   flex-direction: column;
-  background: AliceBlue;
+  background: white;
   width: 100%;
   max-width: 1200px;
-  min-width: 1000px;
+  min-width: 600px;
   margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 ul.algo-list {
   display: flex;
+  margin: 0;
+  justify-content: space-between;
 }
-
 div.algo-image {
-  height: 300px;
-  width: 300px;
-  margin: 10px;
-  border: 1px solid Black;
+  height: 270px;
+  width: 22%;
+  /*margin: 10px;*/
+  border: 1px solid #eaeaea;
+}
+div.algo-image:first-child {
+  margin-left: 30px;
+}
+div.algo-image:last-child {
+  margin-right: 30px;
 }
 
 div.arrow-up {
@@ -40,10 +52,16 @@ div.arrow-up {
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
 
-  border-bottom: 25px solid gray;
+  border-bottom: 25px solid #eaeaea;
 }
 
 div.algo-description {
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
   margin: 0 30px;
   background: white;
+}
+div.algo-description h3 {
+  margin: 10px;
+  font-size: 12pt;
 }
