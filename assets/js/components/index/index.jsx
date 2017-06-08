@@ -9,7 +9,7 @@ class Index extends React.Component {
     return (
       <div className="index">
         <main className="index">
-          <div> main image </div>
+          <div> Main image area </div>
         </main>
         <section className="algo-display">
           <ul className="algo-list">

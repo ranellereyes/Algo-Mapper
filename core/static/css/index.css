@@ -6,20 +6,13 @@ div.index {
 main.index {
   margin: 0 auto;
   width: 100%;
-  /*max-width: 1200px;
-  min-width: 1000px;*/
-  height: 400px;
-  background: #F4F4F4;
-  margin-top: 50px;
-}
-main.index div {
-  margin: 0 auto;
-  width: 100%;
   max-width: 1200px;
   min-width: 1000px;
   height: 400px;
   background: white;
+  margin-top: 50px;
 }
+
 section.algo-display {
   display: flex;
   flex-direction: column;
