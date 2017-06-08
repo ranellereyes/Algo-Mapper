@@ -138,8 +138,16 @@ class Visualization {
     // this.force.on("tick", render);
   }
 
+  unhighlightNode(id) {
+    d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
+      .style("fill", "lightblue")
+      .style("r", 20);
+  }
+
   highlightNode(id, color) {
-    d3.select(this.nodes._groups[0][id - 1]).style("fill", color);
+    d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
+      .style("fill", color)
+      .style("r", 22);
   }
 
   highlightLink(fromId, toId, color) {
@@ -157,7 +165,7 @@ class Visualization {
   }
 
   changeText(textFunction) {
-    this.nodeText.text((d) => textFunction(d))
+    this.nodeText.text((d) => textFunction(d));
   }
 }
 
