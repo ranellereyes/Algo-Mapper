@@ -17,26 +17,28 @@ class Show extends React.Component {
 
   render() {
     return (
-      <div className="index">
-        <main className="show">
-          <section className="show">
-            <h1 className="name">A* Algorithm</h1>
-            <ul className="visualization">
-              <div className="visualization" />
-              <aside className="code"></aside>
+      <div className="index-main">
+        <main className="show-main">
+          <section className="show-main">
+            <h1 className="show-name">A* Algorithm</h1>
+            <ul className="show-visualization">
+              <div className="show-visualization" />
+              <aside className="show-code">
+                <h3>Code area</h3>
+              </aside>
             </ul>
           </section>
         </main>
-        <section className="algo-bottom">
+        <section className="show-algo-bottom">
           <h1>Description</h1>
-          <ul className="algo-description">
-            <div className="how-it-works">
+          <ul className="show-algo-description">
+            <div className="show-how-it-works">
               <h3>How it Works</h3>
               <p>asdfaf</p>
               <h3>Math</h3>
               <p>asdfasdf</p>
             </div>
-            <aside className="pros-n-cons">
+            <aside className="show-pros-n-cons">
               <h3>Pros & Cons</h3>
               <p>asdf</p>
             </aside>

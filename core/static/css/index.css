@@ -36,7 +36,6 @@ ul.index-algo-list {
 div.index-algo-image {
   height: 270px;
   width: 22%;
-  /*margin: 10px;*/
   border: 1px solid #eaeaea;
 }
 div.index-algo-image:first-child {
@@ -55,7 +54,6 @@ div.index-arrow-up {
   height: 0;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
-
   border-bottom: 25px solid #eaeaea;
 }
 
@@ -66,6 +64,6 @@ div.index-algo-description {
   background: white;
 }
 div.index-algo-description h3 {
-  margin: 10px;
+  margin: 15px;
   font-size: 12pt;
 }
