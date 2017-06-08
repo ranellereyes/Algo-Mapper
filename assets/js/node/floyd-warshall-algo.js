@@ -7,10 +7,7 @@ export class floydWarshallAlgo {
     this.indices = Object.keys(nodelist);
     this.costs = Object.keys(nodelist).map(e => new Array);
     this.parents = Object.keys(nodelist).map(e => new Array);
-    this.initCosts = this.initCosts.bind(this);
-
-    this.initCosts();
-    this.initParents();
+    this.numNodes = Object.keys(nodelist).length;
   }
 
   initCosts () {
@@ -81,6 +78,10 @@ export class floydWarshallAlgo {
   }
 
   search (start, end) {
+    let startTime = window.performance.now();
+    this.initCosts();
+    this.initParents();
+
     for (let k = 0; k < this.indices.length; k++) {
       for (let i = 0; i < this.indices.length; i++) {
         for (let j = 0; j < this.indices.length; j++) {
@@ -101,6 +102,12 @@ export class floydWarshallAlgo {
     //   path.unshift(this.parents[startIdx][this.indices.indexOf(path[0])]);
     // }
 
-    return this.pathDeconstructor(start, end);
+    return  {
+              path: this.pathDeconstructor(start, end),
+              numNodes: this.numNodes,
+
+              // Returns run time in micro-seconds
+              runtime: (window.performance.now() - startTime) * 1000
+            };
   }
 }
