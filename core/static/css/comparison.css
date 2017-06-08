@@ -65,6 +65,7 @@ section.comp-arrows figure {
   background-repeat: no-repeat;
   background-size: 100%;
   margin: 15px 15px 15px 15px;
+  cursor: pointer;
 }
 
 section.comp-arrows figure:active {

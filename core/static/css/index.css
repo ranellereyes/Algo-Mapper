@@ -67,6 +67,7 @@ div.index-algo-image {
   margin-right: 35px;
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
+  outline: none;
 }
 
 div.index-algo-image:last-child {
