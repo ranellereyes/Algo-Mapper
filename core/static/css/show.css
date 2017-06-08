@@ -37,11 +37,16 @@ ul.visualization {
 aside.show-code {
   height: 500px;
   flex-grow: 1;
-  background: White;
   border: 0px solid Gray;
   overflow: scroll;
-  
+  overflow-x: hidden;
   /*border-left: 3px solid DarkGray;*/
+}
+aside.show-code pre {
+  margin: 0;
+}
+aside.show-code code {
+  padding: 10px;
 }
 
 div.visualization {
@@ -50,10 +55,6 @@ div.visualization {
   background: White;
   border: 0px solid Gray;
   margin-right: 30px;
-}
-
-aside.show-code h3 {
-  margin: 15px;
 }
 
 section.show-algo-bottom {

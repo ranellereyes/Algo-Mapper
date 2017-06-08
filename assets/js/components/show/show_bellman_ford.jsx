@@ -3,8 +3,7 @@ import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../node/node';
 import Highlight from 'react-highlight';
 
-
-class Show extends React.Component {
+class ShowBellmanFord extends React.Component {
   constructor(props) {
     super(props);
     this.state = { };
@@ -22,73 +21,73 @@ class Show extends React.Component {
       <div className="index-main">
         <main className="show-main">
           <section className="show-main">
-            <h1 className="show-name">A* Algorithm</h1>
+            <h1 className="show-name">Bellman Ford</h1>
             <ul className="visualization">
               <div className="visualization" />
               <aside className="show-code">
-                <Highlight class="javascript-snippet">
+                  <Highlight class="javascript-snippet">
 {`class BellmanFord {
-constructor(nodeList) {
+  constructor(nodeList) {
 
-  this.nodeList = nodeList;
-  this.edgeList = this.createEdgeList(nodeList);
+    this.nodeList = nodeList;
+    this.edgeList = this.createEdgeList(nodeList);
 
-  this.search = this.search.bind(this);
-}
+    this.search = this.search.bind(this);
+  }
 
-search(startNodeId, endNodeId) {
-  let cost = {};
-  let parents = {};
+  search(startNodeId, endNodeId) {
+    let cost = {};
+    let parents = {};
 
-  Object.keys(this.nodeList).forEach((nodeId) => {
-    cost[nodeId] = Infinity;
-    parents[nodeId] = null;
-  });
+    Object.keys(this.nodeList).forEach((nodeId) => {
+      cost[nodeId] = Infinity;
+      parents[nodeId] = null;
+    });
 
-  cost[startNodeId] = 0;
-  let finished = false;
+    cost[startNodeId] = 0;
+    let finished = false;
 
-  for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-    finished = true;
-    this.edgeList.forEach((edge) => {
-      if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-        cost[edge.toId] = cost[edge.fromId] + edge.weight;
-        parents[edge.toId] = edge.fromId;
-        finished = false;
+    for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
+      finished = true;
+      this.edgeList.forEach((edge) => {
+        if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
+          cost[edge.toId] = cost[edge.fromId] + edge.weight;
+          parents[edge.toId] = edge.fromId;
+          finished = false;
+        }
+      });
+      if (finished) {
+        break;
       }
-    });
-    if (finished) {
-      break;
     }
+
+    return this.createPath(parents, startNodeId, endNodeId);
   }
 
-  return this.createPath(parents, startNodeId, endNodeId);
-}
-
-createEdgeList(nodeList) {
-  let edges = [];
-  Object.keys(nodeList).forEach((nodeId) => {
-    nodeList[nodeId].children.forEach((child) => {
-      edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
+  createEdgeList(nodeList) {
+    let edges = [];
+    Object.keys(nodeList).forEach((nodeId) => {
+      nodeList[nodeId].children.forEach((child) => {
+        edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
+      });
     });
-  });
-  return edges;
-}
-
-createPath (parents, startNodeId, endNodeId) {
-  let path = [String(endNodeId)];
-  let startKey = endNodeId;
-  while (parents[startKey]) {
-    path.push(parents[startKey]);
-    startKey = parents[startKey];
+    return edges;
   }
-  return path.reverse();
-}
+
+  createPath (parents, startNodeId, endNodeId) {
+    let path = [String(endNodeId)];
+    let startKey = endNodeId;
+    while (parents[startKey]) {
+      path.push(parents[startKey]);
+      startKey = parents[startKey];
+    }
+    return path.reverse();
+  }
 }
 
 export default BellmanFord;
 `}
-                </Highlight>
+                  </Highlight>
               </aside>
             </ul>
           </section>
@@ -118,4 +117,4 @@ export default BellmanFord;
   }
 }
 
-export default Show;
+export default ShowBellmanFord;
