@@ -39,12 +39,12 @@ ul.index-algo-list {
 div.index-algo-image {
   height: 270px;
   width: 23%;
-  border: 1px solid #eaeaea;
+  border: 1.5px solid #eaeaea;
   border-radius: 4px;
 }
 
 div.index-algo-image:hover {
-  border: 1px solid #44A7C3;
+  border: 1.5px solid #44A7C3;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -57,7 +57,7 @@ div.index-arrow-up {
 }
 
 div.index-algo-description {
-  border: 1px solid #eaeaea;
+  border: 1.5px solid #eaeaea;
   border-radius: 4px;
   /*margin: 0 30px;*/
   background: white;
