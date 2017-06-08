@@ -47,7 +47,7 @@ li.nav-logo a {
 }
 
 div.nav-logo-underline {
-  margin: 3px 10px 0 10px;
+  margin-top: 3px;
   height: 1px;
   width: 0%;
   align-self: flex-start;
@@ -59,8 +59,8 @@ li a:hover {
   cursor: pointer;
 }
 
-li:hover div.underline {
-  width: calc(100% - 20px);
+li:hover div.nav-logo-underline {
+  width: 100%;
   cursor: pointer;
 }
 
