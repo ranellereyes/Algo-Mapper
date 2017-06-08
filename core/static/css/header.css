@@ -23,7 +23,6 @@ nav.nav-bar {
 ul {
   display: flex;
   list-style: none;
-  margin: 0 10px;
 }
 
 li {
@@ -32,7 +31,6 @@ li {
 }
 
 li a {
-  margin: 0 10px;
   color: DarkSlateGray;
   text-decoration: none;
 }
@@ -69,4 +67,5 @@ li:hover div.underline {
 ul.nav-menu li a {
   font-size: 15pt;
   color: #44A7C3;
+  margin-left: 20px;
 }
