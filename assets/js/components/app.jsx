@@ -10,7 +10,7 @@ const App = () => (
   <div>
     <Header />
     <Switch>
-      <Route path="/compare" component={Comparison} />
+      <Route path="/comparison" component={Comparison} />
       <Route path="/:name" component={Show} />
       <Route path="/" component={Index}/>
     </Switch>
