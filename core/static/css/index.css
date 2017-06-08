@@ -45,7 +45,11 @@ div.algo-image:first-child {
 div.algo-image:last-child {
   margin-right: 30px;
 }
-
+div.algo-image:hover {
+  border: 1px solid #44A7C3;
+  border-radius: 4px;
+  cursor: pointer;
+}
 div.arrow-up {
   width: 0;
   height: 0;
