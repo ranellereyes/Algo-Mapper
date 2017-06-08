@@ -6,6 +6,7 @@ import Root from './components/root';
 
 // ==TESTING==
 import { NODELIST, NODELIST2 } from './node/node';
+import { nodelistGenerator } from './node/node';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -30,3 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
 window.NODELIST2 = NODELIST2;
 window.NODELIST = NODELIST;
 window.Node = Node;
+window.r = new nodelistGenerator(20);
