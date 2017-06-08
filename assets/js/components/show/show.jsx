@@ -90,6 +90,8 @@ export default BellmanFord;
 `}
                 </Highlight>
               </aside>
+              <figure></figure>
+              <figure></figure>
             </ul>
           </section>
         </main>
