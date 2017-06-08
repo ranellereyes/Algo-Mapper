@@ -25,14 +25,13 @@ h1.show-name {
   padding: 0px;
   color: white;
   font-size: 50px;
-  font-weight: 200;
+  font-weight: 400;
 }
 
-ul.show-visualization {
+ul.visualization {
   display: flex;
   margin: 0;
   min-height: 500px;
-
 }
 
 aside.show-code {
@@ -43,16 +42,16 @@ aside.show-code {
   /*border-left: 3px solid DarkGray;*/
 }
 
-aside.show-code h3 {
-  margin: 15px;
-}
-
-div.show-visualization {
+div.visualization {
   height: 500px;
   width: 500px;
   background: White;
   border: 0px solid Gray;
   margin-right: 30px;
+}
+
+aside.show-code h3 {
+  margin: 15px;
 }
 
 section.show-algo-bottom {
@@ -66,14 +65,27 @@ section.show-algo-bottom {
   background-color: white;
 }
 
+section.show-algo-bottom > div{
+  margin: 40px;
+}
+
+section.show-algo-bottom h1{
+  color: #44A7C3;
+  padding-bottom: 10px;
+}
+section.show-algo-bottom p{
+  padding-bottom: 15px;
+}
+
 ul.show-algo-description {
   display: flex;
 }
 
 div.show-how-it-works {
-  flex: 3
+  flex: 2;
+  margin-right: 30px;
 }
 
 aside.show-pros-n-cons {
-  flex: 1
+  flex: 1;
 }
