@@ -1,20 +1,19 @@
 class DijkstraSteps {
-  constructor(nodeList, source) {
+  constructor(nodeList) {
     this.nodeList = nodeList;
     this.visited = [];
     this.unvisited = [];
     this.steps = [];
     this.costs = this.costs.bind(this);
-    this.source = source || this.nodeList[1]; // nodeList[#]
   }
 
   initiate(source) {
-    this.source.weight = 0;
-    this.source.cost = 0;
-    this.unvisited.push(this.source);
+    source.weight = 0;
+    source.cost = 0;
+    this.unvisited.push(source);
     Object.keys(this.nodeList).forEach(id => {
       let node = this.nodeList[id];
-      if (node !== this.source) {
+      if (node !== source) {
         node.cost = Infinity;
         this.unvisited.push(node)
       }
@@ -22,6 +21,7 @@ class DijkstraSteps {
   }
 
   search(source, destination) {
+    this.initiate(this.nodeList[source])
     this.steps.push({path: [source], costs: [this.costs()]})
     let parent = {};
     let node = this.nodeList[source];
@@ -53,7 +53,7 @@ class DijkstraSteps {
     }
     console.log(this.steps);
     // create path from source to destination
-    this.createPath(parent, source, destination);
+    this.createPath(parent, this.nodeList[source], this.nodeList[destination]);
   }
 
   costs() {
