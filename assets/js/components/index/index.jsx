@@ -7,19 +7,19 @@ class Index extends React.Component {
 
   render() {
     return (
-      <div className="index">
-        <main className="index">
+      <div className="index-main">
+        <main className="index-main">
           <div> Main image area </div>
         </main>
-        <section className="algo-display">
-          <ul className="algo-list">
-            <div className="algo-image"> Visualiaztion Algorithms area</div>
-            <div className="algo-image" />
-            <div className="algo-image" />
-            <div className="algo-image" />
+        <section className="index-algo-display">
+          <ul className="index-algo-list">
+            <div className="index-algo-image"> Visualiaztion Algorithms area</div>
+            <div className="index-algo-image" />
+            <div className="index-algo-image" />
+            <div className="index-algo-image" />
           </ul>
-          <div className="arrow-up" />
-          <div className="algo-description">
+          <div className="index-arrow-up" />
+          <div className="index-algo-description">
             <h3>
               EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
             </h3>

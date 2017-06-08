@@ -1,10 +1,10 @@
-div.index {
+div.index-main {
   display: flex;
   flex-direction: column;
   padding-bottom: 50px;
 }
 
-main.index {
+main.index-main {
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
@@ -16,7 +16,7 @@ main.index {
 
 }
 
-section.algo-display {
+section.index-algo-display {
   display: flex;
   flex-direction: column;
   background: white;
@@ -28,29 +28,29 @@ section.algo-display {
   padding-bottom: 30px;
 }
 
-ul.algo-list {
+ul.index-algo-list {
   display: flex;
   margin: 0;
   justify-content: space-between;
 }
-div.algo-image {
+div.index-algo-image {
   height: 270px;
   width: 22%;
   /*margin: 10px;*/
   border: 1px solid #eaeaea;
 }
-div.algo-image:first-child {
+div.index-algo-image:first-child {
   margin-left: 30px;
 }
-div.algo-image:last-child {
+div.index-algo-image:last-child {
   margin-right: 30px;
 }
-div.algo-image:hover {
-  border: 1px solid #44A7C3;
+div.index-algo-image:hover {
+  border: 1.5px solid #44A7C3;
   border-radius: 4px;
   cursor: pointer;
 }
-div.arrow-up {
+div.index-arrow-up {
   width: 0;
   height: 0;
   border-left: 25px solid transparent;
@@ -59,13 +59,13 @@ div.arrow-up {
   border-bottom: 25px solid #eaeaea;
 }
 
-div.algo-description {
+div.index-algo-description {
   border: 1px solid #eaeaea;
   border-radius: 4px;
   margin: 0 30px;
   background: white;
 }
-div.algo-description h3 {
+div.index-algo-description h3 {
   margin: 10px;
   font-size: 12pt;
 }
