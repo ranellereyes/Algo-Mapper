@@ -32,28 +32,30 @@ class Visualization {
     return graph;
   }
 
-  centerTextX(x1, x2, y1, y2, weight) {
+  centerTextX(x1, x2, y1, y2, weight, direction) {
     let x = (x1 + x2) / 2;
     let dx = x2 - x1;
     let dy = y2 - y1;
     let radians = Math.atan(dy/dx);
-    if (Math.cos(radians) === 0) return x + weight;
+    if (Math.sin(radians) === 0) return x;
+    if (Math.cos(radians) === 0) return x + weight * direction;
     if ((dy > 0 && dx > 0) || (dy < 0 && dx > 0)) {
-      return x + Math.cos(radians) * weight;
+      return x + (Math.cos(radians) * weight) * direction;
     }
-    return x - Math.cos(radians) * weight;
+    return x - (Math.cos(radians) * weight) * direction;
   }
 
-  centerTextY(x1, x2, y1, y2, weight) {
+  centerTextY(x1, x2, y1, y2, weight, direction) {
     let y = (y1 + y2) / 2;
     let dx = x2 - x1;
     let dy = y2 - y1;
     let radians = Math.atan(dy/dx);
-    if (Math.sin(radians) === 0) return y + weight;
+    if (Math.cos(radians) === 0) return y;
+    if (Math.sin(radians) === 0) return y + weight * direction;
     if ((dy > 0 && dx > 0) || (dy < 0 && dx > 0)) {
-      return y - Math.sin(radians) * weight;
+      return y - (Math.sin(radians) * weight) * direction;
     }
-    return y + Math.sin(radians) * weight;
+    return y + (Math.sin(radians) * weight) * direction;
   }
 
   draw() {
@@ -107,14 +109,14 @@ class Visualization {
     this.bezierLine = d3.line()
             .x(function(d) { return d[0]; })
             .y(function(d) { return d[1]; })
-            .curve(d3.curveBundle.beta(0.5));
+            .curve(d3.curveBundle.beta(0.9));
 
     this.svg.selectAll("text.link")
         .data(graph.links)
         .enter().append("text")
         .attr("class", "link")
-        .attr("x", (d) => this.centerTextX(d.source.x, d.target.x, d.source.y, d.target.y, 10))
-        .attr("y", (d) => this.centerTextY(d.source.x, d.target.x, d.source.y, d.target.y, 10))
+        .attr("x", (d) => this.centerTextX(d.source.x, d.target.x, d.source.y, d.target.y, 12, -1))
+        .attr("y", (d) => this.centerTextY(d.source.x, d.target.x, d.source.y, d.target.y, 12, -1))
         .attr("dy", 5)
         .attr("text-anchor", "middle")
         .text(function(d) { return d.weight });
@@ -162,13 +164,6 @@ class Visualization {
     this.colorPath.style('stroke', color).style('fill', color);
   }
 
-  highlightLink2(fromId, toId, color) {
-    d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
-      .style('marker-end', 'url(#color2)')
-      .style('stroke', color);
-    this.colorPath.style('stroke', color).style('fill', color);
-  }
-
   animateLink(fromId, toId, color) {
     let link = this.links._groups[0].find( link => link.id === `${fromId}-${toId}`);
     let source = this.nodeList[link.id[0]];
@@ -184,12 +179,40 @@ class Visualization {
       )
       .style("stroke-width", 3);
 
+    // let arc = d3.arc()
+    //   .innerRadius(Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2) / 2)
+    //   .outerRadius(Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2) / 2 + 3)
+    //   .startAngle(0);
+    //
+    // let g = this.svg.append("g").attr("transform", `translate(${(source.x + target.x) / 2}, ${(source.y + target.y) / 2})`);
+    //
+    // let foreground = g.append("path")
+    //   .datum({endAngle: 0})
+    //   .style("fill", "orange")
+    //   .style("marker-end", "url(#arrow)")
+    //   .attr("d", arc);
+    //
+    // function arcTween(newAngle) {
+    //   return function(d) {
+    //     var interpolate = d3.interpolate(d.endAngle, newAngle);
+    //
+    //     return function(t) {
+    //       d.endAngle = interpolate(t);
+    //       return arc(d);
+    //     };
+    //   };
+    // }
+    //
+    // foreground.transition()
+    //   .duration(1000)
+    //   .attrTween("d", arcTween(Math.PI * 0.6));
+
     path
       .transition()
       .duration(1000)
       .attr("d", this.bezierLine([
         [source.x, source.y],
-        [this.centerTextX(source.x, target.x, source.y, target.y, 40), this.centerTextY(source.x, target.x, source.y, target.y, 40)],
+        [this.centerTextX(source.x, target.x, source.y, target.y, 20, 1), this.centerTextY(source.x, target.x, source.y, target.y, 20, 1)],
         [target.x, target.y]
       ]))
       .attrTween("stroke-dasharray", function() {
