@@ -63,9 +63,15 @@ ul.index-algo-list {
 
 div.index-algo-image {
   height: 270px;
-  width: 23%;
+  width: 270px;
+  min-width: 270px;
+  margin-right: 35px;
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
+}
+
+div.index-algo-image:last-child {
+  margin-right: 0;
 }
 
 div.index-algo-image:hover {
@@ -73,12 +79,46 @@ div.index-algo-image:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+
+div.index-arrow-fill {
+  width: 0;
+  height: 0;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
+  border-bottom: 22px solid white;
+  position: absolute;
+  top: 3px;
+  left: -22px;
+}
+
 div.index-arrow-up {
   width: 0;
   height: 0;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-bottom: 25px solid #eaeaea;
+  position: relative;
+  top: 2px;
+}
+
+div.index-arrow-up.first {
+  left: 115px;
+  transition: left 0.7s;
+}
+
+div.index-arrow-up.second {
+  left: 420px;
+  transition: left 0.7s;
+}
+
+div.index-arrow-up.third {
+  left: 725px;
+  transition: left 0.7s;
+}
+
+div.index-arrow-up.fourth {
+  left: 1035px;
+  transition: left 0.7s;
 }
 
 div.index-algo-description {
