@@ -30,9 +30,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={ store } />, root);
 });
-
-window.NODELIST2 = NODELIST2;
-window.NODELIST = NODELIST;
-window.Node = Node;
-window.r = new nodelistGenerator(20);
-window.ng = nodelistGenerator;
