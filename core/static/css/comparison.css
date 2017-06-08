@@ -98,8 +98,8 @@ section.comp-graph li{
 }
 section.comp-graph li.comp-graph-code{
   width: 25%;
-  overflow: scroll;
-  
+  overflow:
+
 }
 section.comp-graph li.comp-graph{
   width: 45%;
