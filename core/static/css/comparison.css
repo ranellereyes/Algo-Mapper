@@ -97,16 +97,19 @@ section.comp-graph li{
   height: 500px;
   align-items: flex-start;
 }
+
+section.comp-graph li.comp-graph{
+  width: 45%;
+}
+
 section.comp-graph li.comp-graph-code{
   width: 25%;
   overflow: scroll;
 
 }
-section.comp-graph li.comp-graph{
-  width: 45%;
+section.comp-graph li.comp-graph-code pre {
+  margin: 0;
 }
-
-section.comp-graph li.comp-graph-code h3{
-  margin: 15px;
-  font-size: 13pt;
+section.comp-graph li.comp-graph-code code {
+  padding: 10px;
 }
