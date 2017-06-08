@@ -6,16 +6,41 @@ div.index-main {
 
 main.index-main {
   width: 100%;
-  height: 400px;
-  background: #F4F4F4;
+  height: 500px;
+  background: #010023; /* Old browsers */
+  background: -moz-linear-gradient(left, #010023 0%, #010028 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #010023 0%,#010028 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #010023 0%,#010028 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+
+  position: relative;
   /*border-bottom: 1px solid #eaeaea;*/
 }
-main.index-main div {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1200px;
-  min-width: 600px;
+main.index-main img {
+  height: 100%;
+}
+
+div.index-content {
+  position: absolute;
+  top: 150px;
+  color: white;
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.index-content h1 {
+  font-size: 80px;
+}
+
+div.index-content span {
+  font-size: 24px;
+  text-align: center;
+  font-family: Poiret One;
 }
 
 section.index-algo-display {
