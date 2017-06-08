@@ -9,7 +9,11 @@ class Index extends React.Component {
     return (
       <div className="index-main">
         <main className="index-main">
-          <div> Main image area </div>
+          <img src='http://i1096.photobucket.com/albums/g327/winber1/header2.png'></img>
+          <div className="index-content">
+            <h1>AlgoMapper</h1>
+            <span>Visualize and compare shortest-path algorithms with ease</span>
+          </div>
         </main>
         <section className="index-algo-display">
           <ul className="index-algo-list">
