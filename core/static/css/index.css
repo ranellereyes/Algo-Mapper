@@ -1,7 +1,6 @@
 div.index-main {
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
 }
 
 main.index-main {
@@ -124,10 +123,49 @@ div.index-arrow-up.fourth {
 div.index-algo-description {
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
+  min-height: 250px;
   /*margin: 0 30px;*/
   background: white;
 }
+
 div.index-algo-description h3 {
   margin: 15px;
   font-size: 12pt;
+  transition: opacity 0.2s
+}
+
+h3.into-the-abyss {
+  opacity: 0;;
+}
+
+
+
+footer {
+  height: 200px;
+  background: #010023;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -1px -2px 5px #010023;
+}
+
+ul.author-info {
+  display: flex;
+  color: white;
+  width: 500px;
+  justify-content: space-between;
+}
+
+ul.author-info li {
+  display: flex;
+  flex-direction: column;
+}
+
+figure.github {
+  background-image: url('../images/github-icon.png');
+  background-size: contain;
+  margin: 0;
+  margin-bottom: 10px;
+  height: 40px;
+  width: 40px;
 }
