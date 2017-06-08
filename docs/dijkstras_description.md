@@ -1,7 +1,7 @@
 Description
 
 How it works
-
+Breadth-first search
 Greedily finds the cost from a source node to a destination node or all other nodes within a graph that does not contain negative edge path costs.
 //cost is how much it takes to get from one node to another
 1. Assign a source node and set its cost to 0. All other nodes’ cost is set to infinity.
@@ -26,8 +26,7 @@ E: Edge
 V: Vertices
 O(E logV)
 Worst:
-O(V^2)
-// double check, not sure if these include binary heap or fibonacci heap
+O(V^2) if binary heap or fibonacci heap is not applied
 
 Math
 

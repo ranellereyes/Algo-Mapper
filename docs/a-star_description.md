@@ -3,6 +3,7 @@ A-star
 Description
 
 How it works?
+Best-first search
 Finds the shortest distance from one node to another node
 1. Requires source node and destination node to work and adds source node to a closed list
 2. Calculates the cost of the all adjacent nodes to the source node by adding the edge weight of going to the node and its heuristic (distance from adjacent node to destination node) //maybe more clear explanation needed

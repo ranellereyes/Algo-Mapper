@@ -13,8 +13,9 @@ Finds distance from source node to all other nodes //needs change
 
 Pros
 - Accounts for negative weights
-- Not greedy
+- Determines if negative-weight cycles exist
 - Allows for a wider class of inputs than Dijkstra
+
 
 Cons
 -
