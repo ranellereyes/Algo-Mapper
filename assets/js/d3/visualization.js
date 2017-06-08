@@ -157,11 +157,25 @@ class Visualization {
       .style("r", 22);
   }
 
+  unhighlightLink(fromId, toId) {
+    d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
+      .transition()
+      .duration(500)
+      .style('marker-end', 'url(#base)')
+      .style('stroke', 'grey');
+  }
+
   highlightLink(fromId, toId, color) {
     d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
+      .transition()
+      .duration(500)
       .style('marker-end', 'url(#color)')
       .style('stroke', color);
-    this.colorPath.style('stroke', color).style('fill', color);
+    this.colorPath
+      .transition()
+      .duration(500)
+      .style('stroke', color)
+      .style('fill', color);
   }
 
   animateLink(fromId, toId, color) {
