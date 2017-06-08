@@ -3,6 +3,7 @@ A-star
 Description
 
 How it works?
+Best-first search
 Finds the shortest distance from one node to another node
 1. Requires source node and destination node to work and adds source node to a closed list
 2. Calculates the cost of the all adjacent nodes to the source node by adding the edge weight of going to the node and its heuristic (distance from adjacent node to destination node) //maybe more clear explanation needed
@@ -18,6 +19,7 @@ Finds the shortest distance from one node to another node
 
 Pros
 - Generally very fast
+- It will always find a solution if it exists
 - Best algorithm for path finding, but may not be best for shortest path
 - Time complexity is mostly O(n)
 
