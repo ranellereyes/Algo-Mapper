@@ -1,14 +1,31 @@
 import Astar from './astar';
+import { merge } from 'lodash';
+import Visualization from '../d3/visualization';
 
 class AstarStep extends Astar {
-  constructor(nodeList) {
+  constructor(nodeList, startNodeId, endNodeId) {
     super(nodeList);
+    this.visualization = new Visualization(nodeList);
+    this.i = 0;
+    this.steps = this.search(startNodeId, endNodeId)
   }
 
   search(startNodeId, endNodeId) {
-    let list = this.nodeList;
+    let list = merge({}, this.nodeList);
     let endNode = list[endNodeId];
     let startNode = list[startNodeId];
+    let steps = [
+      {
+        openList: [1],
+        cost: {
+          1: {
+            h: this.hcost(startNode, endNode),
+            g: 0,
+            f: this.hcost(startNode, endNode)
+          }
+        }
+      }
+    ];
 
     // define f, g, and h cost
     for (let idx in list) {
@@ -33,14 +50,15 @@ class AstarStep extends Astar {
 
       // return path if current node is the end node
       if (currentNode.id === endNode.id) {
-        let curr = currentNode;
-        let path = [];
-        while (curr.parent) {
-          path.push(curr.id);
-          curr = curr.parent;
-        }
-        path.push(curr.id);
-        return path.reverse();
+        // let curr = currentNode;
+        // let path = [];
+        // while (curr.parent) {
+        //   path.push(curr.id);
+        //   curr = curr.parent;
+        // }
+        // path.push(curr.id);
+        // return path.reverse();
+        return steps;
       }
 
       // calculate f, g, and h cost for each child node of the current node
@@ -51,7 +69,7 @@ class AstarStep extends Astar {
       });
 
       // add current node to close list and remove it from the open list
-      this.closeList.push(this.openList.shift());
+      this.closeList.push(this.openList.splice(lowIdx));
 
       this.childNodes(currentNode).forEach( node => {
         let newNode = list[node.id];
@@ -72,10 +90,25 @@ class AstarStep extends Astar {
           list[node.id].f = list[node.id].g + list[node.id].h;
         }
       });
+
+      let cost = {};
+      this.openList.forEach( node => {
+        cost[node.id] = list[node.id]
+      });
+      let newStep = {
+        openList: this.openList,
+        cost: cost
+      }
+      steps.push(newStep);
     }
 
     // return empty array if no path is found
-    return []
+    return steps;
+  }
+
+  stepForward() {
+    let steps = this.steps;
+    let visual = this.visualization;
   }
 }
 
