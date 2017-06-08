@@ -18,6 +18,7 @@ Finds the shortest distance from one node to another node
 
 Pros
 - Generally very fast
+- It will always find a solution if it exists
 - Best algorithm for path finding, but may not be best for shortest path
 - Time complexity is mostly O(n)
 
