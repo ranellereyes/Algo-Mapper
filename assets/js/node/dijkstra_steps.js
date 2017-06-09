@@ -6,7 +6,7 @@ class DijkstraSteps {
     this.steps = [];
     this.visual = visual;
     this.costs = this.costs.bind(this);
-    this.i = 0;
+    this.i = -1;
     this.source = this.nodeList[source];
     this.destination = this.nodeList[destination];
     this.initiate();
@@ -80,7 +80,9 @@ class DijkstraSteps {
     return path.reverse();
   }
 
-  stepFoward() {
+  stepForward() {
+    //moves on to next step
+    this.i++;
     let steps = this.steps[this.i];
     let prev = this.steps[this.i - 1]
     // unhighlight previous node/links
@@ -90,11 +92,29 @@ class DijkstraSteps {
       this.visual.unhighlightLink(prev.path[0], prev.path[1]);
     }
     //highlight current node/links
-    this.visual.highlightNode(steps.path[0], "red");
-    this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
-    this.visual.highlightNode(steps.path[1], "green");
+    if (steps) {
+      this.visual.highlightNode(steps.path[0], "red");
+      this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
+      this.visual.highlightNode(steps.path[1], "green");
+    }
+  }
 
-    this.i++;
+  stepBackwards() {
+    this.i--;
+    let steps = this.steps[this.i];
+    let forw = this.steps[this.i + 1];
+    //unhighlight foward node/links
+    if (forw) {
+      this.visual.unhighlightNode(forw.path[0]);
+      this.visual.unhighlightNode(forw.path[1]);
+      this.visual.unhighlightLink(forw.path[0], forw.path[1]);
+    }
+    //highlight current node/links
+    if (steps) {
+      this.visual.highlightNode(steps.path[0], "red");
+      this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
+      this.visual.highlightNode(steps.path[1], "green");
+    }
   }
 
 }
