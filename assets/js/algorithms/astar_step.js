@@ -37,14 +37,12 @@ class AstarStep extends Astar {
       }
       let currentNode = this.openList[lowIdx];
 
-      console.log(this.openList.map( node => node.id ));
-      console.log(this.openList.map( node => node.f ));
-      console.log(currentNode.id);
-
       let newPath = [];
+      let solution = [];
       let curr = currentNode;
       while (curr.parent) {
         newPath.push([curr.parent.id, curr.id]);
+        solution.push(curr.id);
         curr = curr.parent;
       }
 
@@ -56,35 +54,32 @@ class AstarStep extends Astar {
       let newStep = {
         currentNode: newNode,
         closeList: closeList,
-        path: newPath.reverse(),
-        f: newNode.f,
-        g: newNode.g,
-        h: newNode.h
+        path: newPath.reverse()
       }
       steps.push(newStep);
-
+      console.log(steps);
       if (currentNode.id === endNode.id) {
         return steps;
       }
 
       currentNode.children.forEach( node => {
-        list[node.id].g = currentNode.g + node.weight;
-        list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
-        list[node.id].f = list[node.id].g + list[node.id].h;
+        list[node.id].weight = node.weight;
       });
 
       this.childNodes(currentNode).forEach( node => {
-        let gScore = currentNode.g + node.g;
-
+        let gScore = currentNode.g + node.weight;
         if (!this.openList.includes(node)) {
           this.openList.push(node);
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
+          list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
 
         } else if (gScore < list[node.id].g) {
+          debugger;
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
+          list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
         }
       });
@@ -95,20 +90,21 @@ class AstarStep extends Astar {
   stepForward() {
     if (this.i >= this.steps.length) return;
     let node = this.steps[this.i];
+    let curr = node.currentNode;
     let visual = this.visualization;
     // d3.selectAll('line.link')
     //   .transition()
     //   .duration(500)
     //   .style('stroke', 'grey');
-    visual.highlightNode(node.currentNode.id, "green");
-    visual.removeText(node.currentNode.id);
-    visual.addText(node.currentNode.id, -19, -55, 'blue', (d) => `h = ${Math.floor(node.h)}`);
-    visual.addText(node.currentNode.id, -19, -41, 'blue', (d) => `g = ${Math.floor(node.g)}`);
-    visual.addText(node.currentNode.id, -19, -25, 'blue', (d) => `f = ${Math.floor(node.f)}`);
-    if (node.currentNode.parent) {
+    visual.highlightNode(curr.id, "green");
+    visual.removeText(curr.id);
+    visual.addText(curr.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.h)}`);
+    visual.addText(curr.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.g)}`);
+    visual.addText(curr.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.f)}`);
+    if (curr.parent) {
       // visual.removeText(node.parent.id);
-      visual.highlightNode(node.currentNode.parent.id, "red");
-      visual.highlightLink(node.currentNode.parent.id, node.currentNode.id, "red");
+      visual.highlightNode(curr.parent.id, "red");
+      visual.highlightLink(curr.parent.id, curr.id, "red");
     }
     if (this.i === this.steps.length - 1) {
       node.path.forEach( link => {
@@ -123,21 +119,22 @@ class AstarStep extends Astar {
     if (this.i <= 0) return;
     this.i -= 1;
     let node = this.steps[this.i];
+    let curr = node.currentNode;
     let visual = this.visualization;
     if (this.i === this.steps.length - 1) {
       node.path.forEach( link => {
         visual.highlightLink(link[0], link[1], "red");
       })
     }
-    visual.unhighlightNode(node.currentNode.id);
-    visual.removeText(node.currentNode.id);
-    visual.removeText(node.currentNode.parent.id);
-    if (node.currentNode.parent) {
-      visual.highlightNode(node.currentNode.parent.id, "green");
-      visual.addText(node.currentNode.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(node.h)}`);
-      visual.addText(node.currentNode.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(node.g)}`);
-      visual.addText(node.currentNode.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(node.f)}`);
-      visual.unhighlightLink(node.currentNode.parent.id, node.currentNode.id);
+    visual.unhighlightNode(curr.id);
+    visual.removeText(curr.id);
+    if (curr.parent) {
+      visual.removeText(curr.parent.id);
+      visual.highlightNode(curr.parent.id, "green");
+      visual.addText(curr.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.parent.h)}`);
+      visual.addText(curr.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.parent.g)}`);
+      visual.addText(curr.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.parent.f)}`);
+      visual.unhighlightLink(curr.parent.id, curr.id);
     }
   }
 }

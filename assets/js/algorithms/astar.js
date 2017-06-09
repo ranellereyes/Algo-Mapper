@@ -46,9 +46,9 @@ class Astar {
 
       // calculate f, g, and h cost for each child node of the current node
       currentNode.children.forEach( node => {
-        list[node.id].g = currentNode.g + node.weight;
+        // list[node.id].g = currentNode.g + node.weight;
         list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
-        list[node.id].f = list[node.id].g + list[node.id].h;
+        // list[node.id].f = list[node.id].g + list[node.id].h;
       });
 
       // add current node to close list and remove it from the open list
