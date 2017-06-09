@@ -1,7 +1,8 @@
 header.nav-header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
+  z-index: 999;
+  /*top: 0;*/
+  /*left: 0;*/
   height: 50px;
   width: 100%;
   background: white;
@@ -28,6 +29,7 @@ ul {
 li {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 li a {
@@ -47,7 +49,7 @@ li.nav-logo a {
 }
 
 div.nav-logo-underline {
-  margin: 3px 10px 0 10px;
+  margin-top: 3px;
   height: 1px;
   width: 0%;
   align-self: flex-start;
@@ -59,13 +61,43 @@ li a:hover {
   cursor: pointer;
 }
 
-li:hover div.underline {
-  width: calc(100% - 20px);
+li:hover div.nav-logo-underline {
+  width: 100%;
   cursor: pointer;
 }
 
 ul.nav-menu li a {
   font-size: 15pt;
   color: #44A7C3;
-  margin-left: 20px;
+  padding: 8px 10px;
+  outline: none;
+  background: white;
+  position: relative;
+  z-index: 10;
+}
+
+ul.dropdown {
+  /*visibility: hidden;*/
+  position: absolute;
+  top: -150px;
+  display: hidden;
+  flex-direction: column;
+  background: white;
+  transition: transform 0.5s;
+  z-index: 1;
+}
+
+ul.dropdown a.dropdown {
+  background: white;
+  font-size: 14px;
+}
+
+ul.dropdown.active {
+  display: flex;
+  transform: translate(0,200px);
+  transition:
+}
+
+ul.dropdown.dead {
+  transform:
 }

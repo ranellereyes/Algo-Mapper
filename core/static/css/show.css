@@ -34,14 +34,6 @@ ul.visualization {
   min-height: 500px;
 }
 
-aside.show-code {
-  height: 500px;
-  flex-grow: 1;
-  background: White;
-  border: 0px solid Gray;
-  /*border-left: 3px solid DarkGray;*/
-}
-
 div.visualization {
   height: 500px;
   width: 500px;
@@ -50,8 +42,43 @@ div.visualization {
   margin-right: 30px;
 }
 
-aside.show-code h3 {
-  margin: 15px;
+aside.show-code {
+  height: 500px;
+  flex-grow: 1;
+  border: 0px solid Gray;
+  overflow: scroll;
+  overflow-x: hidden;
+  /*border-left: 3px solid DarkGray;*/
+}
+aside.show-code pre {
+  margin: 0;
+}
+aside.show-code code {
+  padding: 10px;
+}
+ul.visualization figure {
+  width: 70px;
+  height: 70px;
+  background-image: url('../images/arrow_gray.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin: 15px 15px 15px 15px;
+  cursor: pointer;
+  position: absolute;
+  left: 430px;
+  top: 580px;
+}
+
+ul.visualization figure:active {
+  background-image: url('../images/arrow_blue.png');
+}
+ul.visualization figure:last-child {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  left: 490px;
+  top: 580px;
 }
 
 section.show-algo-bottom {

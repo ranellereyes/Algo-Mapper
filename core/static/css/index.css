@@ -1,21 +1,45 @@
 div.index-main {
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
 }
 
 main.index-main {
   width: 100%;
-  height: 400px;
-  background: #F4F4F4;
-  margin-top: 50px;
+  height: 500px;
+  background: #010023; /* Old browsers */
+  background: -moz-linear-gradient(left, #010023 0%, #010028 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #010023 0%,#010028 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #010023 0%,#010028 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /*margin-top: 50px;*/
+  display: flex;
+  justify-content: space-around;
+
+  position: relative;
   /*border-bottom: 1px solid #eaeaea;*/
 }
-main.index-main div {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1200px;
-  min-width: 600px;
+main.index-main img {
+  height: 100%;
+}
+
+div.index-content {
+  position: absolute;
+  top: 150px;
+  color: white;
+  width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.index-content h1 {
+  font-size: 80px;
+}
+
+div.index-content span {
+  font-size: 24px;
+  text-align: center;
+  font-family: Poiret One;
 }
 
 section.index-algo-display {
@@ -38,9 +62,16 @@ ul.index-algo-list {
 
 div.index-algo-image {
   height: 270px;
-  width: 23%;
+  width: 270px;
+  min-width: 270px;
+  margin-right: 35px;
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
+  outline: none;
+}
+
+div.index-algo-image:last-child {
+  margin-right: 0;
 }
 
 div.index-algo-image:hover {
@@ -48,21 +79,94 @@ div.index-algo-image:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+
+div.index-arrow-fill {
+  width: 0;
+  height: 0;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
+  border-bottom: 22px solid white;
+  position: absolute;
+  top: 3px;
+  left: -22px;
+}
+
 div.index-arrow-up {
   width: 0;
   height: 0;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-bottom: 25px solid #eaeaea;
+  position: relative;
+  top: 2px;
+}
+
+div.index-arrow-up.first {
+  left: 115px;
+  transition: left 0.7s;
+}
+
+div.index-arrow-up.second {
+  left: 420px;
+  transition: left 0.7s;
+}
+
+div.index-arrow-up.third {
+  left: 725px;
+  transition: left 0.7s;
+}
+
+div.index-arrow-up.fourth {
+  left: 1035px;
+  transition: left 0.7s;
 }
 
 div.index-algo-description {
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
+  min-height: 250px;
   /*margin: 0 30px;*/
   background: white;
 }
+
 div.index-algo-description h3 {
   margin: 15px;
   font-size: 12pt;
+  transition: opacity 0.2s
+}
+
+h3.into-the-abyss {
+  opacity: 0;;
+}
+
+
+
+footer {
+  height: 200px;
+  background: #010023;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -1px -2px 5px #010023;
+}
+
+ul.author-info {
+  display: flex;
+  color: white;
+  width: 500px;
+  justify-content: space-between;
+}
+
+ul.author-info li {
+  display: flex;
+  flex-direction: column;
+}
+
+figure.github {
+  background-image: url('../images/github-icon.png');
+  background-size: contain;
+  margin: 0;
+  margin-bottom: 10px;
+  height: 40px;
+  width: 40px;
 }
