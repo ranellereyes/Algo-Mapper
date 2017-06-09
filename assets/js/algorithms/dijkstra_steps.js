@@ -116,9 +116,9 @@ class DijkstraSteps {
       }
       //highlight current node/links
       if (steps) {
-        if (steps.path[1]) {
-          this.visual.animateLink(steps.path[0], steps.path[1], "black")
-        }
+        // if (steps.path[1]) {
+          // this.visual.animateLink(steps.path[0], steps.path[1], "black")
+        // }
         this.visual.highlightNode(steps.path[0], "red");
         this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
         this.visual.highlightNode(steps.path[1], "green");
@@ -160,9 +160,9 @@ class DijkstraSteps {
           this.visual.addText(idx + 1, -7, -28, "red", (d) => cost);
         }
       });
-      if (steps.path[1]) {
-        this.visual.animateLink(steps.path[0], steps.path[1], "#800080")
-      }
+      // if (steps.path[1]) {
+      //   this.visual.animateLink(steps.path[0], steps.path[1], "#800080")
+      // }
       this.visual.highlightNode(steps.path[0], "red");
       this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
       this.visual.highlightNode(steps.path[1], "green");
