@@ -91,17 +91,25 @@ class AstarStep extends Astar {
   }
 
   stepForward() {
+    if (this.i > this.steps.length) return;
     let node = this.steps[this.i];
     let visual = this.visualization;
-    debugger;
     visual.highlightNode(node.id, "red");
     if (node.parent) {
       visual.highlightLink(node.parent.id, node.id, "red");
     }
-    // node.children.forEach( child => {
-    //   visual.highlightLink(node.id, child.id, "red");
-    // });
     this.i += 1;
+  }
+
+  stepBackward() {
+    if (this.i <= 0) return;
+    this.i -= 1;
+    let node = this.steps[this.i];
+    let visual = this.visualization;
+    visual.unhighlightNode(node.id);
+    if (node.parent) {
+      visual.unhighlightLink(node.parent.id, node.id);
+    }
   }
 }
 
