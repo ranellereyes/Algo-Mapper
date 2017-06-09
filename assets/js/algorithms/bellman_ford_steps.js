@@ -62,6 +62,9 @@ class BellmanFordSteps extends BellmanFord{
       this.path.forEach((id) => {
         this.visual.unhighlightNode(id);
       });
+      for (let i = 0; i < this.path.length -1; i++) {
+        this.visual.unhighlightLink(this.path[i], this.path[i+1]);
+      }
     }
     else {
       this.visual.unhighlightNode(this.steps[this.index+1].node[0]);
@@ -76,18 +79,21 @@ class BellmanFordSteps extends BellmanFord{
   stepForward() {
     console.log(this.index);
     this.index++;
-    if (this.index === this.steps.length ) {
+    if (this.index >= this.steps.length ) {
       this.path.forEach((id) => {
         this.visual.highlightNode(id, "red");
       });
-      this.index = this.steps.length - 1;
+      for (let i = 0; i < this.path.length -1; i++) {
+        this.visual.highlightLink(this.path[i], this.path[i+1], "red");
+      }
+      this.index = this.steps.length;
     } else if (this.index === 0) {
       this.visual.highlightNode(this.steps[this.index].node[0], "red");
       this.visual.highlightNode(this.steps[this.index].node[1], "green");
     } else {
       this.visual.unhighlightNode(this.steps[this.index-1].node[0]);
       this.visual.unhighlightNode(this.steps[this.index-1].node[1]);
-
+      this.visual.animateLink(this.steps[this.index].node[0], this.steps[this.index].node[1], "red");
       this.visual.highlightNode(this.steps[this.index].node[0], "red");
       this.visual.highlightNode(this.steps[this.index].node[1], "green");
     }
