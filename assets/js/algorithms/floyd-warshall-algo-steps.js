@@ -28,18 +28,32 @@ export class floydWarshallAlgoSteps extends floydWarshallAlgo {
     { nodes, loops, tables } = step;
 
     loops.forEach((node, i) => {
-      if (i === 2) {
-        visual.highlightNode(node, "red");
-      } else {
-        visual.highlightNode(node, "green");
+      switch (i) {
+        case 0:
+          visual.highlightNode(node, "lightgreen");
+          break;
+        case 1:
+          visual.highlightNode(node, "green");
+          break;
+        case 2:
+          visual.highlightNode(node, "yellow");
+          break;
+        default:
+          return;
       }
+
+      // if (i === 2) {
+      //   visual.highlightNode(node, "red");
+      // } else {
+      //   visual.highlightNode(node, "green");
+      // }
     });
 
     let non_index_nodes = nodes.filter(node => !loops.includes(node));
 
     if (non_index_nodes.length > 0) {
       non_index_nodes.forEach(node => {
-        visual.highlightNode(node, "blue");
+        visual.highlightNode(node, "lightgreen");
       });
     }
 

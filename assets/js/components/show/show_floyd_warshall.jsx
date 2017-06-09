@@ -25,25 +25,32 @@ class ShowFloyd extends React.Component {
 
   componentWillUnmount() {
     document.onkeydown = null;
+    document.onkeyup = null;
   }
 
   handleKeyPress (e) {
-    console.log(e.keyCode);
     if (e.keyCode === 37){
       this.floyd.stepBackward();
-      console.log(e.keyCode, "left");
+      document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_blue.png')";
     } else if (e.keyCode === 39){
       this.floyd.stepForward();
-      console.log(e.keyCode, "right");
+      document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_blue.png')";
     }
+  }
+  handleKeyUp (e) {
+    console.log("key up");
+    document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+    document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }
 
   handleClickLeft(e) {
-    this.handleKeyPress({keyCode:  37});
+    // this.handleKeyPress({keyCode:  37});
+    this.floyd.stepBackward();
   }
 
   handleClickRight(e) {
-    this.handleKeyPress({keyCode:  39});
+    // this.handleKeyPress({keyCode:  39});
+    this.floyd.stepForward();
   }
 
   render() {
@@ -56,66 +63,99 @@ class ShowFloyd extends React.Component {
               <div className="visualization" />
               <aside className="show-code">
                 <Highlight class="javascript-snippet">
-{`class BellmanFord {
-constructor(nodeList) {
+{`class floydWarshallAlgo {
+  constructor (nodelist) {
+    this.nodelist = nodelist;
+    this.indices = Object.keys(nodelist);
+    this.costs = Object.keys(nodelist).map(e => new Array);
+    this.parents = Object.keys(nodelist).map(e => new Array);
 
-  this.nodeList = nodeList;
-  this.edgeList = this.createEdgeList(nodeList);
+    this.initCosts();
+    this.initParents();
+  }
 
-  this.search = this.search.bind(this);
-}
-
-search(startNodeId, endNodeId) {
-  let cost = {};
-  let parents = {};
-
-  Object.keys(this.nodeList).forEach((nodeId) => {
-    cost[nodeId] = Infinity;
-    parents[nodeId] = null;
-  });
-
-  cost[startNodeId] = 0;
-  let finished = false;
-
-  for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-    finished = true;
-    this.edgeList.forEach((edge) => {
-      if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-        cost[edge.toId] = cost[edge.fromId] + edge.weight;
-        parents[edge.toId] = edge.fromId;
-        finished = false;
-      }
+  initCosts () {
+    this.costs.forEach((row, i) => {
+      this.costs.forEach((ele, j) => {
+        if (i === j) {
+          this.costs[i][j] = 0;
+        } else {
+          this.costs[i][j] = Infinity;
+        }
+      });
     });
-    if (finished) {
-      break;
+
+    Object.keys(this.nodelist).forEach(nodeId => {
+      this.nodelist[nodeId].children.forEach(child => {
+        let nodeIdx = this.indices.indexOf(nodeId),
+            childIdx = this.indices.indexOf(String(child.id));
+        this.costs[nodeIdx][childIdx] = child.weight;
+      });
+    });
+  }
+
+  initParents () {
+    Object.keys(this.nodelist).forEach(nodeId => {
+      this.nodelist[nodeId].children.forEach(child => {
+        let nodeIdx = this.indices.indexOf(nodeId),
+            childIdx = this.indices.indexOf(String(child.id));
+
+        this.parents[nodeIdx][childIdx] = nodeId;
+      });
+    });
+
+    for (let i = 0; i < this.parents.length; i++) {
+      for (let j = 0; j < this.parents.length; j++) {
+        if (i === j) {
+          this.parents[i][j] = null;
+        } else if (!this.parents[i][j]) {
+          this.parents[i][j] = undefined;
+        }
+      }
     }
   }
 
-  return this.createPath(parents, startNodeId, endNodeId);
-}
+  pathDeconstructor(start, end, intermediate = null) {
+    let path = [end],
+        startIdx = this.indices.indexOf(start),
+        endIdx = this.indices.indexOf(end),
+        intIdx = this.indices.indexOf(intermediate);
 
-createEdgeList(nodeList) {
-  let edges = [];
-  Object.keys(nodeList).forEach((nodeId) => {
-    nodeList[nodeId].children.forEach((child) => {
-      edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
-    });
-  });
-  return edges;
-}
+    if (intIdx > -1) {
+      while (intermediate !== path[0]) {
+        let parent = this.parents[intIdx][this.indices.indexOf(path[0])];
+        if (!parent) { break; }
+        path.unshift(parent);
+      }
+    }
 
-createPath (parents, startNodeId, endNodeId) {
-  let path = [String(endNodeId)];
-  let startKey = endNodeId;
-  while (parents[startKey]) {
-    path.push(parents[startKey]);
-    startKey = parents[startKey];
+    while (start !== path[0]) {
+      let parent = this.parents[startIdx][this.indices.indexOf(path[0])];
+      if (!parent) {
+        path.unshift(start);
+        break;
+      }
+      path.unshift(parent);
+    }
+
+    return path;
   }
-  return path.reverse();
-}
-}
 
-export default BellmanFord;
+  search (start, end) {
+    for (let k = 0; k < this.indices.length; k++) {
+      for (let i = 0; i < this.indices.length; i++) {
+        for (let j = 0; j < this.indices.length; j++) {
+          if (this.costs[i][j] > this.costs[i][k] + this.costs[k][j]) {
+            this.costs[i][j] = this.costs[i][k] + this.costs[k][j];
+            this.parents[i][j] = this.parents[k][j];
+          }
+        }
+      }
+    }
+
+    return this.pathDeconstructor(start, end);
+  }
+}
 `}
                 </Highlight>
               </aside>
