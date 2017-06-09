@@ -12,7 +12,10 @@ class ShowBellmanFord extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClickLeft = this.handleClickLeft.bind(this);
     this.handleClickRight = this.handleClickRight.bind(this);
+    this.fetchCode = this.fetchCode.bind(this);
     // this. = this..bind(this);
+
+
   }
 
   componentDidMount() {
@@ -23,11 +26,26 @@ class ShowBellmanFord extends React.Component {
     window.v = visual;
     this.setState({ graph: visual});
     this.algorithm = new BellmanFordSteps(NODELIST, 1, 6, visual);
+    this.fetchCode('static/javascript/bellman_ford.js');
   }
 
   componentWillUnmount() {
     document.onkeydown = null;
     document.onkeyup = null;
+  }
+
+
+  fetchCode(file) {
+    var f = new XMLHttpRequest();
+    f.open("GET", file, false);
+    f.onreadystatechange = () => {
+      if(f.readyState === 4) {
+        if(f.status === 200 || f.status == 0) {
+          this.code = f.responseText;
+        }
+      }
+    };
+    f.send(null);
   }
 
   handleKeyPress (e) {
@@ -65,67 +83,7 @@ class ShowBellmanFord extends React.Component {
               <div className="visualization" />
               <aside className="show-code">
                   <Highlight class="javascript-snippet">
-{`class BellmanFord {
-  constructor(nodeList) {
-
-    this.nodeList = nodeList;
-    this.edgeList = this.createEdgeList(nodeList);
-
-    this.search = this.search.bind(this);
-  }
-
-  search(startNodeId, endNodeId) {
-    let cost = {};
-    let parents = {};
-
-    Object.keys(this.nodeList).forEach((nodeId) => {
-      cost[nodeId] = Infinity;
-      parents[nodeId] = null;
-    });
-
-    cost[startNodeId] = 0;
-    let finished = false;
-
-    for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-      finished = true;
-      this.edgeList.forEach((edge) => {
-        if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-          cost[edge.toId] = cost[edge.fromId] + edge.weight;
-          parents[edge.toId] = edge.fromId;
-          finished = false;
-        }
-      });
-      if (finished) {
-        break;
-      }
-    }
-
-    return this.createPath(parents, startNodeId, endNodeId);
-  }
-
-  createEdgeList(nodeList) {
-    let edges = [];
-    Object.keys(nodeList).forEach((nodeId) => {
-      nodeList[nodeId].children.forEach((child) => {
-        edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
-      });
-    });
-    return edges;
-  }
-
-  createPath (parents, startNodeId, endNodeId) {
-    let path = [String(endNodeId)];
-    let startKey = endNodeId;
-    while (parents[startKey]) {
-      path.push(parents[startKey]);
-      startKey = parents[startKey];
-    }
-    return path.reverse();
-  }
-}
-
-export default BellmanFord;
-`}
+                    {this.code}
                   </Highlight>
               </aside>
               <figure onClick={this.handleClickLeft} id="arrow_left"></figure>

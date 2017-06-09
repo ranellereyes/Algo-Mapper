@@ -55,7 +55,6 @@ class BellmanFord {
     }
     return path.reverse();
   }
-
 }
 
 export default BellmanFord;
