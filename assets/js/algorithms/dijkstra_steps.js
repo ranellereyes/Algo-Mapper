@@ -132,7 +132,7 @@ class DijkstraSteps {
         this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
         this.visual.highlightNode(steps.path[1], "green");
         steps.visited.forEach(node => {
-          this.visual.addText(node.id, -21, 35, "red", (d) => "visited")
+          this.visual.addText(node.id, -21, 36, "red", (d) => "visited")
         });
       }
     }
@@ -178,8 +178,10 @@ class DijkstraSteps {
       this.visual.highlightNode(steps.path[0], "yellow");
       this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
       this.visual.highlightNode(steps.path[1], "green");
+      steps.visited.forEach(node => {
+        this.visual.addText(node.id, -21, 36, "red", (d) => "visited")
+      });
     }
-
   }
 
 }
