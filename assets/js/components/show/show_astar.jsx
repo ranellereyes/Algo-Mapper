@@ -5,7 +5,7 @@ import AstarStep from '../../algorithms/astar_step';
 import Highlight from 'react-highlight';
 import Astar from '../../algorithms/astar';
 
-class Show extends React.Component {
+class ShowAstar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { };
@@ -18,11 +18,22 @@ class Show extends React.Component {
     document.onkeydown = this.handleKeyPress;
     let visual = new Visualization(NODELIST);
     visual.draw();
-    window.v = visual;
     this.setState({ graph: visual });
     this.AstarStep = new AstarStep(NODELIST, 1, 6, visual);
-    window.as = new Astar(NODELIST);
-    window.a = this.AstarStep;
+    this.fetchCode('static/javascript/astar.js');
+  }
+
+  fetchCode(file) {
+    var f = new XMLHttpRequest();
+    f.open("GET", file, false);
+    f.onreadystatechange = () => {
+      if(f.readyState === 4) {
+        if(f.status === 200 || f.status == 0) {
+          this.code = f.responseText;
+        }
+      }
+    };
+    f.send(null);
   }
 
   handleKeyPress(e) {
@@ -51,67 +62,7 @@ class Show extends React.Component {
               <div className="visualization" />
               <aside className="show-code">
                 <Highlight class="javascript-snippet">
-{`class BellmanFord {
-constructor(nodeList) {
-
-  this.nodeList = nodeList;
-  this.edgeList = this.createEdgeList(nodeList);
-
-  this.search = this.search.bind(this);
-}
-
-search(startNodeId, endNodeId) {
-  let cost = {};
-  let parents = {};
-
-  Object.keys(this.nodeList).forEach((nodeId) => {
-    cost[nodeId] = Infinity;
-    parents[nodeId] = null;
-  });
-
-  cost[startNodeId] = 0;
-  let finished = false;
-
-  for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-    finished = true;
-    this.edgeList.forEach((edge) => {
-      if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-        cost[edge.toId] = cost[edge.fromId] + edge.weight;
-        parents[edge.toId] = edge.fromId;
-        finished = false;
-      }
-    });
-    if (finished) {
-      break;
-    }
-  }
-
-  return this.createPath(parents, startNodeId, endNodeId);
-}
-
-createEdgeList(nodeList) {
-  let edges = [];
-  Object.keys(nodeList).forEach((nodeId) => {
-    nodeList[nodeId].children.forEach((child) => {
-      edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
-    });
-  });
-  return edges;
-}
-
-createPath (parents, startNodeId, endNodeId) {
-  let path = [String(endNodeId)];
-  let startKey = endNodeId;
-  while (parents[startKey]) {
-    path.push(parents[startKey]);
-    startKey = parents[startKey];
-  }
-  return path.reverse();
-}
-}
-
-export default BellmanFord;
-`}
+                  {this.code}
                 </Highlight>
               </aside>
               <figure onClick={this.handleClickLeft}></figure>
@@ -125,8 +76,22 @@ export default BellmanFord;
             <ul className="show-algo-description">
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
-                <p>asdfaf  EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
-                </p>
+                <ol>
+                  <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* is its use of its openList and closeList. As the algorithm runs, it finds child nodes and appends them to the openList. The openList stores all nodes that are currently known (i.e. they have been seen by the algorithm, but not visited yet). Once a node has been visited (i.e. it has been set as the <code>currentNode</code>, and its child nodes cost values have been calculated), the <code>currentNode</code> is taken out of the openList and appended to the closeList. If a node is seen more than once, its cost values will be recalculated and its parent will be set to the node which yielded the lowest f cost. This process is repeated until the end point is found. The general process of A* can be explained in the following way:</p>
+                  <li>1. Initialize and openList and closeList as two empty arrays</li>
+                  <li>2. Set the starting node as <code>currentNode</code>, and add it to the openList</li>
+                  <li>3. Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</li>
+                  <ul className='how-it-works'>
+                  	<li>- Ex. f(n) = g(n) + h(n) </li>
+                  	<li>- g cost is the weight of the edge (the link between parent and child node)</li>
+                  	<li>- h is defined by an arbitrary calculation based on the distance from the end node</li>
+                  	<li>- f is equal to the sum of these two values</li>
+                  </ul>
+                  <li>4. If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</li>
+                  <li>5. The currentNode is moved from the openList into the closeList</li>
+                  <li>6. currentNode is reassigned to a node inside the openList with the lowest f cost</li>
+                  <li>7. Repeat step 3 until destination is reached, or the openList is empty</li>
+                </ol>
                 <h3>Math</h3>
                 <p>asdfasdf  EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
                 </p>
@@ -144,4 +109,4 @@ export default BellmanFord;
   }
 }
 
-export default Show;
+export default ShowAstar;
