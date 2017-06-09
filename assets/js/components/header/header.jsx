@@ -39,7 +39,7 @@ class Header extends React.Component {
               >Algorithms</a>
               <ul className={`dropdown ${this.state.active}`}>
                 <Link className="dropdown" to="/astar">A* (A star)</Link>
-                <Link className="dropdown" to="/dijkstra">Dijkstra's</Link>
+                <Link className="dropdown" to="/dijkstras">Dijkstra's</Link>
                 <Link className="dropdown" to="/bellman-ford">Bellman-Ford</Link>
                 <Link className="dropdown" to="/floyd-warshall">Floyd-Warshall</Link>
               </ul>
