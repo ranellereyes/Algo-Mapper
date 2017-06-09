@@ -27,7 +27,7 @@ class DijkstraSteps {
   }
 
   search() {
-    this.steps.push({path: [this.source], costs: [this.costs()]});
+    this.steps.push({path: [this.source.id], costs: [this.costs()]});
     let parent = {};
     let node = this.source;
     while (this.unvisited.length !== 0) {
@@ -82,9 +82,19 @@ class DijkstraSteps {
 
   stepFoward() {
     let steps = this.steps[this.i];
-    console.log(steps);
-    this.visual.highlightNode(steps.path[0].id, "red");
-    
+    let prev = this.steps[this.i - 1]
+    // unhighlight previous node/links
+    if (prev) {
+      this.visual.unhighlightNode(prev.path[0]);
+      this.visual.unhighlightNode(prev.path[1]);
+      this.visual.unhighlightLink(prev.path[0], prev.path[1]);
+    }
+    //highlight current node/links
+    this.visual.highlightNode(steps.path[0], "red");
+    this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
+    this.visual.highlightNode(steps.path[1], "green");
+
+    this.i++;
   }
 
 }

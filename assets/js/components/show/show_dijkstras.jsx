@@ -2,6 +2,7 @@ import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../node/node';
 import Highlight from 'react-highlight';
+import DijkstraSteps from '../../node/dijkstra_steps';
 
 class ShowDijkstras extends React.Component {
   constructor(props) {
@@ -12,8 +13,9 @@ class ShowDijkstras extends React.Component {
   componentDidMount() {
     let visual = new Visualization(NODELIST);
     visual.draw();
-    window.v = visual;
     this.setState({ graph: visual });
+    window.b = new DijkstraSteps(NODELIST, 1, 6, visual);
+
   }
 
   render() {
@@ -26,66 +28,69 @@ class ShowDijkstras extends React.Component {
               <div className="visualization" />
               <aside className="show-code">
                   <Highlight class="javascript-snippet">
-{`class BellmanFord {
+{`class Dijkstra {
   constructor(nodeList) {
-
     this.nodeList = nodeList;
-    this.edgeList = this.createEdgeList(nodeList);
-
-    this.search = this.search.bind(this);
+    this.visited = [];
+    this.unvisited = [];
   }
 
-  search(startNodeId, endNodeId) {
-    let cost = {};
-    let parents = {};
-
-    Object.keys(this.nodeList).forEach((nodeId) => {
-      cost[nodeId] = Infinity;
-      parents[nodeId] = null;
+  initiate(source) {
+    source.weight = 0;
+    source.cost = 0;
+    this.unvisited.push(source);
+    Object.keys(this.nodeList).forEach(id => {
+      let node = this.nodeList[id];
+      if (node !== source) {
+        node.cost = Infinity;
+        this.unvisited.push(node);
+      }
     });
+  }
 
-    cost[startNodeId] = 0;
-    let finished = false;
-
-    for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-      finished = true;
-      this.edgeList.forEach((edge) => {
-        if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-          cost[edge.toId] = cost[edge.fromId] + edge.weight;
-          parents[edge.toId] = edge.fromId;
-          finished = false;
+  search(source, destination) {
+    this.initiate(this.nodeList[source])
+    let parent = {};
+    let node = this.nodeList[source];
+    while (this.unvisited.length !== 0) {
+      node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
+        let _node;
+        if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
+          _node = this.nodeList[child.id];
+          if (_node.cost > node.cost + child.weight) {
+            _node.cost = node.cost + child.weight;
+            parent[_node.id] = node.id;
+          }
         }
       });
-      if (finished) {
-        break;
+      this.visited.push(node);
+      this.unvisited.splice(this.unvisited.indexOf(node), 1);
+
+
+      node = this.unvisited[0]
+      for (let i = 1; i < this.unvisited.length; i++) {
+        if (this.unvisited[i].cost < node.cost) {
+          node = this.unvisited[i];
+        }
       }
     }
-
-    return this.createPath(parents, startNodeId, endNodeId);
+    this.createPath(parent, this.nodeList[source], this.nodeList[destination]);
   }
 
-  createEdgeList(nodeList) {
-    let edges = [];
-    Object.keys(nodeList).forEach((nodeId) => {
-      nodeList[nodeId].children.forEach((child) => {
-        edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
-      });
-    });
-    return edges;
-  }
-
-  createPath (parents, startNodeId, endNodeId) {
-    let path = [String(endNodeId)];
-    let startKey = endNodeId;
-    while (parents[startKey]) {
-      path.push(parents[startKey]);
-      startKey = parents[startKey];
+  createPath(parent, source, destination) {
+    let path = [destination.id];
+    let startKey = destination.id;
+    while (parent[startKey]) {
+      path.push(parent[startKey]);
+      startKey = parent[startKey]
     }
     return path.reverse();
   }
+
+
 }
 
-export default BellmanFord;
+export default Dijkstra;
 `}
                   </Highlight>
               </aside>
