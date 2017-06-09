@@ -2,12 +2,19 @@ import BellmanFord from './bellman_ford';
 import { merge } from 'lodash';
 
 class BellmanFordSteps extends BellmanFord{
-  constructor(nodeList) {
+  constructor(nodeList, startNodeId, endNodeId, visual) {
     super(nodeList);
     this.nodeList = nodeList;
+    this.visual = visual;
+    this.index = -1;
+    this.path = super.search(startNodeId, endNodeId);
     this.edgeList = this.createEdgeList(nodeList);
 
     this.search = this.search.bind(this);
+    this.stepBackward = this.stepBackward.bind(this);
+    this.stepForward = this.stepForward.bind(this);
+
+    this.steps= this.search(startNodeId, endNodeId);
   }
 
   search(startNodeId, endNodeId) {
@@ -20,7 +27,7 @@ class BellmanFordSteps extends BellmanFord{
     });
 
     let steps = [merge({},{
-                  node: [String(startNodeId)],
+                  node: [null, String(startNodeId)],
                   cost: cost})];
 
     cost[startNodeId] = 0;
@@ -44,6 +51,52 @@ class BellmanFordSteps extends BellmanFord{
     }
 
     return steps;
+  }
+
+  stepBackward() {
+    console.log(this.index);
+    this.index--;
+    if (this.index < 0) {
+      this.index = 0;
+    } else if (this.index === this.steps.length -1){
+      this.path.forEach((id) => {
+        this.visual.unhighlightNode(id);
+      });
+      for (let i = 0; i < this.path.length -1; i++) {
+        this.visual.unhighlightLink(this.path[i], this.path[i+1]);
+      }
+    }
+    else {
+      this.visual.unhighlightNode(this.steps[this.index+1].node[0]);
+      this.visual.unhighlightNode(this.steps[this.index+1].node[1]);
+
+      this.visual.highlightNode(this.steps[this.index].node[0], "red");
+      this.visual.highlightNode(this.steps[this.index].node[1], "green");
+    }
+
+  }
+
+  stepForward() {
+    console.log(this.index);
+    this.index++;
+    if (this.index >= this.steps.length ) {
+      this.path.forEach((id) => {
+        this.visual.highlightNode(id, "red");
+      });
+      for (let i = 0; i < this.path.length -1; i++) {
+        this.visual.highlightLink(this.path[i], this.path[i+1], "red");
+      }
+      this.index = this.steps.length;
+    } else if (this.index === 0) {
+      this.visual.highlightNode(this.steps[this.index].node[0], "red");
+      this.visual.highlightNode(this.steps[this.index].node[1], "green");
+    } else {
+      this.visual.unhighlightNode(this.steps[this.index-1].node[0]);
+      this.visual.unhighlightNode(this.steps[this.index-1].node[1]);
+      this.visual.animateLink(this.steps[this.index].node[0], this.steps[this.index].node[1], "red");
+      this.visual.highlightNode(this.steps[this.index].node[0], "red");
+      this.visual.highlightNode(this.steps[this.index].node[1], "green");
+    }
   }
 }
 
