@@ -14,9 +14,9 @@ const App = () => (
     <Header />
     <Switch>
       <Route path="/comparison" component={Comparison} />
-      <Route path="/bellmanford" component={ShowBellmanFord} />
+      <Route path="/bellman-ford" component={ShowBellmanFord} />
       <Route path="/dijkstras" component={ShowDijkstras} />
-      <Route path="/floydwarshall" component={ShowFloyd} />
+      <Route path="/floyd-warshall" component={ShowFloyd} />
       <Route path="/:name" component={Show} />
       <Route path="/" component={Index}/>
     </Switch>
