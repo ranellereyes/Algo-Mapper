@@ -4,48 +4,65 @@ import { cloneDeep } from "lodash";
 export class floydWarshallAlgoSteps extends floydWarshallAlgo {
   constructor(nodelist, start, end, visual) {
     super(nodelist);
-    this.steps = this.search(start, end);
+    this.visualization = visual;
+    this.steps = [];
+    this.search(start, end);
     this.currStep = 0;
+  }
+
+  clear() {
+    d3.selectAll(".node")
+    .transition()
+    .duration(500)
+    .style("fill", "lightblue");
+
+    d3.selectAll(".link")
+    .transition()
+    .duration(500)
+    .style("stroke", "gray");
+  }
+
+  draw(currStep) {
+    let visual = this.visualization,
+    step = this.steps[this.currStep],
+    { nodes, loops, tables } = step;
+
+    loops.forEach((node, i) => {
+      if (i === 2) {
+        visual.highlightNode(node, "red");
+      } else {
+        visual.highlightNode(node, "green");
+      }
+    });
+
+    let non_index_nodes = nodes.filter(node => !loops.includes(node));
+
+    if (non_index_nodes.length > 0) {
+      non_index_nodes.forEach(node => {
+        visual.highlightNode(node, "blue");
+      });
+    }
+
+    nodes.forEach((node, i) => {
+      let child = nodes[i + 1];
+      visual.highlightLink(node, child, "red");
+    });
   }
 
   stepForward() {
     if (this.currStep > this.steps.length) return;
-    // let node = this.steps[this.i];
-    let visual = this.visualization,
-        step = this.steps[this.currStep],
-        { nodes, loops, tables } = step;
-
-    loops.forEach((node, i) => {
-      if (i === 2) {
-        visual.highlightNode(node.id, "red");
-      } else {
-        visual.highlightNode(node.id, "green");
-      }
-    });
-
-    let non_index_nodes = nodes.select(node => !loops.includes(node.id));
-
-    non_index_nodes.forEach(node => {
-      visual.highlightNode(node.id, "blue");
-    });
-
-    nodes.forEach((node, i) => {
-      let child = nodes[i + 1];
-      visual.highlightLink(node.id, child.id, "red");
-    });
 
     this.currStep += 1;
+    this.clear();
+    this.draw(this.steps[this.currStep]);
   }
 
   stepBackward() {
-    if (this.i <= 0) return;
-    this.i -= 1;
-    let node = this.steps[this.i];
-    let visual = this.visualization;
-    visual.unhighlightNode(node.id);
-    if (node.parent) {
-      visual.unhighlightLink(node.parent.id, node.id);
-    }
+    if (this.currStep <= 0) return;
+
+    this.currStep -= 1;
+    this.clear();
+    this.draw(this.steps[this.currStep]);
   }
 
   search(start, end) {
@@ -53,8 +70,8 @@ export class floydWarshallAlgoSteps extends floydWarshallAlgo {
       for (let i = 0; i < this.indices.length; i++) {
         for (let j = 0; j < this.indices.length; j++) {
           let path = [i, j, k].map(idx => this.indices[idx]),
-              nodes = this.pathDeconstructor(...path),
-              loops = [i, j, k].map(idx => this.indices[idx]);
+              nodes = this.pathDeconstructor(...path).map(id => parseInt(id)),
+              loops = [i, j, k].map(idx => parseInt(this.indices[idx]));
 
           if (this.costs[i][j] > this.costs[i][k] + this.costs[k][j]) {
             this.costs[i][j] = this.costs[i][k] + this.costs[k][j];

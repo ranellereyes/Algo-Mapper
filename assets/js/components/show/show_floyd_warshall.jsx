@@ -1,7 +1,8 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
-import floydWarshallAlgoSteps from '../../algorithms/floyd-warshall-algo-steps';
+import {floydWarshallAlgoSteps} from '../../algorithms/floyd-warshall-algo-steps';
+import Highlight from 'react-highlight';
 
 class ShowFloyd extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class ShowFloyd extends React.Component {
     window.v = visual;
     this.setState({ graph: visual });
     this.floyd = new floydWarshallAlgoSteps(NODELIST, 1, 6, visual);
-    window.a = this.AstarStep;
+    window.f = this.floyd;
   }
 
   componentWillUnmount() {
@@ -29,10 +30,10 @@ class ShowFloyd extends React.Component {
   handleKeyPress (e) {
     console.log(e.keyCode);
     if (e.keyCode === 37){
-      this.floyd.stepForward();
+      this.floyd.stepBackward();
       console.log(e.keyCode, "left");
     } else if (e.keyCode === 39){
-      this.floyd.stepBackward();
+      this.floyd.stepForward();
       console.log(e.keyCode, "right");
     }
   }
@@ -148,4 +149,4 @@ export default BellmanFord;
   }
 }
 
-export default Show;
+export default ShowFloyd;
