@@ -76,21 +76,21 @@ class ShowAstar extends React.Component {
             <ul className="show-algo-description">
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
+                <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* is its use of its <code>openList</code> and <code>closeList</code>, where the <code>openList</code> is an array of nodes to be checked and the <code>closeList</code> is an array of nodes that have been visited. As the algorithm runs, nodes are added and removed from these lists until either a path is found or the <code>openList</code> is empty:</p>
                 <ol>
-                  <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* is its use of its <code>openList</code> and <code>closeList</code>, where the <code>openList</code> is an array of nodes to be checked and the <code>closeList</code> is an array of nodes that have been visited. As the algorithm runs, nodes are added and removed from these lists until either a path is found or the <code>openList</code> is empty:</p>
-                  <li><b>1.</b> Initialize and openList and closeList as two empty arrays</li>
-                  <li><b>2.</b> Set the starting node as <code>currentNode</code>, and add it to the openList</li>
-                  <li><b>3.</b> Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</li>
+                  <li><span>Initialize and openList and closeList as two empty arrays</span></li>
+                  <li><span>Set the starting node as <code>currentNode</code>, and add it to the openList</span></li>
+                  <li><span>Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</span></li>
                   <ul className='how-it-works'>
-                  	<li>- f(n) = g(n) + h(n) </li>
-                  	<li>- g cost is the weight of the edge (the link between parent and child node)</li>
-                  	<li>- h is defined by an arbitrary calculation based on the distance from the end node</li>
-                  	<li>- f is equal to the sum of these two values</li>
+                  	<li><span>f(n) = g(n) + h(n)</span></li>
+                  	<li><span>g cost is the weight of the edge (the link between parent and child node)</span></li>
+                  	<li><span>h is defined by an arbitrary calculation based on the distance from the end node</span></li>
+                  	<li><span>f is equal to the sum of these two values</span></li>
                   </ul>
-                  <li><b>4.</b> If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</li>
-                  <li><b>5.</b> The currentNode is moved from the openList into the closeList</li>
-                  <li><b>6.</b> currentNode is reassigned to a node inside the openList with the lowest f cost</li>
-                  <li><b>7.</b> Repeat step 3 until destination is reached, or the openList is empty</li>
+                  <li><span>If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</span></li>
+                  <li><span>The currentNode is moved from the openList into the closeList</span></li>
+                  <li><span>currentNode is reassigned to a node inside the openList with the lowest f cost</span></li>
+                  <li><span>Repeat step 3 until destination is reached, or the openList is empty</span></li>
                 </ol>
                 <h3>Math</h3>
                 <p>
