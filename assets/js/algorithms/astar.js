@@ -2,7 +2,6 @@ class Astar {
   constructor(nodeList) {
     this.openList = [];
     this.closeList = [];
-    this.path = [];
     this.nodeList = nodeList;
   }
 
@@ -44,13 +43,13 @@ class Astar {
         return path.reverse();
       }
 
+      // add current node to close list and remove it from the open list
+      this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
+      
       // g cost set-up
       currentNode.children.forEach( node => {
         list[node.id].weight = node.weight;
       });
-
-      // add current node to close list and remove it from the open list
-      this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
 
       this.childNodes(currentNode).forEach( node => {
         let gScore = currentNode.g + node.weight;
