@@ -7,13 +7,38 @@ class ShowBellmanFord extends React.Component {
   constructor(props) {
     super(props);
     this.state = { };
+
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleClickLeft = this.handleClickLeft.bind(this);
+    this.handleClickRight = this.handleClickRight.bind(this);
   }
 
   componentDidMount() {
+    document.onkeydown = this.handleKeyPress;
     let visual = new Visualization(NODELIST);
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual });
+  }
+  componentWillUnmount() {
+    document.onkeydown = null;
+  }
+
+  handleKeyPress (e) {
+    console.log(e.keyCode);
+    if (e.keyCode === 37){
+      console.log(e.keyCode, "left");
+    } else if (e.keyCode === 39){
+      console.log(e.keyCode, "right");
+    }
+  }
+
+  handleClickLeft(e) {
+    this.handleKeyPress({keyCode:  37});
+  }
+
+  handleClickRight(e) {
+    this.handleKeyPress({keyCode:  39});
   }
 
   render() {
@@ -21,7 +46,7 @@ class ShowBellmanFord extends React.Component {
       <div className="index-main">
         <main className="show-main">
           <section className="show-main">
-            <h1 className="show-name">Bellman Ford</h1>
+            <h1 className="show-name">Bellman Ford Algorithm</h1>
             <ul className="visualization">
               <div className="visualization" />
               <aside className="show-code">
@@ -89,8 +114,8 @@ export default BellmanFord;
 `}
                   </Highlight>
               </aside>
-              <figure></figure>
-              <figure></figure>
+              <figure onClick={this.handleClickLeft}></figure>
+              <figure onClick={this.handleClickRight} ></figure>
             </ul>
           </section>
         </main>
