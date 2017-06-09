@@ -67,7 +67,7 @@ class Visualization {
         .attr("height", 500);
 
     this.svg.append("defs").selectAll("marker")
-        .data(["base", "color", "arrow"])
+        .data(["base", "color", "color2", "arrow"])
         .enter().append("marker")
         .attr("id", function(d) { return d })
         .attr("viewBox", "0 -5 10 10")
@@ -122,7 +122,7 @@ class Visualization {
         .text(function(d) { return d.weight });
 
     this.nodeWrapper = this.nodeGroup
-        .enter().append("g")
+        .enter().append("g").attr("class", (d) => `node-${d.id}`);
 
     this.nodeWrapper
         .append("circle")
@@ -170,6 +170,19 @@ class Visualization {
       .transition()
       .duration(500)
       .style('marker-end', 'url(#color)')
+      .style('stroke', color);
+    this.colorPath
+      .transition()
+      .duration(500)
+      .style('stroke', color)
+      .style('fill', color);
+  }
+
+  highlightLink2(fromId, toId, color) {
+    d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
+      .transition()
+      .duration(500)
+      .style('marker-end', 'url(#color2)')
       .style('stroke', color);
     this.colorPath
       .transition()
@@ -239,10 +252,33 @@ class Visualization {
     setTimeout( () => {
       this.arrowPath.transition().duration(700).style("opacity", "0");
       path.transition().duration(500).style("opacity", "0").remove();
-    }, 1500)
+    }, 1500);
   }
 
-  changeText(textFunction) {
+  addText(nodeId, dx, dy, color, textFunction) {
+    d3.select(`g.node-${nodeId}`).append('text')
+      .text((d) => textFunction(d))
+      .attr('class', `node-${nodeId}`)
+      .attr('dx', dx)
+      .attr('dy', dy)
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .style('opacity', 0)
+      .style('fill', color)
+      .transition()
+      .duration(500)
+      .style('opacity', 1);
+  }
+
+  removeText(nodeId) {
+    d3.selectAll(`text.node-${nodeId}`)
+      .transition()
+      .duration(500)
+      .style('opacity', 0)
+      .remove()
+  }
+
+  changeAllText(textFunction) {
     this.nodeText.text((d) => textFunction(d));
   }
 }
