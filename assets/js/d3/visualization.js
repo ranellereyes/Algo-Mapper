@@ -59,36 +59,11 @@ class Visualization {
   }
 
   draw() {
-    let color = d3.scaleOrdinal(d3.schemeCategory20);
     let graph = this.parseNodes();
 
     this.svg = d3.select("div.visualization").append("svg")
         .attr("width", 500)
         .attr("height", 500);
-
-    this.svg.append("defs").selectAll("marker")
-        .data(["base", "color", "color2", "arrow"])
-        .enter().append("marker")
-        .attr("id", function(d) { return d })
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 26)
-        .attr("refY", 0)
-        .attr("markerWidth", 4)
-        .attr("markerHeight", 4)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .style("fill", "gray")
-        .style("stroke", "gray")
-        .style("opacity", "1");
-
-    this.basePath = d3.select('marker#base path');
-    this.colorPath = d3.select('marker#color path');
-    this.arrowPath = d3.select('marker#arrow path');
-    this.arrowPath
-      .style("opacity", "0")
-      .style("stroke", "crimson")
-      .style("fill", "crimson");
 
     this.nodeGroup = this.svg.selectAll("g")
       .data(graph.nodes);
@@ -104,7 +79,26 @@ class Visualization {
         .attr("y2", function(d) { return d.target.y; })
         .attr("id", function(d) { return `${d.source.id}-${d.target.id}`})
         .style("stroke-width", 3)
-        .style("marker-end",  "url(#base)");
+        .style("marker-end",  (d) => `url(#arrow-${d.source.id}-${d.target.id})`);
+
+    let defs = this.svg.append('defs').selectAll('marker');
+    this.links.each( link => {
+      defs
+        .data([`arrow-${link.source.id}-${link.target.id}`])
+        .enter().append("marker")
+        .attr("id", function(d) { return d })
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 26)
+        .attr("refY", 0)
+        .attr("markerWidth", 4)
+        .attr("markerHeight", 4)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-5L10,0L0,5")
+        .style("fill", "gray")
+        .style("stroke", "gray")
+        .style("opacity", "1");
+    })
 
     this.bezierLine = d3.line()
             .x(function(d) { return d[0]; })
@@ -161,30 +155,20 @@ class Visualization {
     d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
       .transition()
       .duration(500)
-      .style('marker-end', 'url(#base)')
       .style('stroke', 'grey');
+    d3.select(`#arrow-${fromId}-${toId} path`)
+      .transition()
+      .duration(500)
+      .style('stroke', 'grey')
+      .style('fill', 'grey');
   }
 
   highlightLink(fromId, toId, color) {
     d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
       .transition()
       .duration(500)
-      .style('marker-end', 'url(#color)')
       .style('stroke', color);
-    this.colorPath
-      .transition()
-      .duration(500)
-      .style('stroke', color)
-      .style('fill', color);
-  }
-
-  highlightLink2(fromId, toId, color) {
-    d3.select(this.links._groups[0].find( link => link.id === `${fromId}-${toId}`))
-      .transition()
-      .duration(500)
-      .style('marker-end', 'url(#color2)')
-      .style('stroke', color);
-    this.colorPath
+    d3.select(`#arrow-${fromId}-${toId} path`)
       .transition()
       .duration(500)
       .style('stroke', color)
@@ -196,7 +180,7 @@ class Visualization {
     let source = this.nodeList[link.id[0]];
     let target = this.nodeList[link.id[2]];
     let path = this.svg.append("path")
-      .attr("stroke", "red")
+      .attr("stroke", color)
       .attr("class", "link")
       .attr("fill", "none")
       .attr("d", (d) => this.bezierLine([
