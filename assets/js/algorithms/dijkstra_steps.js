@@ -97,13 +97,13 @@ class DijkstraSteps {
       Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
       steps.costs.forEach((cost,idx) => {
         if (cost === Infinity) {
-          this.visual.addText(idx + 1, -6, -25, (d) => "∞");
+          this.visual.addText(idx + 1, -6, -25, "red", (d) => "∞");
         } else if (cost < 10 && cost >= 0) {
-          this.visual.addText(idx + 1, -5, -28, (d) => cost);
+          this.visual.addText(idx + 1, -5, -28, "red", (d) => cost);
         } else {
-          this.visual.addText(idx + 1, -7, -28, (d) => cost);
+          this.visual.addText(idx + 1, -7, -28, "red", (d) => cost);
         }
-      })
+      });
       if (prev) {
         this.visual.unhighlightNode(prev.path[0]);
         this.visual.unhighlightNode(prev.path[1]);
@@ -122,6 +122,10 @@ class DijkstraSteps {
     this.i--;
     let steps = this.steps[this.i];
     let forw = this.steps[this.i + 1];
+    if (this.i === -1) {
+      Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
+      this.i++;
+    }
     //unhighlight foward node/links
     if (forw) {
       this.visual.unhighlightNode(forw.path[0]);

@@ -8,14 +8,47 @@ class ShowDijkstras extends React.Component {
   constructor(props) {
     super(props);
     this.state = { };
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleClickLeft = this.handleClickLeft.bind(this);
+    this.handleClickRight = this.handleClickRight.bind(this);
   }
 
   componentDidMount() {
+    document.onkeydown = this.handleKeyPress;
+    document.onkeyup = this.handleKeyUp;
     let visual = new Visualization(NODELIST);
     visual.draw();
     this.setState({ graph: visual });
-    window.b = new DijkstraSteps(NODELIST, 1, 6, visual);
+    this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
+  }
 
+  componentWillUnmount() {
+    document.onkeydown = null;
+    document.onkeyup = null;
+  }
+
+  handleKeyPress (e) {
+    if (e.keyCode === 37){
+      this.algorithm.stepBackward();
+      document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_blue.png')";
+    } else if (e.keyCode === 39){
+      this.algorithm.stepForward();
+      document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_blue.png')";
+    }
+  }
+  handleKeyUp (e) {
+    document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+    document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+  }
+
+  handleClickLeft(e) {
+    // this.handleKeyPress({keyCode:  37});
+    this.algorithm.stepBackward();
+  }
+
+  handleClickRight(e) {
+    // this.handleKeyPress({keyCode:  39});
+    this.algorithm.stepForward();
   }
 
   render() {
@@ -94,8 +127,8 @@ export default Dijkstra;
 `}
                   </Highlight>
               </aside>
-              <figure></figure>
-              <figure></figure>
+              <figure onClick={this.handleClickLeft} id="arrow_left"></figure>
+              <figure onClick={this.handleClickRight} id="arrow_right"></figure>
             </ul>
           </section>
         </main>
