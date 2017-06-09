@@ -17,7 +17,6 @@ class Visualization {
     let list = this.nodeList;
     let keys = Object.keys(list).sort();
     keys.forEach( idx => {
-      // list[idx].index = parseInt(idx);
       nodes.push(list[idx]);
     });
 
@@ -58,6 +57,26 @@ class Visualization {
     return y + (Math.sin(radians) * weight) * direction;
   }
 
+  addArrow(defs, link, color, animate) {
+    let arrow = defs
+      .data([`arrow-${link.source.id}-${link.target.id}${animate ? animate : ''}`])
+      .enter().append("marker")
+      .attr("id", function(d) { return d })
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 26)
+      .attr("refY", 0)
+      .attr("markerWidth", 4)
+      .attr("markerHeight", 4)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .style("fill", color)
+      .style("stroke", color)
+      .style("opacity", `${animate ? 0 : 1}`);
+
+    if (animate) arrow.transition().duration(500).delay(300).style('opacity', 1);
+  }
+
   draw() {
     let graph = this.parseNodes();
 
@@ -81,29 +100,15 @@ class Visualization {
         .style("stroke-width", 3)
         .style("marker-end",  (d) => `url(#arrow-${d.source.id}-${d.target.id})`);
 
-    let defs = this.svg.append('defs').selectAll('marker');
+    this.defs = this.svg.append('defs').selectAll('marker');
     this.links.each( link => {
-      defs
-        .data([`arrow-${link.source.id}-${link.target.id}`])
-        .enter().append("marker")
-        .attr("id", function(d) { return d })
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 26)
-        .attr("refY", 0)
-        .attr("markerWidth", 4)
-        .attr("markerHeight", 4)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .style("fill", "gray")
-        .style("stroke", "gray")
-        .style("opacity", "1");
+      this.addArrow(this.defs, link, 'gray')
     })
 
     this.bezierLine = d3.line()
             .x(function(d) { return d[0]; })
             .y(function(d) { return d[1]; })
-            .curve(d3.curveBundle.beta(0.9));
+            .curve(d3.curveCardinal.tension(-1.5));
 
     this.svg.selectAll("text.link")
         .data(graph.links)
@@ -176,9 +181,8 @@ class Visualization {
   }
 
   animateLink(fromId, toId, color) {
-    let link = this.links._groups[0].find( link => link.id === `${fromId}-${toId}`);
-    let source = this.nodeList[link.id[0]];
-    let target = this.nodeList[link.id[2]];
+    let source = this.nodeList[fromId];
+    let target = this.nodeList[toId];
     let path = this.svg.append("path")
       .attr("stroke", color)
       .attr("class", "link")
@@ -190,40 +194,14 @@ class Visualization {
       )
       .style("stroke-width", 3);
 
-    // let arc = d3.arc()
-    //   .innerRadius(Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2) / 2)
-    //   .outerRadius(Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2) / 2 + 3)
-    //   .startAngle(0);
-    //
-    // let g = this.svg.append("g").attr("transform", `translate(${(source.x + target.x) / 2}, ${(source.y + target.y) / 2})`);
-    //
-    // let foreground = g.append("path")
-    //   .datum({endAngle: 0})
-    //   .style("fill", "orange")
-    //   .style("marker-end", "url(#arrow)")
-    //   .attr("d", arc);
-    //
-    // function arcTween(newAngle) {
-    //   return function(d) {
-    //     var interpolate = d3.interpolate(d.endAngle, newAngle);
-    //
-    //     return function(t) {
-    //       d.endAngle = interpolate(t);
-    //       return arc(d);
-    //     };
-    //   };
-    // }
-    //
-    // foreground.transition()
-    //   .duration(1000)
-    //   .attrTween("d", arcTween(Math.PI * 0.6));
-
     path
       .transition()
       .duration(1000)
       .attr("d", this.bezierLine([
         [source.x, source.y],
         [this.centerTextX(source.x, target.x, source.y, target.y, 20, 1), this.centerTextY(source.x, target.x, source.y, target.y, 20, 1)],
+        // [100, 250],
+        // [125, 250],
         [target.x, target.y]
       ]))
       .attrTween("stroke-dasharray", function() {
@@ -231,12 +209,11 @@ class Visualization {
             var len = Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2);
             return function(t) { return (d3.interpolateString("0," + len, len + ",0"))(t) };
       })
-      .style("marker-end", "url(#arrow)")
-    setTimeout( () => this.arrowPath.transition().duration(300).style("opacity", "1"), 500 );
+      .style("marker-end", `url(#arrow-${fromId}-${toId}-animate)`);
+
     setTimeout( () => {
-      this.arrowPath.transition().duration(700).style("opacity", "0");
       path.transition().duration(500).style("opacity", "0").remove();
-    }, 1500);
+    }, 1000);
   }
 
   addText(nodeId, dx, dy, color, textFunction) {
