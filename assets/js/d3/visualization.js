@@ -239,7 +239,7 @@ class Visualization {
     setTimeout( () => {
       this.arrowPath.transition().duration(700).style("opacity", "0");
       path.transition().duration(500).style("opacity", "0").remove();
-    }, 1500)
+    }, 1500);
   }
 
   addText(nodeId, dx, dy, textFunction) {
