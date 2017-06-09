@@ -11,6 +11,7 @@ class DijkstraSteps {
     this.destination = this.nodeList[destination];
     this.initiate();
     this.search();
+    this.path;
   }
 
   initiate() {
@@ -27,10 +28,10 @@ class DijkstraSteps {
   }
 
   search() {
-    this.steps.push({path: [this.source.id], costs: [this.costs()]});
+    this.steps.push({path: [this.source.id], costs: this.costs()});
     let parent = {};
     let node = this.source;
-    while (this.unvisited.length !== 0) {
+    while (this.unvisited.length !== 0 && !this.visited.includes(this.destination)) {
       node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
         if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
@@ -40,7 +41,7 @@ class DijkstraSteps {
             parent[_node.id] = node.id;
           }
         }
-        this.steps.push({path: [node.id, child.id], costs: [this.costs()]})
+        this.steps.push({path: [node.id, child.id], costs: this.costs()})
       });
 
       // adds node to visited list
@@ -58,7 +59,7 @@ class DijkstraSteps {
     }
     // console.log(this.steps);
     // create path from source to destination
-    this.createPath(parent, this.source, this.destination);
+    this.path = this.createPath(parent, this.source, this.destination);
   }
 
   costs() {
@@ -85,36 +86,88 @@ class DijkstraSteps {
     this.i++;
     let steps = this.steps[this.i];
     let prev = this.steps[this.i - 1]
-    // unhighlight previous node/links
-    if (prev) {
-      this.visual.unhighlightNode(prev.path[0]);
-      this.visual.unhighlightNode(prev.path[1]);
-      this.visual.unhighlightLink(prev.path[0], prev.path[1]);
+    if (this.i === this.steps.length) {
+      Object.keys(this.nodeList).forEach(node => {
+        this.visual.unhighlightNode(node);
+        this.visual.unhighlightLink(prev.path[0], prev.path[1])
+      });
+      this.path.forEach((node, idx) => {
+        this.visual.highlightNode(node, "red");
+        this.visual.highlightLink(node, this.path[idx + 1])
+      });
+      this.i--;
     }
-    //highlight current node/links
-    if (steps) {
-      this.visual.highlightNode(steps.path[0], "red");
-      this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
-      this.visual.highlightNode(steps.path[1], "green");
+    // unhighlight previous node/links
+    else {
+      Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
+      steps.costs.forEach((cost,idx) => {
+        if (cost === Infinity) {
+          this.visual.addText(idx + 1, -6, -25, "red", (d) => "∞");
+        } else if (cost < 10 && cost >= 0) {
+          this.visual.addText(idx + 1, -5, -28, "red", (d) => cost);
+        } else {
+          this.visual.addText(idx + 1, -7, -28, "red", (d) => cost);
+        }
+      });
+      if (prev) {
+        this.visual.unhighlightNode(prev.path[0]);
+        this.visual.unhighlightNode(prev.path[1]);
+        this.visual.unhighlightLink(prev.path[0], prev.path[1]);
+      }
+      //highlight current node/links
+      if (steps) {
+        // if (steps.path[1]) {
+          // this.visual.animateLink(steps.path[0], steps.path[1], "black")
+        // }
+        this.visual.highlightNode(steps.path[0], "red");
+        this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
+        this.visual.highlightNode(steps.path[1], "green");
+      }
     }
   }
 
-  stepBackwards() {
+  stepBackward() {
     this.i--;
     let steps = this.steps[this.i];
     let forw = this.steps[this.i + 1];
+    if (this.i < -1) {
+      Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
+      this.i++;
+    } else if (this.i === -1) {
+        Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
+    }
+
     //unhighlight foward node/links
     if (forw) {
-      this.visual.unhighlightNode(forw.path[0]);
-      this.visual.unhighlightNode(forw.path[1]);
-      this.visual.unhighlightLink(forw.path[0], forw.path[1]);
+      Object.keys(this.nodeList).forEach(node => {
+        this.visual.unhighlightNode(node);
+        this.visual.unhighlightLink(forw.path[0], forw.path[1])
+      });
+      this.path.forEach((node, idx) => {
+        // this.visual.highlightNode(node, "red");
+        this.visual.unhighlightLink(node, this.path[idx + 1])
+      });
     }
     //highlight current node/links
     if (steps) {
+      Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
+      steps.costs.forEach((cost,idx) => {
+        if (cost === Infinity) {
+          this.visual.addText(idx + 1, -6, -25, "red", (d) => "∞");
+        } else if (cost < 10 && cost >= 0) {
+          this.visual.addText(idx + 1, -5, -28, "red", (d) => cost);
+        } else {
+          this.visual.addText(idx + 1, -7, -28, "red", (d) => cost);
+        }
+      });
+      // if (steps.path[1]) {
+      //   this.visual.animateLink(steps.path[0], steps.path[1], "#800080")
+      // }
       this.visual.highlightNode(steps.path[0], "red");
       this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
       this.visual.highlightNode(steps.path[1], "green");
     }
+
   }
 
 }

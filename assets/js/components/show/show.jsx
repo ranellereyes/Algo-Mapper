@@ -2,20 +2,43 @@ import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
 import AstarStep from '../../algorithms/astar_step';
+import Highlight from 'react-highlight';
+import Astar from '../../algorithms/astar';
 
 class Show extends React.Component {
   constructor(props) {
     super(props);
     this.state = { };
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleClickLeft = this.handleClickLeft.bind(this);
+    this.handleClickRight = this.handleClickRight.bind(this);
   }
 
   componentDidMount() {
+    document.onkeydown = this.handleKeyPress;
     let visual = new Visualization(NODELIST);
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual });
     this.AstarStep = new AstarStep(NODELIST, 1, 6, visual);
+    window.as = new Astar(NODELIST);
     window.a = this.AstarStep;
+  }
+
+  handleKeyPress(e) {
+    if (e.keyCode === 37) {
+      this.AstarStep.stepBackward();
+    } else if (e.keyCode === 39) {
+      this.AstarStep.stepForward();
+    }
+  }
+
+  handleClickLeft(e) {
+    this.handleKeyPress({keyCode:  37});
+  }
+
+  handleClickRight(e) {
+    this.handleKeyPress({keyCode:  39});
   }
 
   render() {
@@ -91,8 +114,8 @@ export default BellmanFord;
 `}
                 </Highlight>
               </aside>
-              <figure></figure>
-              <figure></figure>
+              <figure onClick={this.handleClickLeft}></figure>
+              <figure onClick={this.handleClickRight}></figure>
             </ul>
           </section>
         </main>

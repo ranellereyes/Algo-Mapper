@@ -15,9 +15,7 @@ class AstarStep extends Astar {
     let list = merge({}, this.nodeList);
     let endNode = list[endNodeId];
     let startNode = list[startNodeId];
-    let steps = [];
 
-    // define f, g, and h cost
     for (let idx in list) {
       list[idx].f = 0;
       list[idx].g = 0;
@@ -27,76 +25,83 @@ class AstarStep extends Astar {
 
     startNode.f = this.hcost(startNode, endNode);
     startNode.h = this.hcost(startNode, endNode);
+    let steps = [];
 
-    // add starting node to open list
     this.openList.push(startNode);
 
-    // run pathfinding until open list is empty
     while (this.openList.length > 0) {
       let lowIdx = 0;
 
-      // find lowest node in open list with the lowest f cost
       for (var i = 0; i < this.openList.length; i++) {
         if (this.openList[i].f < this.openList[lowIdx].f) { lowIdx = i }
       }
       let currentNode = this.openList[lowIdx];
-      steps.push(merge({}, currentNode));
-      // return path if current node is the end node
-      if (currentNode.id === endNode.id) {
-        // let curr = currentNode;
-        // let path = [];
-        // while (curr.parent) {
-        //   path.push(curr.id);
-        //   curr = curr.parent;
-        // }
-        // path.push(curr.id);
-        // return path.reverse();
-        return steps;
+
+      let newPath = [];
+      let solution = [];
+      let curr = currentNode;
+      while (curr.parent) {
+        newPath.push([curr.parent.id, curr.id]);
+        solution.push(curr.id);
+        curr = curr.parent;
       }
 
-      // calculate f, g, and h cost for each child node of the current node
+      let openList = [];
+      this.openList.forEach( node => openList.push(node.id));
+      this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
+
+      let newNode = merge({}, currentNode);
+      let newStep = {
+        currentNode: newNode,
+        openList: openList,
+        path: newPath.reverse()
+      }
+      steps.push(newStep);
+
+      if (currentNode.id === endNode.id) return steps;
+
       currentNode.children.forEach( node => {
-        list[node.id].g = currentNode.g + node.weight;
-        list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
-        list[node.id].f = list[node.id].g + list[node.id].h;
+        list[node.id].weight = node.weight;
       });
 
-      // add current node to close list and remove it from the open list
-      this.closeList.push(this.openList.splice(lowIdx));
-
       this.childNodes(currentNode).forEach( node => {
-        // let node = list[node.id];
-        // currentNode.children.find( n => n.id === node.id);
-        let gScore = currentNode.g + node.g;
-
-        // add new child node to open list if not included
+        let gScore = currentNode.g + node.weight;
         if (!this.openList.includes(node)) {
           this.openList.push(node);
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
+          list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
 
-        // update existing node if g cost is lower in newly found path
         } else if (gScore < list[node.id].g) {
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
+          list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
         }
       });
-      // this.openList.forEach( node => {
-      //   steps.push(merge({}, node));
-      // });
     }
     return steps;
   }
 
   stepForward() {
-    if (this.i > this.steps.length) return;
+    if (this.i >= this.steps.length) return;
     let node = this.steps[this.i];
+    let curr = node.currentNode;
     let visual = this.visualization;
-    visual.highlightNode(node.id, "red");
-    if (node.parent) {
-      visual.highlightLink(node.parent.id, node.id, "red");
+    visual.highlightNode(curr.id, "green");
+    visual.removeText(curr.id);
+    visual.addText(curr.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.h)}`);
+    visual.addText(curr.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.g)}`);
+    visual.addText(curr.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.f)}`);
+    if (curr.parent) {
+        visual.highlightNode(curr.parent.id, "red");
+      visual.highlightLink(curr.parent.id, curr.id, "red");
+    }
+    if (this.i === this.steps.length - 1) {
+      node.path.forEach( link => {
+        visual.highlightLink(link[0], link[1], "blue");
+      });
     }
     this.i += 1;
   }
@@ -105,10 +110,24 @@ class AstarStep extends Astar {
     if (this.i <= 0) return;
     this.i -= 1;
     let node = this.steps[this.i];
+    let curr = node.currentNode;
     let visual = this.visualization;
-    visual.unhighlightNode(node.id);
-    if (node.parent) {
-      visual.unhighlightLink(node.parent.id, node.id);
+    if (this.i === this.steps.length - 1) {
+      node.path.forEach( link => {
+        visual.highlightLink(link[0], link[1], "red");
+      })
+    }
+    visual.unhighlightNode(curr.id);
+    visual.removeText(curr.id);
+    if (curr.parent) {
+      if (this.steps[this.i - 1].openList.includes(curr.parent.id)) {
+        visual.highlightNode(curr.parent.id, "green");
+      }
+      visual.removeText(curr.parent.id);
+      visual.addText(curr.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.parent.h)}`);
+      visual.addText(curr.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.parent.g)}`);
+      visual.addText(curr.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.parent.f)}`);
+      visual.unhighlightLink(curr.parent.id, curr.id);
     }
   }
 }

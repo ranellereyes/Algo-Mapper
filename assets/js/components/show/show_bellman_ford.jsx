@@ -1,7 +1,10 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../node/node';
+
 import Highlight from 'react-highlight';
+import { NODELIST } from '../../algorithms/node';
+
+import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 
 class ShowBellmanFord extends React.Component {
   constructor(props) {
@@ -11,34 +14,47 @@ class ShowBellmanFord extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClickLeft = this.handleClickLeft.bind(this);
     this.handleClickRight = this.handleClickRight.bind(this);
+    // this. = this..bind(this);
   }
 
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
+    document.onkeyup = this.handleKeyUp;
     let visual = new Visualization(NODELIST);
     visual.draw();
     window.v = visual;
-    this.setState({ graph: visual });
+    this.setState({ graph: visual});
+    this.algorithm = new BellmanFordSteps(NODELIST, 1, 6, visual);
   }
+
   componentWillUnmount() {
     document.onkeydown = null;
+    document.onkeyup = null;
   }
 
   handleKeyPress (e) {
-    console.log(e.keyCode);
     if (e.keyCode === 37){
-      console.log(e.keyCode, "left");
+      this.algorithm.stepBackward();
+      document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_blue.png')";
     } else if (e.keyCode === 39){
-      console.log(e.keyCode, "right");
+      this.algorithm.stepForward();
+      document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_blue.png')";
     }
+  }
+  handleKeyUp (e) {
+    console.log("key up");
+    document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+    document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }
 
   handleClickLeft(e) {
-    this.handleKeyPress({keyCode:  37});
+    // this.handleKeyPress({keyCode:  37});
+    this.algorithm.stepBackward();
   }
 
   handleClickRight(e) {
-    this.handleKeyPress({keyCode:  39});
+    // this.handleKeyPress({keyCode:  39});
+    this.algorithm.stepForward();
   }
 
   render() {
@@ -114,8 +130,8 @@ export default BellmanFord;
 `}
                   </Highlight>
               </aside>
-              <figure onClick={this.handleClickLeft}></figure>
-              <figure onClick={this.handleClickRight} ></figure>
+              <figure onClick={this.handleClickLeft} id="arrow_left"></figure>
+              <figure onClick={this.handleClickRight} id="arrow_right"></figure>
             </ul>
           </section>
         </main>
