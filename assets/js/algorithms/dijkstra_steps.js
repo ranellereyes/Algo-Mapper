@@ -1,5 +1,3 @@
-import Visualization from '../d3/visualization';
-
 class DijkstraSteps {
   constructor(nodeList, source, destination, visual) {
     this.nodeList = nodeList;
@@ -8,9 +6,11 @@ class DijkstraSteps {
     this.steps = [];
     this.visual = visual;
     this.costs = this.costs.bind(this);
-    this.i = 0;
+    this.i = -1;
     this.source = this.nodeList[source];
     this.destination = this.nodeList[destination];
+    this.initiate();
+    this.search();
   }
 
   initiate() {
@@ -27,7 +27,7 @@ class DijkstraSteps {
   }
 
   search() {
-    this.steps.push({path: [this.source], costs: [this.costs()]});
+    this.steps.push({path: [this.source.id], costs: [this.costs()]});
     let parent = {};
     let node = this.source;
     while (this.unvisited.length !== 0) {
@@ -56,7 +56,7 @@ class DijkstraSteps {
         }
       }
     }
-    console.log(this.steps);
+    // console.log(this.steps);
     // create path from source to destination
     this.createPath(parent, this.source, this.destination);
   }
@@ -76,13 +76,45 @@ class DijkstraSteps {
       path.push(parent[startKey]);
       startKey = parent[startKey]
     }
-    console.log(path.reverse());
+    // console.log(path.reverse());
     return path.reverse();
   }
 
-  stepFoward() {
+  stepForward() {
+    //moves on to next step
+    this.i++;
     let steps = this.steps[this.i];
+    let prev = this.steps[this.i - 1]
+    // unhighlight previous node/links
+    if (prev) {
+      this.visual.unhighlightNode(prev.path[0]);
+      this.visual.unhighlightNode(prev.path[1]);
+      this.visual.unhighlightLink(prev.path[0], prev.path[1]);
+    }
+    //highlight current node/links
+    if (steps) {
+      this.visual.highlightNode(steps.path[0], "red");
+      this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
+      this.visual.highlightNode(steps.path[1], "green");
+    }
+  }
 
+  stepBackwards() {
+    this.i--;
+    let steps = this.steps[this.i];
+    let forw = this.steps[this.i + 1];
+    //unhighlight foward node/links
+    if (forw) {
+      this.visual.unhighlightNode(forw.path[0]);
+      this.visual.unhighlightNode(forw.path[1]);
+      this.visual.unhighlightLink(forw.path[0], forw.path[1]);
+    }
+    //highlight current node/links
+    if (steps) {
+      this.visual.highlightNode(steps.path[0], "red");
+      this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
+      this.visual.highlightNode(steps.path[1], "green");
+    }
   }
 
 }
