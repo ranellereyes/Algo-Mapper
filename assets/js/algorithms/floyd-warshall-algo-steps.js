@@ -16,10 +16,13 @@ export class floydWarshallAlgoSteps extends floydWarshallAlgo {
     .duration(500)
     .style("fill", "lightblue");
 
-    d3.selectAll(".link")
-    .transition()
-    .duration(500)
-    .style("stroke", "gray");
+    let nodeIds = Object.keys(this.nodelist).map(e => Number(e));
+
+    nodeIds.forEach(id => {
+      nodeIds.forEach(id2 => {
+        this.visualization.unhighlightLink(id, id2);
+      });
+    });
   }
 
   draw(currStep) {
