@@ -1,12 +1,8 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-<<<<<<< HEAD
-=======
-import { NODELIST } from '../../algorithms/node';
->>>>>>> master
 import Highlight from 'react-highlight';
-import { NODELIST } from '../../node/node';
-import BellmanFordSteps from '../../node/bellman_ford_steps';
+import { NODELIST } from '../../algorithms/node';
+import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 
 class ShowBellmanFord extends React.Component {
   constructor(props) {
@@ -28,11 +24,7 @@ class ShowBellmanFord extends React.Component {
     this.setState({ graph: visual});
     this.algorithm = new BellmanFordSteps(NODELIST, 1, 6, visual);
   }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> master
   componentWillUnmount() {
     document.onkeydown = null;
     document.onkeyup = null;
