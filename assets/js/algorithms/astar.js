@@ -44,32 +44,30 @@ class Astar {
         return path.reverse();
       }
 
-      // calculate f, g, and h cost for each child node of the current node
+      // g cost set-up
       currentNode.children.forEach( node => {
-        list[node.id].g = currentNode.g + node.weight;
-        list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
-        list[node.id].f = list[node.id].g + list[node.id].h;
+        list[node.id].weight = node.weight;
       });
 
       // add current node to close list and remove it from the open list
-      this.closeList.push(this.openList.shift());
+      this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
 
       this.childNodes(currentNode).forEach( node => {
-        let newNode = list[node.id];
-        currentNode.children.find( n => n.id === node.id);
-        let gScore = currentNode.g + newNode.g;
+        let gScore = currentNode.g + node.weight;
 
         // add new child node to open list if not included
         if (!this.openList.includes(node)) {
           this.openList.push(node);
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
+          list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
 
         // update existing node if g cost is lower in newly found path
         } else if (gScore < list[node.id].g) {
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
+          list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
         }
       });
@@ -94,7 +92,7 @@ class Astar {
   hcost(node, endNode) {
     return Math.sqrt(
       (node.x - endNode.x) ** 2  + (node.y - endNode.y) ** 2
-    ) / 10;
+    ) / 30;
   }
 }
 
