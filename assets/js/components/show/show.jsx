@@ -1,6 +1,7 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../node/node';
+import { NODELIST } from '../../algorithms/node';
+import AstarStep from '../../algorithms/astar_step';
 
 class Show extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class Show extends React.Component {
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual });
+    this.AstarStep = new AstarStep(NODELIST, 1, 6, visual);
+    window.a = this.AstarStep;
   }
 
   render() {

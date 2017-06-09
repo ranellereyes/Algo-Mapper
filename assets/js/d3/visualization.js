@@ -122,7 +122,7 @@ class Visualization {
         .text(function(d) { return d.weight });
 
     this.nodeWrapper = this.nodeGroup
-        .enter().append("g")
+        .enter().append("g").attr("class", (d) => `node-${d.id}`);
 
     this.nodeWrapper
         .append("circle")
@@ -239,10 +239,32 @@ class Visualization {
     setTimeout( () => {
       this.arrowPath.transition().duration(700).style("opacity", "0");
       path.transition().duration(500).style("opacity", "0").remove();
-    }, 1500)
+    }, 1500);
   }
 
-  changeText(textFunction) {
+  addText(nodeId, dx, dy, textFunction) {
+    d3.select(`g.node-${nodeId}`).append('text')
+      .text((d) => textFunction(d))
+      .attr('class', `node-${nodeId}`)
+      .attr('dx', dx)
+      .attr('dy', dy)
+      .attr('x', (d) => d.x)
+      .attr('y', (d) => d.y)
+      .style('opacity', 0)
+      .transition()
+      .duration(500)
+      .style('opacity', 1);
+  }
+
+  removeText(nodeId) {
+    d3.select(`text.node-${nodeId}`)
+      .transition()
+      .duration(500)
+      .style('opacity', 0)
+      .remove()
+  }
+
+  changeAllText(textFunction) {
     this.nodeText.text((d) => textFunction(d));
   }
 }

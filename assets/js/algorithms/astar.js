@@ -93,8 +93,8 @@ class Astar {
 
   hcost(node, endNode) {
     return Math.sqrt(
-      Math.abs(node.x ** 2 - endNode.x ** 2)  + Math.abs(node.y ** 2 - endNode.y ** 2)
-    );
+      (node.x - endNode.x) ** 2  + (node.y - endNode.y) ** 2
+    ) / 10;
   }
 }
 
