@@ -3,29 +3,19 @@ import { merge } from 'lodash';
 import Visualization from '../d3/visualization';
 
 class AstarStep extends Astar {
-  constructor(nodeList, startNodeId, endNodeId) {
+  constructor(nodeList, startNodeId, endNodeId, visual) {
     super(nodeList);
-    this.visualization = new Visualization(nodeList);
+    this.visualization = visual;
     this.i = 0;
-    this.steps = this.search(startNodeId, endNodeId)
+    this.steps = this.search(startNodeId, endNodeId);
+    this.nextStep = 'highlight node';
   }
 
   search(startNodeId, endNodeId) {
     let list = merge({}, this.nodeList);
     let endNode = list[endNodeId];
     let startNode = list[startNodeId];
-    let steps = [
-      {
-        openList: [1],
-        cost: {
-          1: {
-            h: this.hcost(startNode, endNode),
-            g: 0,
-            f: this.hcost(startNode, endNode)
-          }
-        }
-      }
-    ];
+    let steps = [];
 
     // define f, g, and h cost
     for (let idx in list) {
@@ -34,6 +24,9 @@ class AstarStep extends Astar {
       list[idx].h = 0;
       list[idx].parent = undefined;
     }
+
+    startNode.f = this.hcost(startNode, endNode);
+    startNode.h = this.hcost(startNode, endNode);
 
     // add starting node to open list
     this.openList.push(startNode);
@@ -47,7 +40,7 @@ class AstarStep extends Astar {
         if (this.openList[i].f < this.openList[lowIdx].f) { lowIdx = i }
       }
       let currentNode = this.openList[lowIdx];
-
+      steps.push(merge({}, currentNode));
       // return path if current node is the end node
       if (currentNode.id === endNode.id) {
         // let curr = currentNode;
@@ -72,9 +65,9 @@ class AstarStep extends Astar {
       this.closeList.push(this.openList.splice(lowIdx));
 
       this.childNodes(currentNode).forEach( node => {
-        let newNode = list[node.id];
-        currentNode.children.find( n => n.id === node.id);
-        let gScore = currentNode.g + newNode.g;
+        // let node = list[node.id];
+        // currentNode.children.find( n => n.id === node.id);
+        let gScore = currentNode.g + node.g;
 
         // add new child node to open list if not included
         if (!this.openList.includes(node)) {
@@ -91,24 +84,22 @@ class AstarStep extends Astar {
         }
       });
 
-      let cost = {};
       this.openList.forEach( node => {
-        cost[node.id] = list[node.id]
+        steps.push(merge({}, node));
       });
-      let newStep = {
-        openList: this.openList,
-        cost: cost
-      }
-      steps.push(newStep);
     }
-
-    // return empty array if no path is found
     return steps;
   }
 
   stepForward() {
-    let steps = this.steps;
+    let node = this.steps[this.i];
     let visual = this.visualization;
+
+    visual.highlightNode(node.id, "red");
+    node.children.forEach( child => {
+      visual.highlightLink(node.id, child.id, "red");
+    });
+    this.i += 1;
   }
 }
 

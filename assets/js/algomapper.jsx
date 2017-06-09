@@ -4,9 +4,6 @@ import configureStore from './store/store';
 
 import Root from './components/root';
 
-import { NODELIST, NODELIST2 } from './algorithms/node';
-import AstarStep from './algorithms/astar_step';
-
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -27,8 +24,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={ store } />, root);
 });
-
-window.NODELIST2 = NODELIST2;
-window.NODELIST = NODELIST;
-window.Node = Node;
-window.a = new AstarStep(NODELIST);
