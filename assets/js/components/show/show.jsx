@@ -1,8 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../node/node';
-import Highlight from 'react-highlight';
-
 
 class Show extends React.Component {
   constructor(props) {

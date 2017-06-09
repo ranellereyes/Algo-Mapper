@@ -1,30 +1,35 @@
+import Visualization from '../d3/visualization';
+
 class DijkstraSteps {
-  constructor(nodeList) {
+  constructor(nodeList, source, destination, visual) {
     this.nodeList = nodeList;
     this.visited = [];
     this.unvisited = [];
     this.steps = [];
+    this.visual = visual;
     this.costs = this.costs.bind(this);
+    this.i = 0;
+    this.source = this.nodeList[source];
+    this.destination = this.nodeList[destination];
   }
 
-  initiate(source) {
-    source.weight = 0;
-    source.cost = 0;
-    this.unvisited.push(source);
+  initiate() {
+    this.source.weight = 0;
+    this.source.cost = 0;
+    this.unvisited.push(this.source);
     Object.keys(this.nodeList).forEach(id => {
       let node = this.nodeList[id];
-      if (node !== source) {
+      if (node !== this.source) {
         node.cost = Infinity;
         this.unvisited.push(node)
       }
     });
   }
 
-  search(source, destination) {
-    this.initiate(this.nodeList[source])
-    this.steps.push({path: [source], costs: [this.costs()]})
+  search() {
+    this.steps.push({path: [this.source], costs: [this.costs()]});
     let parent = {};
-    let node = this.nodeList[source];
+    let node = this.source;
     while (this.unvisited.length !== 0) {
       node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
@@ -53,7 +58,7 @@ class DijkstraSteps {
     }
     console.log(this.steps);
     // create path from source to destination
-    this.createPath(parent, this.nodeList[source], this.nodeList[destination]);
+    this.createPath(parent, this.source, this.destination);
   }
 
   costs() {
@@ -73,6 +78,11 @@ class DijkstraSteps {
     }
     console.log(path.reverse());
     return path.reverse();
+  }
+
+  stepFoward() {
+    let steps = this.steps[this.i];
+
   }
 
 }
