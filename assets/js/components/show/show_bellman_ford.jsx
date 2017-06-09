@@ -1,7 +1,9 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
+
 import Highlight from 'react-highlight';
 import { NODELIST } from '../../algorithms/node';
+
 import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 
 class ShowBellmanFord extends React.Component {
