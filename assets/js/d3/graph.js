@@ -38,6 +38,7 @@ class Graph {
     //   return d;
     // }, function(error, data) {
     //   if (error) throw error;
+    // }
 
       x.domain(d3.extent(data, function(d) { return d.numNodes; }));
       y.domain(d3.extent(data, function(d) { return d.runtime; }));
@@ -67,5 +68,6 @@ class Graph {
           .attr("stroke-width", 1.5)
           .attr("d", line);
   }
-  
+}
+
 export default Graph;
