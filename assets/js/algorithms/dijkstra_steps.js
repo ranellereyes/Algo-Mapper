@@ -118,14 +118,17 @@ class DijkstraSteps {
     }
   }
 
-  stepBackwards() {
+  stepBackward() {
     this.i--;
     let steps = this.steps[this.i];
     let forw = this.steps[this.i + 1];
-    if (this.i === -1) {
+    if (this.i < -1) {
       Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
       this.i++;
+    } else if (this.i === -1) {
+        Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
     }
+
     //unhighlight foward node/links
     if (forw) {
       this.visual.unhighlightNode(forw.path[0]);
@@ -134,10 +137,21 @@ class DijkstraSteps {
     }
     //highlight current node/links
     if (steps) {
+      Object.keys(this.nodeList).forEach(node => this.visual.removeText(node));
+      steps.costs.forEach((cost,idx) => {
+        if (cost === Infinity) {
+          this.visual.addText(idx + 1, -6, -25, "red", (d) => "∞");
+        } else if (cost < 10 && cost >= 0) {
+          this.visual.addText(idx + 1, -5, -28, "red", (d) => cost);
+        } else {
+          this.visual.addText(idx + 1, -7, -28, "red", (d) => cost);
+        }
+      });
       this.visual.highlightNode(steps.path[0], "red");
       this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
       this.visual.highlightNode(steps.path[1], "green");
     }
+
   }
 
 }
