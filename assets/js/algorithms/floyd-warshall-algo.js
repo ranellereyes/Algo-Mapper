@@ -7,7 +7,6 @@ export class floydWarshallAlgo {
     this.indices = Object.keys(nodelist);
     this.costs = Object.keys(nodelist).map(e => new Array);
     this.parents = Object.keys(nodelist).map(e => new Array);
-    this.initCosts = this.initCosts.bind(this);
 
     this.initCosts();
     this.initParents();
