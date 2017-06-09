@@ -1,19 +1,17 @@
 class Dijkstra {
-  constructor(nodeList, source, destination) {
+  constructor(nodeList) {
     this.nodeList = nodeList;
     this.visited = [];
     this.unvisited = [];
-    this.source = source || this.nodeList[1]; // nodeList[#]
-    this.destination = destination; // nodeList[#]
   }
 
   initiate(source) {
-    this.source.weight = 0;
-    this.source.cost = 0;
-    this.unvisited.push(this.source);
+    source.weight = 0;
+    source.cost = 0;
+    this.unvisited.push(source);
     Object.keys(this.nodeList).forEach(id => {
       let node = this.nodeList[id];
-      if (node !== this.source) {
+      if (node !== source) {
         node.cost = Infinity;
         this.unvisited.push(node);
       }
@@ -21,8 +19,9 @@ class Dijkstra {
   }
 
   search(source, destination) {
+    this.initiate(this.nodeList[source])
     let parent = {};
-    let node = source;
+    let node = this.nodeList[source];
     while (this.unvisited.length !== 0) {
       node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
@@ -50,7 +49,7 @@ class Dijkstra {
       }
     }
     // create path from source to destination
-    this.createPath(parent, source, destination);
+    this.createPath(parent, this.nodeList[source], this.nodeList[destination]);
   }
 
   createPath(parent, source, destination) {
