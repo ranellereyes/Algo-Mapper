@@ -180,7 +180,7 @@ class Visualization {
     let source = this.nodeList[link.id[0]];
     let target = this.nodeList[link.id[2]];
     let path = this.svg.append("path")
-      .attr("stroke", "red")
+      .attr("stroke", color)
       .attr("class", "link")
       .attr("fill", "none")
       .attr("d", (d) => this.bezierLine([
