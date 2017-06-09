@@ -19,26 +19,9 @@ class BellmanFordSteps extends BellmanFord{
       parents[nodeId] = null;
     });
 
-    // let steps = [{
-    //               node: [String(startNodeId)],
-    //               cost: {
-    //                       1: Infinity,
-    //                       2: Infinity,
-    //                       3: Infinity,
-    //                       4: Infinity,
-    //                       5: Infinity,
-    //                       6: Infinity
-    //                     }
-    //               }];
     let steps = [merge({},{
                   node: [String(startNodeId)],
                   cost: cost})];
-    // let initCost = cost;
-    // steps.push({
-    //               node: [String(startNodeId)],
-    //               cost: initCost});
-    console.log(steps, cost);
-
 
     cost[startNodeId] = 0;
     let finished = false;
