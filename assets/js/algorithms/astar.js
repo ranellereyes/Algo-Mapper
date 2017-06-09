@@ -52,7 +52,7 @@ class Astar {
       });
 
       // add current node to close list and remove it from the open list
-      this.closeList.push(this.openList.shift());
+      this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
 
       this.childNodes(currentNode).forEach( node => {
         let newNode = list[node.id];
@@ -94,7 +94,7 @@ class Astar {
   hcost(node, endNode) {
     return Math.sqrt(
       (node.x - endNode.x) ** 2  + (node.y - endNode.y) ** 2
-    ) / 10;
+    ) / 50;
   }
 }
 
