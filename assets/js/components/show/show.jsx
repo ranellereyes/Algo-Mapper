@@ -1,7 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../node/node';
-import DijkstraSteps from '../../node/dijkstra_steps';
 
 class Show extends React.Component {
   constructor(props) {
@@ -14,7 +13,6 @@ class Show extends React.Component {
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual });
-    this.visual = new DijkstraSteps(NODELIST, 1, 6, visual);
   }
 
   render() {

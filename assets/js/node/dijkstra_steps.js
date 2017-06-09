@@ -1,5 +1,3 @@
-import Visualization from '../d3/visualization';
-
 class DijkstraSteps {
   constructor(nodeList, source, destination, visual) {
     this.nodeList = nodeList;
@@ -11,6 +9,8 @@ class DijkstraSteps {
     this.i = 0;
     this.source = this.nodeList[source];
     this.destination = this.nodeList[destination];
+    this.initiate();
+    this.search();
   }
 
   initiate() {
@@ -56,7 +56,7 @@ class DijkstraSteps {
         }
       }
     }
-    console.log(this.steps);
+    // console.log(this.steps);
     // create path from source to destination
     this.createPath(parent, this.source, this.destination);
   }
@@ -76,13 +76,15 @@ class DijkstraSteps {
       path.push(parent[startKey]);
       startKey = parent[startKey]
     }
-    console.log(path.reverse());
+    // console.log(path.reverse());
     return path.reverse();
   }
 
   stepFoward() {
     let steps = this.steps[this.i];
-
+    console.log(steps);
+    this.visual.highlightNode(steps.path[0].id, "red");
+    
   }
 
 }
