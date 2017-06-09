@@ -36,7 +36,6 @@ class ShowBellmanFord extends React.Component {
     document.onkeyup = null;
   }
 
-
   fetchCode(file) {
     var f = new XMLHttpRequest();
     f.open("GET", file, false);
