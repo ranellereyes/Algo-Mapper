@@ -117,6 +117,7 @@ class DijkstraSteps {
       //highlight current node/links
       if (steps) {
         this.visual.highlightNode(steps.path[0], "red");
+        this.visual.animateLink(steps.path[0], steps.path[1], "purple")
         this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
         this.visual.highlightNode(steps.path[1], "green");
       }
@@ -140,9 +141,10 @@ class DijkstraSteps {
         this.visual.unhighlightNode(node);
         this.visual.unhighlightLink(forw.path[0], forw.path[1])
       });
-      // this.visual.unhighlightNode(forw.path[0]);
-      // this.visual.unhighlightNode(forw.path[1]);
-      // this.visual.unhighlightLink(forw.path[0], forw.path[1]);
+      this.path.forEach((node, idx) => {
+        // this.visual.highlightNode(node, "red");
+        this.visual.unhighlightLink(node, this.path[idx + 1])
+      });
     }
     //highlight current node/links
     if (steps) {
