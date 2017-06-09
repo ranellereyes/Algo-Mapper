@@ -19,7 +19,7 @@ class ShowDijkstras extends React.Component {
     let visual = new Visualization(NODELIST);
     visual.draw();
     this.setState({ graph: visual });
-    this.algorithm = new DijkstraSteps(NODELIST, 1, 5, visual);
+    this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
   }
 
   componentWillUnmount() {
@@ -56,7 +56,7 @@ class ShowDijkstras extends React.Component {
       <div className="index-main">
         <main className="show-main">
           <section className="show-main">
-            <h1 className="show-name">Bellman Ford</h1>
+            <h1 className="show-name">Dijkstra's Algorithm</h1>
             <ul className="visualization">
               <div className="visualization" />
               <aside className="show-code">
