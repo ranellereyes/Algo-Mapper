@@ -58,6 +58,26 @@ class Visualization {
     return y + (Math.sin(radians) * weight) * direction;
   }
 
+  addArrow(defs, link, color, animate) {
+    let arrow = defs
+      .data([`arrow-${link.source.id}-${link.target.id}${animate ? animate : ''}`])
+      .enter().append("marker")
+      .attr("id", function(d) { return d })
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 26)
+      .attr("refY", 0)
+      .attr("markerWidth", 4)
+      .attr("markerHeight", 4)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .style("fill", color)
+      .style("stroke", color)
+      .style("opacity", `${animate ? 0 : 1}`);
+
+    if (animate) arrow.transition().duration(500).delay(300).style('opacity', 1);
+  }
+
   draw() {
     let graph = this.parseNodes();
 
@@ -81,23 +101,9 @@ class Visualization {
         .style("stroke-width", 3)
         .style("marker-end",  (d) => `url(#arrow-${d.source.id}-${d.target.id})`);
 
-    let defs = this.svg.append('defs').selectAll('marker');
+    this.defs = this.svg.append('defs').selectAll('marker');
     this.links.each( link => {
-      defs
-        .data([`arrow-${link.source.id}-${link.target.id}`])
-        .enter().append("marker")
-        .attr("id", function(d) { return d })
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 26)
-        .attr("refY", 0)
-        .attr("markerWidth", 4)
-        .attr("markerHeight", 4)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .style("fill", "gray")
-        .style("stroke", "gray")
-        .style("opacity", "1");
+      this.addArrow(this.defs, link, 'gray')
     })
 
     this.bezierLine = d3.line()
@@ -176,9 +182,9 @@ class Visualization {
   }
 
   animateLink(fromId, toId, color) {
-    let link = this.links._groups[0].find( link => link.id === `${fromId}-${toId}`);
-    let source = this.nodeList[link.id[0]];
-    let target = this.nodeList[link.id[2]];
+    // let link = this.links._groups[0].find( link => link.id === `${fromId}-${toId}`);
+    let source = this.nodeList[fromId];
+    let target = this.nodeList[toId];
     let path = this.svg.append("path")
       .attr("stroke", color)
       .attr("class", "link")
@@ -231,12 +237,17 @@ class Visualization {
             var len = Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2);
             return function(t) { return (d3.interpolateString("0," + len, len + ",0"))(t) };
       })
-      .style("marker-end", "url(#arrow)")
-    setTimeout( () => this.arrowPath.transition().duration(300).style("opacity", "1"), 500 );
+      .style("marker-end", `url(#arrow-${fromId}-${toId}-animate)`);
+
+    this.addArrow(this.defs, { source: source, target: target }, color, '-animate')
+    // d3.select(`#arrow-${fromId}-${toId}-animate path`)
+    //   .transition().duration(500).style('opacity', "0");
     setTimeout( () => {
-      this.arrowPath.transition().duration(700).style("opacity", "0");
+      d3.select(`#arrow-${fromId}-${toId}-animate`).remove();
+    }, 1200)
+    setTimeout( () => {
       path.transition().duration(500).style("opacity", "0").remove();
-    }, 1500);
+    }, 1000);
   }
 
   addText(nodeId, dx, dy, color, textFunction) {
