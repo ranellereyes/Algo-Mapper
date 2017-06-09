@@ -1,6 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../node/node';
+import { NODELIST } from '../../algorithms/node';
 import Highlight from 'react-highlight';
 
 class ShowBellmanFord extends React.Component {
@@ -20,6 +20,7 @@ class ShowBellmanFord extends React.Component {
     window.v = visual;
     this.setState({ graph: visual });
   }
+  
   componentWillUnmount() {
     document.onkeydown = null;
   }

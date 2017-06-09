@@ -91,12 +91,17 @@ class AstarStep extends Astar {
   }
 
   stepForward() {
-    if (this.i > this.steps.length) return;
+    if (this.i >= this.steps.length) return;
     let node = this.steps[this.i];
     let visual = this.visualization;
-    visual.highlightNode(node.id, "red");
+    visual.highlightNode(node.id, "green");
+    visual.addText(node.id, -19, -55, 'blue', (d) => `h = ${Math.floor(d.h)}`);
+    visual.addText(node.id, -19, -42, 'blue', (d) => `g = ${Math.floor(d.g)}`);
+    visual.addText(node.id, -19, -25, 'blue', (d) => `f = ${Math.floor(d.f)}`);
     if (node.parent) {
-      visual.highlightLink(node.parent.id, node.id, "red");
+      visual.removeText(node.parent.id);
+      visual.highlightNode(node.parent.id, "red");
+      visual.highlightLink(node.parent.id, node.id, "green");
     }
     this.i += 1;
   }
@@ -107,6 +112,10 @@ class AstarStep extends Astar {
     let node = this.steps[this.i];
     let visual = this.visualization;
     visual.unhighlightNode(node.id);
+    visual.removeText(node.id);
+    visual.addText(node.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(d.h)}`);
+    visual.addText(node.parent.id, -19, -42, 'blue', (d) => `g = ${Math.floor(d.g)}`);
+    visual.addText(node.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(d.f)}`);
     if (node.parent) {
       visual.unhighlightLink(node.parent.id, node.id);
     }
