@@ -1,8 +1,8 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../node/node';
+import { NODELIST } from '../../algorithms/node';
 import Highlight from 'react-highlight';
-import DijkstraSteps from '../../node/dijkstra_steps';
+import DijkstraSteps from '../../algorithms/dijkstra_steps';
 
 class ShowDijkstras extends React.Component {
   constructor(props) {
