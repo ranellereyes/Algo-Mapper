@@ -14,7 +14,7 @@ export class Node {
 export const NODELIST = {
   1: new Node([{ id: 2, weight: 3 }, { id: 3, weight: 5 }], 1, 75, 250),
   2: new Node([{ id: 5, weight: 8 }], 2, 175, 150),
-  3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 7 }], 3, 175, 350),
+  3: new Node([{ id: 5, weight: 5 }, { id: 4, weight: 1 }], 3, 175, 350),
   4: new Node([{ id: 6, weight: 9 }], 4, 325, 350),
   5: new Node([{ id: 6, weight: 2 }], 5, 325, 150),
   6: new Node([{}], 6, 425, 250)

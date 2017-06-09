@@ -46,21 +46,19 @@ class AstarStep extends Astar {
         curr = curr.parent;
       }
 
-      let closeList = [];
-      this.closeList.forEach( node => closeList.push(node.id));
+      let openList = [];
+      this.openList.forEach( node => openList.push(node.id));
       this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
 
       let newNode = merge({}, currentNode);
       let newStep = {
         currentNode: newNode,
-        closeList: closeList,
+        openList: openList,
         path: newPath.reverse()
       }
       steps.push(newStep);
-      console.log(steps);
-      if (currentNode.id === endNode.id) {
-        return steps;
-      }
+
+      if (currentNode.id === endNode.id) return steps;
 
       currentNode.children.forEach( node => {
         list[node.id].weight = node.weight;
@@ -76,7 +74,6 @@ class AstarStep extends Astar {
           list[node.id].f = list[node.id].g + list[node.id].h;
 
         } else if (gScore < list[node.id].g) {
-          debugger;
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
           list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
@@ -92,18 +89,13 @@ class AstarStep extends Astar {
     let node = this.steps[this.i];
     let curr = node.currentNode;
     let visual = this.visualization;
-    // d3.selectAll('line.link')
-    //   .transition()
-    //   .duration(500)
-    //   .style('stroke', 'grey');
     visual.highlightNode(curr.id, "green");
     visual.removeText(curr.id);
     visual.addText(curr.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.h)}`);
     visual.addText(curr.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.g)}`);
     visual.addText(curr.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.f)}`);
     if (curr.parent) {
-      // visual.removeText(node.parent.id);
-      visual.highlightNode(curr.parent.id, "red");
+        visual.highlightNode(curr.parent.id, "red");
       visual.highlightLink(curr.parent.id, curr.id, "red");
     }
     if (this.i === this.steps.length - 1) {
@@ -111,7 +103,6 @@ class AstarStep extends Astar {
         visual.highlightLink(link[0], link[1], "blue");
       });
     }
-    // node.closeList.forEach( id => visual.highlightNode(id, "red"));
     this.i += 1;
   }
 
@@ -129,8 +120,10 @@ class AstarStep extends Astar {
     visual.unhighlightNode(curr.id);
     visual.removeText(curr.id);
     if (curr.parent) {
+      if (this.steps[this.i - 1].openList.includes(curr.parent.id)) {
+        visual.highlightNode(curr.parent.id, "green");
+      }
       visual.removeText(curr.parent.id);
-      visual.highlightNode(curr.parent.id, "green");
       visual.addText(curr.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.parent.h)}`);
       visual.addText(curr.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.parent.g)}`);
       visual.addText(curr.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.parent.f)}`);
