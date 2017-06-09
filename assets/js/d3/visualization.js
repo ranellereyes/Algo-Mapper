@@ -17,7 +17,6 @@ class Visualization {
     let list = this.nodeList;
     let keys = Object.keys(list).sort();
     keys.forEach( idx => {
-      // list[idx].index = parseInt(idx);
       nodes.push(list[idx]);
     });
 
@@ -109,7 +108,7 @@ class Visualization {
     this.bezierLine = d3.line()
             .x(function(d) { return d[0]; })
             .y(function(d) { return d[1]; })
-            .curve(d3.curveBundle.beta(0.9));
+            .curve(d3.curveCardinal.tension(-1.5));
 
     this.svg.selectAll("text.link")
         .data(graph.links)
@@ -182,7 +181,6 @@ class Visualization {
   }
 
   animateLink(fromId, toId, color) {
-    // let link = this.links._groups[0].find( link => link.id === `${fromId}-${toId}`);
     let source = this.nodeList[fromId];
     let target = this.nodeList[toId];
     let path = this.svg.append("path")
@@ -196,40 +194,14 @@ class Visualization {
       )
       .style("stroke-width", 3);
 
-    // let arc = d3.arc()
-    //   .innerRadius(Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2) / 2)
-    //   .outerRadius(Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2) / 2 + 3)
-    //   .startAngle(0);
-    //
-    // let g = this.svg.append("g").attr("transform", `translate(${(source.x + target.x) / 2}, ${(source.y + target.y) / 2})`);
-    //
-    // let foreground = g.append("path")
-    //   .datum({endAngle: 0})
-    //   .style("fill", "orange")
-    //   .style("marker-end", "url(#arrow)")
-    //   .attr("d", arc);
-    //
-    // function arcTween(newAngle) {
-    //   return function(d) {
-    //     var interpolate = d3.interpolate(d.endAngle, newAngle);
-    //
-    //     return function(t) {
-    //       d.endAngle = interpolate(t);
-    //       return arc(d);
-    //     };
-    //   };
-    // }
-    //
-    // foreground.transition()
-    //   .duration(1000)
-    //   .attrTween("d", arcTween(Math.PI * 0.6));
-
     path
       .transition()
       .duration(1000)
       .attr("d", this.bezierLine([
         [source.x, source.y],
         [this.centerTextX(source.x, target.x, source.y, target.y, 20, 1), this.centerTextY(source.x, target.x, source.y, target.y, 20, 1)],
+        // [100, 250],
+        // [125, 250],
         [target.x, target.y]
       ]))
       .attrTween("stroke-dasharray", function() {
@@ -239,12 +211,6 @@ class Visualization {
       })
       .style("marker-end", `url(#arrow-${fromId}-${toId}-animate)`);
 
-    this.addArrow(this.defs, { source: source, target: target }, color, '-animate')
-    // d3.select(`#arrow-${fromId}-${toId}-animate path`)
-    //   .transition().duration(500).style('opacity', "0");
-    setTimeout( () => {
-      d3.select(`#arrow-${fromId}-${toId}-animate`).remove();
-    }, 1200)
     setTimeout( () => {
       path.transition().duration(500).style("opacity", "0").remove();
     }, 1000);
