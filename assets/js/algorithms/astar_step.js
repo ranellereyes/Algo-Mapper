@@ -83,10 +83,9 @@ class AstarStep extends Astar {
           list[node.id].f = list[node.id].g + list[node.id].h;
         }
       });
-
-      this.openList.forEach( node => {
-        steps.push(merge({}, node));
-      });
+      // this.openList.forEach( node => {
+      //   steps.push(merge({}, node));
+      // });
     }
     return steps;
   }
@@ -94,11 +93,14 @@ class AstarStep extends Astar {
   stepForward() {
     let node = this.steps[this.i];
     let visual = this.visualization;
-
+    debugger;
     visual.highlightNode(node.id, "red");
-    node.children.forEach( child => {
-      visual.highlightLink(node.id, child.id, "red");
-    });
+    if (node.parent) {
+      visual.highlightLink(node.parent.id, node.id, "red");
+    }
+    // node.children.forEach( child => {
+    //   visual.highlightLink(node.id, child.id, "red");
+    // });
     this.i += 1;
   }
 }
