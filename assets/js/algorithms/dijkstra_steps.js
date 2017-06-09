@@ -31,7 +31,7 @@ class DijkstraSteps {
     this.steps.push({path: [this.source.id], costs: this.costs()});
     let parent = {};
     let node = this.source;
-    while (this.unvisited.length !== 0) {
+    while (this.unvisited.length !== 0 && !this.visited.includes(this.destination)) {
       node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let _node;
         if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
@@ -87,8 +87,13 @@ class DijkstraSteps {
     let steps = this.steps[this.i];
     let prev = this.steps[this.i - 1]
     if (this.i === this.steps.length) {
-      this.path.forEach(node => {
-        this.visual.highlightNode(node, "red")
+      Object.keys(this.nodeList).forEach(node => {
+        this.visual.unhighlightNode(node);
+        this.visual.unhighlightLink(prev.path[0], prev.path[1])
+      });
+      this.path.forEach((node, idx) => {
+        this.visual.highlightNode(node, "red");
+        this.visual.highlightLink(node, this.path[idx + 1])
       });
       this.i--;
     }
@@ -131,9 +136,13 @@ class DijkstraSteps {
 
     //unhighlight foward node/links
     if (forw) {
-      this.visual.unhighlightNode(forw.path[0]);
-      this.visual.unhighlightNode(forw.path[1]);
-      this.visual.unhighlightLink(forw.path[0], forw.path[1]);
+      Object.keys(this.nodeList).forEach(node => {
+        this.visual.unhighlightNode(node);
+        this.visual.unhighlightLink(forw.path[0], forw.path[1])
+      });
+      // this.visual.unhighlightNode(forw.path[0]);
+      // this.visual.unhighlightNode(forw.path[1]);
+      // this.visual.unhighlightLink(forw.path[0], forw.path[1]);
     }
     //highlight current node/links
     if (steps) {

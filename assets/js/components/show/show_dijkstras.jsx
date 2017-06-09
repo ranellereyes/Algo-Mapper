@@ -19,7 +19,7 @@ class ShowDijkstras extends React.Component {
     let visual = new Visualization(NODELIST);
     visual.draw();
     this.setState({ graph: visual });
-    this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
+    this.algorithm = new DijkstraSteps(NODELIST, 1, 5, visual);
   }
 
   componentWillUnmount() {
