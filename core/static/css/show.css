@@ -105,7 +105,7 @@ section.show-algo-bottom h1{
 }
 
 section.show-algo-bottom p {
-  font-size: 13pt;
+  font-size: 18px;
   padding-bottom: 15px;
 }
 
@@ -113,17 +113,20 @@ ul.show-algo-description {
   display: flex;
 }
 
-ul.show-algo-description h3{
+ul.show-algo-description h3 {
   font-size: 20pt;
 }
 
 div.show-how-it-works {
-  flex: 2;
+  flex: 2.5;
   margin-right: 30px;
 }
 
 aside.show-pros-n-cons {
   flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  background: GhostWhite;
 }
 
 ul.how-it-works {
@@ -132,7 +135,8 @@ ul.how-it-works {
 }
 
 ul.how-it-works li {
-  padding-left: 15px;
+  padding-left: 30px;
+  font-size: 18px;
 }
 
 ol {
@@ -141,14 +145,37 @@ ol {
 
 ol li {
   display: inline-block;
+  padding-left: 10px;
+  font-size: 17px;
 }
 
 ol p {
-  font-size: 10px;
-  line-height: 1.2;
+  font-size: 16px;
+  line-height: 1.3;
 }
 
 code {
   background: GhostWhite;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+ul.pros-n-cons {
+  /*counter-reset: '-';*/
+  display: table;
+}
+
+ul.pros-n-cons li {
+  list-style: disc;
+  /*counter-increment: disc;*/
+  display: table-row;
+}
+
+ul.pros-n-cons li::before {
+  content: "•";
+  width: 10px;
+  display: table-cell;
+  text-align: left;
+}
+
+ul.pros-n-cons span {
 }
