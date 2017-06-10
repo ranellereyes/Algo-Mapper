@@ -76,86 +76,25 @@ class ShowAstar extends React.Component {
             <ul className="show-algo-description">
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
-                <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* is its use of its <code>openList</code> and <code>closeList</code>, where the <code>openList</code> is an array of nodes to be checked and the <code>closeList</code> is an array of nodes that have been visited. As the algorithm runs, nodes are added and removed from these lists until either a path is found or the <code>openList</code> is empty:</p>
+                <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* utilizes an <code>openList</code> and a <code>closeList</code>, where the <code>openList</code> is an array of nodes to be checked and the <code>closeList</code> is an array of nodes that have been visited. As the algorithm runs, nodes are added and removed from these lists until either a path is found or the <code>openList</code> is empty. The steps are as follows:</p>
                 <ol>
                   <li><span>Initialize and openList and closeList as two empty arrays</span></li>
                   <li><span>Set the starting node as <code>currentNode</code>, and add it to the openList</span></li>
                   <li><span>Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</span></li>
                   <ul className='how-it-works'>
-                  	<li><span>f(n) = g(n) + h(n)</span></li>
-                  	<li><span>g cost is the weight of the edge (the link between parent and child node)</span></li>
-                  	<li><span>h is defined by an arbitrary calculation based on the distance from the end node</span></li>
-                  	<li><span>f is equal to the sum of these two values</span></li>
+                  	<li><span><code>f(n) = g(n) + h(n)</code></span></li>
+                  	<li><span><code>g</code> cost is the weight of the edge (the link between parent and child node)</span></li>
+                  	<li><span><code>h</code> is defined by an arbitrary calculation based on the distance from the end node</span></li>
+                  	<li><span><code>f</code> is equal to the sum of these two values</span></li>
                   </ul>
                   <li><span>If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</span></li>
                   <li><span>The currentNode is moved from the openList into the closeList</span></li>
                   <li><span>currentNode is reassigned to a node inside the openList with the lowest f cost</span></li>
                   <li><span>Repeat step 3 until destination is reached, or the openList is empty</span></li>
                 </ol>
-                <h3>Math</h3>
+                <h3>Details</h3>
                 <p>
-                  Pseudo Code
-                  {`
-                  function A*(start, goal)
-                      // The set of nodes already evaluated
-                      closedSet := {}
-
-                      // The set of currently discovered nodes that are not evaluated yet.
-                      // Initially, only the start node is known.
-                      openSet := {start}
-
-                      // For each node, which node it can most efficiently be reached from.
-                      // If a node can be reached from many nodes, cameFrom will eventually contain the
-                      // most efficient previous step.
-                      cameFrom := the empty map
-
-                      // For each node, the cost of getting from the start node to that node.
-                      gScore := map with default value of Infinity
-
-                      // The cost of going from start to start is zero.
-                      gScore[start] := 0
-
-                      // For each node, the total cost of getting from the start node to the goal
-                      // by passing by that node. That value is partly known, partly heuristic.
-                      fScore := map with default value of Infinity
-
-                      // For the first node, that value is completely heuristic.
-                      fScore[start] := heuristic_cost_estimate(start, goal)
-
-                      while openSet is not empty
-                          current := the node in openSet having the lowest fScore[] value
-                          if current = goal
-                              return reconstruct_path(cameFrom, current)
-
-                          openSet.Remove(current)
-                          closedSet.Add(current)
-
-                          for each neighbor of current
-                              if neighbor in closedSet
-                                  continue		// Ignore the neighbor which is already evaluated.
-
-                              if neighbor not in openSet	// Discover a new node
-                                  openSet.Add(neighbor)
-
-                              // The distance from start to a neighbor
-                              tentative_gScore := gScore[current] + dist_between(current, neighbor)
-                              else if tentative_gScore >= gScore[neighbor]
-                                  continue		// This is not a better path.
-
-                              // This path is the best until now. Record it!
-                              cameFrom[neighbor] := current
-                              gScore[neighbor] := tentative_gScore
-                              fScore[neighbor] := gScore[neighbor] + heuristic_cost_estimate(neighbor, goal)
-
-                      return failure
-
-                  function reconstruct_path(cameFrom, current)
-                      total_path := [current]
-                      while current in cameFrom.Keys:
-                          current := cameFrom[current]
-                          total_path.append(current)
-                      return total_path
-                  `}
+                  The heuristic is what drastically differentiates A* from other algorithms. Although this algorithm is typically known as a breadth-first search, it can act as a depth-first search if the heuristic is strongly weighted. This heuristic optimization is highly dependent on the kind of maps that it is exposed to, and unoptimized heuristics can lead to incorrect shortest path calculations. At heart, A* is a greedy algorithm, but will generally will exhibit O(n) time complexity when optimized. A* is extremely well-known for pathfinding, but is not as optimized for node paths. This is because if the node path is has N nodes and each node has N - 1 child nodes, every round of cost evaluation requires A* to make N - 1 calculations, resulting at worst in O(n<sup>n</sup>  ) time complexity.
                 </p>
               </div>
               <aside className="show-pros-n-cons">

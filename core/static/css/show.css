@@ -107,6 +107,12 @@ section.show-algo-bottom h1{
 section.show-algo-bottom p {
   font-size: 18px;
   padding-bottom: 15px;
+  text-indent: 25px;
+  line-height: 1.5;
+}
+
+sup {
+  line-height: 0;
 }
 
 ul.show-algo-description {
@@ -159,6 +165,7 @@ ol {
   counter-reset: item;
   display: table;
   padding-left: 10px;
+  padding-bottom: 20px;
 }
 
 ol > li {
