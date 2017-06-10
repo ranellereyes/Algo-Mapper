@@ -1,18 +1,146 @@
 import React from 'react';
 import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
+import Visualization from '../../d3/visualization';
+import { NODELIST } from '../../algorithms/node';
+
+import DijkstraSteps from '../../algorithms/dijkstra_steps';
+import AstarSteps from '../../algorithms/astar_step';
+import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
+import FloydWarshallAlgoSteps from '../../algorithms/floyd-warshall-algo-steps';
 
 class Comparison extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { options:
+                    { optionA: "dijkstra",
+                      optionB: "bellman-ford"
+                    },
+                  algorithms: {}
+                  };
+    // this.visual = [];
+    this.codes = [];
+
+    this.resetAlgorithms = this.resetAlgorithms.bind(this);
+    this.fetchCode = this.fetchCode.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleClickLeft = this.handleClickLeft.bind(this);
+    this.handleClickRight = this.handleClickRight.bind(this);
+    this.handleSelectA = this.handleSelectA.bind(this);
+    this.handleSelectB = this.handleSelectB.bind(this);
+
   }
 
   componentDidMount() {
-    let visual = new Graph();
-    visual.draw();
-    window.v = visual;
-    this.setState({ graph: visual });
+
+    document.onkeydown = this.handleKeyPress;
+    document.onkeyup = this.handleKeyUp;
+
+    // window.v = visualA;
+    // this.setState({ graph: this.visualA});
+    this.visual = [];
+
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual[0].draw();
+    this.visual[1].draw();
+    this.resetAlgorithms();
+
+    let graph = new Graph();
+    graph.draw();
+  }
+
+  componentWillUnmount() {
+    document.onkeydown = null;
+    document.onkeyup = null;
+  }
+
+  resetAlgorithms() {
+
+    let algorithms = [];
+    d3.selectAll("svg").remove();
+    this.visual = [];
+    this.codes = [];
+
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual[0].draw();
+    this.visual[1].draw();
+    // this.fetchCode('static/javascript/bellman_ford.js');
+
+
+
+    Object.keys(this.state.options).forEach((key, index) => {
+      switch (this.state.options[key]) {
+        case "dijkstra":
+          algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/dijkstra.js');
+          break;
+        case "astar":
+          algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/astar.js');
+          break;
+        case "bellman-ford":
+          algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/bellman_ford.js');
+          break;
+        case "floyd-warshall":
+          algorithms.push(new FloydWarshallAlgoSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/floyd-warshall-algo.js');
+      }
+    });
+    this.setState({algorithms: algorithms});
+  }
+
+  fetchCode(file) {
+    var f = new XMLHttpRequest();
+    f.open("GET", file, false);
+    f.onreadystatechange = () => {
+      if(f.readyState === 4) {
+        if(f.status === 200 || f.status == 0) {
+          this.codes.push(f.responseText);
+        }
+      }
+    };
+    f.send(null);
+  }
+
+  handleKeyPress (e) {
+    if (e.keyCode === 37){
+      this.handleClickLeft(e);
+      document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_blue.png')";
+    } else if (e.keyCode === 39){
+      this.handleClickRight(e);
+      document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_blue.png')";
+    }
+  }
+  handleKeyUp (e) {
+    document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+    document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+  }
+
+  handleClickLeft(e) {
+    this.state.algorithms.forEach((algo) => {
+      algo.stepBackward();
+    });
+  }
+
+  handleClickRight(e) {
+    this.state.algorithms.forEach((algo) => {
+      algo.stepForward();
+    });
+  }
+
+  handleSelectA (e) {
+    this.state.options.optionA = e.target.value;
+    this.resetAlgorithms();
+  }
+
+  handleSelectB (e) {
+    this.state.options.optionB = e.target.value;
+    this.resetAlgorithms();
+
   }
 
   render() {
@@ -22,161 +150,42 @@ class Comparison extends React.Component {
           <section className="comp-main">
             <ul className="comp-visualization">
               <li>
-                <select>
+                <select onChange={this.handleSelectA} value={this.state.options.optionA}>
                   <option value="dijkstra">Dijkstra</option>
                   <option value="astar">A* Algorithm</option>
                   <option value="bellman-ford">Bellman-Ford</option>
                   <option value="floyd-warshall">Floyd-Warshall</option>
                 </select>
-                <div className="comp-visualization" />
+
+                <div className="comp-visualization-a" />
               </li>
               <li>
-                <select>
+                <select onChange={this.handleSelectB} value={this.state.options.optionB}>
                   <option value="dijkstra">Dijkstra</option>
                   <option value="astar">A* Algorithm</option>
                   <option value="bellman-ford">Bellman-Ford</option>
                   <option value="floyd-warshall">Floyd-Warshall</option>
                 </select>
-                <div className="comp-visualization" />
+                <div className="comp-visualization-b" />
               </li>
             </ul>
           </section>
           <section className="comp-arrows">
-            <figure></figure>
-            <figure></figure>
+            <figure onClick={this.handleClickLeft} id="arrow_left"></figure>
+            <figure onClick={this.handleClickRight} id="arrow_right"></figure>
           </section>
           <section className="comp-graph">
             <ul>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
-{`class BellmanFord {
-  constructor(nodeList) {
-
-    this.nodeList = nodeList;
-    this.edgeList = this.createEdgeList(nodeList);
-
-    this.search = this.search.bind(this);
-  }
-
-  search(startNodeId, endNodeId) {
-    let cost = {};
-    let parents = {};
-
-    Object.keys(this.nodeList).forEach((nodeId) => {
-      cost[nodeId] = Infinity;
-      parents[nodeId] = null;
-    });
-
-    cost[startNodeId] = 0;
-    let finished = false;
-
-    for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-      finished = true;
-      this.edgeList.forEach((edge) => {
-        if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-          cost[edge.toId] = cost[edge.fromId] + edge.weight;
-          parents[edge.toId] = edge.fromId;
-          finished = false;
-        }
-      });
-      if (finished) {
-        break;
-      }
-    }
-
-    return this.createPath(parents, startNodeId, endNodeId);
-  }
-
-  createEdgeList(nodeList) {
-    let edges = [];
-    Object.keys(nodeList).forEach((nodeId) => {
-      nodeList[nodeId].children.forEach((child) => {
-        edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
-      });
-    });
-    return edges;
-  }
-
-  createPath (parents, startNodeId, endNodeId) {
-    let path = [String(endNodeId)];
-    let startKey = endNodeId;
-    while (parents[startKey]) {
-      path.push(parents[startKey]);
-      startKey = parents[startKey];
-    }
-    return path.reverse();
-  }
-  }
-
-  export default BellmanFord;
-`}
+                  {this.codes[0]}
                 </Highlight>
               </li>
               <div className="comp-graph">
               </div>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
-                {`class BellmanFord {
-  constructor(nodeList) {
-
-    this.nodeList = nodeList;
-    this.edgeList = this.createEdgeList(nodeList);
-
-    this.search = this.search.bind(this);
-  }
-
-  search(startNodeId, endNodeId) {
-    let cost = {};
-    let parents = {};
-
-    Object.keys(this.nodeList).forEach((nodeId) => {
-      cost[nodeId] = Infinity;
-      parents[nodeId] = null;
-    });
-
-    cost[startNodeId] = 0;
-    let finished = false;
-
-    for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-      finished = true;
-      this.edgeList.forEach((edge) => {
-        if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-          cost[edge.toId] = cost[edge.fromId] + edge.weight;
-          parents[edge.toId] = edge.fromId;
-          finished = false;
-        }
-      });
-      if (finished) {
-        break;
-      }
-    }
-
-    return this.createPath(parents, startNodeId, endNodeId);
-  }
-
-  createEdgeList(nodeList) {
-    let edges = [];
-    Object.keys(nodeList).forEach((nodeId) => {
-      nodeList[nodeId].children.forEach((child) => {
-        edges.push({ fromId: nodeId, toId: String(child.id), weight: child.weight});
-      });
-    });
-    return edges;
-  }
-
-  createPath (parents, startNodeId, endNodeId) {
-    let path = [String(endNodeId)];
-    let startKey = endNodeId;
-    while (parents[startKey]) {
-      path.push(parents[startKey]);
-      startKey = parents[startKey];
-    }
-    return path.reverse();
-  }
-  }
-
-  export default BellmanFord;
-  `}
+                  {this.codes[1]}
                 </Highlight>
               </li>
             </ul>

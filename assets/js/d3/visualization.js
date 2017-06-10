@@ -8,8 +8,9 @@ d3.selection.prototype.moveToBack = function() {
 };
 
 class Visualization {
-  constructor(nodeList) {
+  constructor(nodeList, target) {
     this.nodeList = nodeList;
+    this.target = target;
   }
 
   parseNodes() {
@@ -80,10 +81,9 @@ class Visualization {
   draw() {
     let graph = this.parseNodes();
 
-    this.svg = d3.select("div.visualization").append("svg")
+    this.svg = d3.select(this.target).append("svg")
         .attr("width", 500)
         .attr("height", 500);
-
     this.nodeGroup = this.svg.selectAll("g")
       .data(graph.nodes);
 
