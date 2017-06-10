@@ -44,26 +44,11 @@ class AstarStep extends Astar {
       }
       let currentNode = this.openList[lowIdx];
 
-      // let newPath = [];
-      // let curr = currentNode;
-      // while (curr.parent) {
-      //   newPath.push([curr.parent.id, curr.id]);
-      //   solution.push(curr.id);
-      //   curr = curr.parent;
-      // }
       let closeList = [];
       let openList = [];
-      this.openList.forEach( node => openList.push(node.id));
-      this.closeList.forEach( node => closeList.push(node.id));
+      this.openList.forEach( node => openList.push(node));
       this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
-
-      // let newNode = merge({}, currentNode);
-      // let newStep = {
-      //   currentNode: newNode,
-      //   openList: openList,
-      //   path: newPath.reverse()
-      // }
-      // steps.push(newStep);
+      this.closeList.forEach( node => closeList.push(node));
 
       if (currentNode.id === endNode.id) {
         let newPath = [];
@@ -103,9 +88,8 @@ class AstarStep extends Astar {
           list[node.id].h = this.hcost(list[node.id], list[endNodeId]);
           list[node.id].f = list[node.id].g + list[node.id].h;
         }
-
         let newPath = [];
-        let curr = currentNode;
+        let curr = node;
         while (curr.parent) {
           newPath.push([curr.parent.id, curr.id]);
           curr = curr.parent;
@@ -133,6 +117,7 @@ class AstarStep extends Astar {
     let visual = this.visualization;
 
     visual.clearLinks();
+    visual.clearNodes();
     if (child) {
       visual.highlightNode(child.id, "yellow")
       visual.removeText(child.id);
@@ -141,82 +126,62 @@ class AstarStep extends Astar {
       visual.addText(child.id, -19, -25, 'blue', (d) => `f = ${Math.floor(child.f)}`);
       visual.highlightLink(child.parent.id, child.id, "red");
     }
-    // visual.highlightNode(curr.id, "green");
+
     visual.removeText(curr.id);
     visual.addText(curr.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.h)}`);
     visual.addText(curr.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.g)}`);
     visual.addText(curr.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.f)}`);
-    // if (curr.parent) {
-    //   node.closeList.forEach( id => {
-    //     visual.highlightNode(id, "red");
-    //   });
-    // }
+
     if (this.i === this.steps.length - 1) {
       node.path.forEach( link => {
         visual.highlightLink(link[0], link[1], "blue");
+        visual.highlightNode(link[0], "red");
       });
     } else {
       node.path.forEach( link => {
         visual.highlightLink(link[0], link[1], "red");
       });
     }
-    node.closeList.forEach( id => {
-      visual.highlightNode(id, 'red');
-    });
-    node.openList.forEach( id => {
-      visual.highlightNode(id, 'yellow');
-    });
     visual.highlightNode(curr.id, 'green');
     this.i += 1;
   }
 
   stepBackward() {
-    if (this.i <= 0) return;
-    this.i -= 1;
-    let node = this.steps[this.i];
-    let curr = node.currentNode;
     let visual = this.visualization;
+    if (this.i <= 1) {
+      if (this.i === 0) {
+        return;
+      } else {
+        let node = this.steps[this.i - 1];
+        visual.unhighlightNode(node.currentNode.id);
+        this.i -= 1;
+        return;
+      }
+    };
+    this.i -= 1
+    let node = this.steps[this.i - 1];
+    let curr = node.currentNode;
     let child = node.childNode;
 
     visual.clearLinks();
-    if (child) {
-      visual.unhighlightNode(child.id);
-      // visual.highlightNode(child.id, "yellow")
-      visual.removeText(child.id);
-      // visual.addText(child.id, -19, -55, 'blue', (d) => `h = ${Math.floor(child.h)}`);
-      // visual.addText(child.id, -19, -41, 'blue', (d) => `g = ${Math.floor(child.g)}`);
-      // visual.addText(child.id, -19, -25, 'blue', (d) => `f = ${Math.floor(child.f)}`);
-    }
+    visual.clearNodes();
     if (this.i === this.steps.length - 1) {
       node.path.forEach( link => {
         visual.highlightLink(link[0], link[1], "red");
       })
     }
-
-    // if (curr.parent) {
-    //   if (this.steps[this.i].openList.includes(curr.parent.id)) {
-    //     visual.highlightNode(curr.parent.id, "green");
-    //   }
-    //   visual.removeText(curr.parent.id);
-    //   visual.addText(curr.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.parent.h)}`);
-    //   visual.addText(curr.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.parent.g)}`);
-    //   visual.addText(curr.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.parent.f)}`);
-    //   visual.unhighlightLink(curr.parent.id, curr.id);
-    // }
+    if (child) {
+      visual.highlightNode(child.id, "yellow")
+      visual.removeText(child.id);
+      visual.addText(child.id, -19, -55, 'blue', (d) => `h = ${Math.floor(child.h)}`);
+      visual.addText(child.id, -19, -41, 'blue', (d) => `g = ${Math.floor(child.g)}`);
+      visual.addText(child.id, -19, -25, 'blue', (d) => `f = ${Math.floor(child.f)}`);
+      visual.highlightLink(child.parent.id, child.id, "red");
+    }
     node.path.forEach( link => {
       visual.highlightLink(link[0], link[1], "red");
     });
-    node.closeList.forEach( id => {
-      visual.highlightNode(id, 'red');
-    });
-    node.openList.forEach( id => {
-      visual.highlightNode(id, 'yellow');
-    });
     visual.highlightNode(curr.id, 'green');
-    if (this.i === 0) {
-      visual.removeText(curr.id);
-      visual.unhighlightNode(curr.id);
-    }
   }
 }
 

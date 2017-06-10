@@ -157,6 +157,12 @@ class Visualization {
       .style('fill', 'grey');
   }
 
+  clearNodes() {
+    d3.selectAll('circle.node').transition().duration(500)
+      .style("fill", "lightblue")
+      .style("r", 20);
+  }
+
   unhighlightNode(id) {
     d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
       .style("fill", "lightblue")
