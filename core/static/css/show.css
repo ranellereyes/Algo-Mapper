@@ -227,3 +227,7 @@ ul.pros-n-cons li::before {
   display: table-cell;
   text-align: left;
 }
+
+svg text {
+  font-style: italic;
+}
