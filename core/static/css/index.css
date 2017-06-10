@@ -189,3 +189,15 @@ figure.linkedin {
   height: 40px;
   width: 40px;
 }
+
+figure.linkedin:hover {
+  cursor: pointer;
+  background-color: #383769;
+  border-radius: 5px;
+}
+
+figure.github:hover {
+  cursor: pointer;
+  background-color: #383769;
+  border-radius: 50%;
+}
