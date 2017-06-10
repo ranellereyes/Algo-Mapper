@@ -18,7 +18,8 @@ class Comparison extends React.Component {
                   algorithms: {}
                   };
     // this.visual = [];
-    // this.fetchCode('static/javascript/bellman_ford.js');
+    this.codes = [];
+
     this.resetAlgorithms = this.resetAlgorithms.bind(this);
     this.fetchCode = this.fetchCode.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -36,6 +37,12 @@ class Comparison extends React.Component {
 
     // window.v = visualA;
     // this.setState({ graph: this.visualA});
+    this.visual = [];
+
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual[0].draw();
+    this.visual[1].draw();
     this.resetAlgorithms();
   }
 
@@ -47,27 +54,35 @@ class Comparison extends React.Component {
   resetAlgorithms() {
 
     let algorithms = [];
-
-    this.visual = [];
     d3.selectAll("svg").remove();
+    this.visual = [];
+    this.codes = [];
+
     this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
     this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
+    // this.fetchCode('static/javascript/bellman_ford.js');
+
+
 
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
         case "dijkstra":
           algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/dijkstra.js');
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
           algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
           algorithms.push(new FloydWarshallAlgoSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/floyd-warshall-algo.js');
       }
     });
     this.setState({algorithms: algorithms});
@@ -78,8 +93,8 @@ class Comparison extends React.Component {
     f.open("GET", file, false);
     f.onreadystatechange = () => {
       if(f.readyState === 4) {
-        if(f.status === 200 || f.status === 0) {
-          this.codeA = f.responseText;
+        if(f.status === 200 || f.status == 0) {
+          this.codes.push(f.responseText);
         }
       }
     };
@@ -157,7 +172,7 @@ class Comparison extends React.Component {
             <ul>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
-
+                  {this.codes[0]}
                 </Highlight>
               </li>
               <li className="comp-graph">
@@ -165,7 +180,7 @@ class Comparison extends React.Component {
               </li>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
-
+                  {this.codes[1]}
                 </Highlight>
               </li>
             </ul>
