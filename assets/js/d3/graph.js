@@ -12,23 +12,23 @@ class Graph {
     // ];
 
     // -- QUAD DATA TEST --
-      data1 = [
-        {numNodes: 10, runtime: 100},
-        {numNodes: 20, runtime: 400},
-        {numNodes: 50, runtime: 2505},
-        {numNodes: 80, runtime: 6400},
-        {numNodes: 100, runtime: 100000}
-      ];
+      // data1 = [
+      //   {numNodes: 10, runtime: 100},
+      //   {numNodes: 20, runtime: 400},
+      //   {numNodes: 50, runtime: 2505},
+      //   {numNodes: 80, runtime: 6400},
+      //   {numNodes: 100, runtime: 100000}
+      // ];
 
     // -- CUBIC DATA TEST --
-    data2 = [
-      {numNodes: 5, runtime: 125},
-      {numNodes: 11, runtime: 1000},
-      {numNodes: 20, runtime: 8000},
-      {numNodes: 51, runtime: 12500},
-      {numNodes: 80, runtime: 51200},
-      {numNodes: 100, runtime: 1000000}
-    ];
+    // data2 = [
+    //   {numNodes: 5, runtime: 125},
+    //   {numNodes: 11, runtime: 1000},
+    //   {numNodes: 20, runtime: 8000},
+    //   {numNodes: 51, runtime: 12500},
+    //   {numNodes: 80, runtime: 51200},
+    //   {numNodes: 100, runtime: 1000000}
+    // ];
 
     let compData = data1.concat(data2);
 
