@@ -2,23 +2,23 @@ class Graph {
 
   draw(data1, data2) {
     // -- LINEAR DATA TEST --
-    // data1 = [
-    //   {numNodes: 10, runtime: 15},
-    //   {numNodes: 25, runtime: 50},
-    //   {numNodes: 40, runtime: 80},
-    //   {numNodes: 50, runtime: 90},
-    //   {numNodes: 80, runtime: 160},
-    //   {numNodes: 100, runtime: 210}
-    // ];
+    data1 = [
+      {numNodes: 10, runtime: 500},
+      {numNodes: 25, runtime: 1250},
+      {numNodes: 40, runtime: 2000},
+      {numNodes: 50, runtime: 2500},
+      {numNodes: 80, runtime: 4000},
+      {numNodes: 100, runtime: 5000}
+    ];
 
     // -- QUAD DATA TEST --
-      // data1 = [
-      //   {numNodes: 10, runtime: 100},
-      //   {numNodes: 20, runtime: 400},
-      //   {numNodes: 50, runtime: 2505},
-      //   {numNodes: 80, runtime: 6400},
-      //   {numNodes: 100, runtime: 100000}
-      // ];
+      data2 = [
+        {numNodes: 10, runtime: 100},
+        {numNodes: 20, runtime: 400},
+        {numNodes: 50, runtime: 2505},
+        {numNodes: 80, runtime: 6400},
+        {numNodes: 100, runtime: 10000}
+      ];
 
     // -- CUBIC DATA TEST --
     // data2 = [
