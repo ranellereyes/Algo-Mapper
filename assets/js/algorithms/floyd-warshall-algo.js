@@ -8,6 +8,9 @@ export class floydWarshallAlgo {
     this.costs = Object.keys(nodelist).map(e => new Array);
     this.parents = Object.keys(nodelist).map(e => new Array);
     this.numNodes = Object.keys(nodelist).length;
+
+    this.initCosts();
+    this.initParents();
   }
 
   initCosts () {

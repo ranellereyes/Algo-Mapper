@@ -4,14 +4,6 @@ import configureStore from './store/store';
 
 import Root from './components/root';
 
-// ==TESTING==
-import { NODELIST, NODELIST2 } from './node/node';
-import { nodelistGenerator } from './node/node';
-import { floydWarshallAlgo } from './node/floyd-warshall-algo';
-window.fw = floydWarshallAlgo;
-window.ng = nodelistGenerator;
-window.nl = NODELIST2;
-
 document.addEventListener('DOMContentLoaded', () => {
   let store;
   // if (window.currentUser) {
