@@ -20,6 +20,7 @@ class ShowAstar extends React.Component {
     visual.draw();
     this.setState({ graph: visual });
     this.AstarStep = new AstarStep(NODELIST, 1, 6, visual);
+    window.a = this.AstarStep;
     this.fetchCode('static/javascript/astar.js');
   }
 

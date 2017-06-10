@@ -131,6 +131,7 @@ class Visualization {
         .attr("x", function(d) { return d.x })
         .attr("y", function(d) { return d.y })
         .attr("dy", 5)
+        .attr("dx", -2)
         .attr("text-anchor", "middle")
         .text(function(d) { return d.id });
 
@@ -142,6 +143,18 @@ class Visualization {
         .style("fill", "LightBlue")
         .style("stroke", "black")
         .style("stroke-width", 2);
+  }
+
+  clearLinks() {
+    d3.selectAll('line.link')
+      .transition()
+      .duration(500)
+      .style('stroke', 'grey');
+    d3.selectAll(`path`)
+      .transition()
+      .duration(500)
+      .style('stroke', 'grey')
+      .style('fill', 'grey');
   }
 
   unhighlightNode(id) {
