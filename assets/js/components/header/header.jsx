@@ -5,12 +5,16 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = { active: ''}
-    this.openDropdown = this.openDropdown.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.closeDropdown = this.closeDropdown.bind(this);
   }
 
-  openDropdown() {
-    this.setState({ active: 'active'})
+  toggleDropdown() {
+    if (this.state.active === 'active') {
+      this.setState({ active: '' })
+    } else {
+      this.setState({ active: 'active'})
+    }
   }
 
   closeDropdown(e) {
@@ -29,13 +33,13 @@ class Header extends React.Component {
           </ul>
           <ul className="nav-menu">
             <li>
-              <a>Compare</a>
+              <Link to="/comparison">Compare</Link>
             </li>
             <li>
               <a
                 tabIndex="1"
                 onBlur={this.closeDropdown}
-                onClick={this.openDropdown}
+                onClick={this.toggleDropdown}
               >Algorithms</a>
               <ul className={`dropdown ${this.state.active}`}>
                 <Link className="dropdown" to="/astar">A* (A star)</Link>
