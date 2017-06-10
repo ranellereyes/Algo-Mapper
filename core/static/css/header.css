@@ -80,7 +80,7 @@ ul.dropdown {
   /*visibility: hidden;*/
   position: absolute;
   top: -150px;
-  display: hidden;
+  display: flex;
   flex-direction: column;
   background: white;
   transition: transform 0.5s;

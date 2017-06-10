@@ -78,12 +78,12 @@ class ShowAstar extends React.Component {
                 <h3>How it Works</h3>
                 <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* utilizes an <code>openList</code> and a <code>closeList</code>, where the <code>openList</code> is an array of nodes to be checked and the <code>closeList</code> is an array of nodes that have been visited. As the algorithm runs, nodes are added and removed from these lists until either a path is found or the <code>openList</code> is empty. The steps are as follows:</p>
                 <ol>
-                  <li><span>Initialize and openList and closeList as two empty arrays</span></li>
+                  <li><span>Initialize the <code>openList</code> and <code>closeList</code> as two empty arrays</span></li>
                   <li><span>Set the starting node as <code>currentNode</code>, and add it to the openList</span></li>
                   <li><span>Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</span></li>
                   <ul className='how-it-works'>
                   	<li><span><code>f(n) = g(n) + h(n)</code></span></li>
-                  	<li><span><code>g</code> cost is the weight of the edge (the link between parent and child node)</span></li>
+                  	<li><span><code>g</code> is the cost to reach a node, in this case dictated by the weight of an edge (the link between parent and child node)</span></li>
                   	<li><span><code>h</code> is defined by an arbitrary calculation based on the distance from the end node</span></li>
                   	<li><span><code>f</code> is equal to the sum of these two values</span></li>
                   </ul>

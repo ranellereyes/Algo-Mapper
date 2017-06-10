@@ -160,6 +160,11 @@ ul.author-info {
 ul.author-info li {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+ul.author-info li span {
+  margin: 0;
 }
 
 figure.github {
