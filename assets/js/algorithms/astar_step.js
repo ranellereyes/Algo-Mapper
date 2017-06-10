@@ -192,20 +192,31 @@ class AstarStep extends Astar {
         visual.highlightLink(link[0], link[1], "red");
       })
     }
-    visual.removeText(curr.id);
-    if (curr.parent) {
-      if (this.steps[this.i].openList.includes(curr.parent.id)) {
-        visual.highlightNode(curr.parent.id, "green");
-      }
-      visual.removeText(curr.parent.id);
-      visual.addText(curr.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.parent.h)}`);
-      visual.addText(curr.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.parent.g)}`);
-      visual.addText(curr.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.parent.f)}`);
-      visual.unhighlightLink(curr.parent.id, curr.id);
-    }
+
+    // if (curr.parent) {
+    //   if (this.steps[this.i].openList.includes(curr.parent.id)) {
+    //     visual.highlightNode(curr.parent.id, "green");
+    //   }
+    //   visual.removeText(curr.parent.id);
+    //   visual.addText(curr.parent.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.parent.h)}`);
+    //   visual.addText(curr.parent.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.parent.g)}`);
+    //   visual.addText(curr.parent.id, -19, -25, 'blue', (d) => `f = ${Math.floor(curr.parent.f)}`);
+    //   visual.unhighlightLink(curr.parent.id, curr.id);
+    // }
     node.path.forEach( link => {
       visual.highlightLink(link[0], link[1], "red");
     });
+    node.closeList.forEach( id => {
+      visual.highlightNode(id, 'red');
+    });
+    node.openList.forEach( id => {
+      visual.highlightNode(id, 'yellow');
+    });
+    visual.highlightNode(curr.id, 'green');
+    if (this.i === 0) {
+      visual.removeText(curr.id);
+      visual.unhighlightNode(curr.id);
+    }
   }
 }
 
