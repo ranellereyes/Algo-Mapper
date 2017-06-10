@@ -135,9 +135,8 @@ class Comparison extends React.Component {
                   <option value="bellman-ford">Bellman-Ford</option>
                   <option value="floyd-warshall">Floyd-Warshall</option>
                 </select>
-                <div>
-                  <div className="comp-visualization-a" />
-                </div>
+
+                <div className="comp-visualization-a" />
               </li>
               <li>
                 <select onChange={this.handleSelectB} value={this.state.options.optionB}>
