@@ -14,13 +14,15 @@ class Comparison extends React.Component {
     this.state = { options:
                     { optionA: "dijkstra",
                       optionB: "bellman-ford"
-                    }
+                    },
+                  algorithms: {}
                   };
-
+    // this.visual = [];
     // this.fetchCode('static/javascript/bellman_ford.js');
-    this.initAlgorithms = this.initAlgorithms.bind(this);
+    this.resetAlgorithms = this.resetAlgorithms.bind(this);
     this.fetchCode = this.fetchCode.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleClickLeft = this.handleClickLeft.bind(this);
     this.handleClickRight = this.handleClickRight.bind(this);
     this.handleSelectA = this.handleSelectA.bind(this);
@@ -31,12 +33,10 @@ class Comparison extends React.Component {
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
-    let visualA = new Visualization(NODELIST, "comp-visualization-a");
-    let visualB = new Visualization(NODELIST, "comp-visualization-b");
-    visualA.draw();
-    window.v = visualA;
-    this.setState({ graph: visualA});
-    // this.initAlgorithms(visualA);
+
+    // window.v = visualA;
+    // this.setState({ graph: this.visualA});
+    this.resetAlgorithms();
   }
 
   componentWillUnmount() {
@@ -44,11 +44,33 @@ class Comparison extends React.Component {
     document.onkeyup = null;
   }
 
-  initAlgorithms(visual) {
-    this.algorithms = [new DijkstraSteps(NODELIST, 1, 6, visual),
-                      new AstarSteps(NODELIST, 1, 6, visual),
-                      new BellmanFordSteps(NODELIST, 1, 6, visual),
-                      new FloydWarshallAlgoSteps(NODELIST, 1, 6, visual)];
+  resetAlgorithms() {
+
+    let algorithms = [];
+
+    this.visual = [];
+    d3.selectAll("svg").remove();
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual[0].draw();
+    this.visual[1].draw();
+
+    Object.keys(this.state.options).forEach((key, index) => {
+      switch (this.state.options[key]) {
+        case "dijkstra":
+          algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
+          break;
+        case "astar":
+          algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
+          break;
+        case "bellman-ford":
+          algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          break;
+        case "floyd-warshall":
+          algorithms.push(new FloydWarshallAlgoSteps(NODELIST, 1, 6, this.visual[index]));
+      }
+    });
+    this.setState({algorithms: algorithms});
   }
 
   fetchCode(file) {
@@ -56,7 +78,7 @@ class Comparison extends React.Component {
     f.open("GET", file, false);
     f.onreadystatechange = () => {
       if(f.readyState === 4) {
-        if(f.status === 200 || f.status == 0) {
+        if(f.status === 200 || f.status === 0) {
           this.codeA = f.responseText;
         }
       }
@@ -79,27 +101,25 @@ class Comparison extends React.Component {
   }
 
   handleClickLeft(e) {
-    // this.handleKeyPress({keyCode:  37});
-    this.algorithms.forEach((algo) => {
+    this.state.algorithms.forEach((algo) => {
       algo.stepBackward();
     });
   }
 
   handleClickRight(e) {
-    // this.handleKeyPress({keyCode:  39});
-    this.algorithms.forEach((algo) => {
+    this.state.algorithms.forEach((algo) => {
       algo.stepForward();
     });
   }
 
   handleSelectA (e) {
-   this.setState({options: {optionA: e.target.value}});
-   this.initAlgorithms();
+    this.state.options.optionA = e.target.value;
+    this.resetAlgorithms();
   }
 
   handleSelectB (e) {
-   this.setState({options: {optionB: e.target.value}});
-   this.initAlgorithms();
+    this.state.options.optionB = e.target.value;
+    this.resetAlgorithms();
   }
 
   render() {
@@ -115,7 +135,9 @@ class Comparison extends React.Component {
                   <option value="bellman-ford">Bellman-Ford</option>
                   <option value="floyd-warshall">Floyd-Warshall</option>
                 </select>
-                <div className="comp-visualization-a" />
+                <div>
+                  <div className="comp-visualization-a" />
+                </div>
               </li>
               <li>
                 <select onChange={this.handleSelectB} value={this.state.options.optionB}>
