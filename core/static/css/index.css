@@ -37,9 +37,10 @@ div.index-content h1 {
 }
 
 div.index-content span {
-  font-size: 24px;
+  font-size: 22px;
   text-align: center;
   font-family: Poiret One;
+
 }
 
 section.index-algo-display {
@@ -140,9 +141,8 @@ h3.into-the-abyss {
 }
 
 
-
 footer {
-  height: 200px;
+  height: 150px;
   background: #010023;
   display: flex;
   justify-content: center;
@@ -158,20 +158,46 @@ ul.author-info {
 }
 
 ul.author-info li {
-  display: flex;
-  flex-direction: column;
+  /*display: flex;
+  flex-direction: column;*/
+  text-align: center;
+  width: 120px;
+
   align-items: center;
 }
 
 ul.author-info li span {
   margin: 0;
+  font-size: 14px;
+  font-family: Quicksand;
 }
 
 figure.github {
   background-image: url('../images/github-icon.png');
   background-size: contain;
+  display: inline-block;
   margin: 0;
-  margin-bottom: 10px;
   height: 40px;
   width: 40px;
+}
+
+figure.linkedin {
+  background-image: url('../images/linkedin.png');
+  background-size: contain;
+  display: inline-block;
+  margin: 0 0 0 10px;
+  height: 40px;
+  width: 40px;
+}
+
+figure.linkedin:hover {
+  cursor: pointer;
+  background-color: #383769;
+  border-radius: 5px;
+}
+
+figure.github:hover {
+  cursor: pointer;
+  background-color: #383769;
+  border-radius: 50%;
 }
