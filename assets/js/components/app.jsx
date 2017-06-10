@@ -15,9 +15,9 @@ const App = () => (
     <Switch>
       <Route path="/comparison" component={Comparison} />
       <Route path="/astar" component={AstarShow} />
-      <Route path="/bellmanford" component={ShowBellmanFord} />
+      <Route path="/bellman-ford" component={ShowBellmanFord} />
       <Route path="/dijkstras" component={ShowDijkstras} />
-      <Route path="/floydwarshall" component={ShowFloyd} />
+      <Route path="/floyd-warshall" component={ShowFloyd} />
       <Route path="/:error" render={() => <h1>YOU DUN FUCKED UP</h1>} />
       <Route path="/" component={Index}/>
     </Switch>
