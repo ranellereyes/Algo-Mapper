@@ -170,7 +170,7 @@ ol > li {
 
 li > span {
   display: block;
-  font-size: 16px;
+  font-size: 17px;
   margin-left: 10px;
 }
 
@@ -197,6 +197,7 @@ div.how-it-works p {
 code {
   background: GhostWhite;
   font-size: 16px;
+  padding: 1px 3px;
 }
 
 ul.pros-n-cons {
@@ -213,7 +214,4 @@ ul.pros-n-cons li::before {
   width: 10px;
   display: table-cell;
   text-align: left;
-}
-
-ul.pros-n-cons span {
 }
