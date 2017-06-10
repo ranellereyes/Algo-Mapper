@@ -19,7 +19,7 @@ class ShowDijkstras extends React.Component {
     let visual = new Visualization(NODELIST);
     visual.draw();
     this.setState({ graph: visual });
-    this.algorithm = new DijkstraSteps(NODELIST, 1, 5, visual);
+    this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
   }
 
   componentWillUnmount() {
@@ -56,7 +56,7 @@ class ShowDijkstras extends React.Component {
       <div className="index-main">
         <main className="show-main">
           <section className="show-main">
-            <h1 className="show-name">Bellman Ford</h1>
+            <h1 className="show-name">Dijkstra's Algorithm</h1>
             <ul className="visualization">
               <div className="visualization" />
               <aside className="show-code">
@@ -138,10 +138,15 @@ export default Dijkstra;
             <ul className="show-algo-description">
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                  Breadth-first Search
+                  <ol>
+                    <p>Greedily finds the cost from a source node to a destination node or all other nodes within a graph that does not contain negative edge(s). </p>
+                    <li>1. Assign a source node and set its cost to 0. Set all other nodes' cost to infinity.</li>
+                    <li>2. Set source node to current node and mark all nodes as unvisisted.</li>
+                    <li>3. Find all unvisisted neighbors (children) of current node and calculates the tentative cost to each neighbor. If the tentative cost to the neighbor is less than the neighbor's current cost, set its cost to the tentative cost.</li>
+                    <li>4. After the current node checks all of its unvisited neighbors, mark the current node as visited. Visited nodes will never be checked again.</li>
+                    <li>5. If all nodes have been visited or the destination node as been visited, the algorithm is finished and stops. Else, the current node is set to the node with the lowest cost and return back to step 3.</li>
+                  </ol>
                 <h3>Math</h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

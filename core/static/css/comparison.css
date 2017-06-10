@@ -103,8 +103,10 @@ section.comp-graph li{
   align-items: flex-start;
 }
 
-section.comp-graph li.comp-graph{
+section.comp-graph div.comp-graph{
   width: 45%;
+  height: 500px;
+  margin: 20px, 20px, 30px, 50px;
 }
 
 section.comp-graph li.comp-graph-code{

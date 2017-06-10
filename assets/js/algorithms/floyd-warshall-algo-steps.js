@@ -62,7 +62,10 @@ export default class FloydWarshallAlgoSteps extends floydWarshallAlgo {
 
     nodes.forEach((node, i) => {
       let child = nodes[i + 1];
-      visual.highlightLink(node, child, "red");
+
+      node >= Number(loops[2]) ?
+        visual.highlightLink(node, child, "red") :
+        visual.highlightLink(node, child, "lightgreen");
     });
   }
 

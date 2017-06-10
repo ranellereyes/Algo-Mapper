@@ -1,4 +1,5 @@
 import React from 'react';
+import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
@@ -32,6 +33,7 @@ class Comparison extends React.Component {
   }
 
   componentDidMount() {
+
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
 
@@ -44,6 +46,9 @@ class Comparison extends React.Component {
     this.visual[0].draw();
     this.visual[1].draw();
     this.resetAlgorithms();
+
+    let graph = new Graph();
+    graph.draw();
   }
 
   componentWillUnmount() {
@@ -135,6 +140,7 @@ class Comparison extends React.Component {
   handleSelectB (e) {
     this.state.options.optionB = e.target.value;
     this.resetAlgorithms();
+
   }
 
   render() {
@@ -175,9 +181,8 @@ class Comparison extends React.Component {
                   {this.codes[0]}
                 </Highlight>
               </li>
-              <li className="comp-graph">
-                Graph area
-              </li>
+              <div className="comp-graph">
+              </div>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
                   {this.codes[1]}

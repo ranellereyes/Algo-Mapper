@@ -28,7 +28,7 @@ class DijkstraSteps {
   }
 
   search() {
-    this.steps.push({path: [this.source.id], costs: this.costs()});
+    this.steps.push({path: [this.source.id], costs: this.costs(), visited: this.visits()});
     let parent = {};
     let node = this.source;
     while (this.unvisited.length !== 0 && !this.visited.includes(this.destination)) {
@@ -41,7 +41,7 @@ class DijkstraSteps {
             parent[_node.id] = node.id;
           }
         }
-        this.steps.push({path: [node.id, child.id], costs: this.costs()})
+        this.steps.push({path: [node.id, child.id], costs: this.costs(), visited: this.visits()})
       });
 
       // adds node to visited list
@@ -70,6 +70,15 @@ class DijkstraSteps {
     return stepCost;
   }
 
+  visits() {
+    let visited = [];
+    for (var i = 0; i < this.visited.length; i++) {
+      visited.push(this.visited[i])
+    }
+    return visited;
+  }
+
+
   createPath(parent, source, destination) {
     let path = [destination.id];
     let startKey = destination.id;
@@ -86,14 +95,14 @@ class DijkstraSteps {
     this.i++;
     let steps = this.steps[this.i];
     let prev = this.steps[this.i - 1]
-    if (this.i === this.steps.length) {
+    if (this.i >= this.steps.length) {
       Object.keys(this.nodeList).forEach(node => {
         this.visual.unhighlightNode(node);
         this.visual.unhighlightLink(prev.path[0], prev.path[1])
       });
       this.path.forEach((node, idx) => {
         this.visual.highlightNode(node, "red");
-        this.visual.highlightLink(node, this.path[idx + 1])
+        this.visual.highlightLink(node, this.path[idx + 1], "blue")
       });
       this.i--;
     }
@@ -114,14 +123,17 @@ class DijkstraSteps {
         this.visual.unhighlightNode(prev.path[1]);
         this.visual.unhighlightLink(prev.path[0], prev.path[1]);
       }
-      //highlight current node/links
+      // highlight current node/links
       if (steps) {
-        // if (steps.path[1]) {
-          // this.visual.animateLink(steps.path[0], steps.path[1], "black")
-        // }
-        this.visual.highlightNode(steps.path[0], "red");
+        if (steps.path[1]) {
+          this.visual.animateLink(steps.path[0], steps.path[1], "purple")
+        }
+        this.visual.highlightNode(steps.path[0], "yellow");
         this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
         this.visual.highlightNode(steps.path[1], "green");
+        steps.visited.forEach(node => {
+          this.visual.addText(node.id, -21, 36, "red", (d) => "visited")
+        });
       }
     }
   }
@@ -160,14 +172,16 @@ class DijkstraSteps {
           this.visual.addText(idx + 1, -7, -28, "red", (d) => cost);
         }
       });
-      // if (steps.path[1]) {
-      //   this.visual.animateLink(steps.path[0], steps.path[1], "#800080")
-      // }
-      this.visual.highlightNode(steps.path[0], "red");
+      if (steps.path[1]) {
+        this.visual.animateLink(steps.path[0], steps.path[1], "purple")
+      }
+      this.visual.highlightNode(steps.path[0], "yellow");
       this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
       this.visual.highlightNode(steps.path[1], "green");
+      steps.visited.forEach(node => {
+        this.visual.addText(node.id, -21, 36, "red", (d) => "visited")
+      });
     }
-
   }
 
 }
