@@ -37,9 +37,10 @@ div.index-content h1 {
 }
 
 div.index-content span {
-  font-size: 24px;
+  font-size: 22px;
   text-align: center;
   font-family: Poiret One;
+
 }
 
 section.index-algo-display {
@@ -140,9 +141,8 @@ h3.into-the-abyss {
 }
 
 
-
 footer {
-  height: 200px;
+  height: 150px;
   background: #010023;
   display: flex;
   justify-content: center;
@@ -161,14 +161,15 @@ ul.author-info li {
   /*display: flex;
   flex-direction: column;*/
   text-align: center;
-  width: 110px;
+  width: 120px;
 
   align-items: center;
 }
 
 ul.author-info li span {
   margin: 0;
-  font-family: Poiret One;
+  font-size: 14px;
+  font-family: Quicksand;
 }
 
 figure.github {
