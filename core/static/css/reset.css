@@ -13,5 +13,14 @@ span, p, header, footer, button, a, ol {
 body {
   background: White;
   /*background: #F4F4F4;*/
-
 }
+
+/*code {
+  font-family: Inconsolata;
+  color: DarkSlateGray;
+}
+
+code.hljs.qml {
+  font-family: Inconsolata;
+  font-size: 20px;
+}*/

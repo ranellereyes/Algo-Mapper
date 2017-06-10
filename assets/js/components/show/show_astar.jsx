@@ -76,30 +76,41 @@ class ShowAstar extends React.Component {
             <ul className="show-algo-description">
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
+                <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* utilizes an <code>openList</code> and a <code>closeList</code>, where the <code>openList</code> is an array of nodes to be checked and the <code>closeList</code> is an array of nodes that have been visited. As the algorithm runs, nodes are added and removed from these lists until either a path is found or the <code>openList</code> is empty. The steps are as follows:</p>
                 <ol>
-                  <p>A* (pronounced as 'A star') uses a heuristic approach in finding the shortest paths. This heuristic is an arbitrary number based on the distance away from the end point. The general idea of A* is its use of its openList and closeList. As the algorithm runs, it finds child nodes and appends them to the openList. The openList stores all nodes that are currently known (i.e. they have been seen by the algorithm, but not visited yet). Once a node has been visited (i.e. it has been set as the <code>currentNode</code>, and its child nodes cost values have been calculated), the <code>currentNode</code> is taken out of the openList and appended to the closeList. If a node is seen more than once, its cost values will be recalculated and its parent will be set to the node which yielded the lowest f cost. This process is repeated until the end point is found. The general process of A* can be explained in the following way:</p>
-                  <li>1. Initialize and openList and closeList as two empty arrays</li>
-                  <li>2. Set the starting node as <code>currentNode</code>, and add it to the openList</li>
-                  <li>3. Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</li>
+                  <li><span>Initialize and openList and closeList as two empty arrays</span></li>
+                  <li><span>Set the starting node as <code>currentNode</code>, and add it to the openList</span></li>
+                  <li><span>Calculates the f cost of the all child nodes by adding its weight (g cost) with its heuristic (h cost)</span></li>
                   <ul className='how-it-works'>
-                  	<li>- Ex. f(n) = g(n) + h(n) </li>
-                  	<li>- g cost is the weight of the edge (the link between parent and child node)</li>
-                  	<li>- h is defined by an arbitrary calculation based on the distance from the end node</li>
-                  	<li>- f is equal to the sum of these two values</li>
+                  	<li><span><code>f(n) = g(n) + h(n)</code></span></li>
+                  	<li><span><code>g</code> cost is the weight of the edge (the link between parent and child node)</span></li>
+                  	<li><span><code>h</code> is defined by an arbitrary calculation based on the distance from the end node</span></li>
+                  	<li><span><code>f</code> is equal to the sum of these two values</span></li>
                   </ul>
-                  <li>4. If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</li>
-                  <li>5. The currentNode is moved from the openList into the closeList</li>
-                  <li>6. currentNode is reassigned to a node inside the openList with the lowest f cost</li>
-                  <li>7. Repeat step 3 until destination is reached, or the openList is empty</li>
+                  <li><span>If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</span></li>
+                  <li><span>The currentNode is moved from the openList into the closeList</span></li>
+                  <li><span>currentNode is reassigned to a node inside the openList with the lowest f cost</span></li>
+                  <li><span>Repeat step 3 until destination is reached, or the openList is empty</span></li>
                 </ol>
-                <h3>Math</h3>
-                <p>asdfasdf  EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
+                <h3>Details</h3>
+                <p>
+                  The heuristic is what drastically differentiates A* from other algorithms. Although this algorithm is typically known as a breadth-first search, it can act as a depth-first search if the heuristic is strongly weighted. This heuristic optimization is highly dependent on the kind of maps that it is exposed to, and unoptimized heuristics can lead to incorrect shortest path calculations. At heart, A* is a greedy algorithm, but will generally will exhibit O(n) time complexity when optimized. A* is extremely well-known for pathfinding, but is not as optimized for node paths. This is because if the node path is has N nodes and each node has N - 1 child nodes, every round of cost evaluation requires A* to make N - 1 calculations, resulting at worst in O(n<sup>n</sup>  ) time complexity.
                 </p>
               </div>
               <aside className="show-pros-n-cons">
-                <h3>Pros & Cons</h3>
-                <p>asdfas
-                </p>
+                <h3>Pros</h3>
+                <ul className='pros-n-cons'>
+                  <li><span>Generally very fast</span></li>
+                  <li><span>Will always find a solution if it exists</span></li>
+                  <li><span>One of the best algorithms for pathfinding</span></li>
+                  <li><span>Time Complexity is O(n) using an optimized heuristic</span></li>
+                </ul>
+                <h3>Cons</h3>
+                <ul className='pros-n-cons'>
+                  <li><span>Not optimized for node maps, which can have N - 1 branches for each node</span></li>
+                  <li><span>Time complexity is at worst exponential given unoptimized heuristic</span></li>
+                  <li><span>Will not always find shortest path depending on heuristic</span></li>
+                </ul>
               </aside>
             </ul>
           </div>

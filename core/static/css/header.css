@@ -21,12 +21,12 @@ nav.nav-bar {
   height: 50px;
 }
 
-ul {
+ul.nav-menu {
   display: flex;
   list-style: none;
 }
 
-li {
+ul.nav-menu li {
   display: flex;
   align-items: center;
   position: relative;
