@@ -1,4 +1,5 @@
 import React from 'react';
+import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
 
 class Comparison extends React.Component {
@@ -8,7 +9,10 @@ class Comparison extends React.Component {
   }
 
   componentDidMount() {
-
+    let visual = new Graph();
+    visual.draw();
+    window.v = visual;
+    this.setState({ graph: visual });
   }
 
   render() {
@@ -108,9 +112,8 @@ class Comparison extends React.Component {
 `}
                 </Highlight>
               </li>
-              <li className="comp-graph">
-                Graph area
-              </li>
+              <div className="comp-graph">
+              </div>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
                 {`class BellmanFord {
