@@ -6,7 +6,7 @@ span, p, header, footer, button, a, ol {
   height: auto;
   width: auto;
 
-  font-family: Ek Mukta;
+  font-family: Quicksand;
   list-style: none;
 }
 
@@ -15,12 +15,12 @@ body {
   /*background: #F4F4F4;*/
 }
 
-/*code {
+code {
   font-family: Inconsolata;
   color: DarkSlateGray;
 }
 
-code.hljs.qml {
+span {
   font-family: Inconsolata;
-  font-size: 20px;
-}*/
+  font-size: 16px;
+}

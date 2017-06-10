@@ -158,20 +158,33 @@ ul.author-info {
 }
 
 ul.author-info li {
-  display: flex;
-  flex-direction: column;
+  /*display: flex;
+  flex-direction: column;*/
+  text-align: center;
+  width: 110px;
+
   align-items: center;
 }
 
 ul.author-info li span {
   margin: 0;
+  font-family: Poiret One;
 }
 
 figure.github {
   background-image: url('../images/github-icon.png');
   background-size: contain;
+  display: inline-block;
   margin: 0;
-  margin-bottom: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+figure.linkedin {
+  background-image: url('../images/linkedin.png');
+  background-size: contain;
+  display: inline-block;
+  margin: 0 0 0 10px;
   height: 40px;
   width: 40px;
 }

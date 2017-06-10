@@ -111,6 +111,11 @@ section.show-algo-bottom p {
   line-height: 1.5;
 }
 
+section.show-algo-bottom span {
+  font-size: 16px;
+  font-family: Quicksand;
+}
+
 sup {
   line-height: 0;
 }

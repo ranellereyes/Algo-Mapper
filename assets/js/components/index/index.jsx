@@ -57,18 +57,22 @@ class Index extends React.Component {
           <ul className="author-info">
             <li>
               <figure className="github"></figure>
+              <figure className="linkedin"></figure>
               <span>Ranelle</span>
             </li>
             <li>
               <figure className="github"></figure>
+              <figure className="linkedin"></figure>
               <span>Winber</span>
             </li>
             <li>
               <figure className="github"></figure>
+              <figure className="linkedin"></figure>
               <span>Janice</span>
             </li>
             <li>
               <figure className="github"></figure>
+              <figure className="linkedin"></figure>
               <span>Brandon</span>
             </li>
           </ul>

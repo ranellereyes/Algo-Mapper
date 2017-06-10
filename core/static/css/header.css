@@ -59,6 +59,7 @@ div.nav-logo-underline {
 
 li a:hover {
   cursor: pointer;
+  text-shadow: 0 0 0 turquoise;
 }
 
 li:hover div.nav-logo-underline {
@@ -69,7 +70,7 @@ li:hover div.nav-logo-underline {
 ul.nav-menu li a {
   font-size: 15pt;
   color: #44A7C3;
-  padding: 8px 10px;
+  padding: 12.5px 10px;
   outline: none;
   background: white;
   position: relative;
@@ -92,12 +93,12 @@ ul.dropdown a.dropdown {
   font-size: 14px;
 }
 
+ul.dropdown a:hover {
+  background: GhostWhite;
+}
+
 ul.dropdown.active {
   display: flex;
   transform: translate(0,200px);
   transition:
-}
-
-ul.dropdown.dead {
-  transform:
 }
