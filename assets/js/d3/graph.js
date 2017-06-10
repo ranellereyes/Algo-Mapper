@@ -2,19 +2,31 @@ class Graph {
 
   draw(data1, data2) {
     // -- LINEAR DATA TEST --
-    data1 = [
-      {numNodes: 10, runtime: 15},
-      {numNodes: 50, runtime: 90},
-      {numNodes: 100, runtime: 210},
-      {numNodes: 500, runtime: 900},
-      {numNodes: 1000, runtime: 2300}
-    ];
+    // data1 = [
+    //   {numNodes: 10, runtime: 15},
+    //   {numNodes: 25, runtime: 50},
+    //   {numNodes: 40, runtime: 80},
+    //   {numNodes: 50, runtime: 90},
+    //   {numNodes: 80, runtime: 160},
+    //   {numNodes: 100, runtime: 210}
+    // ];
+
+    // -- QUAD DATA TEST --
+      data1 = [
+        {numNodes: 10, runtime: 100},
+        {numNodes: 20, runtime: 400},
+        {numNodes: 50, runtime: 2505},
+        {numNodes: 80, runtime: 6400},
+        {numNodes: 100, runtime: 100000}
+      ];
 
     // -- CUBIC DATA TEST --
     data2 = [
       {numNodes: 5, runtime: 125},
-      {numNodes: 10, runtime: 1000},
-      {numNodes: 50, runtime: 12500},
+      {numNodes: 11, runtime: 1000},
+      {numNodes: 20, runtime: 8000},
+      {numNodes: 51, runtime: 12500},
+      {numNodes: 80, runtime: 51200},
       {numNodes: 100, runtime: 1000000}
     ];
 
@@ -42,10 +54,10 @@ class Graph {
     var line = d3.line()
         .x(function(d) { return x(d.numNodes); })
         .y(function(d) { return y(d.runtime); })
-        .curve(d3.curveCatmullRom.alpha(1.4));
+        .curve(d3.curveBasis);
 
-    var dotMapX = function(d) { return x(d.numNodes) + 50;};
-    var dotMapY = function(d) { return y(d.runtime) + 20;};
+    var dotMapX = function(d) { return x(d.numNodes) + margin.left;};
+    var dotMapY = function(d) { return y(d.runtime) + margin.top;};
 
       x.domain(d3.extent(compData, function(d) { return d.numNodes; }));
       y.domain(d3.extent(compData, function(d) { return d.runtime; }));
@@ -107,7 +119,7 @@ class Graph {
          .attr("cx", dotMapX)
          .attr("cy", dotMapY);
 
-       svg.selectAll(".dot")
+       svg.selectAll(".dot2")
           .data(data2)
         .enter().append("circle")
           .attr("class", "dot")
@@ -115,7 +127,6 @@ class Graph {
           .attr("r", 3.5)
           .attr("cx", dotMapX)
           .attr("cy", dotMapY);
-
   }
 }
 
