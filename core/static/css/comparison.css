@@ -100,15 +100,14 @@ section.comp-graph li{
 }
 
 section.comp-graph div.comp-graph{
-  width: 45%;
+  flex: 1;
   height: 500px;
   margin: 20px, 20px, 30px, 50px;
 }
 
 section.comp-graph li.comp-graph-code{
-  width: 25%;
+  width: 30%;
   overflow: scroll;
-
 }
 section.comp-graph li.comp-graph-code pre {
   margin: 0;
