@@ -30,11 +30,7 @@ export default class FloydWarshallSteps extends FloydWarshall {
     let nodeIds = Object.keys(this.nodelist).map(e => Number(e));
 
     nodeIds.forEach(id => {
-      d3.selectAll(`text.node-${id}`)
-      .transition()
-      .duration(500)
-      .style('opacity', 0)
-      .remove();
+      this.visualization.removeText(id);
 
       nodeIds.forEach(id2 => {
         this.visualization.unhighlightLink(id, id2);
@@ -165,5 +161,48 @@ export default class FloydWarshallSteps extends FloydWarshall {
       }
     });
     return;
+  }
+
+  stepForwardDisplay() {
+    if (this.currStep < this.steps.length - 2) {
+      dispAnswer(start, end);
+      return;
+    }
+
+    let visual = this.visualization,
+        step = this.steps[this.currStep],
+        { nodes, loops, tables, changed } = step;
+
+    let indices = this.indices;
+
+    loops.forEach((node, idx) => {
+      switch (idx) {
+        case 0:
+          visual.highlightNode(node, "lightgreen");
+          break;
+        case 1:
+          visual.highlightNode(node, "green");
+          break;
+        case 2:
+          visual.highlightNode(node, "yellow");
+          break;
+        default:
+          return;
+      }
+    });
+
+    let non_index_nodes = nodes.filter(node => !loops.includes(node));
+
+    if (non_index_nodes.length > 0) {
+      non_index_nodes.forEach(node => {
+        visual.highlightNode(node, "lightgreen");
+      });
+    }
+
+    this.currStep += 1;
+  }
+
+  display() {
+    return setInterval(() => this.stepForwardDisplay(), 1000);
   }
 }
