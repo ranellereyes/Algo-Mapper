@@ -16,7 +16,7 @@ class ShowDijkstras extends React.Component {
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
-    let visual = new Visualization(NODELIST);
+    let visual = new Visualization(NODELIST, "visualization");
     visual.draw();
     this.setState({ graph: visual });
     this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
