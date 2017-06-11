@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
 
   entry: [
-      './assets/js/index',
+      './assets/js/algomapper',
   ],
 
   output: {
