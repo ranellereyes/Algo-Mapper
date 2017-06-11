@@ -93,22 +93,22 @@ class ShowFloyd extends React.Component {
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
                 <p>
-                  The Floyd-Warshall algorithm is an algorithm that finds the <code>cost</cost> (shortest path) between all pairs of nodes within a graph. Similar to the Bellman-Ford algorithm, the Floyd-Warshall algorithm can handle negative edge weights when calculating the <code>cost</cost>. Edge weights are numerical values that represent the <code>cost</cost> of getting from one node to another connecting node. The Floyd-Warshall algorithm, in essence, finds the shortest path by keeping track of intermediate nodes between a pair of nodes.
+                  The Floyd-Warshall algorithm is an algorithm that finds the <code>cost</code> (shortest path) between all pairs of nodes within a graph. Similar to the Bellman-Ford algorithm, the Floyd-Warshall algorithm can handle negative edge weights when calculating the <code>cost</code>. Edge weights are numerical values that represent the <code>cost</code> of getting from one node to another connecting node. The Floyd-Warshall algorithm, in essence, finds the shortest path by keeping track of intermediate nodes between a pair of nodes.
                 </p>
                 <ol>
-                  <li><span>Creates a <code>cost</cost> and parent chart initialized with data from direct children.</span></li>
+                  <li><span>Creates a <code>cost</code> and parent chart initialized with data from direct children.</span></li>
                   <li><span>Iterate through every pair of nodes with a intermediate node to pass through.</span></li>
-                  <li><span>Check if the path with the intermediate node has a lower <code>cost</cost> than the direct path. If so, replace parents with parent of intermediate-to node.</span></li>
+                  <li><span>Check if the path with the intermediate node has a lower <code>cost</code> than the direct path. If so, replace parents with parent of intermediate-to node.</span></li>
                     <ul className='how-it-works'>
-                      <li><span><code>init<code>cost</cost>s</code> and <code>initParents</code> sets up the initial data from the given nodes</span></li>
-                      <li><span>Imagine if the <code>cost</cost> of <code>Node A</code> to <code>Node C</code> is 15. The <code>cost</cost> of <code>Node A</code> to <code>Node B</code> is 4. The <code>cost</cost> of <code>Node B</code> to <code>Node C</code> is 5.</span></li>
+                      <li><span><code>init<code>cost</code>s</code> and <code>initParents</code> sets up the initial data from the given nodes</span></li>
+                      <li><span>Imagine if the <code>cost</code> of <code>Node A</code> to <code>Node C</code> is 15. The <code>cost</code> of <code>Node A</code> to <code>Node B</code> is 4. The <code>cost</code> of <code>Node B</code> to <code>Node C</code> is 5.</span></li>
                       <li><span>The path from <code>Node A</code> to <code>Node B</code> to <code>Node C</code> is 9 (4 + 5), thus the parent of <code>Node A</code> to <code>Node C</code> is now <code>Node B</code></span></li>
                     </ul>
                   <li><span>After the algorithm is finished, use parental path to retrace the shortest path from a pair of nodes.</span></li>
               </ol>
                 <h3>Details</h3>
                 <p>
-                  The Floyd-Warshall algorithm will always find the <code>cost</cost> between all pairs of node within a graph. However, the algorithm will only ever have to run once to find the shortest path between any pair of nodes if the graph never changes because the data points are saved within the table the algorithm creates.
+                  The Floyd-Warshall algorithm will always find the <code>cost</code> between all pairs of node within a graph. However, the algorithm will only ever have to run once to find the shortest path between any pair of nodes if the graph never changes because the data points are saved within the table the algorithm creates.
                 </p>
                 <p>
                   Because the Floyd-Warshall compares all possible paths between all pairs of nodes in a graph, the time complexity will always be at best and at worst O(n<sup>3</sup>).
