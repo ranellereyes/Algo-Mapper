@@ -7,17 +7,20 @@ main.comp-main {
 
 section.comp-main {
   width: 100%;
-  max-width: 1200px;
-  min-width: 600px;
   margin: 0 auto;
-  /*display: flex;
-  flex-direction: row;*/
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 ul.comp-visualization {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  height: 100%;
+  width: 1300px;
+  max-width: 1300px;
+  min-width: 1000px;
+  justify-content: space-around;
 }
 
 ul.comp-visualization li {
@@ -25,26 +28,32 @@ ul.comp-visualization li {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 48.5%;
-  height: 500px;
+  flex-grow: 0.4;
+  height: 100%;
   background-color: white;
   margin-top: 30px;
 }
-ul.comp-visualization li > div{
+
+ul.comp-visualization li > div {
   width: 100%;
-  height: 450px;
+  height: 500px;
+  min-height: 500px;
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
   display: flex;
   justify-content: center;
 }
 
-ul.comp-visualization select{
+ul.comp-visualization select {
   font-family: inherit;
   font-size: 15pt;
-  border: none;
+  border: 1px solid lavender;
+  padding: 5px;
+  border-radius: 5px;
   outline: none;
+  margin-bottom: 5px;
 }
+
 ul.comp-visualization option{
   font-family: inherit;
   font-size: 15pt;
@@ -82,7 +91,7 @@ section.comp-arrows figure:last-child {
 
 section.comp-graph {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   min-width: 600px;
   margin: 0 auto;
 }
@@ -100,13 +109,13 @@ section.comp-graph li{
 }
 
 section.comp-graph div.comp-graph{
-  width: 45%;
+  width: 40%;
   height: 500px;
   margin: 20px, 20px, 30px, 50px;
 }
 
 section.comp-graph li.comp-graph-code{
-  width: 25%;
+  width: 30%;
   overflow: scroll;
 
 }
@@ -115,4 +124,8 @@ section.comp-graph li.comp-graph-code pre {
 }
 section.comp-graph li.comp-graph-code code {
   padding: 10px;
+}
+
+pre {
+  width: 700px;
 }
