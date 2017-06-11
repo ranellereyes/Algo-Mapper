@@ -19,7 +19,7 @@ class Dijkstra {
   }
 
   search(source, destination) {
-
+    let startTime = window.performance.now();
     this.initiate(this.nodeList[source]);
     let parent = {};
     let node = this.nodeList[source];
@@ -51,6 +51,8 @@ class Dijkstra {
     }
     // create path from source to destination
     this.createPath(parent, this.nodeList[source], this.nodeList[destination]);
+
+    return {runtime: (window.performance.now() - startTime) * 1000};
   }
 
   createPath(parent, source, destination) {
@@ -60,7 +62,6 @@ class Dijkstra {
       path.push(parent[startKey]);
       startKey = parent[startKey]
     }
-    console.log(path.reverse());
     return path.reverse();
   }
 
