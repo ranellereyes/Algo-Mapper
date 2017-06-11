@@ -1,3 +1,5 @@
+import { merge } from 'lodash';
+
 d3.selection.prototype.moveToBack = function() {
   return this.each(function() {
       var firstChild = this.parentNode.firstChild;
@@ -16,7 +18,10 @@ class Visualization {
 
   parseNodes() {
     let nodes = [];
-    let list = this.nodeList;
+    let list = {};
+    for (let key in this.nodeList) {
+      list[key] = merge({}, this.nodeList[key]);
+    }
     let keys = Object.keys(list).sort();
     keys.forEach( idx => {
       list[idx].x /= this.scale;
@@ -161,7 +166,7 @@ class Visualization {
   }
 
   clearNodes() {
-    d3.selectAll('circle.node').transition().duration(500)
+    d3.selectAll(`circle.node-${this.target}`).transition().duration(500)
       .style("fill", "lightblue")
       .style("r", 20 / this.scale * 1.5);
   }
