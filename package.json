@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "webpack": "^1.13.2",
+    "webpack-bundle-tracker": "0.0.93",
+    "webpack-dev-server": "^1.16.2",
     "axios": "^0.14.0",
     "babel-core": "^6.17.0",
     "babel-preset-react": "^6.16.0",
