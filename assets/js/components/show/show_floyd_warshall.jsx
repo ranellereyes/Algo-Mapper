@@ -12,6 +12,7 @@ class ShowFloyd extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClickLeft = this.handleClickLeft.bind(this);
     this.handleClickRight = this.handleClickRight.bind(this);
+    this.fetchCode = this.fetchCode.bind(this);
   }
 
   componentDidMount() {
@@ -21,12 +22,27 @@ class ShowFloyd extends React.Component {
     visual.draw();
     this.setState({ graph: visual });
     this.floyd = new FloydWarshallSteps(NODELIST, 1, 6, visual);
+    this.fetchCode('static/javascript/floyd_warshall.js');
   }
 
   componentWillUnmount() {
     document.onkeydown = null;
     document.onkeyup = null;
   }
+
+  fetchCode(file) {
+    var f = new XMLHttpRequest();
+    f.open("GET", file, false);
+    f.onreadystatechange = () => {
+      if(f.readyState === 4) {
+        if(f.status === 200 || f.status == 0) {
+          this.code = f.responseText;
+        }
+      }
+    };
+    f.send(null);
+  }
+
 
   handleKeyPress (e) {
     if (e.keyCode === 37){
@@ -38,7 +54,6 @@ class ShowFloyd extends React.Component {
     }
   }
   handleKeyUp (e) {
-    console.log("key up");
     document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
     document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }
@@ -58,7 +73,7 @@ class ShowFloyd extends React.Component {
       <div className="index-main">
         <main className="show-main">
           <section className="show-main">
-            <h1 className="show-name">A* Algorithm</h1>
+            <h1 className="show-name">Floyd-Warshall</h1>
             <ul className="visualization">
               <div className="visualization" />
               <aside className="show-code">
