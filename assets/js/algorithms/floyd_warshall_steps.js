@@ -168,6 +168,7 @@ export default class FloydWarshallSteps extends FloydWarshall {
       this.visualization.clearNodes();
       this.visualization.clearLinks();
       this.dispAnswer(this.start, this.end);
+      this.currStep = 0;
       return;
     }
 
