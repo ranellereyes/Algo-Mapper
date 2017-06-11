@@ -7,7 +7,7 @@ import { NODELIST } from '../../algorithms/node';
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 import AstarSteps from '../../algorithms/astar_step';
 import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
-import FloydWarshallAlgoSteps from '../../algorithms/floyd-warshall-algo-steps';
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
 
 class Comparison extends React.Component {
   constructor(props) {
@@ -86,8 +86,8 @@ class Comparison extends React.Component {
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
-          algorithms.push(new FloydWarshallAlgoSteps(NODELIST, 1, 6, this.visual[index]));
-          this.fetchCode('static/javascript/floyd-warshall-algo.js');
+          algorithms.push(new FloydWarshallSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/floyd_warshall.js');
       }
     });
     this.setState({algorithms: algorithms});

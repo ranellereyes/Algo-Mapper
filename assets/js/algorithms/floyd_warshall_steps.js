@@ -1,7 +1,7 @@
-import { floydWarshallAlgo } from "./floyd-warshall-algo";
+import FloydWarshall from "./floyd_warshall";
 import { cloneDeep } from "lodash";
 
-export default class FloydWarshallAlgoSteps extends floydWarshallAlgo {
+export default class FloydWarshallSteps extends FloydWarshall {
   constructor(nodelist, start, end, visual) {
     super(nodelist);
     this.visualization = visual;
