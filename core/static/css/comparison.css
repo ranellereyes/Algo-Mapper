@@ -38,10 +38,7 @@ ul.comp-visualization li > div{
   display: flex;
   justify-content: center;
 }
-/*
-ul.comp-visualization li > div > div{
-  margin: auto;
-}*/
+
 ul.comp-visualization select{
   font-family: inherit;
   font-size: 15pt;
