@@ -8,7 +8,7 @@
   "npm": "2.1.x"
   },
   "scripts": {
-    "webpack": "webpack --progress --display-error-details --config webpack.config.js --watch",
+    "webpack-watch": "webpack --progress --display-error-details --config webpack.config.js --watch",
     "postinstall": "webpack"
   },
   "author": "",
