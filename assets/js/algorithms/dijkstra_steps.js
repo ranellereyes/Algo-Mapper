@@ -184,6 +184,37 @@ class DijkstraSteps {
     }
   }
 
+  stepFowardDisplay() {
+    // if (this.i >= this.steps.length) return;
+    let steps = this.steps[this.i];
+    let visual = this.visual;
+
+    visual.clearLinks();
+    visual.clearNodes();
+    if (this.i >= this.steps.length) {
+      this.path.forEach((node, idx) => {
+        visual.highlightNode(node, "red");
+        visual.highlightLink(node, this.path[idx + 1], "blue")
+      });
+      this.i--;
+    }
+    else if (steps) {
+      visual.highlightNode(steps.path[0], "yellow");
+      visual.highlightLink(steps.path[0], steps.path[1], "red");
+      visual.highlightNode(steps.path[1], "green");
+    }
+
+    this.i += 1;
+    if (this.i === this.steps.length) {
+      this.i = -1
+    }
+
+  }
+
+  display() {
+    return setInterval(() => this.stepForwardDisplay(), 1500);
+  }
+
 }
 
 export default DijkstraSteps;
