@@ -8,7 +8,6 @@ class AstarSteps extends Astar {
     this.visualization = visual;
     this.i = 0;
     this.steps = this.search(startNodeId, endNodeId);
-    this.nextStep = 'highlight node';
   }
 
   search(startNodeId, endNodeId) {
@@ -125,8 +124,8 @@ class AstarSteps extends Astar {
       visual.addText(child.id, -19, -41, 'blue', (d) => `g = ${Math.floor(child.g)}`);
       visual.addText(child.id, -19, -25, 'blue', (d) => `f = ${Math.floor(child.f)}`);
       visual.highlightLink(child.parent.id, child.id, "red");
+      visual.animateLink(child.parent.id, child.id, "brown");
     }
-
     visual.removeText(curr.id);
     visual.addText(curr.id, -19, -55, 'blue', (d) => `h = ${Math.floor(curr.h)}`);
     visual.addText(curr.id, -19, -41, 'blue', (d) => `g = ${Math.floor(curr.g)}`);
