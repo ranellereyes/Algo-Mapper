@@ -75,7 +75,7 @@ class Comparison extends React.Component {
       switch (this.state.options[key]) {
         case "dijkstra":
           algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
-          this.fetchCode('static/javascript/dijkstra.js');
+          this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
