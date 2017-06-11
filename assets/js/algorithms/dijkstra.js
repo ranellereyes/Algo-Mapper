@@ -19,7 +19,8 @@ class Dijkstra {
   }
 
   search(source, destination) {
-    this.initiate(this.nodeList[source])
+
+    this.initiate(this.nodeList[source]);
     let parent = {};
     let node = this.nodeList[source];
     while (this.unvisited.length !== 0) {
