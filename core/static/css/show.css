@@ -4,10 +4,10 @@ main.show-main {
   height: 100%;
   padding-top: 15px;
   padding-bottom: 30px;
-  background: #146a82; /* Old browsers */
-  background: -moz-linear-gradient(left, #146a82 0%, #61b5d3 34%, #61b5d3 68%, #146a82 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, #146a82 0%,#61b5d3 34%,#61b5d3 68%,#146a82 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, #146a82 0%,#61b5d3 34%,#61b5d3 68%,#146a82 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: #2c0d44; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #2c0d44 0%, #1b53ad 40%, #411a93 43%, #1a0947 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #2c0d44 0%,#1b53ad 40%,#411a93 43%,#1a0947 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #2c0d44 0%,#1b53ad 40%,#411a93 43%,#1a0947 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 section.show-main {
@@ -98,7 +98,7 @@ section.show-algo-bottom > div{
 }
 
 section.show-algo-bottom h1{
-  color: #44A7C3;
+  color: #276495;
   padding-bottom: 10px;
   margin-left: -20px;
   font-size: 25pt;
