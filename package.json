@@ -7,7 +7,8 @@
     "build": "webpack --config webpack.config.js --progress --colors",
     "build-production": "webpack --config webpack.prod.config.js --progress --colors",
     "webpack": "webpack --progress --display-error-details --config webpack.config.js --watch",
-    "watch": "node server.js"
+    "watch": "node server.js",
+    "postinstall": "webpack"
   },
   "author": "",
   "license": "ISC",
