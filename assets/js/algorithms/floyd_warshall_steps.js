@@ -207,6 +207,6 @@ export default class FloydWarshallSteps extends FloydWarshall {
   }
 
   display() {
-    return setInterval(() => this.stepForwardDisplay(), 1000);
+    return setInterval(() => this.stepForwardDisplay(), 750);
   }
 }
