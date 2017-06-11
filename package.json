@@ -11,7 +11,8 @@
     "build": "webpack --config webpack.config.js --progress --colors",
     "build-production": "webpack --config webpack.prod.config.js --progress --colors",
     "webpack": "webpack --progress --display-error-details --config webpack.config.js --watch",
-    "watch": "node server.js"
+    "watch": "node server.js",
+    "postinstall": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "webpack": "^1.13.2",
     "axios": "^0.14.0",
     "babel-core": "^6.17.0",
     "babel-preset-react": "^6.16.0",
