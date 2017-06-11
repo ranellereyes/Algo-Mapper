@@ -8,15 +8,18 @@ export default class FloydWarshallSteps extends FloydWarshall {
     this.steps = [];
     this.search(start, end);
     this.currStep = 0;
+    this.start = start;
+    this.end = end;
 
     this.addText = this.addText.bind(this);
   }
 
   clear() {
-    d3.selectAll(".node")
-    .transition()
-    .duration(500)
-    .style("fill", "lightblue");
+    this.visualization.clearNodes();
+    // d3.selectAll(".node")
+    //   .transition()
+    //   .duration(500)
+    //   .style("fill", "lightblue");
 
     d3.selectAll(".corner_text")
       .transition()
@@ -58,28 +61,6 @@ export default class FloydWarshallSteps extends FloydWarshall {
     step = this.steps[this.currStep],
     { nodes, loops, tables, changed } = step;
 
-    // d3.select(`svg`).append('text')
-    //   .text(`i = ${loops[0]}, j = ${loops[1]}, k = ${loops[2]}`)
-    //   .attr('class', `corner_text`)
-    //   .attr('dx', 10)
-    //   .attr('dy', 20)
-    //   .style('opacity', 0)
-    //   .style('fill', 'steelblue')
-    //   .transition()
-    //   .duration(500)
-    //   .style('opacity', 1);
-    //
-    // d3.select(`svg`).append('text')
-    //   .text(`i = source node, j = destination node, k = intermediate node`)
-    //   .attr('class', `corner_text`)
-    //   .attr('dx', 10)
-    //   .attr('dy', 40)
-    //   .style('opacity', 0)
-    //   .style('fill', 'steelblue')
-    //   .transition()
-    //   .duration(500)
-    //   .style('opacity', 1);
-
     this.addText(`i = ${loops[0]}, j = ${loops[1]}, k = ${loops[2]}`, 16);
     this.addText(`i = source node, j = destination node, k = intermediate node`, 30);
 
@@ -96,7 +77,7 @@ export default class FloydWarshallSteps extends FloydWarshall {
           let color = changed ? "red" : "black",
               parent = tables.parents[i][j];
 
-          visual.addText(node, -59, -29, color,
+          visual.addText(node, -39, -29, color,
             (d) => `parent = ${parent}`);
           break;
         case 1:
@@ -128,7 +109,12 @@ export default class FloydWarshallSteps extends FloydWarshall {
   }
 
   stepForward() {
-    if (this.currStep > this.steps.length) return;
+    console.log(this.currStep, this.steps.length);
+    if (this.currStep > this.steps.length - 2) {
+      this.clear();
+      this.dispAnswer(this.start, this.end);
+      return;
+    }
 
     this.currStep += 1;
     this.clear();
@@ -166,5 +152,18 @@ export default class FloydWarshallSteps extends FloydWarshall {
       }
     }
     return this.steps;
+  }
+
+  dispAnswer(start, end) {
+    let answer = this.pathDeconstructor(String(start), String(end));
+    answer.forEach((node, i) => {
+      let child = answer[i + 1];
+      this.visualization.highlightNode(node, "red");
+
+      if (i !== answer.length - 1) {
+        this.visualization.highlightLink(node, child, "red");
+      }
+    });
+    return;
   }
 }
