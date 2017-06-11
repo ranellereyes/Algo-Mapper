@@ -219,16 +219,15 @@ class Visualization {
           [source.x, source.y]
         ])
       )
-      .style("stroke-width", 3);
+      .style("stroke-width", 3)
+      .style('fill', 'white');
 
     path
       .transition()
-      .duration(1000)
+      .duration(600)
       .attr("d", this.bezierLine([
         [source.x, source.y],
         [this.centerTextX(source.x, target.x, source.y, target.y, 20, 1), this.centerTextY(source.x, target.x, source.y, target.y, 20, 1)],
-        // [100, 250],
-        // [125, 250],
         [target.x, target.y]
       ]))
       .attrTween("stroke-dasharray", function() {
@@ -239,8 +238,8 @@ class Visualization {
       .style("marker-end", `url(#arrow-${fromId}-${toId}-animate-${this.target})`);
 
     setTimeout( () => {
-      path.transition().duration(500).style("opacity", "0").remove();
-    }, 1000);
+      d3.selectAll('svg > path').transition().duration(300).style("opacity", "0").remove()
+    }, 650);
   }
 
   addText(nodeId, dx, dy, color, textFunction) {
