@@ -10,26 +10,25 @@ main.index-main {
   background: -moz-linear-gradient(left, #010023 0%, #010028 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, #010023 0%,#010028 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, #010023 0%,#010028 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  /*margin-top: 50px;*/
   display: flex;
   justify-content: space-around;
-
   position: relative;
-  /*border-bottom: 1px solid #eaeaea;*/
 }
 main.index-main img {
   height: 100%;
 }
 
 div.index-content {
-  position: absolute;
-  top: 150px;
   color: white;
-  width: 400px;
-
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-image: url('http://i1096.photobucket.com/albums/g327/winber1/header2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 div.index-content h1 {
@@ -39,6 +38,7 @@ div.index-content h1 {
 }
 
 div.index-content span {
+  width: 350px;
   font-size: 22px;
   text-align: center;
   font-family: Poiret One;
