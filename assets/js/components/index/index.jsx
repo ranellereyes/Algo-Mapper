@@ -1,5 +1,8 @@
 import React from 'react';
 import Highlight from 'react-highlight';
+import Visualization from '../../d3/visualization';
+import { NODELIST } from '../../algorithms/node';
+import AstarStep from '../../algorithms/astar_step';
 
 const MESSAGES = {
   first: 'EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.',
@@ -17,6 +20,15 @@ class Index extends React.Component {
       message: MESSAGES['first']
     }
     this.selectAlgo = this.selectAlgo.bind(this);
+  }
+
+  componentDidMount() {
+    let astar = new Visualization(NODELIST, 'astar', 1.85);
+    let dijkstra = new Visualization(NODELIST, 'dijkstra', 1.85)
+    astar.draw();
+    dijkstra.draw();
+    new AstarStep(NODELIST, 1, 6, astar).display();
+    // new DijkstraStep(NODELIST, 1, 6, dijkstra).display();
   }
 
   selectAlgo(id) {
@@ -39,10 +51,10 @@ class Index extends React.Component {
         </main>
         <section className="index-algo-display">
           <ul className="index-algo-list">
-            <div tabIndex="1" onFocus={() => this.selectAlgo('first')} className="index-algo-image"> Visualiaztion Algorithms area</div>
-            <div tabIndex="1" onFocus={() => this.selectAlgo('second')} className="index-algo-image" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('third')} className="index-algo-image" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('fourth')} className="index-algo-image" />
+            <div tabIndex="1" onFocus={() => this.selectAlgo('first')} className="index-algo-image astar" />
+            <div tabIndex="1" onFocus={() => this.selectAlgo('second')} className="index-algo-image dijkstra" />
+            <div tabIndex="1" onFocus={() => this.selectAlgo('third')} className="index-algo-image bellman" />
+            <div tabIndex="1" onFocus={() => this.selectAlgo('fourth')} className="index-algo-image floyd" />
           </ul>
           <div className={`index-arrow-up ${this.state.algo}`}>
             <div className="index-arrow-fill" />

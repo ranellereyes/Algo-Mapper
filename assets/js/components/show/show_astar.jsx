@@ -16,7 +16,7 @@ class ShowAstar extends React.Component {
 
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
-    let visual = new Visualization(NODELIST);
+    let visual = new Visualization(NODELIST, 'div.visualization');
     visual.draw();
     this.setState({ graph: visual });
     this.AstarStep = new AstarStep(NODELIST, 1, 6, visual);
