@@ -3,15 +3,17 @@ import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
 import AstarSteps from '../../algorithms/astar_step';
-import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
-import DijkstraSteps from '../../algorithms/dijkstra_steps';
+import { AstarDescription, DijkstraDescription, BellmanFordDescription, FloydWarshallDescription } from './descriptions';
 
 const MESSAGES = {
-  first: 'EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.',
-  second: 'I LOVE FOOD',
-  third: 'PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME ',
-  fourth: 'howdy there, nice to meet you'
-};
+  first: <AstarDescription />,
+  second: <DijkstraDescription />,
+  third: <BellmanFordDescription />,
+  fourth: <FloydWarshallDescription />
+}
+
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
+import DijkstraSteps from '../../algorithms/dijkstra_steps';
 
 class Index extends React.Component {
   constructor(props) {
@@ -75,9 +77,9 @@ class Index extends React.Component {
             <div className="index-arrow-fill" />
           </div>
           <div className="index-algo-description">
-            <h3 ref="description" className={this.state.active}>
+            <section ref="description" className={this.state.active}>
               {this.state.message}
-            </h3>
+            </section>
           </div>
         </section>
         <footer>
