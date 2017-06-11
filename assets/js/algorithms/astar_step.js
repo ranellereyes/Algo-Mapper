@@ -8,7 +8,6 @@ class AstarSteps extends Astar {
     this.visualization = visual;
     this.i = 0;
     this.steps = this.search(startNodeId, endNodeId);
-    this.nextStep = 'highlight node';
   }
 
   search(startNodeId, endNodeId) {

@@ -14,7 +14,7 @@ class Visualization {
     this.nodeList = nodeList;
     this.target = target;
     this.scale = scale || 1;
-    this.nodeScale = scale * 1.5 || 1;
+    this.nodeScale = scale / 1.5 || 1;
   }
 
   parseNodes() {
@@ -69,7 +69,7 @@ class Visualization {
 
   addArrow(defs, link, color, animate) {
     let arrow = defs
-      .data([`arrow-${link.source.id}-${link.target.id}${animate ? animate : ''}`])
+      .data([`arrow-${link.source.id}-${link.target.id}${animate ? animate : ''}-${this.target}`])
       .enter().append("marker")
       .attr("id", function(d) { return d })
       .attr("viewBox", "0 -5 10 10")
@@ -95,18 +95,18 @@ class Visualization {
     this.nodeGroup = this.svg.selectAll("g")
       .data(graph.nodes);
 
-    this.links = this.svg.selectAll(`line.link`)
+    this.links = this.svg.selectAll(`line.link-${this.target}`)
         .data(graph.links)
         .enter().append("line")
         .attr("stroke", "gray")
-        .attr("class", `link`)
+        .attr("class", `link-${this.target}`)
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; })
         .attr("id", function(d) { return `${d.source.id}-${d.target.id}`})
         .style("stroke-width", 3)
-        .style("marker-end",  (d) => `url(#arrow-${d.source.id}-${d.target.id})`);
+        .style("marker-end",  (d) => `url(#arrow-${d.source.id}-${d.target.id}-${this.target})`);
 
     this.defs = this.svg.append('defs').selectAll('marker');
     this.links.each( link => {
@@ -118,10 +118,10 @@ class Visualization {
             .y(function(d) { return d[1]; })
             .curve(d3.curveCardinal.tension(-1.5));
 
-    this.svg.selectAll("text.link")
+    this.svg.selectAll(`text.link-${this.target}`)
         .data(graph.links)
         .enter().append("text")
-        .attr("class", "link")
+        .attr("class", `link-${this.target}`)
         .attr("x", (d) => this.centerTextX(d.source.x, d.target.x, d.source.y, d.target.y, 12, -1))
         .attr("y", (d) => this.centerTextY(d.source.x, d.target.x, d.source.y, d.target.y, 12, -1))
         .attr("dy", 5)
@@ -154,11 +154,11 @@ class Visualization {
   }
 
   clearLinks() {
-    d3.selectAll('line.link')
+    d3.selectAll(`line.link-${this.target}`)
       .transition()
       .duration(500)
       .style('stroke', 'grey');
-    d3.selectAll(`path`)
+    d3.selectAll(`div.${this.target} path`)
       .transition()
       .duration(500)
       .style('stroke', 'grey')
@@ -188,7 +188,7 @@ class Visualization {
       .transition()
       .duration(500)
       .style('stroke', 'grey');
-    d3.select(`#arrow-${fromId}-${toId} path`)
+    d3.select(`#arrow-${fromId}-${toId}-${this.target} path`)
       .transition()
       .duration(500)
       .style('stroke', 'grey')
@@ -200,7 +200,7 @@ class Visualization {
       .transition()
       .duration(500)
       .style('stroke', color);
-    d3.select(`#arrow-${fromId}-${toId} path`)
+    d3.select(`#arrow-${fromId}-${toId}-${this.target} path`)
       .transition()
       .duration(500)
       .style('stroke', color)
