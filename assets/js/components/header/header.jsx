@@ -25,10 +25,14 @@ class Header extends React.Component {
     return (
       <header className="nav-header">
         <nav className="nav-bar">
-          <ul>
+          <ul className="nav-logo">
+            <li>
+              <figure className="nav-logo"></figure>
+            </li>
             <li className="nav-logo">
-              <Link to="/">AlgoMapper</Link>
+              <Link to="/">AlgoMapper
               <div className="nav-logo-underline" />
+              </Link>
             </li>
           </ul>
           <ul className="nav-menu">

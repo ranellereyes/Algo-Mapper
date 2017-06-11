@@ -7,7 +7,7 @@ import { NODELIST } from '../../algorithms/node';
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 import AstarSteps from '../../algorithms/astar_step';
 import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
-import FloydWarshallAlgoSteps from '../../algorithms/floyd-warshall-algo-steps';
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
 
 class Comparison extends React.Component {
   constructor(props) {
@@ -45,10 +45,11 @@ class Comparison extends React.Component {
     this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    this.resetAlgorithms();
-
     let graph = new Graph();
     graph.draw();
+
+    this.resetAlgorithms();
+
   }
 
   componentWillUnmount() {
@@ -63,19 +64,18 @@ class Comparison extends React.Component {
     this.visual = [];
     this.codes = [];
 
-    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    // this.fetchCode('static/javascript/bellman_ford.js');
 
-
+    new Graph().draw();
 
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
         case "dijkstra":
           algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
-          this.fetchCode('static/javascript/dijkstra.js');
+          this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
@@ -86,8 +86,8 @@ class Comparison extends React.Component {
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
-          algorithms.push(new FloydWarshallAlgoSteps(NODELIST, 1, 6, this.visual[index]));
-          this.fetchCode('static/javascript/floyd-warshall-algo.js');
+          algorithms.push(new FloydWarshallSteps(NODELIST, 1, 6, this.visual[index]));
+          this.fetchCode('static/javascript/floyd_warshall.js');
       }
     });
     this.setState({algorithms: algorithms});

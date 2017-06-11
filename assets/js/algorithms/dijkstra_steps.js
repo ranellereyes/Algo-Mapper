@@ -128,9 +128,9 @@ class DijkstraSteps {
         if (steps.path[1]) {
           this.visual.animateLink(steps.path[0], steps.path[1], "purple")
         }
-        this.visual.highlightNode(steps.path[0], "yellow");
+        this.visual.highlightNode(steps.path[0], "green");
         this.visual.highlightLink(steps.path[0], steps.path[1], "blue");
-        this.visual.highlightNode(steps.path[1], "green");
+        this.visual.highlightNode(steps.path[1], "yellow");
         steps.visited.forEach(node => {
           this.visual.addText(node.id, -21, 36, "red", (d) => "visited")
         });
@@ -182,6 +182,37 @@ class DijkstraSteps {
         this.visual.addText(node.id, -21, 36, "red", (d) => "visited")
       });
     }
+  }
+
+  stepForwardDisplay() {
+    // if (this.i >= this.steps.length) return;
+    let steps = this.steps[this.i];
+    let visual = this.visual;
+
+    visual.clearLinks();
+    visual.clearNodes();
+    if (this.i === this.steps.length) {
+      this.path.forEach((node, idx) => {
+        visual.highlightNode(node, "red");
+        visual.highlightLink(node, this.path[idx + 1], "blue")
+      });
+    }
+    else if (steps) {
+      visual.highlightNode(steps.path[0], "green");
+      visual.highlightLink(steps.path[0], steps.path[1], "red");
+      visual.highlightNode(steps.path[1], "yellow");
+    }
+
+    this.i += 1;
+    if (this.i > this.steps.length) {
+      this.i = 0;
+    }
+
+  }
+
+  display() {
+    this.i = 0;
+    return setInterval(() => this.stepForwardDisplay(), 1500);
   }
 
 }

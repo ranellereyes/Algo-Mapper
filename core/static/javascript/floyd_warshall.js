@@ -1,7 +1,7 @@
 // TESTING STUFF
 // import { NODELIST, NODELIST2 } from "./node";
 
-export class floydWarshallAlgo {
+export default class FloydWarshall {
   constructor (nodelist) {
     this.nodelist = nodelist;
     this.indices = Object.keys(nodelist);

@@ -1,7 +1,7 @@
 // TESTING STUFF
 // import { NODELIST, NODELIST2 } from "./node";
 
-export class floydWarshallAlgo {
+export default class FloydWarshall {
   constructor (nodelist) {
     this.nodelist = nodelist;
     this.indices = Object.keys(nodelist);
@@ -48,7 +48,7 @@ export class floydWarshallAlgo {
         if (i === j) {
           this.parents[i][j] = null;
         } else if (!this.parents[i][j]) {
-          this.parents[i][j] = undefined;
+          this.parents[i][j] = null;
         }
       }
     }

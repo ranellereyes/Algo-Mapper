@@ -12,6 +12,9 @@ const MESSAGES = {
   fourth: <FloydWarshallDescription />
 }
 
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
+import DijkstraSteps from '../../algorithms/dijkstra_steps';
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +22,7 @@ class Index extends React.Component {
       algo: 'first',
       active: '',
       message: MESSAGES['first']
-    }
+    };
     this.selectAlgo = this.selectAlgo.bind(this);
   }
 
@@ -33,9 +36,9 @@ class Index extends React.Component {
     bellman.draw();
     floyd.draw();
     this.astar = new AstarSteps(NODELIST, 1, 6, astar).display();
-    this.dijkstra = new AstarSteps(NODELIST, 1, 6, dijkstra).display();
+    this.dijkstra = new DijkstraSteps(NODELIST, 1, 6, dijkstra).display();
     this.bellman = new AstarSteps(NODELIST, 1, 6, bellman).display();
-    this.floyd = new AstarSteps(NODELIST, 1, 6, floyd).display();
+    this.floyd = new FloydWarshallSteps(NODELIST, 1, 6, floyd).display();
   }
 
   componentWillUnmount() {
@@ -104,7 +107,7 @@ class Index extends React.Component {
           </ul>
         </footer>
       </div>
-    )
+    );
   }
 }
 
