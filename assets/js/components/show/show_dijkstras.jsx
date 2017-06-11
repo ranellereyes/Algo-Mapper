@@ -111,10 +111,15 @@ class ShowDijkstras extends React.Component {
                 </p>
               </div>
               <aside className="show-pros-n-cons">
-                <h3>Pros & Cons</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <h3>Pros</h3>
+                <ul className='pros-n-cons'>
+                  <li><span>Uninformed algorithm. Does not need to know destination beforehand</span></li>
+                  <li><span>Useful when trying to find multiple destinations as it provides the shortest path from one source node to all other nodes</span></li>
+                </ul>
+                <h3>Cons</h3>
+                <ul className='pros-n-cons'>
+                  <li><span>Fails with negative edge weights because visited nodes will never be visited again so the costs will never be re-evaluated</span></li>
+                </ul>
               </aside>
             </ul>
           </div>
