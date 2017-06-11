@@ -31,10 +31,17 @@ class Index extends React.Component {
     dijkstra.draw();
     bellman.draw();
     floyd.draw();
-    new AstarSteps(NODELIST, 1, 6, astar).display();
-    new AstarSteps(NODELIST, 1, 6, dijkstra).display();
-    new AstarSteps(NODELIST, 1, 6, bellman).display();
-    new AstarSteps(NODELIST, 1, 6, floyd).display();
+    this.astar = new AstarSteps(NODELIST, 1, 6, astar).display();
+    this.dijkstra = new AstarSteps(NODELIST, 1, 6, dijkstra).display();
+    this.bellman = new AstarSteps(NODELIST, 1, 6, bellman).display();
+    this.floyd = new AstarSteps(NODELIST, 1, 6, floyd).display();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.astar);
+    clearInterval(this.dijkstra);
+    clearInterval(this.bellman);
+    clearInterval(this.floyd);
   }
 
   selectAlgo(id) {
