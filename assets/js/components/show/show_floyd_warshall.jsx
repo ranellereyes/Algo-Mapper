@@ -1,7 +1,7 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
-import {floydWarshallAlgoSteps} from '../../algorithms/floyd-warshall-algo-steps';
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
 import Highlight from 'react-highlight';
 
 class ShowFloyd extends React.Component {
@@ -15,11 +15,11 @@ class ShowFloyd extends React.Component {
   }
 
   componentDidMount() {
-    let visual = new Visualization(NODELIST);
+    let visual = new Visualization(NODELIST, "div.visualization");
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual });
-    this.floyd = new floydWarshallAlgoSteps(NODELIST, 1, 6, visual);
+    this.floyd = new FloydWarshallSteps(NODELIST, 1, 6, visual);
     window.f = this.floyd;
   }
 
@@ -63,7 +63,7 @@ class ShowFloyd extends React.Component {
               <div className="visualization" />
               <aside className="show-code">
                 <Highlight class="javascript-snippet">
-{`class floydWarshallAlgo {
+{`class FloydWarshall {
   constructor (nodelist) {
     this.nodelist = nodelist;
     this.indices = Object.keys(nodelist);
