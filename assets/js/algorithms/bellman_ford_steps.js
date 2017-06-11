@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 class BellmanFordSteps extends BellmanFord{
   constructor(nodeList, startNodeId, endNodeId, visual) {
     super(nodeList);
-    this.nodeList = nodeList;
+    // this.nodeList = nodeList;
     this.visual = visual;
     this.index = -1;
     this.path = super.search(startNodeId, endNodeId);
@@ -18,28 +18,28 @@ class BellmanFordSteps extends BellmanFord{
   }
 
   search(startNodeId, endNodeId) {
-    let cost = {};
+    let costs = {};
     let parents = {};
 
     Object.keys(this.nodeList).forEach((nodeId) => {
-      cost[nodeId] = Infinity;
+      costs[nodeId] = Infinity;
       parents[nodeId] = null;
     });
+    costs[startNodeId] = 0;
 
     let steps = [merge({},{
                   node: [null, String(startNodeId)],
-                  cost: cost})];
+                  costs: costs})];
 
-    cost[startNodeId] = 0;
     let finished = false;
 
     for (let i = 0; i < Object.keys(this.nodeList).length - 1; i++) {
       finished = true;
       this.edgeList.forEach((edge) => {
-        let thisStep = { node: [edge.fromId, edge.toId], cost: {} } ;
-        if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
-          cost[edge.toId] = cost[edge.fromId] + edge.weight;
-          thisStep.cost[edge.toId] = cost[edge.toId];
+        let thisStep = { node: [edge.fromId, edge.toId], costs: {} } ;
+        if (costs[edge.fromId] + edge.weight < costs[edge.toId]) {
+          costs[edge.toId] = costs[edge.fromId] + edge.weight;
+          thisStep.costs[edge.toId] = costs[edge.toId];
           parents[edge.toId] = edge.fromId;
           finished = false;
         }
@@ -55,29 +55,33 @@ class BellmanFordSteps extends BellmanFord{
 
   stepBackward() {
     this.index--;
+    this.visual.clearLinks();
+    this.visual.clearNodes();
     if (this.index < 0) {
-      this.index = 0;
-    } else if (this.index === this.steps.length -1){
-      this.path.forEach((id) => {
-        this.visual.unhighlightNode(id);
-      });
-      for (let i = 0; i < this.path.length -1; i++) {
-        this.visual.unhighlightLink(this.path[i], this.path[i+1]);
-      }
-    }
-    else {
-      this.visual.unhighlightNode(this.steps[this.index+1].node[0]);
-      this.visual.unhighlightNode(this.steps[this.index+1].node[1]);
-
-      this.visual.highlightNode(this.steps[this.index].node[0], "red");
+      this.index = -1;
+    } else {
+      this.visual.highlightNode(this.steps[this.index].node[0], "yellow");
       this.visual.highlightNode(this.steps[this.index].node[1], "green");
-    }
+      this.visual.highlightLink(this.steps[this.index].node[0], this.steps[this.index].node[1], "red");
 
+      let costs = this.steps[this.index].costs;
+      Object.keys(costs).forEach((nodeId) => {
+        this.visual.removeText(nodeId);
+        if (costs[nodeId] === Infinity) {
+          this.visual.addText(nodeId, -6, -25, "red", (d) => "∞");
+        } else if (costs[nodeId] < 10 && costs[nodeId] >= 0) {
+          this.visual.addText(nodeId, -5, -28, "red", (d) => costs[nodeId]);
+        } else {
+          this.visual.addText(nodeId, -7, -28, "red", (d) => costs[nodeId]);
+        }
+      });
+    }
   }
 
   stepForward() {
-    console.log(this.index);
     this.index++;
+    this.visual.clearLinks();
+    this.visual.clearNodes();
     if (this.index >= this.steps.length ) {
       this.path.forEach((id) => {
         this.visual.highlightNode(id, "red");
@@ -86,15 +90,22 @@ class BellmanFordSteps extends BellmanFord{
         this.visual.highlightLink(this.path[i], this.path[i+1], "red");
       }
       this.index = this.steps.length;
-    } else if (this.index === 0) {
-      this.visual.highlightNode(this.steps[this.index].node[0], "red");
-      this.visual.highlightNode(this.steps[this.index].node[1], "green");
     } else {
-      this.visual.unhighlightNode(this.steps[this.index-1].node[0]);
-      this.visual.unhighlightNode(this.steps[this.index-1].node[1]);
-      this.visual.animateLink(this.steps[this.index].node[0], this.steps[this.index].node[1], "red");
-      this.visual.highlightNode(this.steps[this.index].node[0], "red");
+      this.visual.highlightNode(this.steps[this.index].node[0], "yellow");
       this.visual.highlightNode(this.steps[this.index].node[1], "green");
+      this.visual.highlightLink(this.steps[this.index].node[0], this.steps[this.index].node[1], "red");
+
+      let costs = this.steps[this.index].costs;
+      Object.keys(costs).forEach((nodeId) => {
+        this.visual.removeText(nodeId);
+        if (costs[nodeId] === Infinity) {
+          this.visual.addText(nodeId, -6, -25, "red", (d) => "∞");
+        } else if (costs[nodeId] < 10 && costs[nodeId] >= 0) {
+          this.visual.addText(nodeId, -5, -28, "red", (d) => costs[nodeId]);
+        } else {
+          this.visual.addText(nodeId, -7, -28, "red", (d) => costs[nodeId]);
+        }
+      });
     }
   }
 }
