@@ -96,10 +96,10 @@ class ShowBellmanFord extends React.Component {
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
                 <p>
-                  Finds distance from source node to all other nodes //needs change
+                  The Bellman-Ford algorithm is an algorithm that finds the <code>cost</code> (shortest path) from a source node to a destination node or all other nodes within a graph. Unlike Dijkstra's algorithm, the Bellman-Ford algorithm can handle negative edge weights and will display an error if there is a negative cycle. Edge weights are numerical values that represent the <code>cost</code> of getting from one node to another connecting node. //needs change
                 </p>
                 <ol>
-                  <li><span>Assign a source node and set its distance value (cost / weight?) to 0. All other nodes’ distance value to infinity.</span></li>
+                  <li><span>Assign a source node and set its <code>cost</code> to 0. Set all other nodes' <code>cost</code> to infinity because the source node does not know how much it will <code>cost</code> to get to the other nodes.</span></li>
                   <li><span>From the source node it relaxes all the edges in the graph that are outgoing from the source node.</span></li>
                   <li><span>Iterate over every node V-1 times (V = # of vertices) and updates the cost of getting from source node to every node if the cost is less than the previous cost of getting to the node.</span></li>
                   <li><span>The algorithm ends when it iterates over the nodes V-1 times or if the current and previous iteration is the same.</span></li>
