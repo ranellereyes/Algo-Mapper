@@ -16,8 +16,6 @@ class ShowBellmanFord extends React.Component {
     this.handleClickRight = this.handleClickRight.bind(this);
     this.fetchCode = this.fetchCode.bind(this);
     // this. = this..bind(this);
-
-
   }
 
   componentDidMount() {
@@ -59,7 +57,6 @@ class ShowBellmanFord extends React.Component {
     }
   }
   handleKeyUp (e) {
-    console.log("key up");
     document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
     document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }
@@ -99,22 +96,27 @@ class ShowBellmanFord extends React.Component {
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  Finds distance from source node to all other nodes //needs change
                 </p>
-                <h3>Math</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <ol>
+                  <li><span>Assign a source node and set its distance value (cost / weight?) to 0. All other nodes’ distance value to infinity.</span></li>
+                  <li><span>From the source node it relaxes all the edges in the graph that are outgoing from the source node.</span></li>
+                  <li><span>Iterate over every node V-1 times (V = # of vertices) and updates the cost of getting from source node to every node if the cost is less than the previous cost of getting to the node.</span></li>
+                  <li><span>The algorithm ends when it iterates over the nodes V-1 times or if the current and previous iteration is the same.</span></li>
+                  <li><span></span></li>
+                </ol>
               </div>
               <aside className="show-pros-n-cons">
-                <h3>Pros & Cons</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <h3>Pros</h3>
+                  <ul className='pros-n-cons'>
+                    <li><span>Accounts for negative weights</span></li>
+                    <li><span>Determines if negative-weight cycles exist</span></li>
+                    <li><span>Allows for a wider class of inputs than Dijkstra</span></li>
+                  </ul>
+                  <h3>Cons</h3>
+                  <ul className='pros-n-cons'>
+                    <li><span></span></li>
+                  </ul>
               </aside>
             </ul>
           </div>
