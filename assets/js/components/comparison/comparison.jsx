@@ -9,6 +9,11 @@ import AstarSteps from '../../algorithms/astar_step';
 import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
 
+import Dijkstra from '../../algorithms/dijkstra';
+import Astar from '../../algorithms/astar';
+import BellmanFord from '../../algorithms/bellman_ford';
+import FloydWarshall from '../../algorithms/floyd_warshall';
+
 class Comparison extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +21,8 @@ class Comparison extends React.Component {
                     { optionA: "dijkstra",
                       optionB: "bellman-ford"
                     },
-                  algorithms: {}
+                  algorithms: [],
+                  graphAlgo: []
                   };
     // this.visual = [];
     this.codes = [];
@@ -45,7 +51,8 @@ class Comparison extends React.Component {
     this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    let graph = new Graph();
+    let graph = new Graph(FloydWarshall, FloydWarshall);
+    window.graph = graph;
     graph.draw();
 
     this.resetAlgorithms();
@@ -60,6 +67,7 @@ class Comparison extends React.Component {
   resetAlgorithms() {
 
     let algorithms = [];
+    let graphAlgo = [];
     d3.selectAll("svg").remove();
     this.visual = [];
     this.codes = [];
@@ -69,28 +77,35 @@ class Comparison extends React.Component {
     this.visual[0].draw();
     this.visual[1].draw();
 
-    new Graph().draw();
 
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
         case "dijkstra":
           algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
+          // graphAlgo.push(Dijkstra);
+          graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
+          graphAlgo.push(FloydWarshall);
+          // graphAlgo.push(Astar);
           this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
           algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          graphAlgo.push(FloydWarshall);
+          // graphAlgo.push(BellmanFord);
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
           algorithms.push(new FloydWarshallSteps(NODELIST, 1, 6, this.visual[index]));
+          graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/floyd_warshall.js');
       }
     });
-    this.setState({algorithms: algorithms});
+    this.setState({algorithms, graphAlgo});
+    new Graph(...graphAlgo).draw();
   }
 
   fetchCode(file) {

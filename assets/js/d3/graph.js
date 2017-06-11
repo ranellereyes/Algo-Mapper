@@ -1,36 +1,55 @@
 import { nodelistGenerator } from '../algorithms/node';
 import FloydWarshall from '../algorithms/floyd_warshall';
 
-class Graph {
+export default class Graph {
   constructor(alg1, alg2){
     this.nodeNums = [5, 10, 20, 30, 40, 50, 75, 100];
     this.data1 = [];
     this.data2 = [];
+    this.alg1 = alg1;
+    this.alg2 = alg2;
+    this.nodelistGenerator = nodelistGenerator;
   }
 
-  computeData(algo) {
-    this.nodeNums.forEach();
+  computeData(alg1, alg2) {
+    this.nodeNums.forEach(num => {
+      let runtime = new alg1(new nodelistGenerator(num).nodelist)
+                      .search('1', String(num))
+                      .runtime;
+      this.data1.push({numNodes: num, runtime});
+    });
+
+    this.nodeNums.forEach(num => {
+      let runtime = new alg2(new nodelistGenerator(num).nodelist)
+                      .search('1', String(num))
+                      .runtime;
+      this.data2.push({numNodes: num, runtime});
+    });
   }
 
-  draw(data1, data2) {
+  draw() {
+    let data1 = this.data1,
+        data2 = this.data2;
+
+    this.computeData(this.alg1, this.alg2);
     // -- LINEAR DATA TEST --
-    data1 = [
-      {numNodes: 10, runtime: 500},
-      {numNodes: 25, runtime: 1250},
-      {numNodes: 40, runtime: 2000},
-      {numNodes: 50, runtime: 2500},
-      {numNodes: 80, runtime: 4000},
-      {numNodes: 100, runtime: 5000}
-    ];
+    // data1 = [
+    //   {numNodes: 10, runtime: 500},
+    //   {numNodes: 25, runtime: 1250},
+    //   {numNodes: 40, runtime: 2000},
+    //   {numNodes: 50, runtime: 2500},
+    //   {numNodes: 80, runtime: 4000},
+    //   {numNodes: 100, runtime: 5000}
+    // ];
 
     // -- QUAD DATA TEST --
-      data2 = [
-        {numNodes: 10, runtime: 100},
-        {numNodes: 20, runtime: 400},
-        {numNodes: 50, runtime: 2505},
-        {numNodes: 80, runtime: 6400},
-        {numNodes: 100, runtime: 10000}
-      ];
+      // data2 = [
+      //   {numNodes: 10, runtime: 100},
+      //   {numNodes: 20, runtime: 400},
+      //   {numNodes: 50, runtime: 2505},
+      //   {numNodes: 80, runtime: 6400},
+      //   {numNodes: 100, runtime: 10000}
+      // ];
 
     // -- CUBIC DATA TEST --
     // data2 = [
@@ -141,5 +160,3 @@ class Graph {
           .attr("cy", dotMapY);
   }
 }
-
-export default Graph;
