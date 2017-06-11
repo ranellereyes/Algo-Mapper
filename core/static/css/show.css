@@ -4,7 +4,7 @@ main.show-main {
   height: 100%;
   padding-top: 15px;
   padding-bottom: 30px;
-  background: #595b82;  
+  background: #093765;
 }
 
 section.show-main {
@@ -46,7 +46,8 @@ aside.show-code {
   border: 0px solid Gray;
   overflow: scroll;
   overflow-x: hidden;
-  /*border-left: 3px solid DarkGray;*/
+  border: 1px solid gray;
+  border-radius: 3px;
 }
 aside.show-code pre {
   margin: 0;

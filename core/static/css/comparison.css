@@ -7,9 +7,9 @@ main.comp-main {
 
 section.comp-main {
   width: 100%;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   height: 100%;
-  background: #595b82;
+  background: #093765;
   display: flex;
   justify-content: center;
 }
@@ -63,7 +63,6 @@ ul.comp-visualization option {
 section.comp-arrows {
   width: 100%;
   min-width: 600px;
-  margin-top: -100px;
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
