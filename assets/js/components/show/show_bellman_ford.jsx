@@ -112,7 +112,7 @@ class ShowBellmanFord extends React.Component {
                 </ol>
                 <h3>Details</h3>
                 <p>
-                  The Bellman-Ford algorithm can account for negative weight edges because the algorithm will iterate through all the edge weights every iteration to update the <code>cost</code> to reach the adjacent nodes. Because of these iterations, the time complexity of the Bellman-Ford algorithm at worst runs at O(n<sup>n</sup>) time complexity and at best O(n) if each node only has one child node.
+                  The Bellman-Ford algorithm can account for negative weight edges because the algorithm will iterate through all the edge weights every iteration to update the <code>cost</code> to reach the adjacent nodes. Because of these iterations, the time complexity of the Bellman-Ford algorithm at worst runs at O(n<sup>2</sup>) time complexity and at best O(n) if each node only has one child node.
                 </p>
               </div>
               <aside className="show-pros-n-cons">
