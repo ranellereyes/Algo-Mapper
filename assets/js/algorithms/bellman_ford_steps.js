@@ -36,7 +36,10 @@ class BellmanFordSteps extends BellmanFord{
     for (let i = 0; i < Object.keys(this.nodeList).length - 1; i++) {
       finished = true;
       this.edgeList.forEach((edge) => {
-        let thisStep = { node: [edge.fromId, edge.toId], costs: {} } ;
+        let thisStep = merge({},{
+                      node: [edge.fromId, edge.toId],
+                      costs: costs});
+        // let thisStep = { node: [edge.fromId, edge.toId], costs } ;
         if (costs[edge.fromId] + edge.weight < costs[edge.toId]) {
           costs[edge.toId] = costs[edge.fromId] + edge.weight;
           thisStep.costs[edge.toId] = costs[edge.toId];
