@@ -1,4 +1,16 @@
+import { nodelistGenerator } from '../algorithms/node';
+import FloydWarshall from '../algorithms/floyd_warshall';
+
 class Graph {
+  constructor(alg1, alg2){
+    this.nodeNums = [5, 10, 20, 30, 40, 50, 75, 100];
+    this.data1 = [];
+    this.data2 = [];
+  }
+
+  computeData(algo) {
+    this.nodeNums.forEach();
+  }
 
   draw(data1, data2) {
     // -- LINEAR DATA TEST --

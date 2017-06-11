@@ -37,15 +37,30 @@ li a {
   text-decoration: none;
 }
 
+ul.nav-logo {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+ul.nav-logo figure {
+  width: 38px;
+  height: 40px;
+  background-image: url('../images/logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 5px 6px 0px 0px;
+}
 li.nav-logo {
   display: flex;
   flex-direction: column;
 }
-
 li.nav-logo a {
   margin-top: 5px;
   font-family: Poiret One;
   font-size: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 div.nav-logo-underline {

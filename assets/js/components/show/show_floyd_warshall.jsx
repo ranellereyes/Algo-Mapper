@@ -15,12 +15,12 @@ class ShowFloyd extends React.Component {
   }
 
   componentDidMount() {
+    document.onkeydown = this.handleKeyPress;
+    document.onkeyup = this.handleKeyUp;
     let visual = new Visualization(NODELIST, "visualization");
     visual.draw();
-    window.v = visual;
     this.setState({ graph: visual });
     this.floyd = new FloydWarshallSteps(NODELIST, 1, 6, visual);
-    window.f = this.floyd;
   }
 
   componentWillUnmount() {

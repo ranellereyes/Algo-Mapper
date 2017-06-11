@@ -3,15 +3,17 @@ import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
 import AstarSteps from '../../algorithms/astar_step';
-import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
-import DijkstraSteps from '../../algorithms/dijkstra_steps';
+import { AstarDescription, DijkstraDescription, BellmanFordDescription, FloydWarshallDescription } from './descriptions';
 
 const MESSAGES = {
-  first: 'EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.',
-  second: 'I LOVE FOOD',
-  third: 'PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME ',
-  fourth: 'howdy there, nice to meet you'
-};
+  first: <AstarDescription />,
+  second: <DijkstraDescription />,
+  third: <BellmanFordDescription />,
+  fourth: <FloydWarshallDescription />
+}
+
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
+import DijkstraSteps from '../../algorithms/dijkstra_steps';
 
 class Index extends React.Component {
   constructor(props) {
@@ -75,32 +77,48 @@ class Index extends React.Component {
             <div className="index-arrow-fill" />
           </div>
           <div className="index-algo-description">
-            <h3 ref="description" className={this.state.active}>
+            <section ref="description" className={this.state.active}>
               {this.state.message}
-            </h3>
+            </section>
           </div>
         </section>
         <footer>
           <ul className="author-info">
             <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Ranelle Reyes</span>
+              <a href="https://github.com/bbchui">
+                <figure className="github"></figure>
+              </a>
+              <a href="https://www.linkedin.com/in/brandon-chui">
+                <figure className="linkedin"></figure>
+              </a>
+              <span>Brandon Chui</span>
             </li>
             <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Winber Xu</span>
-            </li>
-            <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
+              <a href="https://github.com/JaniceYR">
+                <figure className="github"></figure>
+              </a>
+              <a href="https://www.linkedin.com/in/janiceyuralee/">
+                <figure className="linkedin"></figure>
+              </a>
               <span>Janice Yura Lee</span>
             </li>
             <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Brandon Chui</span>
+              <a href="https://github.com/ranellereyes/">
+                <figure className="github"></figure>
+              </a>
+              <a href="https://www.linkedin.com/in/ranellereyes">
+                <figure className="linkedin"></figure>
+              </a>
+              <span>Ranelle Reyes</span>
+            </li>
+            <li>
+              <a href="https://github.com/winber2">
+                <figure className="github"></figure>
+              </a>
+              <a href="https://www.linkedin.com/in/winber/">
+                <figure className="linkedin"></figure>
+              </a>
+              <span>Winber Xu</span>
             </li>
           </ul>
         </footer>

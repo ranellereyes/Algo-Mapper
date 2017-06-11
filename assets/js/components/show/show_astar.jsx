@@ -95,7 +95,10 @@ class ShowAstar extends React.Component {
                 </ol>
                 <h3>Details</h3>
                 <p>
-                  The heuristic is what drastically differentiates A* from other algorithms. Although this algorithm is typically known as a breadth-first search, it can act as a depth-first search if the heuristic is strongly weighted. This heuristic optimization is highly dependent on the kind of maps that it is exposed to, and unoptimized heuristics can lead to incorrect shortest path calculations. At heart, A* is a greedy algorithm, but will generally will exhibit O(n) time complexity when optimized. A* is extremely well-known for pathfinding, but is not as optimized for node paths. This is because if the node path is has N nodes and each node has N - 1 child nodes, every round of cost evaluation requires A* to make N - 1 calculations, resulting at worst in O(n<sup>n</sup>  ) time complexity.
+                  The heuristic is what drastically differentiates A* from other algorithms. Although A* is typically O(n) time complexity, the pitfall is that unoptimized heuristics can lead to incorrect shortest path calculations. The most basic implementation of this heuristic is the linear distance away from the destination, but simply weighting this distance can drastically change solutions.
+                </p>
+                <p>
+                  Typical A* implementations utilize priority queues, where the lowest cost values are evaluated and removed from the queue. Binary Heaps can further improve efficiently by organizing the queued nodes in a tree format. A* is extremely well-known for pathfinding, but is not as optimized for node paths. This is because if the node path is has N nodes and each node has N - 1 child nodes, every round of cost evaluation requires A* to make N - 1 calculations, resulting at worst in O(n<sup>n</sup>  ) time complexity.
                 </p>
               </div>
               <aside className="show-pros-n-cons">

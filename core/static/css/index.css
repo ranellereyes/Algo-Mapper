@@ -34,6 +34,8 @@ div.index-content {
 
 div.index-content h1 {
   font-size: 80px;
+  font-family: Poiret One;
+  margin-bottom: 20px;
 }
 
 div.index-content span {
@@ -130,13 +132,18 @@ div.index-algo-description {
   background: white;
 }
 
-div.index-algo-description h3 {
-  margin: 15px;
+div.index-algo-description section {
+  margin: 10px 15px;
   font-size: 12pt;
   transition: opacity 0.2s
 }
 
-h3.into-the-abyss {
+div.index-algo-description p {
+  font-size: 18px;
+  transition: opacity 0.2s
+}
+
+section.into-the-abyss {
   opacity: 0;;
 }
 
@@ -170,6 +177,11 @@ ul.author-info li span {
   margin: 0;
   font-size: 14px;
   font-family: Quicksand;
+}
+
+h2 {
+  font-size: 25px;
+  margin-bottom: 10px;
 }
 
 figure.github {
