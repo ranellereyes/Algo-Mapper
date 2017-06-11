@@ -54,7 +54,6 @@ class BellmanFordSteps extends BellmanFord{
   }
 
   stepBackward() {
-    console.log(this.index);
     this.index--;
     if (this.index < 0) {
       this.index = 0;
