@@ -93,16 +93,42 @@ class ShowFloyd extends React.Component {
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
                 <p>
-                  
+                  The Floyd-Warshall algorithm is an algorithm that finds the <code>cost</code> (shortest path) between all pairs of nodes within a graph. Similar to the Bellman-Ford algorithm, the Floyd-Warshall algorithm can handle negative edge weights when calculating the <code>cost</code>. Edge weights are numerical values that represent the <code>cost</code> of getting from one node to another connecting node. The Floyd-Warshall algorithm, in essence, finds the shortest path by keeping track of intermediate nodes between a pair of nodes.
                 </p>
-                <h3>Math</h3>
-                <p>asdfasdf  EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.
+                <ol>
+                  <li><span>Creates a <code>cost</code> and parent chart initialized with data from direct children.</span></li>
+                  <li><span>Iterate through every pair of nodes with a intermediate node to pass through.</span></li>
+                  <li><span>Check if the path with the intermediate node has a lower <code>cost</code> than the direct path. If so, replace parents with parent of intermediate-to node.</span></li>
+                    <ul className='how-it-works'>
+                      <li><span><code>init<code>cost</code>s</code> and <code>initParents</code> sets up the initial data from the given nodes</span></li>
+                      <li><span>Imagine if the <code>cost</code> of <code>Node A</code> to <code>Node C</code> is 15. The <code>cost</code> of <code>Node A</code> to <code>Node B</code> is 4. The <code>cost</code> of <code>Node B</code> to <code>Node C</code> is 5.</span></li>
+                      <li><span>The path from <code>Node A</code> to <code>Node B</code> to <code>Node C</code> is 9 (4 + 5), thus the parent of <code>Node A</code> to <code>Node C</code> is now <code>Node B</code></span></li>
+                    </ul>
+                  <li><span>After the algorithm is finished, use parental path to retrace the shortest path from a pair of nodes.</span></li>
+              </ol>
+                <h3>Details</h3>
+                <p>
+                  The Floyd-Warshall algorithm will always find the <code>cost</code> between all pairs of node within a graph. However, the algorithm will only ever have to run once to find the shortest path between any pair of nodes if the graph never changes because the data points are saved within the table the algorithm creates.
+                </p>
+                <p>
+                  Because the Floyd-Warshall compares all possible paths between all pairs of nodes in a graph, the time complexity will always be at best and at worst O(n<sup>3</sup>).
                 </p>
               </div>
               <aside className="show-pros-n-cons">
-                <h3>Pros & Cons</h3>
-                <p>asdfas
-                </p>
+                <h3>Pros</h3>
+                <ul className='pros-n-cons'>
+                  <li><span>Finds the shortest path for every pair of nodes within a graph</span></li>
+                  <li><span>Preloads entire nest</span></li>
+                  <li><span>Checks for negative weight edges</span></li>
+                  <li><span>Same best and worst time complexity</span></li>
+                </ul>
+                <h3>Cons</h3>
+                <ul className='pros-n-cons'>
+                  <li><span>Slow O(n<sup>3</sup>)</span></li>
+                  <li><span>Cannot end iterations early</span></li>
+                  <li><span>Requires O(n<sup>3</sup>) space complexity</span></li>
+                  <li><span>Will have to redo calculations if a new node is added to the graph</span></li>
+                </ul>
               </aside>
             </ul>
           </div>
