@@ -111,6 +111,29 @@ class BellmanFordSteps extends BellmanFord{
       });
     }
   }
+
+  stepForwardDisplay() {
+    this.index++;
+    this.visual.clearLinks();
+    this.visual.clearNodes();
+    if (this.index >= this.steps.length ) {
+      this.path.forEach((id) => {
+        this.visual.highlightNode(id, "red");
+      });
+      for (let i = 0; i < this.path.length -1; i++) {
+        this.visual.highlightLink(this.path[i], this.path[i+1], "red");
+      }
+      this.index = -1;
+    } else {
+      this.visual.highlightNode(this.steps[this.index].node[0], "yellow");
+      this.visual.highlightNode(this.steps[this.index].node[1], "green");
+      this.visual.highlightLink(this.steps[this.index].node[0], this.steps[this.index].node[1], "red");
+    }
+  }
+
+  display() {
+    return setInterval(() => this.stepForwardDisplay(), 1500);
+  }
 }
 
 export default BellmanFordSteps;
