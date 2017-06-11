@@ -38,7 +38,6 @@ class ShowFloyd extends React.Component {
     }
   }
   handleKeyUp (e) {
-    console.log("key up");
     document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
     document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }

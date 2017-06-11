@@ -87,6 +87,12 @@ export default class Graph {
         .y(function(d) { return y(d.runtime); })
         .curve(d3.curveBasis);
 
+    var tooltip = d3.select("div.comp-graph")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+
     var dotMapX = function(d) { return x(d.numNodes) + margin.left;};
     var dotMapY = function(d) { return y(d.runtime) + margin.top;};
 
@@ -148,7 +154,21 @@ export default class Graph {
          .attr("fill", "steelblue")
          .attr("r", 3.5)
          .attr("cx", dotMapX)
-         .attr("cy", dotMapY);
+         .attr("cy", dotMapY)
+         .on("mouseover", function(d) {
+            tooltip.transition()
+                   .duration(200)
+                   .style("opacity", .9);
+            tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
+                   .style("left", dotMapX(d))
+                   .style("top", dotMapY(d));
+          })
+          .on("mouseout", function(d) {
+              tooltip.transition()
+                   .duration(500)
+                   .style("opacity", 0);
+          });
+
 
        svg.selectAll(".dot2")
           .data(data2)
@@ -157,6 +177,19 @@ export default class Graph {
           .attr("fill", "red")
           .attr("r", 3.5)
           .attr("cx", dotMapX)
-          .attr("cy", dotMapY);
+          .attr("cy", dotMapY)
+          .on("mouseover", function(d) {
+             tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+             tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
+                    .style("left", dotMapX(d))
+                    .style("top", dotMapY(d));
+           })
+           .on("mouseout", function(d) {
+               tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+           });
   }
 }
