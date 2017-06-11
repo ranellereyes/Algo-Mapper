@@ -21,7 +21,7 @@ class ShowBellmanFord extends React.Component {
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
-    let visual = new Visualization(NODELIST, "div.visualization");
+    let visual = new Visualization(NODELIST, "visualization");
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual});
