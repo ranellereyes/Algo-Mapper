@@ -164,16 +164,20 @@ export default class FloydWarshallSteps extends FloydWarshall {
   }
 
   stepForwardDisplay() {
-    if (this.currStep < this.steps.length - 2) {
-      dispAnswer(start, end);
+    if (this.currStep > this.steps.length - 2) {
+      this.visualization.clearNodes();
+      this.visualization.clearLinks();
+      this.dispAnswer(this.start, this.end);
       return;
     }
 
     let visual = this.visualization,
         step = this.steps[this.currStep],
-        { nodes, loops, tables, changed } = step;
+        { nodes, loops, tables, changed } = step,
+        indices = this.indices;
 
-    let indices = this.indices;
+    visual.clearNodes();
+    visual.clearLinks();
 
     loops.forEach((node, idx) => {
       switch (idx) {
