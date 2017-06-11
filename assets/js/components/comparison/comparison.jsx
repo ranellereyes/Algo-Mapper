@@ -155,7 +155,6 @@ class Comparison extends React.Component {
   handleSelectB (e) {
     this.state.options.optionB = e.target.value;
     this.resetAlgorithms();
-
   }
 
   render() {
