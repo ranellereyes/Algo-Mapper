@@ -1,6 +1,3 @@
-// TESTING STUFF
-// import { NODELIST, NODELIST2 } from "./node";
-
 export default class FloydWarshall {
   constructor (nodelist) {
     this.nodelist = nodelist;

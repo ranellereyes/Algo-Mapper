@@ -101,7 +101,9 @@ export default class Graph {
         .style("opacity", 0);
 
 
-    var dotMapX = function(d) { return x(d.numNodes) + margin.left;};
+    var dotMapX = function(d) {
+      console.log(x(d.numNodes) + margin.left);
+      return x(d.numNodes) + margin.left;};
     var dotMapY = function(d) { return y(d.runtime) + margin.top;};
 
       x.domain(d3.extent(compData, function(d) { return d.numNodes; }));
@@ -160,7 +162,7 @@ export default class Graph {
        .enter().append("circle")
          .attr("class", "dot")
          .attr("fill", "steelblue")
-         .attr("r", 3.5)
+         .attr("r", 5)
          .attr("cx", dotMapX)
          .attr("cy", dotMapY)
          .on("mouseover", function(d) {
@@ -168,8 +170,8 @@ export default class Graph {
                    .duration(200)
                    .style("opacity", .9);
             tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
-                   .style("left", dotMapX(d))
-                   .style("top", dotMapY(d));
+                   .style("left", dotMapX(d)+"px")
+                   .style("top", dotMapY(d)+"px");
           })
           .on("mouseout", function(d) {
               tooltip.transition()
@@ -183,16 +185,16 @@ export default class Graph {
         .enter().append("circle")
           .attr("class", "dot")
           .attr("fill", "red")
-          .attr("r", 3.5)
+          .attr("r", 5)
           .attr("cx", dotMapX)
           .attr("cy", dotMapY)
           .on("mouseover", function(d) {
              tooltip.transition()
-                    .duration(200)
+                    .duration(50)
                     .style("opacity", .9);
              tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
-                    .style("left", dotMapX(d))
-                    .style("top", dotMapY(d));
+                    .style("left", dotMapX(d)+"px")
+                    .style("top", dotMapY(d)+"px");
            })
            .on("mouseout", function(d) {
                tooltip.transition()

@@ -115,3 +115,16 @@ section.comp-graph li.comp-graph-code pre {
 section.comp-graph li.comp-graph-code code {
   padding: 10px;
 }
+
+div.comp-graph {
+  position: relative;
+}
+.tooltip {
+  position: absolute;
+  background-color: #F4F4F4;
+  padding: 5px;
+  width: 90px;
+}
+.dot {
+  cursor: pointer;
+}
