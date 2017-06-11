@@ -15,7 +15,7 @@ class ShowFloyd extends React.Component {
   }
 
   componentDidMount() {
-    let visual = new Visualization(NODELIST, "div.visualization");
+    let visual = new Visualization(NODELIST, "visualization");
     visual.draw();
     window.v = visual;
     this.setState({ graph: visual });

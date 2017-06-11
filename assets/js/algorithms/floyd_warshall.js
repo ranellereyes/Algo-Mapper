@@ -48,7 +48,7 @@ export default class FloydWarshall {
         if (i === j) {
           this.parents[i][j] = null;
         } else if (!this.parents[i][j]) {
-          this.parents[i][j] = undefined;
+          this.parents[i][j] = null;
         }
       }
     }

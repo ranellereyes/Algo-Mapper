@@ -3,6 +3,7 @@ import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
 import AstarSteps from '../../algorithms/astar_step';
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 
 const MESSAGES = {
@@ -10,7 +11,7 @@ const MESSAGES = {
   second: 'I LOVE FOOD',
   third: 'PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME ',
   fourth: 'howdy there, nice to meet you'
-}
+};
 
 class Index extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Index extends React.Component {
       algo: 'first',
       active: '',
       message: MESSAGES['first']
-    }
+    };
     this.selectAlgo = this.selectAlgo.bind(this);
   }
 
@@ -35,7 +36,7 @@ class Index extends React.Component {
     this.astar = new AstarSteps(NODELIST, 1, 6, astar).display();
     this.dijkstra = new DijkstraSteps(NODELIST, 1, 6, dijkstra).display();
     this.bellman = new AstarSteps(NODELIST, 1, 6, bellman).display();
-    this.floyd = new AstarSteps(NODELIST, 1, 6, floyd).display();
+    this.floyd = new FloydWarshallSteps(NODELIST, 1, 6, floyd).display();
   }
 
   componentWillUnmount() {
@@ -104,7 +105,7 @@ class Index extends React.Component {
           </ul>
         </footer>
       </div>
-    )
+    );
   }
 }
 
