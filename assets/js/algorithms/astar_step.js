@@ -2,7 +2,7 @@ import Astar from './astar';
 import { merge } from 'lodash';
 import Visualization from '../d3/visualization';
 
-class AstarStep extends Astar {
+class AstarSteps extends Astar {
   constructor(nodeList, startNodeId, endNodeId, visual) {
     super(nodeList);
     this.visualization = visual;
@@ -215,8 +215,8 @@ class AstarStep extends Astar {
   }
 
   display() {
-    setInterval(() => this.stepForwardDisplay(), 1500);
+    return setInterval(() => this.stepForwardDisplay(), 1500);
   }
 }
 
-export default AstarStep;
+export default AstarSteps;

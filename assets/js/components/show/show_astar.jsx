@@ -1,7 +1,7 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
-import AstarStep from '../../algorithms/astar_step';
+import AstarSteps from '../../algorithms/astar_step';
 import Highlight from 'react-highlight';
 import Astar from '../../algorithms/astar';
 
@@ -16,10 +16,10 @@ class ShowAstar extends React.Component {
 
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
-    let visual = new Visualization(NODELIST, 'div.visualization');
+    let visual = new Visualization(NODELIST, 'visualization');
     visual.draw();
     this.setState({ graph: visual });
-    this.AstarStep = new AstarStep(NODELIST, 1, 6, visual);
+    this.AstarStep = new AstarSteps(NODELIST, 1, 6, visual);
     window.a = this.AstarStep;
     this.fetchCode('static/javascript/astar.js');
   }

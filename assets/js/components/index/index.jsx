@@ -2,7 +2,7 @@ import React from 'react';
 import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
-import AstarStep from '../../algorithms/astar_step';
+import AstarSteps from '../../algorithms/astar_step';
 
 const MESSAGES = {
   first: 'EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.',
@@ -24,11 +24,17 @@ class Index extends React.Component {
 
   componentDidMount() {
     let astar = new Visualization(NODELIST, 'astar', 1.85);
-    let dijkstra = new Visualization(NODELIST, 'dijkstra', 1.85)
+    let dijkstra = new Visualization(NODELIST, 'dijkstra', 1.85);
+    let bellman = new Visualization(NODELIST, 'bellman', 1.85);
+    let floyd = new Visualization(NODELIST, 'floyd', 1.85);
     astar.draw();
     dijkstra.draw();
-    new AstarStep(NODELIST, 1, 6, astar).display();
-    // new DijkstraStep(NODELIST, 1, 6, dijkstra).display();
+    bellman.draw();
+    floyd.draw();
+    new AstarSteps(NODELIST, 1, 6, astar).display();
+    new AstarSteps(NODELIST, 1, 6, dijkstra).display();
+    new AstarSteps(NODELIST, 1, 6, bellman).display();
+    new AstarSteps(NODELIST, 1, 6, floyd).display();
   }
 
   selectAlgo(id) {

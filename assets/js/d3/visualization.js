@@ -14,6 +14,7 @@ class Visualization {
     this.nodeList = nodeList;
     this.target = target;
     this.scale = scale || 1;
+    this.nodeScale = scale * 1.5 || 1;
   }
 
   parseNodes() {
@@ -88,10 +89,9 @@ class Visualization {
 
   draw() {
     let graph = this.parseNodes();
-    let scale = this.scale;
     this.svg = d3.select(`div.${this.target}`).append("svg")
-        .attr("width", 500 / scale)
-        .attr("height", 500 / scale);
+        .attr("width", 500 / this.scale)
+        .attr("height", 500 / this.scale);
     this.nodeGroup = this.svg.selectAll("g")
       .data(graph.nodes);
 
@@ -144,7 +144,7 @@ class Visualization {
         .text(function(d) { return d.id });
 
     this.nodes = d3.selectAll(`.node-${this.target}`)
-        .attr("r", 20 / scale * 1.5)
+        .attr("r", 20 / this.nodeScale)
         .attr("id", function(d) { return d.id })
         .attr("cx", function(d) { return d.x })
         .attr("cy", function(d) { return d.y })
@@ -168,19 +168,19 @@ class Visualization {
   clearNodes() {
     d3.selectAll(`circle.node-${this.target}`).transition().duration(500)
       .style("fill", "lightblue")
-      .style("r", 20 / this.scale * 1.5);
+      .style("r", 20 / this.nodeScale);
   }
 
   unhighlightNode(id) {
     d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
       .style("fill", "lightblue")
-      .style("r", 20 / this.scale * 1.5);
+      .style("r", 20 / this.nodeScale);
   }
 
   highlightNode(id, color) {
     d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
       .style("fill", color)
-      .style("r", 22 / this.scale * 1.5);
+      .style("r", 22 / this.nodeScale);
   }
 
   unhighlightLink(fromId, toId) {
