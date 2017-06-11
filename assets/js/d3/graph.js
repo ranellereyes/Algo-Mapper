@@ -154,7 +154,7 @@ export default class Graph {
        .enter().append("circle")
          .attr("class", "dot")
          .attr("fill", "steelblue")
-         .attr("r", 3.5)
+         .attr("r", 5)
          .attr("cx", dotMapX)
          .attr("cy", dotMapY)
          .on("mouseover", function(d) {
@@ -168,7 +168,7 @@ export default class Graph {
           .on("mouseout", function(d) {
               tooltip.transition()
                    .duration(500)
-                   .style("opacity", .9);
+                   .style("opacity", 0);
           });
 
 
@@ -177,12 +177,12 @@ export default class Graph {
         .enter().append("circle")
           .attr("class", "dot")
           .attr("fill", "red")
-          .attr("r", 3.5)
+          .attr("r", 5)
           .attr("cx", dotMapX)
           .attr("cy", dotMapY)
           .on("mouseover", function(d) {
              tooltip.transition()
-                    .duration(200)
+                    .duration(50)
                     .style("opacity", .9);
              tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
                     .style("left", dotMapX(d)+"px")
@@ -191,7 +191,7 @@ export default class Graph {
            .on("mouseout", function(d) {
                tooltip.transition()
                     .duration(500)
-                    .style("opacity", 0.9);
+                    .style("opacity", 0);
            });
   }
 }
