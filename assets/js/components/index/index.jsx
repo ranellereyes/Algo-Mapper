@@ -3,13 +3,13 @@ import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
 import AstarSteps from '../../algorithms/astar_step';
-import AstarDescription from './astar';
+import { AstarDescription, DijkstraDescription, BellmanFordDescription, FloydWarshallDescription } from './descriptions';
 
 const MESSAGES = {
   first: <AstarDescription />,
-  second: 'I LOVE FOOD',
-  third: 'PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME ',
-  fourth: 'howdy there, nice to meet you'
+  second: <DijkstraDescription />,
+  third: <BellmanFordDescription />,
+  fourth: <FloydWarshallDescription />
 }
 
 class Index extends React.Component {

@@ -136,6 +136,11 @@ div.index-algo-description section {
   transition: opacity 0.2s
 }
 
+div.index-algo-description p {
+  font-size: 18px;
+  transition: opacity 0.2s
+}
+
 section.into-the-abyss {
   opacity: 0;;
 }
@@ -173,6 +178,7 @@ ul.author-info li span {
 }
 
 h2 {
+  font-size: 25px;
   margin-bottom: 10px;
 }
 
