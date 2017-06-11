@@ -129,7 +129,7 @@ class Visualization {
         .text(function(d) { return d.weight });
 
     this.nodeWrapper = this.nodeGroup
-        .enter().append("g").attr("class", (d) => `node-${d.id}`);
+        .enter().append("g").attr("class", (d) => `node-${d.id}-${this.target}`);
 
     this.nodeWrapper
         .append("circle")
@@ -212,7 +212,7 @@ class Visualization {
     let target = this.nodeList[toId];
     let path = this.svg.append("path")
       .attr("stroke", color)
-      .attr("class", "link")
+      .attr("class", `link-${this.target}`)
       .attr("fill", "none")
       .attr("d", (d) => this.bezierLine([
           [source.x, source.y],
@@ -236,7 +236,7 @@ class Visualization {
             var len = Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2);
             return function(t) { return (d3.interpolateString("0," + len, len + ",0"))(t) };
       })
-      .style("marker-end", `url(#arrow-${fromId}-${toId}-animate)`);
+      .style("marker-end", `url(#arrow-${fromId}-${toId}-animate-${this.target})`);
 
     setTimeout( () => {
       path.transition().duration(500).style("opacity", "0").remove();
@@ -244,9 +244,9 @@ class Visualization {
   }
 
   addText(nodeId, dx, dy, color, textFunction) {
-    d3.select(`g.node-${nodeId}`).append('text')
+    d3.select(`g.node-${nodeId}-${this.target}`).append('text')
       .text((d) => textFunction(d))
-      .attr('class', `node-${nodeId}`)
+      .attr('class', `node-${nodeId}-${this.target}`)
       .attr('dx', dx)
       .attr('dy', dy)
       .attr('x', (d) => d.x)
@@ -259,7 +259,7 @@ class Visualization {
   }
 
   removeText(nodeId) {
-    d3.selectAll(`text.node-${nodeId}`)
+    d3.selectAll(`text.node-${nodeId}-${this.target}`)
       .transition()
       .duration(500)
       .style('opacity', 0)
