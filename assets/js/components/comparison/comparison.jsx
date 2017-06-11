@@ -45,10 +45,11 @@ class Comparison extends React.Component {
     this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    this.resetAlgorithms();
-
     let graph = new Graph();
     graph.draw();
+
+    this.resetAlgorithms();
+
   }
 
   componentWillUnmount() {
@@ -67,9 +68,8 @@ class Comparison extends React.Component {
     this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    // this.fetchCode('static/javascript/bellman_ford.js');
 
-
+    new Graph().draw();
 
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
