@@ -23,7 +23,6 @@ class ShowBellmanFord extends React.Component {
     document.onkeyup = this.handleKeyUp;
     let visual = new Visualization(NODELIST, "visualization");
     visual.draw();
-    window.v = visual;
     this.setState({ graph: visual});
     this.algorithm = new BellmanFordSteps(NODELIST, 1, 6, visual);
     this.fetchCode('static/javascript/bellman_ford.js');
@@ -119,13 +118,13 @@ class ShowBellmanFord extends React.Component {
               <aside className="show-pros-n-cons">
                 <h3>Pros</h3>
                   <ul className='pros-n-cons'>
-                    <li><span>Accounts for negative weights</span></li>
+                    <li><span>Accounts for negative weights when finding the shortest path</span></li>
                     <li><span>Determines if negative-weight cycles exist</span></li>
-                    <li><span>Allows for a wider class of inputs than Dijkstra</span></li>
+                    <li><span>Allows for a wider class of inputs than Dijkstra's algorithm</span></li>
                   </ul>
                   <h3>Cons</h3>
                   <ul className='pros-n-cons'>
-                    <li><span>Slower than Dijkstr's Algorithm</span></li>
+                    <li><span>Slower than Dijkstra's Algorithm</span></li>
                     <li><span>Shortest path won't be found with negative weight cycles</span></li>
                   </ul>
               </aside>

@@ -50,6 +50,7 @@ ul.nav-logo figure {
   background-repeat: no-repeat;
   background-size: contain;
   margin: 5px 6px 0px 0px;
+  cursor: pointer;
 }
 li.nav-logo {
   display: flex;
@@ -96,6 +97,7 @@ ul.dropdown {
   /*visibility: hidden;*/
   position: absolute;
   top: -150px;
+  left: 0px;
   display: flex;
   flex-direction: column;
   background: white;

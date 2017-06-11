@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { active: ''}
+    this.state = { active: ''};
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.closeDropdown = this.closeDropdown.bind(this);
   }
 
   toggleDropdown() {
     if (this.state.active === 'active') {
-      this.setState({ active: '' })
+      this.setState({ active: '' });
     } else {
-      this.setState({ active: 'active'})
+      this.setState({ active: 'active'});
     }
   }
 
@@ -27,7 +27,9 @@ class Header extends React.Component {
         <nav className="nav-bar">
           <ul className="nav-logo">
             <li>
-              <figure className="nav-logo"></figure>
+              <Link to="/">
+                <figure className="nav-logo"></figure>
+              </Link>
             </li>
             <li className="nav-logo">
               <Link to="/">AlgoMapper
@@ -45,7 +47,7 @@ class Header extends React.Component {
                 onBlur={this.closeDropdown}
                 onClick={this.toggleDropdown}
               >Algorithms</a>
-              <ul className={`dropdown ${this.state.active}`}>
+            <ul className={`dropdown ${this.state.active}`}>
                 <Link className="dropdown" to="/astar">A* (A star)</Link>
                 <Link className="dropdown" to="/dijkstras">Dijkstra's</Link>
                 <Link className="dropdown" to="/bellman-ford">Bellman-Ford</Link>

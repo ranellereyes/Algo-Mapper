@@ -109,7 +109,7 @@ section.comp-graph li{
 }
 
 section.comp-graph div.comp-graph{
-  width: 40%;
+  flex: 1;
   height: 500px;
   margin: 20px, 20px, 30px, 50px;
 }
@@ -117,7 +117,6 @@ section.comp-graph div.comp-graph{
 section.comp-graph li.comp-graph-code{
   width: 30%;
   overflow: scroll;
-
 }
 section.comp-graph li.comp-graph-code pre {
   margin: 0;
