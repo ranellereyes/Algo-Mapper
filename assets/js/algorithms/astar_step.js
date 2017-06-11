@@ -2,7 +2,7 @@ import Astar from './astar';
 import { merge } from 'lodash';
 import Visualization from '../d3/visualization';
 
-class AstarStep extends Astar {
+class AstarSteps extends Astar {
   constructor(nodeList, startNodeId, endNodeId, visual) {
     super(nodeList);
     this.visualization = visual;
@@ -183,6 +183,40 @@ class AstarStep extends Astar {
     });
     visual.highlightNode(curr.id, 'green');
   }
+
+  stepForwardDisplay() {
+    if (this.i >= this.steps.length) return;
+    let node = this.steps[this.i];
+    let curr = node.currentNode;
+    let child = node.childNode;
+    let visual = this.visualization;
+
+    visual.clearLinks();
+    visual.clearNodes();
+    if (child) {
+      visual.highlightNode(child.id, "yellow")
+      visual.highlightLink(child.parent.id, child.id, "red");
+    }
+    if (this.i === this.steps.length - 1) {
+      node.path.forEach( link => {
+        visual.highlightLink(link[0], link[1], "blue");
+        visual.highlightNode(link[0], "red");
+      });
+    } else {
+      node.path.forEach( link => {
+        visual.highlightLink(link[0], link[1], "red");
+      });
+    }
+    visual.highlightNode(curr.id, 'green');
+    this.i += 1;
+    if (this.i === this.steps.length) {
+      this.i = 0;
+    }
+  }
+
+  display() {
+    return setInterval(() => this.stepForwardDisplay(), 1500);
+  }
 }
 
-export default AstarStep;
+export default AstarSteps;

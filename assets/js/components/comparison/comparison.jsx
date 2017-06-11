@@ -41,8 +41,8 @@ class Comparison extends React.Component {
     // this.setState({ graph: this.visualA});
     this.visual = [];
 
-    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
     let graph = new Graph();

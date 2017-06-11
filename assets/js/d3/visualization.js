@@ -1,3 +1,5 @@
+import { merge } from 'lodash';
+
 d3.selection.prototype.moveToBack = function() {
   return this.each(function() {
       var firstChild = this.parentNode.firstChild;
@@ -8,16 +10,23 @@ d3.selection.prototype.moveToBack = function() {
 };
 
 class Visualization {
-  constructor(nodeList, target) {
+  constructor(nodeList, target, scale) {
     this.nodeList = nodeList;
     this.target = target;
+    this.scale = scale || 1;
+    this.nodeScale = scale * 1.5 || 1;
   }
 
   parseNodes() {
     let nodes = [];
-    let list = this.nodeList;
+    let list = {};
+    for (let key in this.nodeList) {
+      list[key] = merge({}, this.nodeList[key]);
+    }
     let keys = Object.keys(list).sort();
     keys.forEach( idx => {
+      list[idx].x /= this.scale;
+      list[idx].y /= this.scale;
       nodes.push(list[idx]);
     });
 
@@ -80,18 +89,17 @@ class Visualization {
 
   draw() {
     let graph = this.parseNodes();
-
-    this.svg = d3.select(this.target).append("svg")
-        .attr("width", 500)
-        .attr("height", 500);
+    this.svg = d3.select(`div.${this.target}`).append("svg")
+        .attr("width", 500 / this.scale)
+        .attr("height", 500 / this.scale);
     this.nodeGroup = this.svg.selectAll("g")
       .data(graph.nodes);
 
-    this.links = this.svg.selectAll("line.link")
+    this.links = this.svg.selectAll(`line.link`)
         .data(graph.links)
         .enter().append("line")
         .attr("stroke", "gray")
-        .attr("class", "link")
+        .attr("class", `link`)
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
@@ -125,7 +133,7 @@ class Visualization {
 
     this.nodeWrapper
         .append("circle")
-        .attr("class", "node");
+        .attr("class", `node-${this.target}`);
 
     this.nodeText = this.nodeWrapper.append("text")
         .attr("x", function(d) { return d.x })
@@ -135,8 +143,8 @@ class Visualization {
         .attr("text-anchor", "middle")
         .text(function(d) { return d.id });
 
-    this.nodes = d3.selectAll(".node")
-        .attr("r", 20)
+    this.nodes = d3.selectAll(`.node-${this.target}`)
+        .attr("r", 20 / this.nodeScale)
         .attr("id", function(d) { return d.id })
         .attr("cx", function(d) { return d.x })
         .attr("cy", function(d) { return d.y })
@@ -158,21 +166,21 @@ class Visualization {
   }
 
   clearNodes() {
-    d3.selectAll('circle.node').transition().duration(500)
+    d3.selectAll(`circle.node-${this.target}`).transition().duration(500)
       .style("fill", "lightblue")
-      .style("r", 20);
+      .style("r", 20 / this.nodeScale);
   }
 
   unhighlightNode(id) {
     d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
       .style("fill", "lightblue")
-      .style("r", 20);
+      .style("r", 20 / this.nodeScale);
   }
 
   highlightNode(id, color) {
     d3.select(this.nodes._groups[0][id - 1]).transition().duration(500)
       .style("fill", color)
-      .style("r", 22);
+      .style("r", 22 / this.nodeScale);
   }
 
   unhighlightLink(fromId, toId) {
