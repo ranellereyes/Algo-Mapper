@@ -21,28 +21,28 @@ class Dijkstra {
   search(source, destination) {
     this.initiate(this.nodeList[source])
     let parent = {};
-    let node = this.nodeList[source];
+    let currentNode = this.nodeList[source];
     while (this.unvisited.length !== 0) {
-      node.children.sort((a,b) => a.weight - b.weight).forEach(child => {
+      currentNode.children.sort((a,b) => a.weight - b.weight).forEach(child => {
         let neighbor;
         if (this.unvisited.indexOf(this.nodeList[child.id]) !== -1) {
           neighbor = this.nodeList[child.id];
-          if (neighbor.cost > node.cost + child.weight) {
-            neighbor.cost = node.cost + child.weight;
-            parent[neighbor.id] = node.id;
+          if (neighbor.cost > currentNode.cost + child.weight) {
+            neighbor.cost = currentNode.cost + child.weight;
+            parent[neighbor.id] = currentNode.id;
           }
         }
       });
-      // adds node to visited list
-      this.visited.push(node);
-      // remove node from unvisited list
-      this.unvisited.splice(this.unvisited.indexOf(node), 1);
+      // adds currentNode to visited list
+      this.visited.push(currentNode);
+      // remove currentNode from unvisited list
+      this.unvisited.splice(this.unvisited.indexOf(currentNode), 1);
 
-      //choose node with lowest cost
-      node = this.unvisited[0];
+      //choose currentNode with lowest cost
+      currentNode = this.unvisited[0];
       for (let i = 1; i < this.unvisited.length; i++) {
-        if (this.unvisited[i].cost < node.cost) {
-          node = this.unvisited[i];
+        if (this.unvisited[i].cost < currentNode.cost) {
+          currentNode = this.unvisited[i];
         }
       }
     }

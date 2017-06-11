@@ -92,19 +92,20 @@ class ShowDijkstras extends React.Component {
                 <p>
                 Dijkstra’s (pronounced ‘DYKE-struh’) algorithm is an algorithm that finds the <code>cost</code> (shortest path) from a source node to a destination node or all other nodes within a graph that does not contain negative edge weights. Edge weights are numerical values that represent the <code>cost</code> of getting from one node to another connecting node.</p>
                     <ol>
-                      <li><span>Assign a source node and set its <code>cost</code> to 0. Set all other nodes' <code>cost</code> to infinity.</span></li>
+                      <li><span>Assign a source node and set its <code>cost</code> to 0. Set all other nodes' <code>cost</code> to infinity because the source node does not know how much it will <code>cost</code> to get to the other nodes.</span></li>
                       <li><span>Set source node to current node and mark all nodes as unvisisted.</span></li>
-                      <li><span>Find all unvisisted neighbors (children) of current node and calculates the tentative <code>cost</code> to each neighbor. If the tentative <code>cost</code> to the neighbor is less than the neighbor's current <code>cost</code>, set its <code>cost</code> to the tentative <code>cost</code>.</span></li>
+                      <li><span>Find all unvisisted neighbors (children) of current node and calculates the tentative <code>cost</code> to each neighbor by adding the <code>cost</code> of the current node with the edge <code>weight</code> to get to the neighbor. If the tentative <code>cost</code> to the neighbor is less than the neighbor's current <code>cost</code>, set the neighbo's <code>cost</code> to the tentative <code>cost</code>.</span></li>
                         <ul className='how-it-works'>
-                        	<li><span><code>f(n) = g(n) + h(n)</code></span></li>
-                        	<li><span><code>g</code> is the cost to reach a node, in this case dictated by the weight of an edge (the link between parent and child node)</span></li>
-                        	<li><span><code>h</code> is defined by an arbitrary calculation based on the distance from the end node</span></li>
-                        	<li><span><code>f</code> is equal to the sum of these two values</span></li>
+                        	<li><span><code>neighbor.cost = currentNode.cost + child.weight</code></span></li>
+                        	<li><span><code>neighbor.cost</code> is the cost of the <code>currentNode</code> to reach its neighbor</span></li>
+                        	<li><span><code>Node 1</code> (<code>currentNode</code>) has a cost of 0 and the <code>weight</code> to get to <code>Node 2</code> is 3.</span></li>
+                        	<li><span>The tentative <code>cost</code> from <code>Node 1</code> to <code>Node 2</code> is 0 + 3 = 3 which is less than Node 2's current <code>cost</code> of infinity.</span></li>
+                          <li><span>The new <code>cost</code> of getting from <code>Node 1</code> to <code>Node 2</code> is now 3.</span></li>
                         </ul>
-                      <li><span>After the current node checks all of its unvisited neighbors, mark the current node as visited. Visited nodes will never be checked again.</span></li>
-                      <li><span>If all nodes have been visited or the destination node as been visited, the algorithm is finished and stops. Else, the current node is set to the node with the lowest <code>cost</code> and return back to step 3.</span></li>
+                      <li><span>After the current node checks all of its unvisited neighbors, mark the current node as <code>visited</code>. <code>Visited</code> nodes will never be checked again.</span></li>
+                      <li><span>If all nodes have been <code>visited</code> or the destination node has been <code>visited</code>, the algorithm is finished. Otherwise, the current node is set to the node with the lowest <code>cost</code> and return back to step 3.</span></li>
                   </ol>
-                <h3>Math</h3>
+                <h3>Details</h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
