@@ -167,11 +167,12 @@ class Comparison extends React.Component {
     buttonHolder.style.backgroundColor = "transparent";
     // buttonHolder.style.zIndex = "-1";
     buttonHolder.style.width = "60%";
-    buttonHolder.style.height = "100px";
+    buttonHolder.style.height = "80px";
     let button = document.getElementById("button");
     button.removeEventListener("mouseover", this.mouseOverEffect);
     button.removeEventListener("mouseout", this.mouseOutEffect);
     button.style.backgroundImage = "url('../static/images/replay.png')";
+    button.style.margin = "105px 0 0 -100px";
     button.style.width = "50px";
     button.style.height = "50px";
     button.style.zIndex = "1";
@@ -185,6 +186,7 @@ class Comparison extends React.Component {
     buttonHolder.style.zIndex = "1";
     let button = document.getElementById("button");
     button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.margin = "0";
     button.style.width = "40%";
     button.style.height = "40%";
     button.style.zIndex = "1";
