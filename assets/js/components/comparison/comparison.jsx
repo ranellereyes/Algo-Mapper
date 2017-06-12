@@ -45,8 +45,6 @@ class Comparison extends React.Component {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
 
-    // window.v = visualA;
-    // this.setState({ graph: this.visualA});
     this.visual = [];
 
     this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
@@ -167,30 +165,41 @@ class Comparison extends React.Component {
   hidePlayButton(){
     let buttonHolder = document.getElementById("button-holder");
     buttonHolder.style.backgroundColor = "transparent";
-    buttonHolder.style.zIndex = "-1";
+    // buttonHolder.style.zIndex = "-1";
+    buttonHolder.style.width = "60%";
+    buttonHolder.style.height = "100px";
     let button = document.getElementById("button");
-    button.removeEventListener("mouseout", this.hoverEffect);
-    button.style.backgroundImage = "none";
-    button.style.zIndex = "-1";
+    button.removeEventListener("mouseover", this.mouseOverEffect);
+    button.removeEventListener("mouseout", this.mouseOutEffect);
+    button.style.backgroundImage = "url('../static/images/replay.png')";
+    button.style.width = "50px";
+    button.style.height = "50px";
+    button.style.zIndex = "1";
   }
 
   revealPlayButton(){
     let buttonHolder = document.getElementById("button-holder");
     buttonHolder.style.backgroundColor = "lightgray";
+    buttonHolder.style.width = "100%";
+    buttonHolder.style.height = "100%";
     buttonHolder.style.zIndex = "1";
     let button = document.getElementById("button");
     button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.width = "40%";
+    button.style.height = "40%";
     button.style.zIndex = "1";
-    button.addEventListener("mouseover", (e) => {
-      e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
-    });
-    button.addEventListener("mouseout", this.hoverEffect);
-
+    button.addEventListener("mouseover", this.mouseOverEffect);
+    button.addEventListener("mouseout", this.mouseOutEffect);
   }
 
-  hoverEffect(e) {
+  mouseOverEffect(e) {
+    e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
+  }
+
+  mouseOutEffect(e) {
     e.target.style.backgroundImage = "url('../static/images/play_button.png')";
   }
+
   render() {
     return (
       <div className="index-main">
