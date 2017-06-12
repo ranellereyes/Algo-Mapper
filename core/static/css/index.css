@@ -149,6 +149,8 @@ section.into-the-abyss {
 
 
 footer {
+  position: relative;
+  z-index: 999;
   height: 150px;
   background: #010023;
   display: flex;
