@@ -59,74 +59,74 @@ class Graph {
     var dotMapX = function(d) { return x(d.numNodes) + margin.left;};
     var dotMapY = function(d) { return y(d.runtime) + margin.top;};
 
-      x.domain(d3.extent(compData, function(d) { return d.numNodes; }));
-      y.domain(d3.extent(compData, function(d) { return d.runtime; }));
+    x.domain(d3.extent(compData, function(d) { return d.numNodes; }));
+    y.domain(d3.extent(compData, function(d) { return d.runtime; }));
 
-      g.append("g")
-          .attr("transform", "translate(0," + 450 + ")")
-          .call(d3.axisBottom(x))
-          .append("text")
-            .attr("fill", "#000")
-            .attr("x", 215)
-            .attr("y", -8)
-            .attr("dx", "0.71em")
-            .attr("text-anchor", "middle")
-            .text("Number of Nodes");
-        // .select(".domain")
-        //   .remove();
-
-      // svg.selectAll("dot")
-      //   .data(data)
-      //   .enter().append("circle")
-      //   .attr("r", 3.5)
-      //   .attr("cx", function(d) { return x(d.numNodes); })
-      //   .attr("cy", function(d) { return y(d.runtime); });
-
-      g.append("g")
-          .call(d3.axisLeft(y))
+    g.append("g")
+        .attr("transform", "translate(0," + 450 + ")")
+        .call(d3.axisBottom(x))
         .append("text")
           .attr("fill", "#000")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", "0.71em")
-          .attr("text-anchor", "end")
-          .text("Runtime (microseconds)");
+          .attr("x", 215)
+          .attr("y", -8)
+          .attr("dx", "0.71em")
+          .attr("text-anchor", "middle")
+          .text("Number of Nodes");
+      // .select(".domain")
+      //   .remove();
 
-      g.append("path")
-          .datum(data1)
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-linejoin", "round")
-          .attr("stroke-linecap", "round")
-          .attr("stroke-width", 1.5)
-          .attr("d", line);
+    // svg.selectAll("dot")
+    //   .data(data)
+    //   .enter().append("circle")
+    //   .attr("r", 3.5)
+    //   .attr("cx", function(d) { return x(d.numNodes); })
+    //   .attr("cy", function(d) { return y(d.runtime); });
 
-      g.append("path")
-          .datum(data2)
-          .attr("fill", "none")
-          .attr("stroke", "red")
-          .attr("stroke-linejoin", "round")
-          .attr("stroke-linecap", "round")
-          .attr("stroke-width", 1.5)
-          .attr("d", line);
+    g.append("g")
+        .call(d3.axisLeft(y))
+      .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text("Runtime (microseconds)");
 
-      svg.selectAll(".dot")
-         .data(data1)
-       .enter().append("circle")
-         .attr("class", "dot")
-         .attr("fill", "steelblue")
-         .attr("r", 3.5)
-         .attr("cx", dotMapX)
-         .attr("cy", dotMapY);
+    g.append("path")
+        .datum(data1)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
 
-       svg.selectAll(".dot2")
-          .data(data2)
-        .enter().append("circle")
-          .attr("class", "dot")
-          .attr("fill", "red")
-          .attr("r", 3.5)
-          .attr("cx", dotMapX)
-          .attr("cy", dotMapY);
+    g.append("path")
+        .datum(data2)
+        .attr("fill", "none")
+        .attr("stroke", "red")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
+    svg.selectAll(".dot")
+       .data(data1)
+     .enter().append("circle")
+       .attr("class", "dot")
+       .attr("fill", "steelblue")
+       .attr("r", 3.5)
+       .attr("cx", dotMapX)
+       .attr("cy", dotMapY);
+
+    svg.selectAll(".dot2")
+        .data(data2)
+      .enter().append("circle")
+        .attr("class", "dot")
+        .attr("fill", "red")
+        .attr("r", 3.5)
+        .attr("cx", dotMapX)
+        .attr("cy", dotMapY);
   }
 }
 
