@@ -67,6 +67,21 @@ class Visualization {
     return y - (Math.sin(radians) * weight) * direction;
   }
 
+  addCornerText(text, dy, color = "steelblue") {
+    this.svg
+      .append('text')
+      .text(text)
+      .attr('class', `corner_text`)
+      .attr('dx', 10)
+      .attr('dy', dy)
+      .attr('font-size', 12)
+      .style('opacity', 0)
+      .style('fill', color)
+      .transition()
+      .duration(500)
+      .style('opacity', 1);
+  }
+
   addArrow(defs, link, color, animate) {
     let arrow = defs
       .data([`arrow-${link.source.id}-${link.target.id}${animate ? animate : ''}-${this.target}`])

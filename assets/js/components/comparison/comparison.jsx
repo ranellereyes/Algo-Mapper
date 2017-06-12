@@ -2,7 +2,7 @@ import React from 'react';
 import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
-import { NODELIST, nodelistGenerator } from '../../algorithms/node';
+import { NODELIST2, nodelistGenerator } from '../../algorithms/node';
 
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 import AstarSteps from '../../algorithms/astar_step';
@@ -47,8 +47,8 @@ class Comparison extends React.Component {
 
     this.visual = [];
 
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
 
@@ -69,8 +69,8 @@ class Comparison extends React.Component {
     this.visual = [];
     this.codes = [];
 
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
 
@@ -78,25 +78,25 @@ class Comparison extends React.Component {
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
         case "dijkstra":
-          algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new DijkstraSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(Dijkstra);
           // graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
-          algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
-          graphAlgo.push(FloydWarshall);
-          // graphAlgo.push(Astar);
+          algorithms.push(new AstarSteps(NODELIST2, 1, 8, this.visual[index]));
+          graphAlgo.push(Astar);
+          // graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
-          algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new BellmanFordSteps(NODELIST2, 1, 8, this.visual[index]));
           // graphAlgo.push(FloydWarshall);
           graphAlgo.push(BellmanFord);
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
-          algorithms.push(new FloydWarshallSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new FloydWarshallSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/floyd_warshall.js');
       }
@@ -167,11 +167,12 @@ class Comparison extends React.Component {
     buttonHolder.style.backgroundColor = "transparent";
     // buttonHolder.style.zIndex = "-1";
     buttonHolder.style.width = "60%";
-    buttonHolder.style.height = "100px";
+    buttonHolder.style.height = "80px";
     let button = document.getElementById("button");
     button.removeEventListener("mouseover", this.mouseOverEffect);
     button.removeEventListener("mouseout", this.mouseOutEffect);
     button.style.backgroundImage = "url('../static/images/replay.png')";
+    button.style.margin = "105px 0 0 -100px";
     button.style.width = "50px";
     button.style.height = "50px";
     button.style.zIndex = "1";
@@ -185,6 +186,7 @@ class Comparison extends React.Component {
     buttonHolder.style.zIndex = "1";
     let button = document.getElementById("button");
     button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.margin = "0";
     button.style.width = "40%";
     button.style.height = "40%";
     button.style.zIndex = "1";
