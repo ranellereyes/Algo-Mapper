@@ -10,7 +10,14 @@ While learning new algorithms, it is very common for users to get lost tracking 
 
 ##### _Algorithm visualizations_
 
-Visualizations were created using `d3.js`, a data visualization library for JavaScript. This was a clear choice over pure canvas or the `Easel.js` library. Both the algorithm show pages and the comparison page use `d3.js` to colorize pre-made node maps. Due to the nature of the algorithms, each visualization was built with a different modular approach, representing how the algorithm searches through the node map. `d3.js` was also used to generate graphs to compare and display time complexity data for separate algorithms.
+Visualizations were created using `d3.js`, a data visualization library for JavaScript. This was a clear choice over pure canvas or the `Easel.js` library. Both the algorithm show pages and the comparison page use `d3.js` to colorize pre-made node maps. Due to the nature of the algorithms, each visualization was built with a different modular approach, representing how the algorithm searches through the node map.
+
+![Astar](docs/gifs/Astar.gif)
+
+![Comparison](docs/gifs/Comparison.gif)
+
+
+`d3.js` was also used to generate graphs to compare and display time complexity data for separate algorithms.
 
 ##### _Code Highlighting_
 
@@ -36,7 +43,7 @@ __Bonus MVP__:
 
 ##### Algorithms
 
-Understanding the general concepts is one thing. Writing code that works is another. Although we do wish to have accomplished a little more on the technical side of things, we still implemented four very functional algorithms in JavaScript that properly display and calculate shortest paths. 
+Understanding the general concepts is one thing. Writing code that works is another. Although we do wish to have accomplished a little more on the technical side of things, we still implemented four very functional algorithms in JavaScript that properly display and calculate shortest paths.
 
 ##### Graphs and Visualizations
 

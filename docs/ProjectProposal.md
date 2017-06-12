@@ -11,11 +11,11 @@ With this website, users will be able to:
 - [ ] Pick and choose between 4 different algorithms that find shortest path,
 - [ ] Show page with algorithm visualization, details, and code,
 - [ ] Comparison page that allows user to pick between two algorithms, see each of their visualizations, and differences in time complexity,
-- [ ] Create example shortest path model that can be used for each algorithm,
 - [ ] Can pause visualization and take it step-by-step.
 
 __Bonus MVP__:
 
+- [ ] Create example shortest path model that can be used for each algorithm,
 - [ ] Compare between different programming languages
 - [ ] Compare space complexity if method is found
 - [ ] Add additional algorithms

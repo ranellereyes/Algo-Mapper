@@ -85,8 +85,8 @@ class Comparison extends React.Component {
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST2, 1, 8, this.visual[index]));
-          graphAlgo.push(FloydWarshall);
-          // graphAlgo.push(Astar);
+          graphAlgo.push(Astar);
+          // graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
