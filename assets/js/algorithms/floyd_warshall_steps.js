@@ -10,8 +10,6 @@ export default class FloydWarshallSteps extends FloydWarshall {
     this.currStep = 0;
     this.start = start;
     this.end = end;
-
-    this.addText = this.addText.bind(this);
   }
 
   clear() {
@@ -38,27 +36,27 @@ export default class FloydWarshallSteps extends FloydWarshall {
     });
   }
 
-  addText(text, dy, color = "steelblue") {
-    d3.select(`svg`).append('text')
-      .text(text)
-      .attr('class', `corner_text`)
-      .attr('dx', 10)
-      .attr('dy', dy)
-      .attr('font-size', 12)
-      .style('opacity', 0)
-      .style('fill', color)
-      .transition()
-      .duration(500)
-      .style('opacity', 1);
-  }
+  // addCornerText(text, dy, color = "steelblue") {
+  //   d3.select(`svg`).append('text')
+  //     .text(text)
+  //     .attr('class', `corner_text`)
+  //     .attr('dx', 10)
+  //     .attr('dy', dy)
+  //     .attr('font-size', 12)
+  //     .style('opacity', 0)
+  //     .style('fill', color)
+  //     .transition()
+  //     .duration(500)
+  //     .style('opacity', 1);
+  // }
 
   draw(currStep) {
     let visual = this.visualization,
     step = this.steps[this.currStep],
     { nodes, loops, tables, changed } = step;
 
-    this.addText(`i = ${loops[0]}, j = ${loops[1]}, k = ${loops[2]}`, 16);
-    this.addText(`i = source node, j = destination node, k = intermediate node`, 30);
+    visual.addCornerText(`i = ${loops[0]}, j = ${loops[1]}, k = ${loops[2]}`, 16);
+    visual.addCornerText(`i = source node, j = destination node, k = intermediate node`, 30);
 
     let indices = this.indices;
 
@@ -66,9 +64,9 @@ export default class FloydWarshallSteps extends FloydWarshall {
       switch (idx) {
         case 0:
           let [i, j, k] = loops.map(e => indices.indexOf(String(e)));
-          visual.highlightNode(node, "lightgreen");
-          this.addText(`direct cost = ${tables.costs[i][j]}`, 44, "black");
-          this.addText(`cost thru k = ${tables.costs[i][k] + tables.costs[k][j]}`, 58, "black");
+          visual.highlightNode(node, "yellow");
+          visual.addCornerText(`direct cost = ${tables.costs[i][j]}`, 44, "black");
+          visual.addCornerText(`cost thru k = ${tables.costs[i][k] + tables.costs[k][j]}`, 58, "black");
 
           let color = changed ? "red" : "black",
               parent = tables.parents[i][j];
@@ -80,7 +78,7 @@ export default class FloydWarshallSteps extends FloydWarshall {
           visual.highlightNode(node, "green");
           break;
         case 2:
-          visual.highlightNode(node, "yellow");
+          visual.highlightNode(node, "lightgreen");
           break;
         default:
           return;
