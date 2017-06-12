@@ -68,10 +68,18 @@ class Index extends React.Component {
         </main>
         <section className="index-algo-display">
           <ul className="index-algo-list">
-            <div tabIndex="1" onFocus={() => this.selectAlgo('first')} className="index-algo-image astar" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('second')} className="index-algo-image dijkstra" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('third')} className="index-algo-image bellman" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('fourth')} className="index-algo-image floyd" />
+            <div tabIndex="1" onFocus={() => this.selectAlgo('first')} className="index-algo-image astar">
+              <h2>A* star</h2>
+            </div>
+            <div tabIndex="1" onFocus={() => this.selectAlgo('second')} className="index-algo-image dijkstra">
+              <h2>Dijkstra's</h2>
+            </div>
+            <div tabIndex="1" onFocus={() => this.selectAlgo('third')} className="index-algo-image bellman">
+              <h2>Bellman-Ford</h2>
+            </div>
+            <div tabIndex="1" onFocus={() => this.selectAlgo('fourth')} className="index-algo-image floyd">
+              <h2>Floyd-Warshall</h2>
+            </div>
           </ul>
           <div className={`index-arrow-up ${this.state.algo}`}>
             <div className="index-arrow-fill" />
@@ -82,7 +90,7 @@ class Index extends React.Component {
             </section>
           </div>
         </section>
-      </div>  
+      </div>
     );
   }
 }

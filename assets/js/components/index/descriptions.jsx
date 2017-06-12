@@ -7,8 +7,7 @@ export const AstarDescription = () => (
     <p>A* is an informed search algorithm, or a best-first search, meaning that it solves problems by searching among all possible paths to the solution for the one that incurs the smallest cost. Among the stored paths in memory, it first considers the ones that appear to lead most quickly to the solution. What makes this algorithm unique is its heuristic approach, where each node's cost value is dictated by a heuristic. In general, this cost is evaluated as the sum of the initial cost to reach a particular node, and the distance away that node is from the destination. </p>
     <br />
 
-    <p>Check out this algorithm more in depth here!</p>
-    <Link to={`/astar`}> A* </Link>
+    <p>Check out this algorithm more in depth <Link to='/astar'>here!</Link></p>
   </div>
 )
 
@@ -20,8 +19,7 @@ export const DijkstraDescription = () => (
     </p>
     <br />
 
-    <p>Check out this algorithm more in depth here!</p>
-    <Link to={`/dijkstras`}> Dijkstra's </Link>
+    <p>Check out this algorithm more in depth <Link to='/dijkstras'>here!</Link></p>
   </div>
 )
 
@@ -33,8 +31,7 @@ export const BellmanFordDescription = () => (
     </p>
     <br />
 
-    <p>Check out this algorithm more in depth here!</p>
-    <Link to={`/bellman-ford`}> Bellman-Ford </Link>
+    <p>Check out this algorithm more in depth <Link to='/bellman-ford'>here!</Link></p>
   </div>
 )
 
@@ -42,11 +39,10 @@ export const FloydWarshallDescription = () => (
   <div className='index-description'>
     <h2>Floyd-Warshall</h2>
     <p>
-      The Floyd-Warshall algorithm is an algorithm that finds the shortest path between all pairs of node on a given graph. 
+      The Floyd-Warshall algorithm is an algorithm that finds the shortest path between all pairs of node on a given graph.
     </p>
     <br />
 
-    <p>Check out this algorithm more in depth here!</p>
-    <Link to={`/floyd-warshall`}> Floyd-Warshall </Link>
+    <p>Check out this algorithm more in depth <Link to='/floyd-warshall'>here!</Link></p>
   </div>
 )
