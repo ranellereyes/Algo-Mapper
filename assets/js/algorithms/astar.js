@@ -18,6 +18,7 @@ class Astar {
       list[idx].parent = undefined;
     }
 
+    let start = window.performance.now();
     // add starting node to open list
     this.openList.push(startNode);
 
@@ -40,12 +41,15 @@ class Astar {
           curr = curr.parent;
         }
         path.push(curr.id);
-        return path.reverse();
+        return {
+          path: path.reverse(),
+          runtime: window.performance.now() - start
+        }
       }
 
       // add current node to close list and remove it from the open list
       this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
-      
+
       // g cost set-up
       currentNode.children.forEach( node => {
         list[node.id].weight = node.weight;
@@ -55,7 +59,7 @@ class Astar {
         let gScore = currentNode.g + node.weight;
 
         // add new child node to open list if not included
-        if (!this.openList.includes(node)) {
+        if (!this.openList.includes(node) && !this.closeList.includes(node)) {
           this.openList.push(node);
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;
@@ -73,7 +77,10 @@ class Astar {
     }
 
     // return empty array if no path is found
-    return []
+    return {
+      path: [],
+      runtime: window.performance.now() - start
+    }
   }
 
   childNodes(currentNode) {
