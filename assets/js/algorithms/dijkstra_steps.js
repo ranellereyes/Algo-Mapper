@@ -85,7 +85,6 @@ class DijkstraSteps {
       path.push(parent[startKey]);
       startKey = parent[startKey]
     }
-    // console.log(path.reverse());
     return path.reverse();
   }
 
