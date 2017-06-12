@@ -93,9 +93,7 @@ export default class Graph {
         .style("opacity", 0);
 
 
-    var dotMapX = function(d) {
-      console.log(x(d.numNodes) + margin.left);
-      return x(d.numNodes) + margin.left;};
+    var dotMapX = function(d) { return x(d.numNodes) + margin.left;};
     var dotMapY = function(d) { return y(d.runtime) + margin.top;};
 
       x.domain(d3.extent(compData, function(d) { return d.numNodes; }));

@@ -35,6 +35,7 @@ class Comparison extends React.Component {
     this.handleClickRight = this.handleClickRight.bind(this);
     this.handleSelectA = this.handleSelectA.bind(this);
     this.handleSelectB = this.handleSelectB.bind(this);
+    this.handlePlayGraph = this.handlePlayGraph.bind(this);
 
   }
 
@@ -147,14 +148,24 @@ class Comparison extends React.Component {
     });
   }
 
-  handleSelectA (e) {
+  handleSelectA(e) {
     this.state.options.optionA = e.target.value;
     this.resetAlgorithms();
   }
 
-  handleSelectB (e) {
+  handleSelectB(e) {
     this.state.options.optionB = e.target.value;
     this.resetAlgorithms();
+  }
+
+  handlePlayGraph(e) {
+    console.log("Graph will be running!");
+    let buttonHolder = document.getElementById("button-holder");
+    buttonHolder.style.backgroundColor = "transparent";
+    buttonHolder.style.zIndex = "-1";
+    let button = document.getElementById("button");
+    button.style.backgroundImage = "none";
+    button.style.zIndex = "-1";
   }
 
   render() {
@@ -195,8 +206,13 @@ class Comparison extends React.Component {
                   {this.codes[0]}
                 </Highlight>
               </li>
-              <div className="comp-graph">
-              </div>
+              <li className="comp-graph">
+                <div className="comp-graph">
+                  <div className="comp-graph-button" id="button-holder">
+                    <figure onClick={this.handlePlayGraph} id="button"></figure>
+                  </div>
+                </div>
+              </li>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
                   {this.codes[1]}
