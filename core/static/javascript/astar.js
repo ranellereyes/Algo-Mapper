@@ -45,7 +45,7 @@ class Astar {
 
       // add current node to close list and remove it from the open list
       this.closeList.push(this.openList.splice(lowIdx, 1)[0]);
-      
+
       // g cost set-up
       currentNode.children.forEach( node => {
         list[node.id].weight = node.weight;
@@ -55,7 +55,7 @@ class Astar {
         let gScore = currentNode.g + node.weight;
 
         // add new child node to open list if not included
-        if (!this.openList.includes(node)) {
+        if (!this.openList.includes(node) && !this.closeList.includes(node)) {
           this.openList.push(node);
           list[node.id].parent = currentNode;
           list[node.id].g = gScore;

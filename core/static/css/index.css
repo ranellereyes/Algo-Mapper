@@ -71,6 +71,7 @@ div.index-algo-image {
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
   outline: none;
+  position: relative;
 }
 
 div.index-algo-image:last-child {
@@ -141,6 +142,12 @@ div.index-algo-description section {
 div.index-algo-description p {
   font-size: 18px;
   transition: opacity 0.2s
+}
+
+div.index-algo-image h2 {
+  position: absolute;
+  top: 5px;
+  left: 10px;
 }
 
 section.into-the-abyss {
