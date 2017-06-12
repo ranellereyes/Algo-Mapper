@@ -8,6 +8,16 @@ While learning new algorithms, it is very common for users to get lost tracking 
 
 ### Technologies
 
+##### _List of Technologies_
+
+- Vanilla JavaScript
+- React
+- Django / Python
+- react-highlight
+- d3.js
+- React-DOM
+- Webpack
+
 ##### _Algorithm visualizations_
 
 Visualizations were created using `d3.js`, a data visualization library for JavaScript. This was a clear choice over pure canvas or the `Easel.js` library. Both the algorithm show pages and the comparison page use `d3.js` to colorize pre-made node maps. Due to the nature of the algorithms, each visualization was built with a different modular approach, representing how the algorithm searches through the node map.
@@ -15,46 +25,30 @@ Visualizations were created using `d3.js`, a data visualization library for Java
 Figure 1: AStar algorithm displayed on show page
 ![Astar](docs/gifs/Astar.gif)
 
+With our modular design, we can choose to show any sort of relative information needed.
 
 Figure 2: Comparison page showing two different algorithms
 ![Comparison](docs/gifs/Comparison.gif)
 
-
+In our comparison showpage, you can see the difference between different algorithms and what sort of information is needed and displayed. On the left of figure 2, you can see that visited nodes are important to the algorithm while on the right, you can see that an extra node needs to be highlighted and extra information is displayed on the top.
 
 Figure 3: Graph and code displayed, along with the ability to re-calculate the data
 ![Graph](docs/gifs/Graph.gif)
 
-`d3.js` was also used to generate graphs to compare and display time complexity data for separate algorithms.
+As another point of comparison, the user is able derive and compare time complexities. Due to the random generator of nodelists, the solutions and runtimes can differ due to hitting worst-case scenarios. `d3.js` was also used to generate graphs to compare and display time complexity data for separate algorithms.
 
 ##### _Code Highlighting_
 
 Although visualizations are helpful for understanding the core concepts of the algorithm, the pure code is of course another imperative. The show page and comparison both have code boxes that display JavaScript code that our team members developed, highlighted and formatted correctly using `react-highlight`.
 
-### Minimum Viable Product
+### Future Plans
 
-With this website, users will be able to:
+- Compare algorithms using different languages
+- Compare algorithms with different optimized data structures (binary heaps, etc.)
+- Show negative weight cases
+- Add more user functionality/create own nodegraphs.
 
-- [ ] Pick and choose between 4 different algorithms that find shortest path,
-- [ ] View a show page with algorithm visualization, details, and code,
-- [ ] Comparison page that allows user to pick between two algorithms, see each of their visualizations, and differences in time complexity,
-- [ ] Create example shortest path model that can be used for each algorithm,
-- [ ] Can pause visualization and take it step-by-step.
-
-__Bonus MVP__:
-
-- [ ] Compare between different programming languages
-- [ ] Compare space complexity if method is found
-- [ ] Add additional algorithms
-
-### Technical Challenges
-
-##### Algorithms
-
-Understanding the general concepts is one thing. Writing code that works is another. Although we do wish to have accomplished a little more on the technical side of things, we still implemented four very functional algorithms in JavaScript that properly display and calculate shortest paths.
-
-##### Graphs and Visualizations
-
-### Group Members and Implementation Timeline
+### Group Members
 
 Our group consists of four members:
 
