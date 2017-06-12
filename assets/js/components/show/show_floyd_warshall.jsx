@@ -81,9 +81,8 @@ class ShowFloyd extends React.Component {
                   {this.code}
                 </Highlight>
               </aside>
-              <figure onClick={this.handleClickLeft}></figure>
-              <figure onClick={this.handleClickRight} ></figure>
-            </ul>
+              <figure onClick={this.handleClickLeft} id="arrow_left"></figure>
+              <figure onClick={this.handleClickRight} id="arrow_right"></figure>            </ul>
           </section>
         </main>
         <section className="show-algo-bottom">
