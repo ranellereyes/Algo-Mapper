@@ -82,8 +82,8 @@ class ShowFloyd extends React.Component {
                   {this.code}
                 </Highlight>
               </aside>
-              <figure onClick={this.handleClickLeft}></figure>
-              <figure onClick={this.handleClickRight} ></figure>
+              <figure id="arrow_left" onClick={this.handleClickLeft}></figure>
+              <figure id="arrow_right" onClick={this.handleClickRight} ></figure>
             </ul>
           </section>
         </main>

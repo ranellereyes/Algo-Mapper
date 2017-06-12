@@ -202,9 +202,38 @@ export default class Graph {
          })
          .on("mouseout", function(d) {
              tooltip.transition()
-                  .duration(500)
-                  .style("opacity", 0)
-                  .style('z-index', -1);
+                    .duration(500)
+                    .style("opacity", 0)
+                    .style('z-index', -1);
          });
-    }
+
+         var legend = d3.select('svg.graph')
+            .append("g")
+            .selectAll("g")
+            .data(['blue', 'red'])
+            .enter()
+            .append('g')
+              .attr('class', 'legend')
+              .attr('transform', function(d, i) {
+                var height = 14;
+                var x = 75;
+                var y = 20 + i * height + 8 * i;
+                return 'translate(' + x + ',' + y + ')';
+            });
+
+        legend.append('rect')
+            .attr('width', 14)
+            .attr('height', 14)
+            .data(['blue', 'red'])
+            .style('fill', function(d) { return d; })
+            .style('stroke', function(d) {return d; });
+
+        legend.append('text')
+            .attr('x', 14 + 5)
+            .attr('y', 14)
+            .data([String(this.alg1.name),
+                      String(this.alg2.name)])
+            .text(function(d) { return d; });
+
+       }
   }

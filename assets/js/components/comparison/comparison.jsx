@@ -2,7 +2,7 @@ import React from 'react';
 import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
-import { NODELIST, nodelistGenerator } from '../../algorithms/node';
+import { NODELIST2, nodelistGenerator } from '../../algorithms/node';
 
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 import AstarSteps from '../../algorithms/astar_step';
@@ -45,12 +45,10 @@ class Comparison extends React.Component {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
 
-    // window.v = visualA;
-    // this.setState({ graph: this.visualA});
     this.visual = [];
 
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
 
@@ -71,8 +69,8 @@ class Comparison extends React.Component {
     this.visual = [];
     this.codes = [];
 
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST2, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
 
@@ -80,25 +78,25 @@ class Comparison extends React.Component {
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
         case "dijkstra":
-          algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new DijkstraSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(Dijkstra);
           // graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
-          algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new AstarSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(FloydWarshall);
           // graphAlgo.push(Astar);
           this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
-          algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new BellmanFordSteps(NODELIST2, 1, 8, this.visual[index]));
           // graphAlgo.push(FloydWarshall);
           graphAlgo.push(BellmanFord);
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
-          algorithms.push(new FloydWarshallSteps(NODELIST, 1, 6, this.visual[index]));
+          algorithms.push(new FloydWarshallSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/floyd_warshall.js');
       }
@@ -167,30 +165,43 @@ class Comparison extends React.Component {
   hidePlayButton(){
     let buttonHolder = document.getElementById("button-holder");
     buttonHolder.style.backgroundColor = "transparent";
-    buttonHolder.style.zIndex = "-1";
+    // buttonHolder.style.zIndex = "-1";
+    buttonHolder.style.width = "60%";
+    buttonHolder.style.height = "80px";
     let button = document.getElementById("button");
-    button.removeEventListener("mouseout", this.hoverEffect);
-    button.style.backgroundImage = "none";
-    button.style.zIndex = "-1";
+    button.removeEventListener("mouseover", this.mouseOverEffect);
+    button.removeEventListener("mouseout", this.mouseOutEffect);
+    button.style.backgroundImage = "url('../static/images/replay.png')";
+    button.style.margin = "105px 0 0 -100px";
+    button.style.width = "50px";
+    button.style.height = "50px";
+    button.style.zIndex = "1";
   }
 
   revealPlayButton(){
     let buttonHolder = document.getElementById("button-holder");
     buttonHolder.style.backgroundColor = "lightgray";
+    buttonHolder.style.width = "100%";
+    buttonHolder.style.height = "100%";
     buttonHolder.style.zIndex = "1";
     let button = document.getElementById("button");
     button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.margin = "0";
+    button.style.width = "40%";
+    button.style.height = "40%";
     button.style.zIndex = "1";
-    button.addEventListener("mouseover", (e) => {
-      e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
-    });
-    button.addEventListener("mouseout", this.hoverEffect);
-
+    button.addEventListener("mouseover", this.mouseOverEffect);
+    button.addEventListener("mouseout", this.mouseOutEffect);
   }
 
-  hoverEffect(e) {
+  mouseOverEffect(e) {
+    e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
+  }
+
+  mouseOutEffect(e) {
     e.target.style.backgroundImage = "url('../static/images/play_button.png')";
   }
+
   render() {
     return (
       <div className="index-main">
