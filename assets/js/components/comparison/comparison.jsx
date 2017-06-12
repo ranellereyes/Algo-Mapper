@@ -80,18 +80,15 @@ class Comparison extends React.Component {
         case "dijkstra":
           algorithms.push(new DijkstraSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(Dijkstra);
-          // graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST2, 1, 8, this.visual[index]));
           graphAlgo.push(Astar);
-          // graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
           algorithms.push(new BellmanFordSteps(NODELIST2, 1, 8, this.visual[index]));
-          // graphAlgo.push(FloydWarshall);
           graphAlgo.push(BellmanFord);
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
