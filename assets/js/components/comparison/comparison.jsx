@@ -69,6 +69,7 @@ class Comparison extends React.Component {
 
     let algorithms = [];
     let graphAlgo = [];
+    this.revealPlayButton();
     d3.selectAll("svg").remove();
     this.visual = [];
     this.codes = [];
@@ -160,14 +161,36 @@ class Comparison extends React.Component {
 
   handlePlayGraph(e) {
     console.log("Graph will be running!");
+    this.hidePlayButton();
+  }
+
+  hidePlayButton(){
     let buttonHolder = document.getElementById("button-holder");
     buttonHolder.style.backgroundColor = "transparent";
     buttonHolder.style.zIndex = "-1";
     let button = document.getElementById("button");
+    button.removeEventListener("mouseout", this.hoverEffect);
     button.style.backgroundImage = "none";
     button.style.zIndex = "-1";
   }
 
+  revealPlayButton(){
+    let buttonHolder = document.getElementById("button-holder");
+    buttonHolder.style.backgroundColor = "lightgray";
+    buttonHolder.style.zIndex = "1";
+    let button = document.getElementById("button");
+    button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.zIndex = "1";
+    button.addEventListener("mouseover", (e) => {
+      e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
+    });
+    button.addEventListener("mouseout", this.hoverEffect);
+
+  }
+
+  hoverEffect(e) {
+    e.target.style.backgroundImage = "url('../static/images/play_button.png')";
+  }
   render() {
     return (
       <div className="index-main">
