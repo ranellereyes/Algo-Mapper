@@ -147,14 +147,12 @@ div.comp-graph-button {
 }
 
 div.comp-graph-button figure{
-  background-image: url('../images/play_button.png');
   background-repeat: no-repeat;
   background-size: 100%;
   width: 40%;
   height: 40%;
   opacity: 1;
+  cursor: pointer;
 }
 div.comp-graph-button figure:hover{
-  background-image: url('../images/play_button_hover.png');
-  cursor: pointer;
 }
