@@ -18,7 +18,7 @@ class Header extends React.Component {
   }
 
   closeDropdown(e) {
-    setTimeout(() => this.setState({ active: ''}), 100);
+    setTimeout(() => this.setState({ active: ''}), 200);
   }
 
   render() {
