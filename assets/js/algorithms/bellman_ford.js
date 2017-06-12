@@ -18,20 +18,14 @@ class BellmanFord {
     });
 
     cost[startNodeId] = 0;
-    let finished = false;
 
     for (let i = 0; i < Object.keys(this.nodeList).length -1; i++) {
-      finished = true;
       this.edgeList.forEach((edge) => {
         if (cost[edge.fromId] + edge.weight < cost[edge.toId]) {
           cost[edge.toId] = cost[edge.fromId] + edge.weight;
           parents[edge.toId] = edge.fromId;
-          finished = false;
         }
       });
-      if (finished) {
-        break;
-      }
     }
 
     return  {
