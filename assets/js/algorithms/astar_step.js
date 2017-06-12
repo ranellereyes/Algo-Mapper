@@ -134,14 +134,14 @@ class AstarSteps extends Astar {
       });
     }
     if (child) {
-      visual.highlightNode(child.id, "yellow")
+      visual.highlightNode(child.id, "green")
       visual.removeText(child.id);
       visual.addText(child.id, -26, -59, 'blue', (d) => `h = ${Math.floor(child.h)}`);
       visual.addText(child.id, -26, -43, 'blue', (d) => `g = ${Math.floor(child.g)}`);
       visual.addText(child.id, -26, -25, 'blue', (d) => `f = ${Math.floor(child.f)}`);
       visual.highlightLink(curr.id, child.id, "red");
     }
-    visual.highlightNode(curr.id, 'green');
+    visual.highlightNode(curr.id, 'yellow');
     this.i += 1;
   }
 
@@ -173,14 +173,14 @@ class AstarSteps extends Astar {
       visual.highlightLink(link[0], link[1], "blue");
     });
     if (child) {
-      visual.highlightNode(child.id, "yellow")
+      visual.highlightNode(child.id, "green")
       visual.removeText(child.id);
       visual.addText(child.id, -26, -59, 'blue', (d) => `h = ${Math.floor(child.h)}`);
       visual.addText(child.id, -26, -43, 'blue', (d) => `g = ${Math.floor(child.g)}`);
       visual.addText(child.id, -26, -25, 'blue', (d) => `f = ${Math.floor(child.f)}`);
       visual.highlightLink(curr.id, child.id, "red");
     }
-    visual.highlightNode(curr.id, 'green');
+    visual.highlightNode(curr.id, 'yellow');
   }
 
   stepForwardDisplay() {
