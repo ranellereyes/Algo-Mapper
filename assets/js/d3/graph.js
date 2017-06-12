@@ -169,6 +169,7 @@ export default class Graph {
          .on("mouseover", function(d) {
             tooltip.transition()
                    .duration(200)
+                   .style('z-index', 1)
                    .style("opacity", .9);
             tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
                    .style("left", dotMapX(d)+"px")
@@ -177,7 +178,8 @@ export default class Graph {
           .on("mouseout", function(d) {
               tooltip.transition()
                    .duration(500)
-                   .style("opacity", 0);
+                   .style("opacity", 0)
+                   .style('z-index', -1);
           });
 
 
@@ -192,6 +194,7 @@ export default class Graph {
           .on("mouseover", function(d) {
              tooltip.transition()
                     .duration(50)
+                    .style('z-index', 1)
                     .style("opacity", .9);
              tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
                     .style("left", dotMapX(d)+"px")
@@ -200,7 +203,8 @@ export default class Graph {
            .on("mouseout", function(d) {
                tooltip.transition()
                     .duration(500)
-                    .style("opacity", 0);
+                    .style("opacity", 0)
+                    .style('z-index', -1);
            });
   }
 }
