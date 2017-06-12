@@ -96,7 +96,7 @@ class ShowBellmanFord extends React.Component {
               <div className="show-how-it-works">
                 <h3>How it Works</h3>
                 <p>
-                  The Bellman-Ford algorithm is an algorithm that finds the <code>cost</code> (shortest path) from a source node to a destination node or all other nodes within a graph. Unlike Dijkstra's algorithm, the Bellman-Ford algorithm can handle negative edge weights and will display an error if there is a negative cycle. Edge weights are numerical values that represent the <code>cost</code> of getting from one node to another connecting node. //needs change
+                  The Bellman-Ford algorithm is an algorithm that finds the <code>cost</code> (shortest path) from a source node to a destination node or all other nodes within a graph. Unlike Dijkstra's algorithm, the Bellman-Ford algorithm can handle negative edge weights and will display an error if there is a negative cycle. Edge weights are numerical values that represent the <code>cost</code> of getting from one node to another connecting node.
                 </p>
                 <ol>
                   <li><span>Assign a source node and set its <code>cost</code> to 0. Set all other nodes' <code>cost</code> to infinity because the source node does not know how much it will <code>cost</code> to get to the other nodes.</span></li>
@@ -113,7 +113,7 @@ class ShowBellmanFord extends React.Component {
                 </ol>
                 <h3>Details</h3>
                 <p>
-                  The Bellman-Ford algorithm can account for negative weight edges because the algorithm will iterate through all the edge weights every iteration to update the <code>cost</code> to reach the adjacent nodes. Because of these iterations, the time complexity of the Bellman-Ford algorithm at worst runs at O(n<sup>2</sup>) time complexity and at best O(n) if each node only has one child node.
+                  The Bellman-Ford algorithm can account for negative weight edges because the algorithm will iterate through all the edge weights every iteration to update the <code>cost</code> to reach the adjacent nodes. Because of these iterations, the time complexity of the Bellman-Ford algorithm at worst runs at O((V-1) * E) time complexity (O(n<sup>2</sup>)) where V is the number of nodes and E is the number of edges and at best O(n) if each node only has one child node.
                 </p>
               </div>
               <aside className="show-pros-n-cons">

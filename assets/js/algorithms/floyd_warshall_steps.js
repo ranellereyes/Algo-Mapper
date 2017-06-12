@@ -103,7 +103,6 @@ export default class FloydWarshallSteps extends FloydWarshall {
   }
 
   stepForward() {
-    console.log(this.currStep, this.steps.length);
     if (this.currStep > this.steps.length - 2) {
       this.clear();
       this.dispAnswer(this.start, this.end);
