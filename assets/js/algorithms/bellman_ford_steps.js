@@ -7,7 +7,7 @@ class BellmanFordSteps extends BellmanFord{
     // this.nodeList = nodeList;
     this.visual = visual;
     this.index = -1;
-    this.path = super.search(startNodeId, endNodeId);
+    this.path = super.search(startNodeId, endNodeId).path;
     this.edgeList = this.createEdgeList(nodeList);
 
     this.search = this.search.bind(this);

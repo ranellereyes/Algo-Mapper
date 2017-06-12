@@ -124,6 +124,10 @@ section.comp-graph li.comp-graph-code code {
   padding: 10px;
 }
 
+g.tick text {
+  font-size: 9;
+}
+
 div.comp-graph {
   position: relative;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../algorithms/node';
+import { NODELIST, nodelistGenerator } from '../../algorithms/node';
 
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 import AstarSteps from '../../algorithms/astar_step';
@@ -22,7 +22,8 @@ class Comparison extends React.Component {
                       optionB: "bellman-ford"
                     },
                   algorithms: [],
-                  graphAlgo: []
+                  graphAlgo: [],
+                  graph: null
                   };
     // this.visual = [];
     this.codes = [];
@@ -52,12 +53,8 @@ class Comparison extends React.Component {
     this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    let graph = new Graph(FloydWarshall, FloydWarshall);
-    window.graph = graph;
-    graph.draw();
 
     this.resetAlgorithms();
-
   }
 
   componentWillUnmount() {
@@ -96,8 +93,8 @@ class Comparison extends React.Component {
           break;
         case "bellman-ford":
           algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
-          graphAlgo.push(FloydWarshall);
-          // graphAlgo.push(BellmanFord);
+          // graphAlgo.push(FloydWarshall);
+          graphAlgo.push(BellmanFord);
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
@@ -106,8 +103,10 @@ class Comparison extends React.Component {
           this.fetchCode('static/javascript/floyd_warshall.js');
       }
     });
-    this.setState({algorithms, graphAlgo});
-    new Graph(...graphAlgo).draw();
+
+    let graph = new Graph(...graphAlgo);
+    graph.drawPlaceholder();
+    this.setState({algorithms, graphAlgo, graph});
   }
 
   fetchCode(file) {
@@ -160,7 +159,8 @@ class Comparison extends React.Component {
   }
 
   handlePlayGraph(e) {
-    console.log("Graph will be running!");
+    d3.selectAll(".graph").remove();
+    this.state.graph.draw();
     this.hidePlayButton();
   }
 
