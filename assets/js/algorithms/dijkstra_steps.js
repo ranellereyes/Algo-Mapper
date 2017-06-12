@@ -57,7 +57,6 @@ class DijkstraSteps {
         }
       }
     }
-    // console.log(this.steps);
     // create path from source to destination
     this.path = this.createPath(parent, this.source, this.destination);
   }
@@ -92,7 +91,9 @@ class DijkstraSteps {
 
   stepForward() {
     //moves on to next step
-    this.i++;
+    if (this.i !== this.steps.length) {
+      this.i++;
+    }
     let steps = this.steps[this.i];
     let prev = this.steps[this.i - 1]
     if (this.i >= this.steps.length) {
@@ -104,7 +105,7 @@ class DijkstraSteps {
         this.visual.highlightNode(node, "red");
         this.visual.highlightLink(node, this.path[idx + 1], "blue")
       });
-      this.i--;
+      // this.i--;
     }
     // unhighlight previous node/links
     else {
@@ -140,6 +141,8 @@ class DijkstraSteps {
 
   stepBackward() {
     this.i--;
+    this.visual.clearLinks();
+    this.visual.clearNodes();
     let steps = this.steps[this.i];
     let forw = this.steps[this.i + 1];
     if (this.i < -1) {
