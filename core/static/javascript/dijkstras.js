@@ -4,7 +4,7 @@ class Dijkstra {
     this.visited = [];
     this.unvisited = [];
   }
-
+  //Sets source node to cost 0 and all other node's cost to Infinity
   initiate(source) {
     source.weight = 0;
     source.cost = 0;
@@ -17,7 +17,7 @@ class Dijkstra {
       }
     });
   }
-
+  //Find shortest path from source node to destination node
   search(source, destination) {
     this.initiate(this.nodeList[source])
     let parent = {};
