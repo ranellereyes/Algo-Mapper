@@ -3,8 +3,7 @@ import FloydWarshall from '../algorithms/floyd_warshall';
 
 export default class Graph {
   constructor(alg1, alg2){
-    this.nodeNums = [ 50, 100, 150, 200, 250, 300, 350, 400,
-                      500, 600, 700, 800, 900, 1000];
+    this.nodeNums = [ 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000];
     this.data1 = [];
     this.data2 = [];
     this.alg1 = alg1;
@@ -12,12 +11,14 @@ export default class Graph {
     this.nodelistGenerator = nodelistGenerator;
   }
 
-  computeData(alg, i) {
+  computeData(alg, i, list) {
     i == 0 ?
       this.data1 = [] :
       this.data2 = [];
 
-    this.nodeNums.forEach(num => {
+    let nodeNums = list === 'small' ? this.nodeNums.map(e => e / 10) : this.nodeNums;
+
+    nodeNums.forEach(num => {
       let runtime = new alg(new nodelistGenerator(num).nodelist)
                       .search('1', String(num))
                       .runtime;
@@ -30,23 +31,23 @@ export default class Graph {
 
   drawPlaceholder() {
     // -- LINEAR DATA TEST --
-    this.data1 = [
-      {numNodes: 10, runtime: 500},
-      {numNodes: 25, runtime: 1250},
-      {numNodes: 40, runtime: 2000},
-      {numNodes: 50, runtime: 2500},
-      {numNodes: 80, runtime: 4000},
-      {numNodes: 100, runtime: 5000}
-    ];
+    // this.data1 = [
+    //   {numNodes: 10, runtime: 500},
+    //   {numNodes: 25, runtime: 1250},
+    //   {numNodes: 40, runtime: 2000},
+    //   {numNodes: 50, runtime: 2500},
+    //   {numNodes: 80, runtime: 4000},
+    //   {numNodes: 100, runtime: 5000}
+    // ];
 
     // -- QUAD DATA TEST --
-      this.data2 = [
-        {numNodes: 10, runtime: 100},
-        {numNodes: 20, runtime: 400},
-        {numNodes: 50, runtime: 2505},
-        {numNodes: 80, runtime: 6400},
-        {numNodes: 100, runtime: 10000}
-      ];
+      // this.data2 = [
+      //   {numNodes: 10, runtime: 100},
+      //   {numNodes: 20, runtime: 400},
+      //   {numNodes: 50, runtime: 2505},
+      //   {numNodes: 80, runtime: 6400},
+      //   {numNodes: 100, runtime: 10000}
+      // ];
 
     // -- CUBIC DATA TEST --
     // data2 = [
@@ -58,23 +59,22 @@ export default class Graph {
     //   {numNodes: 100, runtime: 1000000}
     // ];
 
+    this.data1 = [], this.data2 = [];
     this.draw("example");
   }
 
   draw(option) {
     if (option !== "example") {
       let algs = [this.alg1, this.alg2];
-
-      this.data1.length == 0 ?
-      algs.forEach((alg, i) => this.computeData(alg, i)) :
-      null;
-      // this.computeData(this.alg1, this.alg2);
+      let list =  algs.includes(FloydWarshall) ?
+                    'small' : 'regular';
+      algs.forEach((alg, i) => this.computeData(alg, i, list));
     }
 
     let compData = this.data1.concat(this.data2);
 
     var div = d3.select("div.comp-graph"),
-        svg = div.append("svg"),
+        svg = div.append("svg").attr("class", "graph"),
         margin = {top: 20, right: 20, bottom: 30, left: 50},
         // width = Number(div.attr("width")) - margin.left - margin.right,
         // height = Number(div.attr("height")) - margin.top - margin.bottom,
@@ -103,9 +103,7 @@ export default class Graph {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    var dotMapX = function(d) {
-      console.log(x(d.numNodes) + margin.left);
-      return x(d.numNodes) + margin.left;};
+    var dotMapX = function(d) { return x(d.numNodes) + margin.left;};
     var dotMapY = function(d) { return y(d.runtime) + margin.top;};
 
       x.domain(d3.extent(compData, function(d) { return d.numNodes; }));
@@ -133,6 +131,7 @@ export default class Graph {
 
       g.append("g")
           .call(d3.axisLeft(y))
+          .style("font-size", 9)
         .append("text")
           .attr("fill", "#000")
           .attr("transform", "rotate(-90)")

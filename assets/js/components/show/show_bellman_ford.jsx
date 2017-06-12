@@ -2,7 +2,7 @@ import React from 'react';
 import Visualization from '../../d3/visualization';
 
 import Highlight from 'react-highlight';
-import { NODELIST } from '../../algorithms/node';
+import { NODELIST2 } from '../../algorithms/node';
 
 import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 
@@ -21,10 +21,10 @@ class ShowBellmanFord extends React.Component {
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
-    let visual = new Visualization(NODELIST, "visualization");
+    let visual = new Visualization(NODELIST2, "visualization");
     visual.draw();
     this.setState({ graph: visual});
-    this.algorithm = new BellmanFordSteps(NODELIST, 1, 6, visual);
+    this.algorithm = new BellmanFordSteps(NODELIST2, 1, 8, visual);
     this.fetchCode('static/javascript/bellman_ford.js');
   }
 

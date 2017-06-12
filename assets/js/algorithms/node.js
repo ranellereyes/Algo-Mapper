@@ -25,18 +25,18 @@ export const NODELIST2 = {
     { id: 2, weight: 11 },
     { id: 4, weight: 9 },
     { id: 5, weight: 8 },
-  ], 1, 20, 20),
-  2: new Node([{ id: 3, weight: 8 }, { id: 7, weight: 8 }], 2, 20, 40),
-  3: new Node([{ id: 7, weight: -7 }], 3, 40, 50),
+  ], 1, 75, 280),
+  2: new Node([{ id: 3, weight: 2 }, { id: 7, weight: 8 }], 2, 165, 380),
+  3: new Node([{ id: 7, weight: 4 }], 3, 295, 360),
   4: new Node([
-    { id: 5, weight: -15 },
-    { id: 6, weight: 1 },
-    { id: 2, weight: 3 },
-  ], 4, 40, 30),
-  5: new Node([{ id: 6, weight: 10 }], 5, 40, 10),
-  6: new Node([{ id: 8, weight: 2 }], 6, 60, 20),
-  7: new Node([{ id: 4, weight: 12 }, { id: 8, weight: 5 }], 7, 60, 40),
-  8: new Node([{ id: 3, weight: 4 }], 8, 80, 30)
+    { id: 5, weight: 2 },
+    { id: 6, weight: 12 },
+    { id: 2, weight: 1 },
+  ], 4, 210, 255),
+  5: new Node([{ id: 6, weight: 10 }], 5, 130, 150),
+  6: new Node([{ id: 8, weight: 9 }], 6, 260, 125),
+  7: new Node([{ id: 4, weight: 12 }, { id: 8, weight: 5 }], 7, 350, 225),
+  8: new Node([], 8, 405, 100)
 };
 
 export class nodelistGenerator {

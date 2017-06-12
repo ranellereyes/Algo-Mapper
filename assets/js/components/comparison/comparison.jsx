@@ -22,7 +22,8 @@ class Comparison extends React.Component {
                       optionB: "bellman-ford"
                     },
                   algorithms: [],
-                  graphAlgo: []
+                  graphAlgo: [],
+                  graph: null
                   };
     // this.visual = [];
     this.codes = [];
@@ -35,6 +36,7 @@ class Comparison extends React.Component {
     this.handleClickRight = this.handleClickRight.bind(this);
     this.handleSelectA = this.handleSelectA.bind(this);
     this.handleSelectB = this.handleSelectB.bind(this);
+    this.handlePlayGraph = this.handlePlayGraph.bind(this);
 
   }
 
@@ -64,6 +66,7 @@ class Comparison extends React.Component {
 
     let algorithms = [];
     let graphAlgo = [];
+    this.revealPlayButton();
     d3.selectAll("svg").remove();
     this.visual = [];
     this.codes = [];
@@ -101,7 +104,8 @@ class Comparison extends React.Component {
       }
     });
 
-    let graph = new Graph(...graphAlgo).drawPlaceholder();
+    let graph = new Graph(...graphAlgo);
+    graph.drawPlaceholder();
     this.setState({algorithms, graphAlgo, graph});
   }
 
@@ -144,16 +148,49 @@ class Comparison extends React.Component {
     });
   }
 
-  handleSelectA (e) {
+  handleSelectA(e) {
     this.state.options.optionA = e.target.value;
     this.resetAlgorithms();
   }
 
-  handleSelectB (e) {
+  handleSelectB(e) {
     this.state.options.optionB = e.target.value;
     this.resetAlgorithms();
   }
 
+  handlePlayGraph(e) {
+    d3.selectAll(".graph").remove();
+    this.state.graph.draw();
+    this.hidePlayButton();
+  }
+
+  hidePlayButton(){
+    let buttonHolder = document.getElementById("button-holder");
+    buttonHolder.style.backgroundColor = "transparent";
+    buttonHolder.style.zIndex = "-1";
+    let button = document.getElementById("button");
+    button.removeEventListener("mouseout", this.hoverEffect);
+    button.style.backgroundImage = "none";
+    button.style.zIndex = "-1";
+  }
+
+  revealPlayButton(){
+    let buttonHolder = document.getElementById("button-holder");
+    buttonHolder.style.backgroundColor = "lightgray";
+    buttonHolder.style.zIndex = "1";
+    let button = document.getElementById("button");
+    button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.zIndex = "1";
+    button.addEventListener("mouseover", (e) => {
+      e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
+    });
+    button.addEventListener("mouseout", this.hoverEffect);
+
+  }
+
+  hoverEffect(e) {
+    e.target.style.backgroundImage = "url('../static/images/play_button.png')";
+  }
   render() {
     return (
       <div className="index-main">
@@ -192,8 +229,13 @@ class Comparison extends React.Component {
                   {this.codes[0]}
                 </Highlight>
               </li>
-              <div className="comp-graph">
-              </div>
+              <li className="comp-graph">
+                <div className="comp-graph">
+                  <div className="comp-graph-button" id="button-holder">
+                    <figure onClick={this.handlePlayGraph} id="button"></figure>
+                  </div>
+                </div>
+              </li>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
                   {this.codes[1]}
