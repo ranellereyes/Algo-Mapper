@@ -16,6 +16,7 @@ class ShowFloyd extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
     let visual = new Visualization(NODELIST2, "visualization");
