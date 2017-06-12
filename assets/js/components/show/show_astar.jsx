@@ -12,10 +12,12 @@ class ShowAstar extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClickLeft = this.handleClickLeft.bind(this);
     this.handleClickRight = this.handleClickRight.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
+    document.onkeyup = this.handleKeyUp;
     let visual = new Visualization(NODELIST2, 'visualization');
     visual.draw();
     this.setState({ graph: visual });
@@ -38,11 +40,18 @@ class ShowAstar extends React.Component {
   }
 
   handleKeyPress(e) {
-    if (e.keyCode === 37) {
+    if (e.keyCode === 37){
       this.AstarStep.stepBackward();
-    } else if (e.keyCode === 39) {
+      document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_blue.png')";
+    } else if (e.keyCode === 39){
       this.AstarStep.stepForward();
+      document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_blue.png')";
     }
+  }
+
+  handleKeyUp (e) {
+    document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+    document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }
 
   handleClickLeft(e) {
@@ -66,8 +75,8 @@ class ShowAstar extends React.Component {
                   {this.code}
                 </Highlight>
               </aside>
-              <figure onClick={this.handleClickLeft}></figure>
-              <figure onClick={this.handleClickRight}></figure>
+              <figure onClick={this.handleClickLeft} id="arrow_left"></figure>
+              <figure onClick={this.handleClickRight} id="arrow_right"></figure>
             </ul>
           </section>
         </main>
