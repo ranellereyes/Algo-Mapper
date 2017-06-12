@@ -58,16 +58,18 @@ export default class Graph {
     //   {numNodes: 100, runtime: 1000000}
     // ];
 
-    this.draw();
+    this.draw("example");
   }
 
-  draw() {
-    let algs = [this.alg1, this.alg2];
+  draw(option) {
+    if (option !== "example") {
+      let algs = [this.alg1, this.alg2];
 
-    this.data1.length == 0 ?
+      this.data1.length == 0 ?
       algs.forEach((alg, i) => this.computeData(alg, i)) :
       null;
-    // this.computeData(this.alg1, this.alg2);
+      // this.computeData(this.alg1, this.alg2);
+    }
 
     let compData = this.data1.concat(this.data2);
 
@@ -81,6 +83,7 @@ export default class Graph {
         g = svg.append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    this.svg = svg;
     svg.data(compData);
     svg.style("width", width).style("height", height);
 
@@ -99,7 +102,6 @@ export default class Graph {
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
-
 
     var dotMapX = function(d) {
       console.log(x(d.numNodes) + margin.left);
