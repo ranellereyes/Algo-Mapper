@@ -18,6 +18,7 @@ class Astar {
       list[idx].parent = undefined;
     }
 
+    let start = window.performance.now();
     // add starting node to open list
     this.openList.push(startNode);
 
@@ -40,7 +41,10 @@ class Astar {
           curr = curr.parent;
         }
         path.push(curr.id);
-        return path.reverse();
+        return {
+          path: path.reverse(),
+          runtime: window.performance.now() - start
+        }
       }
 
       // add current node to close list and remove it from the open list
@@ -73,7 +77,10 @@ class Astar {
     }
 
     // return empty array if no path is found
-    return []
+    return {
+      path: [],
+      runtime: window.performance.now() - start
+    }
   }
 
   childNodes(currentNode) {
