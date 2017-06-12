@@ -19,7 +19,7 @@ const App = () => (
       <Route path="/bellman-ford" component={ShowBellmanFord} />
       <Route path="/dijkstras" component={ShowDijkstras} />
       <Route path="/floyd-warshall" component={ShowFloyd} />
-      <Route path="/:error" render={() => <h1>YOU DUN FUCKED UP</h1>} />
+      <Route path="/:error" render={() => <div className='error'><h1 className='error-page'>Page does not exist</h1></div>} />
       <Route path="/" component={Index}/>
     </Switch>
     <Footer />
