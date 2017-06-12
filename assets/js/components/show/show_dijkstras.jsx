@@ -1,6 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../algorithms/node';
+import { NODELIST2 } from '../../algorithms/node';
 import Highlight from 'react-highlight';
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 
@@ -14,12 +14,13 @@ class ShowDijkstras extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
-    let visual = new Visualization(NODELIST, "visualization");
+    let visual = new Visualization(NODELIST2, "visualization");
     visual.draw();
     this.setState({ graph: visual });
-    this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
+    this.algorithm = new DijkstraSteps(NODELIST2, 1, 8, visual);
     this.fetchCode('static/javascript/dijkstras.js');
   }
 
@@ -107,7 +108,10 @@ class ShowDijkstras extends React.Component {
                   </ol>
                 <h3>Details</h3>
                 <p>
-                  Dijkstra’s algorithm does not purposely direct it’s patting towards the destination node. Instead, it finds the shortest path to every node in the graph, and if the destination node is reached, the algorithm stops. To find the shortest path of the source node to the destination node, simply trace the way back following the path in reverse. Dijkstra’s algorithm cannot handle negative edge weights because if one of the neighbor nodes is already marked visited because its cost was lower than the current node’s cost, the negative edge weight can never be applied to its cost. Without the application of binary heaps or fibonacci heaps, the time complexity for Dijkstra’s algorithm is at best O(nlog(n)) and at worst O(n<sup>n</sup>) depending on the number of nodes and edge weights.
+                  Dijkstra’s algorithm does not purposely direct it’s patting towards the destination node. Instead, it finds the shortest path to every node in the graph, and if the destination node is reached, the algorithm stops. To find the shortest path of the source node to the destination node, simply trace the way back following the path in reverse. Dijkstra's algorithm uses priority queue to greedily select the closest node that has not been visited. Dijkstra’s algorithm cannot handle negative edge weights because if one of the neighbor nodes is already marked visited because its cost was lower than the current node’s cost, the negative edge weight can never be applied to its cost.
+                </p>
+                <p>
+                  Without the application of binary heaps or fibonacci heaps, the time complexity for Dijkstra’s algorithm is at best O(nlog(n)) and at worst O(n<sup>2</sup>) depending on the number of nodes and edge weights.
                 </p>
               </div>
               <aside className="show-pros-n-cons">

@@ -8,6 +8,7 @@ import ShowFloyd from './show/show_floyd_warshall';
 import Comparison from './comparison/comparison';
 import AstarShow from './show/show_astar';
 import Index from './index/index';
+import Footer from './header/footer';
 
 const App = () => (
   <div>
@@ -21,6 +22,7 @@ const App = () => (
       <Route path="/:error" render={() => <h1>YOU DUN FUCKED UP</h1>} />
       <Route path="/" component={Index}/>
     </Switch>
+    <Footer />
   </div>
 );
 

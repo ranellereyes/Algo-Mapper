@@ -8,6 +8,7 @@ class BellmanFord {
   }
 
   search(startNodeId, endNodeId) {
+    let startTime = window.performance.now();
     let cost = {};
     let parents = {};
 
@@ -33,7 +34,10 @@ class BellmanFord {
       }
     }
 
-    return this.createPath(parents, startNodeId, endNodeId);
+    return  {
+              path: this.createPath(parents, startNodeId, endNodeId),
+              runtime: (window.performance.now() - startTime) * 1000
+            };
   }
 
   createEdgeList(nodeList) {

@@ -2,12 +2,17 @@ import React from 'react';
 import Graph from '../../d3/graph';
 import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../algorithms/node';
+import { NODELIST, nodelistGenerator } from '../../algorithms/node';
 
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 import AstarSteps from '../../algorithms/astar_step';
 import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
+
+import Dijkstra from '../../algorithms/dijkstra';
+import Astar from '../../algorithms/astar';
+import BellmanFord from '../../algorithms/bellman_ford';
+import FloydWarshall from '../../algorithms/floyd_warshall';
 
 class Comparison extends React.Component {
   constructor(props) {
@@ -16,7 +21,9 @@ class Comparison extends React.Component {
                     { optionA: "dijkstra",
                       optionB: "bellman-ford"
                     },
-                  algorithms: {}
+                  algorithms: [],
+                  graphAlgo: [],
+                  graph: null
                   };
     // this.visual = [];
     this.codes = [];
@@ -29,6 +36,7 @@ class Comparison extends React.Component {
     this.handleClickRight = this.handleClickRight.bind(this);
     this.handleSelectA = this.handleSelectA.bind(this);
     this.handleSelectB = this.handleSelectB.bind(this);
+    this.handlePlayGraph = this.handlePlayGraph.bind(this);
 
   }
 
@@ -45,11 +53,8 @@ class Comparison extends React.Component {
     this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
-    let graph = new Graph();
-    graph.draw();
 
     this.resetAlgorithms();
-
   }
 
   componentWillUnmount() {
@@ -60,37 +65,48 @@ class Comparison extends React.Component {
   resetAlgorithms() {
 
     let algorithms = [];
+    let graphAlgo = [];
+    this.revealPlayButton();
     d3.selectAll("svg").remove();
     this.visual = [];
     this.codes = [];
 
-    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-a"));
-    this.visual.push(new Visualization(NODELIST, "div.comp-visualization-b"));
+    this.visual.push(new Visualization(NODELIST, "comp-visualization-a"));
+    this.visual.push(new Visualization(NODELIST, "comp-visualization-b"));
     this.visual[0].draw();
     this.visual[1].draw();
 
-    new Graph().draw();
 
     Object.keys(this.state.options).forEach((key, index) => {
       switch (this.state.options[key]) {
         case "dijkstra":
           algorithms.push(new DijkstraSteps(NODELIST, 1, 6, this.visual[index]));
-          this.fetchCode('static/javascript/dijkstra.js');
+          graphAlgo.push(Dijkstra);
+          // graphAlgo.push(FloydWarshall);
+          this.fetchCode('static/javascript/dijkstras.js');
           break;
         case "astar":
           algorithms.push(new AstarSteps(NODELIST, 1, 6, this.visual[index]));
+          graphAlgo.push(FloydWarshall);
+          // graphAlgo.push(Astar);
           this.fetchCode('static/javascript/astar.js');
           break;
         case "bellman-ford":
           algorithms.push(new BellmanFordSteps(NODELIST, 1, 6, this.visual[index]));
+          // graphAlgo.push(FloydWarshall);
+          graphAlgo.push(BellmanFord);
           this.fetchCode('static/javascript/bellman_ford.js');
           break;
         case "floyd-warshall":
           algorithms.push(new FloydWarshallSteps(NODELIST, 1, 6, this.visual[index]));
+          graphAlgo.push(FloydWarshall);
           this.fetchCode('static/javascript/floyd_warshall.js');
       }
     });
-    this.setState({algorithms: algorithms});
+
+    let graph = new Graph(...graphAlgo);
+    graph.drawPlaceholder();
+    this.setState({algorithms, graphAlgo, graph});
   }
 
   fetchCode(file) {
@@ -132,17 +148,49 @@ class Comparison extends React.Component {
     });
   }
 
-  handleSelectA (e) {
+  handleSelectA(e) {
     this.state.options.optionA = e.target.value;
     this.resetAlgorithms();
   }
 
-  handleSelectB (e) {
+  handleSelectB(e) {
     this.state.options.optionB = e.target.value;
     this.resetAlgorithms();
+  }
+
+  handlePlayGraph(e) {
+    d3.selectAll(".graph").remove();
+    this.state.graph.draw();
+    this.hidePlayButton();
+  }
+
+  hidePlayButton(){
+    let buttonHolder = document.getElementById("button-holder");
+    buttonHolder.style.backgroundColor = "transparent";
+    buttonHolder.style.zIndex = "-1";
+    let button = document.getElementById("button");
+    button.removeEventListener("mouseout", this.hoverEffect);
+    button.style.backgroundImage = "none";
+    button.style.zIndex = "-1";
+  }
+
+  revealPlayButton(){
+    let buttonHolder = document.getElementById("button-holder");
+    buttonHolder.style.backgroundColor = "lightgray";
+    buttonHolder.style.zIndex = "1";
+    let button = document.getElementById("button");
+    button.style.backgroundImage = "url('../static/images/play_button.png')";
+    button.style.zIndex = "1";
+    button.addEventListener("mouseover", (e) => {
+      e.target.style.backgroundImage = "url('../static/images/play_button_hover.png')";
+    });
+    button.addEventListener("mouseout", this.hoverEffect);
 
   }
 
+  hoverEffect(e) {
+    e.target.style.backgroundImage = "url('../static/images/play_button.png')";
+  }
   render() {
     return (
       <div className="index-main">
@@ -181,8 +229,13 @@ class Comparison extends React.Component {
                   {this.codes[0]}
                 </Highlight>
               </li>
-              <div className="comp-graph">
-              </div>
+              <li className="comp-graph">
+                <div className="comp-graph">
+                  <div className="comp-graph-button" id="button-holder">
+                    <figure onClick={this.handlePlayGraph} id="button"></figure>
+                  </div>
+                </div>
+              </li>
               <li className="comp-graph-code">
                 <Highlight class="javascript-snippet">
                   {this.codes[1]}

@@ -3,15 +3,18 @@ import Highlight from 'react-highlight';
 import Visualization from '../../d3/visualization';
 import { NODELIST } from '../../algorithms/node';
 import AstarSteps from '../../algorithms/astar_step';
-import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
-import DijkstraSteps from '../../algorithms/dijkstra_steps';
+import { AstarDescription, DijkstraDescription, BellmanFordDescription, FloydWarshallDescription } from './descriptions';
 
 const MESSAGES = {
-  first: 'EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.EXTREMELY IMPORTANT DESCRIPTION.',
-  second: 'I LOVE FOOD',
-  third: 'PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME PLEASE GET THIS AWAY FROM ME ',
-  fourth: 'howdy there, nice to meet you'
+  first: <AstarDescription />,
+  second: <DijkstraDescription />,
+  third: <BellmanFordDescription />,
+  fourth: <FloydWarshallDescription />
 };
+
+import FloydWarshallSteps from '../../algorithms/floyd_warshall_steps';
+import DijkstraSteps from '../../algorithms/dijkstra_steps';
+import BellmanFordSteps from '../../algorithms/bellman_ford_steps';
 
 class Index extends React.Component {
   constructor(props) {
@@ -35,7 +38,7 @@ class Index extends React.Component {
     floyd.draw();
     this.astar = new AstarSteps(NODELIST, 1, 6, astar).display();
     this.dijkstra = new DijkstraSteps(NODELIST, 1, 6, dijkstra).display();
-    this.bellman = new AstarSteps(NODELIST, 1, 6, bellman).display();
+    this.bellman = new BellmanFordSteps(NODELIST, 1, 6, bellman).display();
     this.floyd = new FloydWarshallSteps(NODELIST, 1, 6, floyd).display();
   }
 
@@ -58,7 +61,6 @@ class Index extends React.Component {
     return (
       <div className="index-main">
         <main className="index-main">
-          <img src='http://i1096.photobucket.com/albums/g327/winber1/header2.png'></img>
           <div className="index-content">
             <h1>AlgoMapper</h1>
             <span>Visualize and compare shortest-path algorithms with ease</span>
@@ -66,44 +68,28 @@ class Index extends React.Component {
         </main>
         <section className="index-algo-display">
           <ul className="index-algo-list">
-            <div tabIndex="1" onFocus={() => this.selectAlgo('first')} className="index-algo-image astar" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('second')} className="index-algo-image dijkstra" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('third')} className="index-algo-image bellman" />
-            <div tabIndex="1" onFocus={() => this.selectAlgo('fourth')} className="index-algo-image floyd" />
+            <div tabIndex="1" onFocus={() => this.selectAlgo('first')} className="index-algo-image astar">
+              <h2>A* star</h2>
+            </div>
+            <div tabIndex="1" onFocus={() => this.selectAlgo('second')} className="index-algo-image dijkstra">
+              <h2>Dijkstra's</h2>
+            </div>
+            <div tabIndex="1" onFocus={() => this.selectAlgo('third')} className="index-algo-image bellman">
+              <h2>Bellman-Ford</h2>
+            </div>
+            <div tabIndex="1" onFocus={() => this.selectAlgo('fourth')} className="index-algo-image floyd">
+              <h2>Floyd-Warshall</h2>
+            </div>
           </ul>
           <div className={`index-arrow-up ${this.state.algo}`}>
             <div className="index-arrow-fill" />
           </div>
           <div className="index-algo-description">
-            <h3 ref="description" className={this.state.active}>
+            <section ref="description" className={this.state.active}>
               {this.state.message}
-            </h3>
+            </section>
           </div>
         </section>
-        <footer>
-          <ul className="author-info">
-            <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Ranelle Reyes</span>
-            </li>
-            <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Winber Xu</span>
-            </li>
-            <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Janice Yura Lee</span>
-            </li>
-            <li>
-              <figure className="github"></figure>
-              <figure className="linkedin"></figure>
-              <span>Brandon Chui</span>
-            </li>
-          </ul>
-        </footer>
       </div>
     );
   }

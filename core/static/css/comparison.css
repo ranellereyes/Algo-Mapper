@@ -2,51 +2,55 @@ main.comp-main {
   margin: 0 auto;
   width: 100%;
   height: 100%;
-  padding-top: 50px;
   padding-bottom: 30px;
 }
 
 section.comp-main {
   width: 100%;
-  max-width: 1200px;
+  height: 100%;
+  padding-bottom: 15px;
   min-width: 600px;
-  margin: 0 auto;
-  /*display: flex;
-  flex-direction: row;*/
+  background: #010023;
+  display: flex;
+  justify-content: center;
 }
 
 ul.comp-visualization {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  max-width: 1200px;
+  min-width: 600px;
+  height: 100%;
+  width: 1200px;
 }
 
 ul.comp-visualization li {
   display: flex;
   flex-direction: column;
+  flex-grow: 0.4;
   justify-content: space-between;
   align-items: center;
-  width: 48.5%;
-  height: 500px;
-  background-color: white;
+  height: 100%;
   margin-top: 30px;
 }
-ul.comp-visualization li > div{
+ul.comp-visualization li > div {
   width: 100%;
-  height: 450px;
+  height: 500px;
   border: 1.5px solid #eaeaea;
   border-radius: 4px;
+  background: white;
   display: flex;
   justify-content: center;
 }
-/*
-ul.comp-visualization li > div > div{
-  margin: auto;
-}*/
+
 ul.comp-visualization select{
   font-family: inherit;
   font-size: 15pt;
-  border: none;
+  border: 1px solid lavender;
+  border-radius:  5px;
+  padding: 5px;
+  margin-bottom: 10px;
   outline: none;
 }
 ul.comp-visualization option{
@@ -98,25 +102,72 @@ section.comp-graph ul{
 }
 
 section.comp-graph li{
-  border: 1.5px solid #eaeaea;
   height: 500px;
   align-items: flex-start;
 }
-
+section.comp-graph li.comp-graph {
+  flex: 1;
+}
 section.comp-graph div.comp-graph{
-  width: 45%;
   height: 500px;
   margin: 20px, 20px, 30px, 50px;
 }
 
 section.comp-graph li.comp-graph-code{
-  width: 25%;
+  width: 30%;
   overflow: scroll;
-
 }
 section.comp-graph li.comp-graph-code pre {
   margin: 0;
 }
 section.comp-graph li.comp-graph-code code {
   padding: 10px;
+}
+
+g.tick text {
+  font-size: 9;
+}
+
+div.comp-graph {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #F4F4F4;
+  padding: 5px;
+  width: 90px;
+}
+.dot {
+  cursor: pointer;
+}
+div.comp-graph svg {
+  z-index: 0;
+}
+div.comp-graph-button {
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  opacity: 0.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+div.comp-graph-button figure{
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 40%;
+  height: 40%;
+  opacity: 1;
+  cursor: pointer;
+}
+
+pre {
+  width: 700px;
+  overflow: hidden;
 }

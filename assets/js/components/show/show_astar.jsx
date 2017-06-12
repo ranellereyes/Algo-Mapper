@@ -1,6 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../algorithms/node';
+import { NODELIST2 } from '../../algorithms/node';
 import AstarSteps from '../../algorithms/astar_step';
 import Highlight from 'react-highlight';
 import Astar from '../../algorithms/astar';
@@ -12,14 +12,16 @@ class ShowAstar extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClickLeft = this.handleClickLeft.bind(this);
     this.handleClickRight = this.handleClickRight.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
-    let visual = new Visualization(NODELIST, 'visualization');
+    document.onkeyup = this.handleKeyUp;
+    let visual = new Visualization(NODELIST2, 'visualization');
     visual.draw();
     this.setState({ graph: visual });
-    this.AstarStep = new AstarSteps(NODELIST, 1, 6, visual);
+    this.AstarStep = new AstarSteps(NODELIST2, 1, 8, visual);
     window.a = this.AstarStep;
     this.fetchCode('static/javascript/astar.js');
   }
@@ -38,11 +40,18 @@ class ShowAstar extends React.Component {
   }
 
   handleKeyPress(e) {
-    if (e.keyCode === 37) {
+    if (e.keyCode === 37){
       this.AstarStep.stepBackward();
-    } else if (e.keyCode === 39) {
+      document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_blue.png')";
+    } else if (e.keyCode === 39){
       this.AstarStep.stepForward();
+      document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_blue.png')";
     }
+  }
+
+  handleKeyUp (e) {
+    document.getElementById("arrow_left").style.backgroundImage = "url('/static/images/arrow_gray.png')";
+    document.getElementById("arrow_right").style.backgroundImage = "url('/static/images/arrow_gray.png')";
   }
 
   handleClickLeft(e) {
@@ -66,8 +75,8 @@ class ShowAstar extends React.Component {
                   {this.code}
                 </Highlight>
               </aside>
-              <figure onClick={this.handleClickLeft}></figure>
-              <figure onClick={this.handleClickRight}></figure>
+              <figure onClick={this.handleClickLeft} id="arrow_left"></figure>
+              <figure onClick={this.handleClickRight} id="arrow_right"></figure>
             </ul>
           </section>
         </main>
@@ -95,7 +104,10 @@ class ShowAstar extends React.Component {
                 </ol>
                 <h3>Details</h3>
                 <p>
-                  The heuristic is what drastically differentiates A* from other algorithms. Although this algorithm is typically known as a breadth-first search, it can act as a depth-first search if the heuristic is strongly weighted. This heuristic optimization is highly dependent on the kind of maps that it is exposed to, and unoptimized heuristics can lead to incorrect shortest path calculations. At heart, A* is a greedy algorithm, but will generally will exhibit O(n) time complexity when optimized. A* is extremely well-known for pathfinding, but is not as optimized for node paths. This is because if the node path is has N nodes and each node has N - 1 child nodes, every round of cost evaluation requires A* to make N - 1 calculations, resulting at worst in O(n<sup>n</sup>  ) time complexity.
+                  The heuristic is what drastically differentiates A* from other algorithms. Although A* is typically O(n) time complexity, the pitfall is that unoptimized heuristics can lead to incorrect shortest path calculations. The most basic implementation of this heuristic is the linear distance away from the destination, but simply weighting this distance can drastically change solutions.
+                </p>
+                <p>
+                  Typical A* implementations utilize priority queues, where the lowest cost values are evaluated and removed from the queue. Binary Heaps can further improve efficiently by organizing the queued nodes in a tree format. A* is extremely well-known for pathfinding, but is not as optimized for node paths. This is because if the node path is has N nodes and each node has N - 1 child nodes, every round of cost evaluation requires A* to make N - 1 calculations, resulting at worst in O(n<sup>n</sup>  ) time complexity.
                 </p>
               </div>
               <aside className="show-pros-n-cons">
