@@ -204,6 +204,14 @@ export default class FloydWarshallSteps extends FloydWarshall {
       });
     }
 
+    nodes.forEach((node, i) => {
+      let child = nodes[i + 1];
+
+      node >= Number(loops[2]) ?
+      visual.highlightLink(node, child, "red") :
+      visual.highlightLink(node, child, "lightgreen");
+    });
+
     this.currStep += 1;
   }
 
