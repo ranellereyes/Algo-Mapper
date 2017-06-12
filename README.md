@@ -12,10 +12,17 @@ While learning new algorithms, it is very common for users to get lost tracking 
 
 Visualizations were created using `d3.js`, a data visualization library for JavaScript. This was a clear choice over pure canvas or the `Easel.js` library. Both the algorithm show pages and the comparison page use `d3.js` to colorize pre-made node maps. Due to the nature of the algorithms, each visualization was built with a different modular approach, representing how the algorithm searches through the node map.
 
+Figure 1: AStar algorithm displayed on show page
 ![Astar](docs/gifs/Astar.gif)
 
+
+Figure 2: Comparison page showing two different algorithms
 ![Comparison](docs/gifs/Comparison.gif)
 
+
+
+Figure 3: Graph and code displayed, along with the ability to re-calculate the data
+![Graph](docs/gifs/Graph.gif)
 
 `d3.js` was also used to generate graphs to compare and display time complexity data for separate algorithms.
 

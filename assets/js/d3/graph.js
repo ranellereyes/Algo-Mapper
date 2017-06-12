@@ -16,7 +16,8 @@ export default class Graph {
       this.data1 = [] :
       this.data2 = [];
 
-    let nodeNums = list === 'small' ? this.nodeNums.map(e => e / 10) : this.nodeNums;
+    // let nodeNums = list === 'small' ? this.nodeNums.map(e => e / 10) : this.nodeNums;
+    let nodeNums = this.nodeNums.map(e => e / 10);
 
     nodeNums.forEach(num => {
       let runtime = new alg(new nodelistGenerator(num).nodelist)
