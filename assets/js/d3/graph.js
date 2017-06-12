@@ -131,6 +131,7 @@ export default class Graph {
 
     g.append("g")
         .call(d3.axisLeft(y))
+        .style("font-size", 9)
       .append("text")
         .attr("fill", "#000")
         .attr("transform", "rotate(-90)")
@@ -140,7 +141,7 @@ export default class Graph {
         .text("Runtime (microseconds)");
 
     g.append("path")
-        .datum(data1)
+        .datum(this.data1)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-linejoin", "round")
@@ -149,7 +150,7 @@ export default class Graph {
         .attr("d", line);
 
     g.append("path")
-        .datum(data2)
+        .datum(this.data2)
         .attr("fill", "none")
         .attr("stroke", "red")
         .attr("stroke-linejoin", "round")
@@ -158,21 +159,52 @@ export default class Graph {
         .attr("d", line);
 
     svg.selectAll(".dot")
-       .data(data1)
+       .data(this.data1)
      .enter().append("circle")
        .attr("class", "dot")
        .attr("fill", "steelblue")
-       .attr("r", 3.5)
+       .attr("r", 5)
        .attr("cx", dotMapX)
-       .attr("cy", dotMapY);
+       .attr("cy", dotMapY)
+       .on("mouseover", function(d) {
+          tooltip.transition()
+                 .duration(200)
+                 .style('z-index', 1)
+                 .style("opacity", .9);
+          tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
+                 .style("left", dotMapX(d)+"px")
+                 .style("top", dotMapY(d)+"px");
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                 .duration(500)
+                 .style("opacity", 0)
+                 .style('z-index', -1);
+        });
 
-    svg.selectAll(".dot2")
-        .data(data2)
+
+     svg.selectAll(".dot2")
+        .data(this.data2)
       .enter().append("circle")
         .attr("class", "dot")
         .attr("fill", "red")
-        .attr("r", 3.5)
+        .attr("r", 5)
         .attr("cx", dotMapX)
-        .attr("cy", dotMapY);
+        .attr("cy", dotMapY)
+        .on("mouseover", function(d) {
+           tooltip.transition()
+                  .duration(50)
+                  .style('z-index', 1)
+                  .style("opacity", .9);
+           tooltip.html(`num = ${d.numNodes}<br /> time = ${Math.floor(d.runtime)}`)
+                  .style("left", dotMapX(d)+"px")
+                  .style("top", dotMapY(d)+"px");
+         })
+         .on("mouseout", function(d) {
+             tooltip.transition()
+                  .duration(500)
+                  .style("opacity", 0)
+                  .style('z-index', -1);
+         });
+    }
   }
-}
