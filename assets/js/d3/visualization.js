@@ -47,11 +47,11 @@ class Visualization {
     let dy = y2 - y1;
     let radians = Math.atan(dy/dx);
     if (Math.sin(radians) === 0) return x;
-    if (Math.cos(radians) === 0) return x + weight * direction;
-    if ((dy > 0 && dx > 0) || (dy < 0 && dx > 0)) {
-      return x + (Math.cos(radians) * weight) * direction;
+    if (Math.cos(radians) < 0.001 && Math.cos(radians) > -0.001) return x + weight * direction;
+    if ((dy < 0 && dx < 0) || (dy > 0 && dx < 0)) {
+      return x - (Math.cos(radians) * weight) * direction;
     }
-    return x - (Math.cos(radians) * weight) * direction;
+    return x + (Math.cos(radians) * weight) * direction;
   }
 
   centerTextY(x1, x2, y1, y2, weight, direction) {
@@ -59,12 +59,12 @@ class Visualization {
     let dx = x2 - x1;
     let dy = y2 - y1;
     let radians = Math.atan(dy/dx);
-    if (Math.cos(radians) === 0) return y;
+    if (Math.cos(radians) < 0.001 && Math.cos(radians) > -0.001) return y;
     if (Math.sin(radians) === 0) return y + weight * direction;
-    if ((dy > 0 && dx > 0) || (dy < 0 && dx > 0)) {
-      return y - (Math.sin(radians) * weight) * direction;
+    if ((dy < 0 && dx < 0) || (dy > 0 && dx < 0)) {
+      return y + (Math.sin(radians) * weight) * direction;
     }
-    return y + (Math.sin(radians) * weight) * direction;
+    return y - (Math.sin(radians) * weight) * direction;
   }
 
   addArrow(defs, link, color, animate) {
@@ -122,8 +122,8 @@ class Visualization {
         .data(graph.links)
         .enter().append("text")
         .attr("class", `link-${this.target}`)
-        .attr("x", (d) => this.centerTextX(d.source.x, d.target.x, d.source.y, d.target.y, 12, -1))
-        .attr("y", (d) => this.centerTextY(d.source.x, d.target.x, d.source.y, d.target.y, 12, -1))
+        .attr("x", (d) => this.centerTextX(d.source.x, d.target.x, d.source.y, d.target.y, 15, -1))
+        .attr("y", (d) => this.centerTextY(d.source.x, d.target.x, d.source.y, d.target.y, 15, -1))
         .attr("dy", 5)
         .attr("text-anchor", "middle")
         .text(function(d) { return d.weight });
