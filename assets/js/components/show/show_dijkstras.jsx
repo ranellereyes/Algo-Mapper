@@ -1,6 +1,6 @@
 import React from 'react';
 import Visualization from '../../d3/visualization';
-import { NODELIST } from '../../algorithms/node';
+import { NODELIST2 } from '../../algorithms/node';
 import Highlight from 'react-highlight';
 import DijkstraSteps from '../../algorithms/dijkstra_steps';
 
@@ -16,10 +16,10 @@ class ShowDijkstras extends React.Component {
   componentDidMount() {
     document.onkeydown = this.handleKeyPress;
     document.onkeyup = this.handleKeyUp;
-    let visual = new Visualization(NODELIST, "visualization");
+    let visual = new Visualization(NODELIST2, "visualization");
     visual.draw();
     this.setState({ graph: visual });
-    this.algorithm = new DijkstraSteps(NODELIST, 1, 6, visual);
+    this.algorithm = new DijkstraSteps(NODELIST2, 1, 8, visual);
     this.fetchCode('static/javascript/dijkstras.js');
   }
 
