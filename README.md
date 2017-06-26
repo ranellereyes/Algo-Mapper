@@ -4,7 +4,7 @@
 
 While learning new algorithms, it is very common for users to get lost tracking variables, miss a conceptual step, and have trouble visualizing all the math into a physical model. So we built a full-stack web app that will allow users to walkthrough step-by-step through an algorithm and be able to compare the time-complexity of different algorithms.
 
-[Live Link](https://algomapper.life)
+[Live Link](http://algomapper.life)
 
 ### Technologies
 
