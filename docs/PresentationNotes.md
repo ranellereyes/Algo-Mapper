@@ -27,3 +27,4 @@ Goals:
 - HTML/CSS
 - Algorithms!
 - Git workflow
+- Graph modules? (Kinda extraneous IMO)
