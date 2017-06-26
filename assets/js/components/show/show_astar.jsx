@@ -97,7 +97,7 @@ class ShowAstar extends React.Component {
                   	<li><span><code>h</code> is defined by an arbitrary calculation based on the distance from the end node</span></li>
                   	<li><span><code>f</code> is equal to the sum of these two values</span></li>
                   </ul>
-                  <li><span>If child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</span></li>
+                  <li><span>If the child's cost has not been calculated yet, its cost values are saved and its parent is set to <code>currentNode</code>. If the child's cost values have already been calculated, the lowest cost values are saved and its parent is set to the node which yielded those lowest cost values</span></li>
                   <li><span>The currentNode is moved from the openList into the closeList</span></li>
                   <li><span>currentNode is reassigned to a node inside the openList with the lowest f cost</span></li>
                   <li><span>Repeat step 3 until destination is reached, or the openList is empty</span></li>
