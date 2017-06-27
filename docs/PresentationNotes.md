@@ -32,6 +32,12 @@ Goals:
 
 #### _Outline_
 
+**Tabs that should be opened before**
+  - d3js docs (https://github.com/d3/d3/blob/master/API.md)
+  - bl.ocks.org example (https://bl.ocks.org/mbostock/3883245)
+  - Algomapper.life (https://algomapper.life)
+  - Invoke Winber function (https://github.com/ranellereyes/Algo-Mapper/commit/3c740905f4564a1ce8007ad17038b490fa9b6116)
+
 - Walkthrough the website real quick (Winber)
 - Prep (Brandon)
   - docs
