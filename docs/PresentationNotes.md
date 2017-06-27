@@ -13,6 +13,7 @@ Describe the following:
   - Splitting up the workload
   - Making functions for everyone to use in our visualization class
   - Learning process
+- Problem handling
 
 Goals:
   - 30-ish minute lecture
@@ -28,3 +29,28 @@ Goals:
 - Algorithms!
 - Git workflow
 - Graph modules? (Kinda extraneous IMO)
+
+#### _Outline_
+
+- Walkthrough the website real quick (Winber)
+- Prep (Brandon)
+  - docs
+  - weekend work
+  - wireframes
+- Group handling (Janice-Ranelle)
+  - meetings
+  - git workflow
+  - goal setting and accountability
+- New technology/Problem solving (Ranelle/Winber)
+  - Mention Django... then move on to d3js
+
+---
+
+- Why we chose it
+  - Algorithms look good our resumes lol
+  - Learning shortest path algos which we don't learn in algo curriculum
+  - Lots of Pre-planning
+    - HAPPY HOUR IS MANDATORY
+    - Getting all our opinions
+    - Having solid documentation before we started
+    - Hourly meetups
