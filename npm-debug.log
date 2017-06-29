@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'webpack' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.1
+4 verbose run-script [ 'prewebpack', 'webpack', 'postwebpack' ]
+5 info lifecycle algomapper@1.0.0~prewebpack: algomapper@1.0.0
+6 silly lifecycle algomapper@1.0.0~prewebpack: no script for prewebpack, continuing
+7 info lifecycle algomapper@1.0.0~webpack: algomapper@1.0.0
+8 verbose lifecycle algomapper@1.0.0~webpack: unsafe-perm in lifecycle true
+9 verbose lifecycle algomapper@1.0.0~webpack: PATH: C:\Users\Winber\AppData\Roaming\nvm\v6.10.1\node_modules\npm\bin\node-gyp-bin;D:\Programming\Algo-Mapper\node_modules\.bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\PharosSystems\Core;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Skype\Phone\;C:\Users\Winber\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\PostgreSQL\9.4\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Git\cmd;C:\Users\Winber\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Winber\AppData\Local\Programs\Python\Python36-32\;C:\RailsInstaller\Git\cmd;C:\RailsInstaller\Ruby2.3.0\bin;C:\Users\Winber\.rbenv-win\bin;C:\Users\Winber\.rbenv-win\shims;_SZ    C:\Ruby23-x64\bin;C:\Users\Winber\AppData\Local\Microsoft\WindowsApps;C:\Users\Winber\AppData\Local\atom\bin;C:\Users\Winber\AppData\Roaming\npm;C:\Users\Winber\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Winber\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Heroku\bin
+10 verbose lifecycle algomapper@1.0.0~webpack: CWD: D:\Programming\Algo-Mapper
+11 silly lifecycle algomapper@1.0.0~webpack: Args: [ '/d /s /c',
+11 silly lifecycle   'webpack --progress --display-error-details --config webpack.config.js --watch' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at exports._errnoException (util.js:1018:11)
+12 verbose stack     at process.kill (internal/process.js:190:13)
+12 verbose stack     at process.listener (C:\Users\Winber\AppData\Roaming\nvm\v6.10.1\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (C:\Users\Winber\AppData\Roaming\nvm\v6.10.1\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (C:\Users\Winber\AppData\Roaming\nvm\v6.10.1\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:217:44)
+13 verbose cwd D:\Programming\Algo-Mapper
+14 error Windows_NT 10.0.15063
+15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "webpack"
+16 error node v6.10.1
+17 error npm  v3.10.10
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]
